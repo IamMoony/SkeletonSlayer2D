@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CameraMovement : MonoBehaviour
 {
-    public Transform target;
+    public Rigidbody2D target;
     public float moveSpeed;
     public float maxOffset;
 

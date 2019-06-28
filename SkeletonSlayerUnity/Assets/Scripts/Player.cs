@@ -9,7 +9,7 @@ public class Player : Character
         
     }
 
-    public override void Update()
+    public void Update()
     {
         if (Input.GetAxis("Horizontal") != 0)
         {
@@ -23,6 +23,5 @@ public class Player : Character
         {
             Jump();
         }
-        base.Update();
     }
 }

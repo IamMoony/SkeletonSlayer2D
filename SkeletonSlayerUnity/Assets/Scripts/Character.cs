@@ -13,6 +13,7 @@ public class Character : MonoBehaviour
     public int JumpForce_Base;
     [HideInInspector] public int JumpForce_Current;
 
+    public bool isGrounded;
     public LayerMask GroundLayer;
 
     private Rigidbody2D RB;
@@ -28,9 +29,9 @@ public class Character : MonoBehaviour
         JumpForce_Current = JumpForce_Base;
     }
 
-    public virtual void Update()
+    void FixedUpdate()
     {
-        ANIM.SetBool("IsGrounded", GroundCheck());
+        ANIM.SetBool("IsGrounded", isGrounded);
     }
 
     public void Move(Vector2 direction)
@@ -41,23 +42,6 @@ public class Character : MonoBehaviour
         RB.velocity = new Vector2(direction.x * MoveSpeed_Current, RB.velocity.y);
     }
 
-    public bool GroundCheck()
-    {
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, GetComponent<Renderer>().bounds.size.y * 0.52f, GroundLayer);
-        if (hit)
-        {
-            //Debug.Log("GroundCheck - Success");
-            return true;
-        }
-        else
-        {
-            //Debug.Log("GroundCheck - Failed");
-            //if (hit)
-            //    Debug.Log("Raycasthit Name:" + hit.collider.name);
-            return false;
-        }
-    }
-
     public void Turn()
     {
         transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
@@ -65,7 +49,7 @@ public class Character : MonoBehaviour
 
     public void Jump()
     {
-        if (GroundCheck())
+        if (isGrounded)
         {
             ANIM.SetTrigger("Jump");
             RB.AddForce(Vector2.up * JumpForce_Current);
