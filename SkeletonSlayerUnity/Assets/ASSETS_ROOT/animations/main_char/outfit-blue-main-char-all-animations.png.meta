@@ -1,7 +1,52 @@
 fileFormatVersion: 2
 guid: 9abe6ef8a179830409db98cc4cea7ea7
 TextureImporter:
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      213: -2605339346645360786
+    second: outfit-blue-main-char-all-animations_0
+  - first:
+      213: 681508290541755491
+    second: outfit-blue-main-char-all-animations_1
+  - first:
+      213: -9206845603808093400
+    second: outfit-blue-main-char-all-animations_2
+  - first:
+      213: 5912084591337159214
+    second: outfit-blue-main-char-all-animations_3
+  - first:
+      213: -1588002080042843271
+    second: outfit-blue-main-char-all-animations_4
+  - first:
+      213: 8783305793066770566
+    second: outfit-blue-main-char-all-animations_5
+  - first:
+      213: -2052906218373154860
+    second: outfit-blue-main-char-all-animations_6
+  - first:
+      213: 6904161002586554197
+    second: outfit-blue-main-char-all-animations_7
+  - first:
+      213: -2788035544848761316
+    second: outfit-blue-main-char-all-animations_8
+  - first:
+      213: 1348030725583401749
+    second: outfit-blue-main-char-all-animations_9
+  - first:
+      213: 4320822508411091079
+    second: outfit-blue-main-char-all-animations_10
+  - first:
+      213: -5061053737341358820
+    second: outfit-blue-main-char-all-animations_11
+  - first:
+      213: -3229985580850253487
+    second: outfit-blue-main-char-all-animations_12
+  - first:
+      213: 5799802969374768988
+    second: outfit-blue-main-char-all-animations_13
+  - first:
+      213: 2113684102904048302
+    second: outfit-blue-main-char-all-animations_14
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -82,7 +127,322 @@ TextureImporter:
     androidETC2FallbackOverride: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: outfit-blue-main-char-all-animations_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 192
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a0ead89b990f1bb4ab1514abdf110baf
+      internalID: -2605339346645360786
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: outfit-blue-main-char-all-animations_1
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 192
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3853c31d708e2a14a98f5e619adac38e
+      internalID: 681508290541755491
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: outfit-blue-main-char-all-animations_2
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 192
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c4de27e323ad0044fbd8b2b01639bb39
+      internalID: -9206845603808093400
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: outfit-blue-main-char-all-animations_3
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 192
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 006cbec7a31b949498a3c60a858f22a9
+      internalID: 5912084591337159214
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: outfit-blue-main-char-all-animations_4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 900b775e73605d14cb2a5b923bced643
+      internalID: -1588002080042843271
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: outfit-blue-main-char-all-animations_5
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5e62272246acde94b8de614df3c677f7
+      internalID: 8783305793066770566
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: outfit-blue-main-char-all-animations_6
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ed4e08c7323082a4fb3ef36bdfb16f2b
+      internalID: -2052906218373154860
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: outfit-blue-main-char-all-animations_7
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aeba59da1dde2d149bb16d40288bd531
+      internalID: 6904161002586554197
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: outfit-blue-main-char-all-animations_8
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3d740608797915d458ec9a0e806015ac
+      internalID: -2788035544848761316
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: outfit-blue-main-char-all-animations_9
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b52e04b21eb5e5c4fa99bd38757632a5
+      internalID: 1348030725583401749
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: outfit-blue-main-char-all-animations_10
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fc0c5a1392367b24890877ed2bf05018
+      internalID: 4320822508411091079
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: outfit-blue-main-char-all-animations_11
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1d3f2d9cc54307645a92251915838cbe
+      internalID: -5061053737341358820
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: outfit-blue-main-char-all-animations_12
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 73ede3f8eef5a3e48a90cd8c8ad86c81
+      internalID: -3229985580850253487
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: outfit-blue-main-char-all-animations_13
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8cb768e9531a5db40ba8abed873ec6d7
+      internalID: 5799802969374768988
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: outfit-blue-main-char-all-animations_14
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 85f5dea74449c7548b2cff1d24f5b2ec
+      internalID: 2113684102904048302
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
