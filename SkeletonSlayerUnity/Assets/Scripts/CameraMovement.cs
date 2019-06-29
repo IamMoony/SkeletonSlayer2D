@@ -8,7 +8,7 @@ public class CameraMovement : MonoBehaviour
     public float moveSpeed;
     public float maxOffset;
 
-    private void Update()
+    private void FixedUpdate()
     {
         if (Vector2.Distance(transform.position, target.position) > maxOffset)
         {

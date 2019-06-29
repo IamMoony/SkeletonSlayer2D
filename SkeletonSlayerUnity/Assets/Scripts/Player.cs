@@ -23,5 +23,9 @@ public class Player : Character
         {
             Jump();
         }
+        if (Input.GetButtonDown("Dash"))
+        {
+            Dash();
+        }
     }
 }
