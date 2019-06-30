@@ -19,7 +19,7 @@ TextureImporter:
     second: walk_right_4
   - first:
       213: -5099900630156948025
-    second: main--char-mage-rework-newhead-newcolor-spritesheet_5
+    second: walk_right_5
   - first:
       213: 3101885326879974896
     second: walk_right_6
@@ -282,7 +282,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: main--char-mage-rework-newhead-newcolor-spritesheet_5
+      name: walk_right_5
       rect:
         serializedVersion: 2
         x: 128
