@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BasicMovementMage : MonoBehaviour
+public class Move : MonoBehaviour
 
   
 {
     public float moveSpeed = 5f;
+    public bool isGrounded = false;
 
     // Start is called before the first frame update
     void Start()
@@ -21,7 +22,7 @@ public class BasicMovementMage : MonoBehaviour
         transform.position += movement * Time.deltaTime * moveSpeed;
 
         void Jump() {
-            if(Input.GetButtonDown("Jump"))
+            if (Input.GetButtonDown("Jump") && isGrounded == true)
             {
                 gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(0f, 5f), ForceMode2D.Impulse);
             }
