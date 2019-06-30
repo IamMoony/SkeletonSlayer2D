@@ -16,6 +16,11 @@ public class GroundCheck : MonoBehaviour
         Parent.isGrounded = true;
     }
 
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        Parent.isGrounded = true;
+    }
+
     private void OnTriggerExit2D(Collider2D collision)
     {
         Parent.isGrounded = false;

@@ -5,6 +5,7 @@ using UnityEngine;
 public class NPC : Character
 {
     public float viewDistance;
+    public LayerMask visible;
 
     public GameObject target;
 
@@ -17,33 +18,89 @@ public class NPC : Character
     public enum action {Guarding, Patrolling, Attacking, Searching, Fleeing};
     public action Action;
 
+    private float turnTimer;
+
     public IEnumerator Patrol()
     {
-        Move(transform.right);
-        RaycastHit2D viewCheck = Physics2D.Raycast(transform.position + transform.right * 0.5f, transform.right, viewDistance);
-        RaycastHit2D groundCheck = Physics2D.Raycast(transform.position + transform.right * 0.5f, Vector2.down, 10f);
+        RaycastHit2D viewCheck;
+        RaycastHit2D groundCheck; 
         while (target == null)
         {
-            if (groundCheck)
+            if (!isStunned)
             {
+                groundCheck = Physics2D.Raycast(transform.position + new Vector3(FacingDirection.x, FacingDirection.y, 0) * 0.25f, Vector2.down, 1f, GroundLayer);
+                if (groundCheck)
+                {
+                    Debug.Log("GroundCheck Passed: "+ groundCheck.collider.name);
+                    viewCheck = Physics2D.Raycast(transform.position + new Vector3(FacingDirection.x, FacingDirection.y, 0) * 0.25f, FacingDirection, viewDistance, visible);
+                    if (viewCheck)
+                    {
+                        Debug.Log("Viewcheck Passed" + viewCheck.collider.name);
+                        Move(Vector2.zero);
+                        if (viewCheck.collider.tag == "Player")
+                        {
+                            target = viewCheck.collider.gameObject;
+                        }
+                        else
+                        {
+                            Turn();
+                        }
+                    }
+                    else
+                        Move(FacingDirection);
+                }
+                else
+                {
+                    Debug.Log("No Ground detected");
+                    Move(Vector2.zero);
+                    Turn();
+                }
+            }
+            yield return 100;
+        }
+        Debug.Log("Target found");
+    }
+
+    public IEnumerator Guard()
+    {
+        turnTimer = 3f;
+        RaycastHit2D viewCheck;
+        while (target == null)
+        {
+            if (!isStunned)
+            {
+                viewCheck = Physics2D.Raycast(transform.position + new Vector3(FacingDirection.x, FacingDirection.y, 0) * 0.25f, FacingDirection, viewDistance, visible);
                 if (viewCheck)
                 {
-                    Move(Vector2.zero);
+                    //Debug.Log("Viewcheck Passed" + viewCheck.collider.name);
                     if (viewCheck.collider.tag == "Player")
                     {
                         target = viewCheck.collider.gameObject;
                     }
                     else
                     {
+                        if (turnTimer > 0)
+                            turnTimer -= Time.deltaTime;
+                        else
+                        {
+                            Turn();
+                            turnTimer = 3f;
+                        }
+                    }
+                }
+                else
+                {
+                    if (turnTimer > 0)
+                        turnTimer -= Time.deltaTime;
+                    else
+                    {
                         Turn();
+                        turnTimer = 3f;
                     }
                 }
             }
-            else
-            {
-                Turn();
-            }
-            yield return 10;
+            yield return 100;
         }
+        //Debug.Log("Target found");
     }
 }
