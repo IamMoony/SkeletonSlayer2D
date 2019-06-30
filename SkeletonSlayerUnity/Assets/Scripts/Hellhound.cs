@@ -4,5 +4,8 @@ using UnityEngine;
 
 public class Hellhound : NPC
 {
-    
+    private void Start()
+    {
+        StartCoroutine(Patrol());
+    }
 }
