@@ -177,4 +177,26 @@ public class Character : MonoBehaviour
         if (state)
             Root_Ticks = 10;
     }
+
+    virtual public void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Projectile")
+        {
+            Projectile.projectileElement element = collision.gameObject.GetComponent<Projectile>().element;
+            int dmg = collision.gameObject.GetComponent<Projectile>().dmg;
+            Damage(dmg);
+            if (element == Projectile.projectileElement.Fire)
+            {
+                Burn(true);
+            }
+            else if (element == Projectile.projectileElement.Ice)
+            {
+                Freeze(true);
+            }
+            else if (element == Projectile.projectileElement.Earth)
+            {
+                Root(true);
+            }
+        }
+    }
 }

@@ -93,6 +93,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 2
+  type: 0
+  element: 1
+  dmg: 1
+  ignoredLayer:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!50 &2390927443734499079
 Rigidbody2D:
   serializedVersion: 4

@@ -10,6 +10,7 @@ public class Projectile : MonoBehaviour
     public enum projectileElement {Fire, Ice, Earth};
     public projectileElement element;
     public int dmg;
+    public LayerMask ignoredLayer;
 
     void Start()
     {
@@ -18,52 +19,77 @@ public class Projectile : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        Debug.Log("Projectile Trigger Enter");
         if (type == projectileType.Normal)
         {
             if (element == projectileElement.Fire)
             {
-                if (collision.gameObject.tag == "Character")
+                if (collision.gameObject.layer != ignoredLayer)
                 {
-                    
+                    Destroy(gameObject, 0.1f);
                 }
             }
             else if (element == projectileElement.Ice)
             {
-
+                if (collision.gameObject.layer != ignoredLayer)
+                {
+                    Destroy(gameObject, 0.1f);
+                }
             }
             else if (element == projectileElement.Earth)
             {
-
+                if (collision.gameObject.layer != ignoredLayer)
+                {
+                    Destroy(gameObject, 0.1f);
+                }
             }
         }
         else if (type == projectileType.Lob)
         {
             if (element == projectileElement.Fire)
             {
-
+                if (collision.gameObject.layer != ignoredLayer)
+                {
+                    Destroy(gameObject, 0.1f);
+                }
             }
             else if (element == projectileElement.Ice)
             {
-
+                if (collision.gameObject.layer != ignoredLayer)
+                {
+                    Destroy(gameObject, 0.1f);
+                }
             }
             else if (element == projectileElement.Earth)
             {
-
+                if (collision.gameObject.layer != ignoredLayer)
+                {
+                    Destroy(gameObject, 0.1f);
+                }
             }
         }
         else if (type == projectileType.Ground)
         {
             if (element == projectileElement.Fire)
             {
-
+                if (collision.gameObject.layer != ignoredLayer)
+                {
+                    Destroy(gameObject, 0.1f);
+                }
             }
             else if (element == projectileElement.Ice)
             {
-
+                if (collision.gameObject.layer != ignoredLayer)
+                {
+                    Destroy(gameObject, 0.1f);
+                }
             }
             else if (element == projectileElement.Earth)
             {
-
+                if (collision.gameObject.layer != ignoredLayer)
+                {
+                    Destroy(gameObject, 0.1f);
+                }
             }
         }
     }

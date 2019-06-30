@@ -26,7 +26,7 @@ public class Player : Character
         }
         if (Input.GetButtonDown("Shoot"))
         {
-            GroundAttack(projectile, FacingDirection);
+            Shoot(projectile, FacingDirection);
         }
     }
 }

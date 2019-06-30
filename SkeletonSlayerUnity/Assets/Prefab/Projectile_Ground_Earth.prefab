@@ -96,6 +96,9 @@ MonoBehaviour:
   type: 0
   element: 0
   dmg: 0
+  ignoredLayer:
+    serializedVersion: 2
+    m_Bits: 512
 --- !u!50 &4053248971094408246
 Rigidbody2D:
   serializedVersion: 4
