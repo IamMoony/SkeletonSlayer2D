@@ -100,7 +100,7 @@ public class Character : MonoBehaviour
     {
         if (isGrounded)
         {
-            ANIM.SetTrigger("Jump");
+            //ANIM.SetTrigger("Jump");
             RB.AddForce(Vector2.up * JumpForce_Current);
         }
     }
@@ -131,6 +131,7 @@ public class Character : MonoBehaviour
 
     public void Shoot(GameObject projectile, Vector2 direction)
     {
+        ANIM.SetTrigger("Shoot");
         Vector2 spawnPos = new Vector2(transform.position.x, transform.position.y) + direction * 0.25f;
         Destroy(Instantiate(projectile, spawnPos, Quaternion.Euler(0, 0, direction == Vector2.right ? 0 : 180)), 5f);
     }
