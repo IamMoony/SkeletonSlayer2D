@@ -18,6 +18,7 @@ public class Character : MonoBehaviour
     public bool isDashing;
     public Vector2 FacingDirection;
     public bool isDead;
+    public bool isStunned;
 
     private Rigidbody2D RB;
     private Animator ANIM;
@@ -168,7 +169,13 @@ public class Character : MonoBehaviour
         Effect_Freeze.SetActive(state);
         MoveSpeed_Current = state ? 0 : MoveSpeed_Base;
         if (state)
+        {
             Freeze_Ticks = 5;
+            Move(Vector2.zero);
+            isStunned = true;
+        }
+        else
+            isStunned = false;
     }
 
     public void Root(bool state)
@@ -176,7 +183,10 @@ public class Character : MonoBehaviour
         Effect_Root.SetActive(state);
         MoveSpeed_Current = state ? 0 : MoveSpeed_Base;
         if (state)
+        {
             Root_Ticks = 10;
+            Move(Vector2.zero);
+        }
     }
 
     virtual public void OnTriggerEnter2D(Collider2D collision)
