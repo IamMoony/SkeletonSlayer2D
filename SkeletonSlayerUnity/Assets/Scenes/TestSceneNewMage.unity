@@ -190,7 +190,7 @@ PrefabInstance:
     - target: {fileID: 2065848936377577216, guid: 0e83d9b3cf66e2d4899690cdc75f64a0,
         type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2065848936377577216, guid: 0e83d9b3cf66e2d4899690cdc75f64a0,
         type: 3}
@@ -200,6 +200,11 @@ PrefabInstance:
     - target: {fileID: 2065848936377577219, guid: 0e83d9b3cf66e2d4899690cdc75f64a0,
         type: 3}
       propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2065848936377577228, guid: 0e83d9b3cf66e2d4899690cdc75f64a0,
+        type: 3}
+      propertyPath: m_WasSpriteAssigned
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -454,7 +459,7 @@ GameObject:
   - component: {fileID: 1258237810}
   - component: {fileID: 1258237809}
   - component: {fileID: 1258237813}
-  - component: {fileID: 1258237815}
+  - component: {fileID: 1258237814}
   m_Layer: 0
   m_Name: MainPlayer
   m_TagString: Untagged
@@ -592,7 +597,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &1258237815
+--- !u!114 &1258237814
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1325,7 +1330,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2021559926}
   - component: {fileID: 2021559927}
-  - component: {fileID: 2021559928}
   m_Layer: 0
   m_Name: GroundCheck
   m_TagString: Untagged
@@ -1373,18 +1377,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.18756819, y: 0.0033958997}
   m_EdgeRadius: 0
---- !u!114 &2021559928
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2021559925}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c8fc3dd3a9415d640bad40e7c9c86f1b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!50 &2125295053 stripped
 Rigidbody2D:
   m_CorrespondingSourceObject: {fileID: 2065848936377577217, guid: 0e83d9b3cf66e2d4899690cdc75f64a0,

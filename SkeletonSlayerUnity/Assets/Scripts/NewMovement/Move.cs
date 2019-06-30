@@ -6,29 +6,36 @@ public class Move : MonoBehaviour
 
   
 {
-    public float moveSpeed = 5f;
-    public bool isGrounded = false;
+
+    Animator animator;
+    Rigidbody2D rb2D;
+    SpriteRenderer spriteRenderer;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        animator = GetComponent<Animator>();
+        rb2D = GetComponent<Rigidbody2D>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
     void Update() {
-        Jump();
-        Vector3 movement = new Vector3(Input.GetAxis("Horizontal"), 0.0f, 0.0f);
-        transform.position += movement * Time.deltaTime * moveSpeed;
 
-        void Jump() {
-            if (Input.GetButtonDown("Jump") && isGrounded == true)
-            {
-                gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(0f, 5f), ForceMode2D.Impulse);
-            }
-            
+        if(Input.GetKey("d") || Input.GetKey("right")) {
+            rb2D.velocity = new Vector2(2, 0);
+        } else if(Input.GetKey("a") || Input.GetKey("left"))
+        {
+            rb2D.velocity = new Vector2(-2, 0);
         }
+
+        if(Input.GetKey("space"))
+        {
+            rb2D.velocity = new Vector2(rb2D.velocity.x, 3);
+        }
+    }
+  
+            
+    
        
     }
-
-}
