@@ -4,10 +4,7 @@ using UnityEngine;
 
 public class Player : Character
 {
-    void Start()
-    {
-        
-    }
+    public GameObject projectile;
 
     public void Update()
     {
@@ -26,6 +23,10 @@ public class Player : Character
         if (Input.GetButtonDown("Dash"))
         {
             Dash();
+        }
+        if (Input.GetButtonDown("Shoot"))
+        {
+            GroundAttack(projectile, FacingDirection);
         }
     }
 }
