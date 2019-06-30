@@ -2,13 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Grounded : MonoBehaviour
+public class Ground : MonoBehaviour
 {
-    GameObject MainPlayer;
+
+    GameObject player;
+
     // Start is called before the first frame update
     void Start()
     {
-        MainPlayer = gameObject.transform.parent.gameObject;
+        player = gameObject.transform.parent.gameObject;
     }
 
     // Update is called once per frame
@@ -16,20 +18,19 @@ public class Grounded : MonoBehaviour
     {
         
     }
-
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if(collision.collider.tag == "Ground")
         {
-            MainPlayer.GetComponent<Move>().isGrounded = true;
+            player.GetComponent<Movement>().isGrounded = true;
         }
     }
 
-    public void OnCollisionExit2D(Collision2D collision)
+    private void OnCollisionExit2D(Collision2D collision)
     {
-        if(collision.collider.tag == "Ground")
+        if (collision.collider.tag == "Ground")
         {
-            MainPlayer.GetComponent<Move>().isGrounded = false;
+            player.GetComponent<Movement>().isGrounded = false;
         }
     }
 }

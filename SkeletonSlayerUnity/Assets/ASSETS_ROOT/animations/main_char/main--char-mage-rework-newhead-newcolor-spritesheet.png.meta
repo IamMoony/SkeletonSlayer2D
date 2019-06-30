@@ -97,10 +97,10 @@ TextureImporter:
     second: jump6
   - first:
       213: 7184051643307190455
-    second: main--char-mage-rework-newhead-newcolor-spritesheet_0
+    second: idle1
   - first:
       213: 1813670913952416801
-    second: main--char-mage-rework-newhead-newcolor-spritesheet_1
+    second: idle2
   - first:
       213: -4146253400705609859
     second: walk_right_1
@@ -115,13 +115,13 @@ TextureImporter:
     second: walk_right_4
   - first:
       213: 3101885326879974896
-    second: main--char-mage-rework-newhead-newcolor-spritesheet_6
+    second: walk_right_5
   - first:
       213: -8724541730817973397
-    second: main--char-mage-rework-newhead-newcolor-spritesheet_7
+    second: walk_right_6
   - first:
       213: -4136943895287763364
-    second: main--char-mage-rework-newhead-newcolor-spritesheet_8
+    second: walk_right_7
   - first:
       213: -4361710631997075676
     second: walk_right_8
@@ -288,7 +288,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: main--char-mage-rework-newhead-newcolor-spritesheet_0
+      name: idle1
       rect:
         serializedVersion: 2
         x: 0
@@ -309,7 +309,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: main--char-mage-rework-newhead-newcolor-spritesheet_1
+      name: idle2
       rect:
         serializedVersion: 2
         x: 32
@@ -414,7 +414,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: main--char-mage-rework-newhead-newcolor-spritesheet_6
+      name: walk_right_5
       rect:
         serializedVersion: 2
         x: 128
@@ -435,7 +435,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: main--char-mage-rework-newhead-newcolor-spritesheet_7
+      name: walk_right_6
       rect:
         serializedVersion: 2
         x: 160
@@ -456,7 +456,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: main--char-mage-rework-newhead-newcolor-spritesheet_8
+      name: walk_right_7
       rect:
         serializedVersion: 2
         x: 192
