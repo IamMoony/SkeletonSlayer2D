@@ -6,6 +6,7 @@ public class Movement : MonoBehaviour
 {
     public float moveSpeed = 5f;
     public bool isGrounded = false;
+    // public bool isRunning = false;
 
     Animator animator;
     Rigidbody2D rigidBody2D;
@@ -30,13 +31,20 @@ public class Movement : MonoBehaviour
         transform.position += horizontalMovement * Time.deltaTime * moveSpeed;
         */
 
-        if(Input.GetKey("d") || Input.GetKey("right"))
+        if (Input.GetKey("d") || Input.GetKey("right"))
         {
             rigidBody2D.velocity = new Vector2(2, rigidBody2D.velocity.y);
-            animator.Play("Run");
-        } else if(Input.GetKey("a"))
+            if(isGrounded)
+            {
+                animator.Play("Run");
+            }
+            spriteRenderer.flipX = false;
+
+        } else if(Input.GetKey("a") || Input.GetKey("left"))
         {
+            rigidBody2D.velocity = new Vector2(-2, rigidBody2D.velocity.x);
             animator.Play("Run");
+            spriteRenderer.flipX = true;
         } else
         {
             animator.Play("Idle");
