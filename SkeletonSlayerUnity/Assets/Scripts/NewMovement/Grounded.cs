@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Ground : MonoBehaviour
+public class Grounded : MonoBehaviour
 {
 
     GameObject player;
@@ -14,7 +14,7 @@ public class Ground : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         
     }
@@ -33,4 +33,6 @@ public class Ground : MonoBehaviour
             player.GetComponent<Movement>().isGrounded = false;
         }
     }
+
+
 }
