@@ -26,7 +26,8 @@ public class Player : Character
         }
         if (Input.GetButtonDown("Shoot"))
         {
-            Shoot(projectile, FacingDirection);
+            if (isGrounded && !isWalking)
+                StartCoroutine(Cast(projectile));
         }
     }
 }

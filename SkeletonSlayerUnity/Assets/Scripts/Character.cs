@@ -12,8 +12,11 @@ public class Character : MonoBehaviour
     [HideInInspector] public int MoveSpeed_Current;
     public int JumpForce_Base;
     [HideInInspector] public int JumpForce_Current;
-
+    public float actionValue = 0;
+    
     public bool isGrounded;
+    public bool isWalking;
+    public bool isCasting;
     public LayerMask GroundLayer;
     public bool isDashing;
     public Vector2 FacingDirection;
@@ -48,9 +51,11 @@ public class Character : MonoBehaviour
         FacingDirection = Vector2.right;
     }
 
-    void FixedUpdate()
+    public virtual void FixedUpdate()
     {
         ANIM.SetBool("IsGrounded", isGrounded);
+        ANIM.SetBool("IsWalking", isWalking);
+        ANIM.SetBool("IsCasting", isCasting);
         if (Burn_Ticks > 0 || Freeze_Ticks > 0 || Root_Ticks > 0)
         {
             if (tick > 0)
@@ -85,7 +90,7 @@ public class Character : MonoBehaviour
 
     public void Move(Vector2 direction)
     {
-        ANIM.SetBool("IsWalking", direction != Vector2.zero);
+        isWalking = direction != Vector2.zero;
         if (direction.x < 0 && FacingDirection == Vector2.right || direction.x > 0 && FacingDirection == Vector2.left)
             Turn();
         RB.velocity = new Vector2(direction.x * MoveSpeed_Current, RB.velocity.y);
@@ -209,5 +214,22 @@ public class Character : MonoBehaviour
                 Root(true);
             }
         }
+    }
+
+    public IEnumerator Cast(GameObject projectile)
+    {
+        isCasting = true;
+        while(actionValue < 1)
+        {
+            if (isGrounded && !isWalking)
+                actionValue = Mathf.Clamp(actionValue + Time.deltaTime, 0, 1);
+            else
+                break;
+            yield return 1;
+        }
+        isCasting = false;
+        if (isGrounded && !isWalking)
+            Shoot(projectile, FacingDirection);
+        actionValue = 0;
     }
 }

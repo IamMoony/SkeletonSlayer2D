@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Player_JumpOff
+  m_Name: Player_Casting
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -20,7 +20,7 @@ AnimationClip:
   m_PPtrCurves:
   - curve:
     - time: 0
-      value: {fileID: 5541491980939719229, guid: 992a457a14b2d7e4bb8076dbd50db6c0,
+      value: {fileID: 2076417640381170419, guid: 5df8a5baf836d16419f70348c449b398,
         type: 3}
     attribute: m_Sprite
     path: 
@@ -41,7 +41,7 @@ AnimationClip:
       customType: 23
       isPPtrCurve: 1
     pptrCurveMapping:
-    - {fileID: 5541491980939719229, guid: 992a457a14b2d7e4bb8076dbd50db6c0, type: 3}
+    - {fileID: 2076417640381170419, guid: 5df8a5baf836d16419f70348c449b398, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
