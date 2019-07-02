@@ -101,7 +101,7 @@ public class Character : MonoBehaviour
     {
         if (isGrounded)
         {
-            //ANIM.SetTrigger("Jump");
+            ANIM.SetTrigger("Jump");
             RB.AddForce(Vector2.up * JumpForce_Current);
         }
     }
