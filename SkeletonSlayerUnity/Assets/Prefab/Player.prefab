@@ -242,7 +242,7 @@ MonoBehaviour:
   MoveSpeed_Current: 0
   JumpForce_Base: 250
   JumpForce_Current: 0
-  isGrounded: 0
+  isGrounded: 1
   GroundLayer:
     serializedVersion: 2
     m_Bits: 512
