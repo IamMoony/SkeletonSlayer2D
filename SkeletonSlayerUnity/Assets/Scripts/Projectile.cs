@@ -26,6 +26,7 @@ public class Projectile : MonoBehaviour
             {
                 if (collision.gameObject.layer != ignoredLayer)
                 {
+                    DelayedChildDestroy();
                     Destroy(gameObject, 0.1f);
                 }
             }
@@ -33,6 +34,7 @@ public class Projectile : MonoBehaviour
             {
                 if (collision.gameObject.layer != ignoredLayer)
                 {
+                    DelayedChildDestroy();
                     Destroy(gameObject, 0.1f);
                 }
             }
@@ -40,6 +42,7 @@ public class Projectile : MonoBehaviour
             {
                 if (collision.gameObject.layer != ignoredLayer)
                 {
+                    DelayedChildDestroy();
                     Destroy(gameObject, 0.1f);
                 }
             }
@@ -50,6 +53,7 @@ public class Projectile : MonoBehaviour
             {
                 if (collision.gameObject.layer != ignoredLayer)
                 {
+                    DelayedChildDestroy();
                     Destroy(gameObject, 0.1f);
                 }
             }
@@ -57,6 +61,7 @@ public class Projectile : MonoBehaviour
             {
                 if (collision.gameObject.layer != ignoredLayer)
                 {
+                    DelayedChildDestroy();
                     Destroy(gameObject, 0.1f);
                 }
             }
@@ -64,6 +69,7 @@ public class Projectile : MonoBehaviour
             {
                 if (collision.gameObject.layer != ignoredLayer)
                 {
+                    DelayedChildDestroy();
                     Destroy(gameObject, 0.1f);
                 }
             }
@@ -74,6 +80,7 @@ public class Projectile : MonoBehaviour
             {
                 if (collision.gameObject.layer != ignoredLayer)
                 {
+                    DelayedChildDestroy();
                     Destroy(gameObject, 0.1f);
                 }
             }
@@ -81,6 +88,7 @@ public class Projectile : MonoBehaviour
             {
                 if (collision.gameObject.layer != ignoredLayer)
                 {
+                    DelayedChildDestroy();
                     Destroy(gameObject, 0.1f);
                 }
             }
@@ -88,9 +96,20 @@ public class Projectile : MonoBehaviour
             {
                 if (collision.gameObject.layer != ignoredLayer)
                 {
+                    DelayedChildDestroy();
                     Destroy(gameObject, 0.1f);
                 }
             }
+        }
+    }
+
+    void DelayedChildDestroy()
+    {
+        if (transform.childCount > 0)
+        {
+            Transform child = transform.GetChild(0);
+            child.SetParent(null);
+            Destroy(child, 5f);
         }
     }
 }
