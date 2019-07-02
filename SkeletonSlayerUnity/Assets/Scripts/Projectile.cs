@@ -109,7 +109,7 @@ public class Projectile : MonoBehaviour
         {
             Transform child = transform.GetChild(0);
             child.SetParent(null);
-            Destroy(child, 5f);
+            Destroy(child.gameObject, 5f);
         }
     }
 }
