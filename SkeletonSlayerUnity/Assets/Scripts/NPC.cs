@@ -20,6 +20,15 @@ public class NPC : Character
 
     private float turnTimer;
 
+    public override void FixedUpdate()
+    {
+        base.FixedUpdate();
+        if (isDead)
+        {
+            Destroy(gameObject,0.1f);
+        }
+    }
+
     public IEnumerator Patrol()
     {
         RaycastHit2D viewCheck;
@@ -31,11 +40,11 @@ public class NPC : Character
                 groundCheck = Physics2D.Raycast(transform.position + new Vector3(FacingDirection.x, FacingDirection.y, 0) * 0.25f, Vector2.down, 1f, GroundLayer);
                 if (groundCheck)
                 {
-                    Debug.Log("GroundCheck Passed: "+ groundCheck.collider.name);
+                    //Debug.Log("GroundCheck Passed: "+ groundCheck.collider.name);
                     viewCheck = Physics2D.Raycast(transform.position + new Vector3(FacingDirection.x, FacingDirection.y, 0) * 0.25f, FacingDirection, viewDistance, visible);
                     if (viewCheck)
                     {
-                        Debug.Log("Viewcheck Passed" + viewCheck.collider.name);
+                        //Debug.Log("Viewcheck Passed" + viewCheck.collider.name);
                         Move(Vector2.zero);
                         if (viewCheck.collider.tag == "Player")
                         {
@@ -51,7 +60,7 @@ public class NPC : Character
                 }
                 else
                 {
-                    Debug.Log("No Ground detected");
+                    //Debug.Log("No Ground detected");
                     Move(Vector2.zero);
                     Turn();
                 }

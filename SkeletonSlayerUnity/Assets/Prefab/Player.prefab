@@ -127,7 +127,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: f51f107996f09404794a333c1e078e76, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -242,7 +242,10 @@ MonoBehaviour:
   MoveSpeed_Current: 0
   JumpForce_Base: 250
   JumpForce_Current: 0
+  actionValue: 0
   isGrounded: 1
+  isWalking: 0
+  isCasting: 0
   GroundLayer:
     serializedVersion: 2
     m_Bits: 512
