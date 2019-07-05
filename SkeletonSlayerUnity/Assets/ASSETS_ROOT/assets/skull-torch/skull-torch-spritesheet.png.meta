@@ -14,6 +14,9 @@ TextureImporter:
   - first:
       213: 4780430230918435983
     second: skull-torch-spritesheet_3
+  - first:
+      213: 1614831548897295624
+    second: skull-torch-spritesheet_4
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -110,7 +113,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1a51803876169cc4a89485da810076cd
+      spriteID: 508739da118495b419f88989735d3b3e
       internalID: -4732471471219183221
       vertices: []
       indices: 
@@ -131,7 +134,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0b174b7f4e0c2294c981e157f45bd7be
+      spriteID: 7311897a0f43afd4ca419c18435e031b
       internalID: 8507706687527169937
       vertices: []
       indices: 
@@ -152,7 +155,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c76346782b3e04b41bf53d090fac0f9b
+      spriteID: 8da9e14fe3f734a42af27bd59192b38b
       internalID: 1766793124699483543
       vertices: []
       indices: 
@@ -173,8 +176,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8e1b85ef4fce31340bfae80f51c08062
+      spriteID: db1a64256c6c4c04e87cd0795a335dc5
       internalID: 4780430230918435983
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: skull-torch-spritesheet_4
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 39a6b8f82a49a3242b1b4a24175624ae
+      internalID: 1614831548897295624
       vertices: []
       indices: 
       edges: []
