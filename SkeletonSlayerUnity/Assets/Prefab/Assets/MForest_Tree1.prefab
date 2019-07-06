@@ -70,7 +70,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: -2541579827414792756, guid: bfb8fd12fe830894793d286f2999f643,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -96,7 +96,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.61332786, y: 1.3860302}
+  m_Offset: {x: 0.61332786, y: 1.6567037}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -107,7 +107,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.465513, y: 0.6029396}
+  m_Size: {x: 1.465513, y: 0.032022}
   m_EdgeRadius: 0
 --- !u!61 &1647618760
 BoxCollider2D:
@@ -122,7 +122,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.8887732, y: 1.0078876}
+  m_Offset: {x: -0.8887732, y: 1.3202446}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -133,7 +133,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.1599536, y: 0.6811919}
+  m_Size: {x: 1.1599536, y: 0.028295398}
   m_EdgeRadius: 0
 --- !u!61 &1647618761
 BoxCollider2D:
@@ -148,7 +148,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 1.1830571, y: 0.29569358}
+  m_Offset: {x: 1.1830571, y: 0.47812736}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -159,5 +159,5 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.57138586, y: 0.41749728}
+  m_Size: {x: 0.57138586, y: 0.025018215}
   m_EdgeRadius: 0
