@@ -17,6 +17,8 @@ public class Character : MonoBehaviour
     public bool isGrounded;
     public bool isWalking;
     public bool isCasting;
+    public bool canClimb;
+    public bool isClimbing;
     public LayerMask GroundLayer;
     public bool isDashing;
     public Vector2 FacingDirection;
@@ -56,6 +58,7 @@ public class Character : MonoBehaviour
         ANIM.SetBool("IsGrounded", isGrounded);
         ANIM.SetBool("IsWalking", isWalking);
         ANIM.SetBool("IsCasting", isCasting);
+        ANIM.SetBool("IsClimbing", isClimbing);
         if (Burn_Ticks > 0 || Freeze_Ticks > 0 || Root_Ticks > 0)
         {
             if (tick > 0)
@@ -86,6 +89,16 @@ public class Character : MonoBehaviour
                 tick = 1f;
             }
         }
+        if (isClimbing && Input.GetAxis("Vertical") == 0)
+        {
+            ANIM.speed = 0;
+        }
+        else if (isWalking)
+        {
+            ANIM.speed = Mathf.Clamp((float)MoveSpeed_Current / (float)MoveSpeed_Base, 0, 1);
+        }
+        else if (ANIM.speed == 0)
+            ANIM.speed = 1;
     }
 
     public void Move(Vector2 direction)
@@ -104,7 +117,7 @@ public class Character : MonoBehaviour
 
     public void Jump()
     {
-        if (isGrounded)
+        if (isGrounded || isClimbing)
         {
             ANIM.SetTrigger("Jump");
             RB.AddForce(Vector2.up * JumpForce_Current);
@@ -176,7 +189,7 @@ public class Character : MonoBehaviour
         if (state)
         {
             Freeze_Ticks = 5;
-            Move(Vector2.zero);
+            RB.velocity = Vector2.zero;
             isStunned = true;
         }
         else
@@ -190,7 +203,7 @@ public class Character : MonoBehaviour
         if (state)
         {
             Root_Ticks = 10;
-            Move(Vector2.zero);
+            RB.velocity = Vector2.zero;
         }
     }
 
@@ -214,6 +227,23 @@ public class Character : MonoBehaviour
                 Root(true);
             }
         }
+        if (collision.gameObject.tag == "Climbable")
+        {
+            canClimb = true;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Climbable")
+        {
+            canClimb = false;
+            if (isClimbing)
+            {
+                isClimbing = false;
+                RB.gravityScale = 1f;
+            }
+        }
     }
 
     public IEnumerator Cast(GameObject projectile)
@@ -231,5 +261,16 @@ public class Character : MonoBehaviour
         if (isGrounded && !isWalking)
             Shoot(projectile, FacingDirection);
         actionValue = 0;
+    }
+
+    public void Climb(Vector2 direction)
+    {
+        if (!isClimbing)
+        {
+            isClimbing = true;
+            RB.velocity = Vector2.zero;
+            RB.gravityScale = 0;
+        }
+        transform.position = Vector2.MoveTowards(transform.position, transform.position + new Vector3(0, direction.y, 0), Time.deltaTime * 2f);
     }
 }

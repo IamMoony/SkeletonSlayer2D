@@ -9,13 +9,16 @@ public class NPC : Character
 
     public GameObject target;
 
-    public enum attitude { Friendly, Neutral, Enemy };
+    public enum faction { Friendly, Neutral, Enemy };
+    public faction Faction;
+
+    public enum attitude { Defensive, Passive, Aggressive };
     public attitude Attitude;
 
     public enum state {Normal, Alert}
     public state State;
 
-    public enum action {Guarding, Patrolling, Attacking, Searching, Fleeing};
+    public enum action {Guarding, Patrolling, Pursuing, Searching, Fleeing};
     public action Action;
 
     private float turnTimer;
@@ -31,8 +34,9 @@ public class NPC : Character
 
     public IEnumerator Patrol()
     {
+        MoveSpeed_Current = MoveSpeed_Base / 2;
         RaycastHit2D viewCheck;
-        RaycastHit2D groundCheck; 
+        RaycastHit2D groundCheck;
         while (target == null)
         {
             if (!isStunned)
