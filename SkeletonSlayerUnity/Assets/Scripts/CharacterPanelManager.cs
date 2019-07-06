@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class CharacterPanelManager : MonoBehaviour
 {
     public GameObject characterPanel_Instance;
+    public float panelOffsetY;
 
     private List<Transform> characterInScene;
     private List<GameObject> characterPanelInScene;
@@ -32,7 +33,7 @@ public class CharacterPanelManager : MonoBehaviour
         }
     }
 
-    private void LateUpdate()
+    private void Update()
     {
         UpdatePanels();
     }
@@ -43,7 +44,7 @@ public class CharacterPanelManager : MonoBehaviour
         {
             if (!characterInScene[i].GetComponent<Character>().isDead)
             {
-                characterPanelInScene[i].transform.position = Camera.main.WorldToScreenPoint(characterInScene[i].position + Vector3.up);
+                characterPanelInScene[i].transform.position = Camera.main.WorldToScreenPoint(characterInScene[i].position + Vector3.up * panelOffsetY);
                 characterHealthBar[i].fillAmount = Mathf.Clamp((float)characterInScene[i].GetComponent<Character>().HP_Current / (float)characterInScene[i].GetComponent<Character>().HP_Base, 0, 1);
                 characterActionBar[i].fillAmount = characterInScene[i].GetComponent<Character>().actionValue;
             }
