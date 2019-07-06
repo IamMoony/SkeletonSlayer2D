@@ -16,6 +16,13 @@ public class Player : Character
         {
             Move(Vector2.zero);
         }
+        if (canClimb)
+        {
+            if (Input.GetAxis("Vertical") != 0)
+            {
+                Climb(new Vector2(0, Input.GetAxis("Vertical")));
+            }
+        }
         if (Input.GetButtonDown("Jump"))
         {
             Jump();
