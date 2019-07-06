@@ -93,8 +93,12 @@ public class Character : MonoBehaviour
         {
             ANIM.speed = 0;
         }
+        else if (isWalking)
+        {
+            ANIM.speed = Mathf.Clamp((float)MoveSpeed_Current / (float)MoveSpeed_Base, 0, 1);
+        }
         else if (ANIM.speed == 0)
-            ANIM.speed = 1f;
+            ANIM.speed = 1;
     }
 
     public void Move(Vector2 direction)
