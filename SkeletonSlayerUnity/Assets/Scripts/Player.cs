@@ -25,7 +25,7 @@ public class Player : Character
         }
         if (Input.GetButtonDown("Jump"))
         {
-            Jump();
+            Jump(Vector2.zero);
         }
         if (Input.GetButtonDown("Dash"))
         {

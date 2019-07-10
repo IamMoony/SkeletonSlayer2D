@@ -32,76 +32,90 @@ public class NPC : Character
         }
     }
 
+    public bool CheckFloor()
+    {
+        return Physics2D.Raycast(transform.position + new Vector3(FacingDirection.x, FacingDirection.y, 0) * 0.25f, Vector2.down, 1f, GroundLayer);
+    }
+
+    public bool CheckWall()
+    {
+        return Physics2D.Raycast(transform.position + new Vector3(FacingDirection.x, FacingDirection.y, 0) * 0.25f, FacingDirection, .25f, GroundLayer);
+    }
+
+    public GameObject CheckView()
+    {
+        RaycastHit2D viewCheck = Physics2D.Raycast(transform.position + new Vector3(FacingDirection.x, FacingDirection.y, 0) * 0.25f, FacingDirection, viewDistance, visible);
+        if (viewCheck)
+            return viewCheck.collider.gameObject;
+        else
+            return null;
+    }
+
+    public bool CheckJump()
+    {
+        return Physics2D.Raycast(transform.position + new Vector3(FacingDirection.x, FacingDirection.y, 0) * 2f + Vector3.up, Vector2.down, 3f, GroundLayer);
+    }
+
     public IEnumerator Patrol()
     {
         MoveSpeed_Current = MoveSpeed_Base / 2;
-        RaycastHit2D viewCheck;
-        RaycastHit2D groundCheck;
         while (target == null)
         {
-            if (!isStunned)
+            if (!isStunned && isGrounded)
             {
-                groundCheck = Physics2D.Raycast(transform.position + new Vector3(FacingDirection.x, FacingDirection.y, 0) * 0.25f, Vector2.down, 1f, GroundLayer);
-                if (groundCheck)
+                if (CheckFloor())
                 {
-                    //Debug.Log("GroundCheck Passed: "+ groundCheck.collider.name);
-                    viewCheck = Physics2D.Raycast(transform.position + new Vector3(FacingDirection.x, FacingDirection.y, 0) * 0.25f, FacingDirection, viewDistance, visible);
-                    if (viewCheck)
+                    if (CheckWall())
                     {
-                        //Debug.Log("Viewcheck Passed" + viewCheck.collider.name);
-                        Move(Vector2.zero);
-                        if (viewCheck.collider.tag == "Player")
+                        Turn();
+                    }
+                    else
+                    {
+                        GameObject view = CheckView();
+                        if (view == null)
                         {
-                            target = viewCheck.collider.gameObject;
+                            Move(FacingDirection);
                         }
                         else
                         {
-                            Turn();
+                            Move(Vector2.zero);
+                            target = view;
                         }
                     }
-                    else
-                        Move(FacingDirection);
                 }
                 else
                 {
-                    //Debug.Log("No Ground detected");
                     Move(Vector2.zero);
-                    Turn();
+                    yield return new WaitForSeconds(Random.Range(0.25f, 1.5f));
+                    if (CheckJump())
+                    {
+                        Debug.Log("JumpCheck Passed!");
+                        Jump(FacingDirection);
+                        isGrounded = false;
+                        while (!isGrounded)
+                            yield return new WaitForEndOfFrame();
+                    }
+                    else
+                    {
+                        Debug.Log("JumpCheck Failed!");
+                        Turn();
+                    }
                 }
             }
-            yield return 100;
+            yield return new WaitForEndOfFrame();
         }
-        Debug.Log("Target found");
+        yield return true;
     }
 
     public IEnumerator Guard()
     {
         turnTimer = 3f;
-        RaycastHit2D viewCheck;
         while (target == null)
         {
             if (!isStunned)
             {
-                viewCheck = Physics2D.Raycast(transform.position + new Vector3(FacingDirection.x, FacingDirection.y, 0) * 0.25f, FacingDirection, viewDistance, visible);
-                if (viewCheck)
-                {
-                    //Debug.Log("Viewcheck Passed" + viewCheck.collider.name);
-                    if (viewCheck.collider.tag == "Player")
-                    {
-                        target = viewCheck.collider.gameObject;
-                    }
-                    else
-                    {
-                        if (turnTimer > 0)
-                            turnTimer -= Time.deltaTime;
-                        else
-                        {
-                            Turn();
-                            turnTimer = 3f;
-                        }
-                    }
-                }
-                else
+                GameObject view = CheckView();
+                if (view == null)
                 {
                     if (turnTimer > 0)
                         turnTimer -= Time.deltaTime;
@@ -111,9 +125,13 @@ public class NPC : Character
                         turnTimer = 3f;
                     }
                 }
+                else
+                {
+                    target = view;
+                }
             }
-            yield return 100;
+            yield return new WaitForEndOfFrame();
         }
-        //Debug.Log("Target found");
+        yield return true;
     }
 }
