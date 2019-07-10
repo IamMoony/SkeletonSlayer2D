@@ -23,6 +23,12 @@ TextureImporter:
   - first:
       213: -1642807812708487148
     second: hell-hound-basic-animations_6
+  - first:
+      213: 5885633696030954444
+    second: hell-hound-basic-animations_7
+  - first:
+      213: -2713231867475078715
+    second: hell-hound-basic-animations_8
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -119,7 +125,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3c98ab9cee9e25d48aa260ec3ca76e40
+      spriteID: e5d5ab67338f64d48aa8d9c8962b863b
       internalID: 4767545128821921782
       vertices: []
       indices: 
@@ -140,7 +146,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f1ec4c21709f42d4c98b006f0fdf4468
+      spriteID: 033fffcf814ea964f828819285984328
       internalID: 4939786663893355069
       vertices: []
       indices: 
@@ -161,7 +167,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 533873717ce39144ea198a0d66c5e060
+      spriteID: 4c54238d5e58f0347988483db3c9b9f5
       internalID: 615775903754522915
       vertices: []
       indices: 
@@ -182,7 +188,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4a2c0abc73123a9439276a4088fe22b5
+      spriteID: d1fadc3254159b241b6a6d84d8c523dc
       internalID: -6543651099342997487
       vertices: []
       indices: 
@@ -203,7 +209,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5ce24ff8dd38d84408da735cbaff8f4d
+      spriteID: 22862b36cca1e114ebf8f325cb67d509
       internalID: 6333813915761167798
       vertices: []
       indices: 
@@ -224,7 +230,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8412a08fa3214dd45865721729ff90a2
+      spriteID: 8e807b492dab3b14c8ace184fbbd7bb6
       internalID: 8048061931273051593
       vertices: []
       indices: 
@@ -245,8 +251,50 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 04a3abe939be00e4d8dc933c647d8bbd
+      spriteID: e2c4deba6e107754394bcd55e5da5978
       internalID: -1642807812708487148
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: hell-hound-basic-animations_7
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9e020826b73d1264b86b0009eaf900e4
+      internalID: 5885633696030954444
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: hell-hound-basic-animations_8
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7f293eec313f21c41bb383527947f284
+      internalID: -2713231867475078715
       vertices: []
       indices: 
       edges: []

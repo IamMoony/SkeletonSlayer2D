@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -121577862986651451}
   - component: {fileID: 1987067320431221765}
   m_Layer: 11
-  m_Name: Projectile_Ice
+  m_Name: Projectile_Player_Ice
   m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -171,7 +171,7 @@ GameObject:
   - component: {fileID: 4814583819328829469}
   - component: {fileID: 9060692093018818081}
   - component: {fileID: 3689756187883062047}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: Effect_IceTrail
   m_TagString: Untagged
   m_Icon: {fileID: 0}

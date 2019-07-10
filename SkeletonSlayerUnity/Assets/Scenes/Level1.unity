@@ -144,6 +144,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Wooden_Ladder
       objectReference: {fileID: 0}
+    - target: {fileID: 1394314819605642440, guid: 4540707901c2c234ea0031781afde5d3,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1394314819605642446, guid: 4540707901c2c234ea0031781afde5d3,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -260,7 +265,7 @@ PrefabInstance:
     - target: {fileID: 2065848936377577218, guid: 0e83d9b3cf66e2d4899690cdc75f64a0,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -9.078
+      value: -5.22
       objectReference: {fileID: 0}
     - target: {fileID: 2065848936377577218, guid: 0e83d9b3cf66e2d4899690cdc75f64a0,
         type: 3}
@@ -1331,7 +1336,7 @@ PrefabInstance:
     - target: {fileID: 5939185117275640316, guid: cccb138ef246ae74688c8ec65d845d7d,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -6.245
+      value: -9.36
       objectReference: {fileID: 0}
     - target: {fileID: 5939185117275640316, guid: cccb138ef246ae74688c8ec65d845d7d,
         type: 3}

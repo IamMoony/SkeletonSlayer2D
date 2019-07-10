@@ -106,6 +106,7 @@ Transform:
   - {fileID: 3971844611257233742}
   - {fileID: 615396616120497807}
   - {fileID: 8118886383276501456}
+  - {fileID: 1929384199219962796}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -247,15 +248,80 @@ MonoBehaviour:
   FacingDirection: {x: 0, y: 0}
   isDead: 0
   isStunned: 0
+  ANIM: {fileID: 0}
   viewDistance: 1
   visible:
     serializedVersion: 2
-    m_Bits: 512
+    m_Bits: 768
+  attackRange: 0.5
+  attackDuration: 1
   target: {fileID: 0}
+  inAttackRange: 0
   Faction: 0
   Attitude: 2
   State: 0
   Action: 0
+--- !u!1 &6802837637206850023
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1929384199219962796}
+  - component: {fileID: 682473212729217438}
+  - component: {fileID: 5372465020142630572}
+  m_Layer: 14
+  m_Name: AttackCollider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1929384199219962796
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6802837637206850023}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.339, y: -0.248, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5939185117275640316}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!58 &682473212729217438
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6802837637206850023}
+  m_Enabled: 0
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.1
+--- !u!114 &5372465020142630572
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6802837637206850023}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb659f3ef3727b94f969545c4b5b8428, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dmgAmount: 1
 --- !u!1001 &5939185117412317634
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -267,6 +333,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Effect_Freeze
+      objectReference: {fileID: 0}
+    - target: {fileID: 5993968086995487863, guid: 8d7c5b53f9abdc6409b771e09df7ef19,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6550039890089946957, guid: 8d7c5b53f9abdc6409b771e09df7ef19,
         type: 3}
@@ -343,6 +414,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Effect_Burn
       objectReference: {fileID: 0}
+    - target: {fileID: 7310163276645880396, guid: 24d0ce4752c97ad4dbdff29e61179231,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7310163276645880397, guid: 24d0ce4752c97ad4dbdff29e61179231,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -417,6 +493,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Effect_Root
+      objectReference: {fileID: 0}
+    - target: {fileID: 3100901961245998558, guid: 3640f9ad3ffe55547ace5d07abc2be73,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2504051161396862692, guid: 3640f9ad3ffe55547ace5d07abc2be73,
         type: 3}

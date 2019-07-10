@@ -70,7 +70,7 @@ public class Character : MonoBehaviour
                 if (Burn_Ticks > 0)
                 {
                     Burn_Ticks--;
-                    Damage(1);
+                    Damage(1, Vector2.up);
                     if (Burn_Ticks == 0)
                         Burn(false);
                 }
@@ -167,8 +167,9 @@ public class Character : MonoBehaviour
         Destroy(Instantiate(projectile, spawnPos, Quaternion.Euler(0, 0, direction == Vector2.right ? 0 : 180)), 5f);
     }
 
-    public void Damage(int amount)
+    public void Damage(int amount, Vector2 direction)
     {
+        RB.velocity = direction + Vector2.up;
         HP_Current = Mathf.Clamp(HP_Current - amount, 0, HP_Base);
         if (HP_Current == 0)
         {
@@ -213,7 +214,7 @@ public class Character : MonoBehaviour
         {
             Projectile.projectileElement element = collision.gameObject.GetComponent<Projectile>().element;
             int dmg = collision.gameObject.GetComponent<Projectile>().dmg;
-            Damage(dmg);
+            Damage(dmg, collision.transform.right);
             if (element == Projectile.projectileElement.Fire)
             {
                 Burn(true);
