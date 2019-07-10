@@ -11,7 +11,19 @@ public class Hellhound : NPC
 
     IEnumerator Behavior()
     {
-        yield return StartCoroutine(Patrol());
-        Debug.Log("Target aquired! Target: "+target.name);
+        while (true)
+        {
+            if (target == null)
+            {
+                yield return StartCoroutine(Patrol());
+            }
+            else
+            {
+                if (!inAttackRange)
+                    yield return StartCoroutine(Pursue());
+                else
+                    yield return StartCoroutine(Attack_Melee());
+            }
+        }
     }
 }

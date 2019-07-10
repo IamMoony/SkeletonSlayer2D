@@ -26,7 +26,7 @@ public class Character : MonoBehaviour
     public bool isStunned;
 
     private Rigidbody2D RB;
-    private Animator ANIM;
+    public Animator ANIM;
     private GameObject Effect_Burn;
     private GameObject Effect_Freeze;
     private GameObject Effect_Root;
