@@ -6,6 +6,12 @@ public class Hellhound : NPC
 {
     private void Start()
     {
-        StartCoroutine(Patrol());
+        StartCoroutine(Behavior());
+    }
+
+    IEnumerator Behavior()
+    {
+        yield return StartCoroutine(Patrol());
+        Debug.Log("Target aquired! Target: "+target.name);
     }
 }

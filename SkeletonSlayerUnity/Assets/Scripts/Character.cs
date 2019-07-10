@@ -115,12 +115,12 @@ public class Character : MonoBehaviour
         FacingDirection = FacingDirection == Vector2.right ? Vector2.left : Vector2.right;
     }
 
-    public void Jump()
+    public void Jump(Vector2 direction)
     {
         if (isGrounded || isClimbing)
         {
             ANIM.SetTrigger("Jump");
-            RB.AddForce(Vector2.up * JumpForce_Current);
+            RB.AddForce((Vector2.up + direction) * JumpForce_Current);
         }
     }
 
