@@ -102,7 +102,7 @@ GameObject:
   - component: {fileID: 739753493}
   - component: {fileID: 739753495}
   - component: {fileID: 739753494}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: GroundCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -178,7 +178,7 @@ GameObject:
   - component: {fileID: 2065848936377577219}
   m_Layer: 9
   m_Name: Player
-  m_TagString: Player
+  m_TagString: Character
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -307,7 +307,7 @@ CircleCollider2D:
   m_GameObject: {fileID: 2065848936377577231}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: a2404c3f9b537444b9d1446a715cbcee, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -338,6 +338,7 @@ MonoBehaviour:
   isGrounded: 1
   isWalking: 0
   isCasting: 0
+  isEvoking: 0
   canClimb: 0
   isClimbing: 0
   GroundLayer:
@@ -347,8 +348,15 @@ MonoBehaviour:
   FacingDirection: {x: 0, y: 0}
   isDead: 0
   isStunned: 0
-  projectile: {fileID: 2390927443734499096, guid: db8a3a7c3c29fbe419ff2a9f898da5f9,
+  ANIM: {fileID: 0}
+  activeElement: 0
+  projectile_Fire: {fileID: 4439456849462767887, guid: b50c293318cb0fc4999618cf21e66765,
     type: 3}
+  projectile_Water: {fileID: 2390927443734499096, guid: db8a3a7c3c29fbe419ff2a9f898da5f9,
+    type: 3}
+  projectile_Earth: {fileID: 4053248971094408233, guid: 30379c95a7c27ec43a2df2d5ea54b593,
+    type: 3}
+  projectile_Air: {fileID: 0}
 --- !u!95 &2065848936377577219
 Animator:
   serializedVersion: 3

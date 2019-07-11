@@ -17,6 +17,7 @@ public class Character : MonoBehaviour
     public bool isGrounded;
     public bool isWalking;
     public bool isCasting;
+    public bool isEvoking;
     public bool canClimb;
     public bool isClimbing;
     public LayerMask GroundLayer;
@@ -103,7 +104,7 @@ public class Character : MonoBehaviour
 
     public void Move(Vector2 direction)
     {
-        isWalking = direction != Vector2.zero;
+        isWalking = true;
         if (direction.x < 0 && FacingDirection == Vector2.right || direction.x > 0 && FacingDirection == Vector2.left)
             Turn();
         RB.velocity = new Vector2(direction.x * MoveSpeed_Current, RB.velocity.y);
@@ -112,7 +113,7 @@ public class Character : MonoBehaviour
     public void Turn()
     {
         transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
-        FacingDirection = FacingDirection == Vector2.right ? Vector2.left : Vector2.right;
+        FacingDirection *= -1f;
     }
 
     public void Jump(Vector2 direction)
@@ -161,12 +162,6 @@ public class Character : MonoBehaviour
         Destroy(Instantiate(projectile, spawnPos, Quaternion.Euler(0, 0, direction == Vector2.right ? 45 : 135)), 5f);
     }
 
-    public void GroundAttack(GameObject projectile, Vector2 direction)
-    {
-        Vector2 spawnPos = new Vector2(transform.position.x, transform.position.y - 0.5f) + direction * 0.25f;
-        Destroy(Instantiate(projectile, spawnPos, Quaternion.Euler(0, 0, direction == Vector2.right ? 0 : 180)), 5f);
-    }
-
     public void Damage(int amount, Vector2 direction)
     {
         RB.velocity = direction + Vector2.up;
@@ -180,7 +175,8 @@ public class Character : MonoBehaviour
     public void Burn(bool state)
     {
         Effect_Burn.SetActive(state);
-        Burn_Ticks = 5;
+        if (state)
+            Burn_Ticks = 5;
     }
 
     public void Freeze(bool state)
@@ -210,24 +206,6 @@ public class Character : MonoBehaviour
 
     virtual public void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Projectile")
-        {
-            Projectile.projectileElement element = collision.gameObject.GetComponent<Projectile>().element;
-            int dmg = collision.gameObject.GetComponent<Projectile>().dmg;
-            Damage(dmg, collision.transform.right);
-            if (element == Projectile.projectileElement.Fire)
-            {
-                Burn(true);
-            }
-            else if (element == Projectile.projectileElement.Ice)
-            {
-                Freeze(true);
-            }
-            else if (element == Projectile.projectileElement.Earth)
-            {
-                Root(true);
-            }
-        }
         if (collision.gameObject.tag == "Climbable")
         {
             canClimb = true;
@@ -247,21 +225,25 @@ public class Character : MonoBehaviour
         }
     }
 
-    public IEnumerator Cast(GameObject projectile)
+    public IEnumerator Cast(string spell, float castTime)
     {
         isCasting = true;
-        while(actionValue < 1)
+        while(actionValue < castTime)
         {
             if (isGrounded && !isWalking)
                 actionValue = Mathf.Clamp(actionValue + Time.deltaTime, 0, 1);
             else
                 break;
-            yield return 1;
+            yield return new WaitForEndOfFrame();
         }
+        actionValue = 0;
         isCasting = false;
         if (isGrounded && !isWalking)
-            Shoot(projectile, FacingDirection);
-        actionValue = 0;
+        {
+            isEvoking = true;
+            yield return StartCoroutine(spell);
+            isEvoking = false;
+        }
     }
 
     public void Climb(Vector2 direction)

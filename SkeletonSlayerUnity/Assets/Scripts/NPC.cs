@@ -85,6 +85,8 @@ public class NPC : Character
         //Debug.Log("Start Attack Routine");
         while (inAttackRange)
         {
+            if (target.transform.position.x < transform.position.x && FacingDirection == Vector2.right || target.transform.position.x > transform.position.x && FacingDirection == Vector2.left)
+                Turn();
             ANIM.SetTrigger("Attack_Melee");
             yield return new WaitForSeconds(attackDuration);
             if (Vector2.Distance(target.transform.position, transform.position) > attackRange)
@@ -96,6 +98,7 @@ public class NPC : Character
     public IEnumerator Pursue()
     {
         //Debug.Log("Start Pursue Routine");
+        MoveSpeed_Current = MoveSpeed_Base;
         while (!inAttackRange)
         {
             if (!CheckTarget())
@@ -108,7 +111,7 @@ public class NPC : Character
             if (Vector2.Distance(target.transform.position, transform.position) < attackRange)
             {
                 //Debug.Log("In Range");
-                Move(Vector2.zero);
+                isWalking = false;
                 inAttackRange = true;
             }
             else
@@ -144,7 +147,7 @@ public class NPC : Character
                         {
                             if (view.tag == "Player")
                             {
-                                Move(Vector2.zero);
+                                isWalking = false;
                                 target = view;
                                 //Debug.Log("Target aquired: " + target.name);
                             }
@@ -155,7 +158,7 @@ public class NPC : Character
                 }
                 else
                 {
-                    Move(Vector2.zero);
+                    isWalking = false;
                     yield return new WaitForSeconds(Random.Range(0.25f, 1.5f));
                     if (CheckJump())
                     {
@@ -197,7 +200,7 @@ public class NPC : Character
                 {
                     if (view.tag == "Player")
                     {
-                        Move(Vector2.zero);
+                        isWalking = false;
                         target = view;
                     }
                 }
