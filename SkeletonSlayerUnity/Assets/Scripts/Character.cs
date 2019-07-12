@@ -164,7 +164,8 @@ public class Character : MonoBehaviour
 
     public void Damage(int amount, Vector2 direction)
     {
-        RB.velocity = direction + Vector2.up;
+        if (isGrounded)
+            RB.velocity = direction + Vector2.up;
         HP_Current = Mathf.Clamp(HP_Current - amount, 0, HP_Base);
         if (HP_Current == 0)
         {
