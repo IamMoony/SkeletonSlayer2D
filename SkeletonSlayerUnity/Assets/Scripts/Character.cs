@@ -12,8 +12,11 @@ public class Character : MonoBehaviour
     [HideInInspector] public int MoveSpeed_Current;
     public int JumpForce_Base;
     [HideInInspector] public int JumpForce_Current;
+    public GameObject effect_Burn;
+    public GameObject effect_Freeze;
+    public GameObject effect_Root;
+
     public float actionValue = 0;
-    
     public bool isGrounded;
     public bool isWalking;
     public bool isCasting;
@@ -28,9 +31,6 @@ public class Character : MonoBehaviour
 
     private Rigidbody2D RB;
     public Animator ANIM;
-    private GameObject Effect_Burn;
-    private GameObject Effect_Freeze;
-    private GameObject Effect_Root;
     private float tick;
     private int Burn_Ticks;
     private int Freeze_Ticks;
@@ -40,12 +40,12 @@ public class Character : MonoBehaviour
     {
         RB = GetComponent<Rigidbody2D>();
         ANIM = GetComponent<Animator>();
-        Effect_Burn = transform.Find("Effect_Burn").gameObject;
-        Effect_Burn.SetActive(false);
-        Effect_Freeze = transform.Find("Effect_Freeze").gameObject;
-        Effect_Freeze.SetActive(false);
-        Effect_Root = transform.Find("Effect_Root").gameObject;
-        Effect_Root.SetActive(false);
+        effect_Burn = Instantiate(effect_Burn, transform);
+        effect_Burn.SetActive(false);
+        effect_Freeze = Instantiate(effect_Freeze, transform);
+        effect_Freeze.SetActive(false);
+        effect_Root = Instantiate(effect_Root, transform);
+        effect_Root.SetActive(false);
         tick = 1f;
         HP_Current = HP_Base;
         DMG_Current = DMG_Base;
@@ -175,14 +175,14 @@ public class Character : MonoBehaviour
 
     public void Burn(bool state)
     {
-        Effect_Burn.SetActive(state);
+        effect_Burn.SetActive(state);
         if (state)
             Burn_Ticks = 5;
     }
 
     public void Freeze(bool state)
     {
-        Effect_Freeze.SetActive(state);
+        effect_Freeze.SetActive(state);
         MoveSpeed_Current = state ? 0 : MoveSpeed_Base;
         if (state)
         {
@@ -196,7 +196,7 @@ public class Character : MonoBehaviour
 
     public void Root(bool state)
     {
-        Effect_Root.SetActive(state);
+        effect_Root.SetActive(state);
         MoveSpeed_Current = state ? 0 : MoveSpeed_Base;
         if (state)
         {
