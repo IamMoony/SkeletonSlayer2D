@@ -4,9 +4,9 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Projectile
-  - Ground
   - Climbable
+  - Projectile
+  - Character
   layers:
   - Default
   - TransparentFX
@@ -16,15 +16,15 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Ground
+  - Character_Player
+  - Character_Enemy
+  - Projectile_Player
+  - Projectile_Enemy
+  - Attack_Player
+  - Attack_Enemy
+  - GroundCheck
+  - ViewCheck
   - 
   - 
   - 

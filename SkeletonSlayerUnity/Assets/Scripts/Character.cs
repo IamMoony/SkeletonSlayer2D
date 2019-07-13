@@ -12,11 +12,15 @@ public class Character : MonoBehaviour
     [HideInInspector] public int MoveSpeed_Current;
     public int JumpForce_Base;
     [HideInInspector] public int JumpForce_Current;
+    public GameObject effect_Burn;
+    public GameObject effect_Freeze;
+    public GameObject effect_Root;
+
     public float actionValue = 0;
-    
     public bool isGrounded;
     public bool isWalking;
     public bool isCasting;
+    public bool isEvoking;
     public bool canClimb;
     public bool isClimbing;
     public LayerMask GroundLayer;
@@ -26,10 +30,7 @@ public class Character : MonoBehaviour
     public bool isStunned;
 
     private Rigidbody2D RB;
-    private Animator ANIM;
-    private GameObject Effect_Burn;
-    private GameObject Effect_Freeze;
-    private GameObject Effect_Root;
+    public Animator ANIM;
     private float tick;
     private int Burn_Ticks;
     private int Freeze_Ticks;
@@ -39,12 +40,12 @@ public class Character : MonoBehaviour
     {
         RB = GetComponent<Rigidbody2D>();
         ANIM = GetComponent<Animator>();
-        Effect_Burn = transform.Find("Effect_Burn").gameObject;
-        Effect_Burn.SetActive(false);
-        Effect_Freeze = transform.Find("Effect_Freeze").gameObject;
-        Effect_Freeze.SetActive(false);
-        Effect_Root = transform.Find("Effect_Root").gameObject;
-        Effect_Root.SetActive(false);
+        effect_Burn = Instantiate(effect_Burn, transform);
+        effect_Burn.SetActive(false);
+        effect_Freeze = Instantiate(effect_Freeze, transform);
+        effect_Freeze.SetActive(false);
+        effect_Root = Instantiate(effect_Root, transform);
+        effect_Root.SetActive(false);
         tick = 1f;
         HP_Current = HP_Base;
         DMG_Current = DMG_Base;
@@ -70,7 +71,7 @@ public class Character : MonoBehaviour
                 if (Burn_Ticks > 0)
                 {
                     Burn_Ticks--;
-                    Damage(1);
+                    Damage(1, Vector2.up);
                     if (Burn_Ticks == 0)
                         Burn(false);
                 }
@@ -103,7 +104,7 @@ public class Character : MonoBehaviour
 
     public void Move(Vector2 direction)
     {
-        isWalking = direction != Vector2.zero;
+        isWalking = true;
         if (direction.x < 0 && FacingDirection == Vector2.right || direction.x > 0 && FacingDirection == Vector2.left)
             Turn();
         RB.velocity = new Vector2(direction.x * MoveSpeed_Current, RB.velocity.y);
@@ -112,7 +113,7 @@ public class Character : MonoBehaviour
     public void Turn()
     {
         transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
-        FacingDirection = FacingDirection == Vector2.right ? Vector2.left : Vector2.right;
+        FacingDirection *= -1f;
     }
 
     public void Jump(Vector2 direction)
@@ -161,14 +162,10 @@ public class Character : MonoBehaviour
         Destroy(Instantiate(projectile, spawnPos, Quaternion.Euler(0, 0, direction == Vector2.right ? 45 : 135)), 5f);
     }
 
-    public void GroundAttack(GameObject projectile, Vector2 direction)
+    public void Damage(int amount, Vector2 direction)
     {
-        Vector2 spawnPos = new Vector2(transform.position.x, transform.position.y - 0.5f) + direction * 0.25f;
-        Destroy(Instantiate(projectile, spawnPos, Quaternion.Euler(0, 0, direction == Vector2.right ? 0 : 180)), 5f);
-    }
-
-    public void Damage(int amount)
-    {
+        if (isGrounded)
+            RB.velocity = direction + Vector2.up;
         HP_Current = Mathf.Clamp(HP_Current - amount, 0, HP_Base);
         if (HP_Current == 0)
         {
@@ -178,13 +175,14 @@ public class Character : MonoBehaviour
 
     public void Burn(bool state)
     {
-        Effect_Burn.SetActive(state);
-        Burn_Ticks = 5;
+        effect_Burn.SetActive(state);
+        if (state)
+            Burn_Ticks = 5;
     }
 
     public void Freeze(bool state)
     {
-        Effect_Freeze.SetActive(state);
+        effect_Freeze.SetActive(state);
         MoveSpeed_Current = state ? 0 : MoveSpeed_Base;
         if (state)
         {
@@ -198,7 +196,7 @@ public class Character : MonoBehaviour
 
     public void Root(bool state)
     {
-        Effect_Root.SetActive(state);
+        effect_Root.SetActive(state);
         MoveSpeed_Current = state ? 0 : MoveSpeed_Base;
         if (state)
         {
@@ -209,24 +207,6 @@ public class Character : MonoBehaviour
 
     virtual public void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Projectile")
-        {
-            Projectile.projectileElement element = collision.gameObject.GetComponent<Projectile>().element;
-            int dmg = collision.gameObject.GetComponent<Projectile>().dmg;
-            Damage(dmg);
-            if (element == Projectile.projectileElement.Fire)
-            {
-                Burn(true);
-            }
-            else if (element == Projectile.projectileElement.Ice)
-            {
-                Freeze(true);
-            }
-            else if (element == Projectile.projectileElement.Earth)
-            {
-                Root(true);
-            }
-        }
         if (collision.gameObject.tag == "Climbable")
         {
             canClimb = true;
@@ -246,21 +226,25 @@ public class Character : MonoBehaviour
         }
     }
 
-    public IEnumerator Cast(GameObject projectile)
+    public IEnumerator Cast(string spell, float castTime)
     {
         isCasting = true;
-        while(actionValue < 1)
+        while(actionValue < castTime)
         {
             if (isGrounded && !isWalking)
                 actionValue = Mathf.Clamp(actionValue + Time.deltaTime, 0, 1);
             else
                 break;
-            yield return 1;
+            yield return new WaitForEndOfFrame();
         }
+        actionValue = 0;
         isCasting = false;
         if (isGrounded && !isWalking)
-            Shoot(projectile, FacingDirection);
-        actionValue = 0;
+        {
+            isEvoking = true;
+            yield return StartCoroutine(spell);
+            isEvoking = false;
+        }
     }
 
     public void Climb(Vector2 direction)

@@ -5,12 +5,10 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {
     public float speed;
-    public enum projectileType {Normal, Lob, Ground};
-    public projectileType type;
-    public enum projectileElement {Fire, Ice, Earth};
-    public projectileElement element;
+    public Player.Element element;
     public int dmg;
-    public LayerMask ignoredLayer;
+    public GameObject effect_Ground;
+    public GameObject effect_Destroy;
 
     void Start()
     {
@@ -19,91 +17,32 @@ public class Projectile : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("Projectile Trigger Enter");
-        if (type == projectileType.Normal)
+        if (collision.tag == "Character")
         {
-            if (element == projectileElement.Fire)
+            collision.GetComponent<Character>().Damage(dmg, transform.right);
+            if (element == Player.Element.Fire)
             {
-                if (collision.gameObject.layer != ignoredLayer)
-                {
-                    DelayedChildDestroy();
-                    Destroy(gameObject, 0.1f);
-                }
+                collision.GetComponent<Character>().Burn(true);
             }
-            else if (element == projectileElement.Ice)
+            else if (element == Player.Element.Water)
             {
-                if (collision.gameObject.layer != ignoredLayer)
-                {
-                    DelayedChildDestroy();
-                    Destroy(gameObject, 0.1f);
-                }
-            }
-            else if (element == projectileElement.Earth)
-            {
-                if (collision.gameObject.layer != ignoredLayer)
-                {
-                    DelayedChildDestroy();
-                    Destroy(gameObject, 0.1f);
-                }
+                collision.GetComponent<Character>().Freeze(true);
             }
         }
-        else if (type == projectileType.Lob)
+        ProjectileDestroy();
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Character")
         {
-            if (element == projectileElement.Fire)
-            {
-                if (collision.gameObject.layer != ignoredLayer)
-                {
-                    DelayedChildDestroy();
-                    Destroy(gameObject, 0.1f);
-                }
-            }
-            else if (element == projectileElement.Ice)
-            {
-                if (collision.gameObject.layer != ignoredLayer)
-                {
-                    DelayedChildDestroy();
-                    Destroy(gameObject, 0.1f);
-                }
-            }
-            else if (element == projectileElement.Earth)
-            {
-                if (collision.gameObject.layer != ignoredLayer)
-                {
-                    DelayedChildDestroy();
-                    Destroy(gameObject, 0.1f);
-                }
-            }
-        }
-        else if (type == projectileType.Ground)
-        {
-            if (element == projectileElement.Fire)
-            {
-                if (collision.gameObject.layer != ignoredLayer)
-                {
-                    DelayedChildDestroy();
-                    Destroy(gameObject, 0.1f);
-                }
-            }
-            else if (element == projectileElement.Ice)
-            {
-                if (collision.gameObject.layer != ignoredLayer)
-                {
-                    DelayedChildDestroy();
-                    Destroy(gameObject, 0.1f);
-                }
-            }
-            else if (element == projectileElement.Earth)
-            {
-                if (collision.gameObject.layer != ignoredLayer)
-                {
-                    DelayedChildDestroy();
-                    Destroy(gameObject, 0.1f);
-                }
-            }
+            collision.gameObject.GetComponent<Character>().Damage(dmg, transform.right);
+            collision.gameObject.GetComponent<Character>().Root(true);
+            ProjectileDestroy();
         }
     }
 
-    void DelayedChildDestroy()
+    void ProjectileDestroy()
     {
         if (transform.childCount > 0)
         {
@@ -111,5 +50,12 @@ public class Projectile : MonoBehaviour
             child.SetParent(null);
             Destroy(child.gameObject, 5f);
         }
+        Destroy(Instantiate(effect_Destroy, transform.position, Quaternion.identity), 5f);
+        Destroy(gameObject);
+    }
+
+    void GroundEffect()
+    {
+        Instantiate(effect_Ground, transform.position, Quaternion.identity);
     }
 }

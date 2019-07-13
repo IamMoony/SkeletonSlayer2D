@@ -4,7 +4,17 @@ using UnityEngine;
 
 public class Player : Character
 {
-    public GameObject projectile;
+    public enum Element {Fire, Water, Earth, Air};
+    public Element activeElement;
+    public GameObject projectile_Fire;
+    public GameObject projectile_Water;
+    public GameObject projectile_Earth;
+    public GameObject projectile_Air;
+
+    private void Start()
+    {
+        activeElement = Element.Fire;
+    }
 
     public void Update()
     {
@@ -14,7 +24,7 @@ public class Player : Character
         }
         else
         {
-            Move(Vector2.zero);
+            isWalking = false;
         }
         if (canClimb)
         {
@@ -34,7 +44,59 @@ public class Player : Character
         if (Input.GetButtonDown("Shoot"))
         {
             if (isGrounded && !isWalking)
-                StartCoroutine(Cast(projectile));
+            {
+                StartCoroutine(Cast("Spell_Primary", 1f));
+            } 
+        }
+        if (Input.GetKey(KeyCode.Alpha1))
+        {
+            if (activeElement != Element.Fire)
+            {
+                activeElement = Element.Fire;
+            }
+        }
+        if (Input.GetKey(KeyCode.Alpha2))
+        {
+            if (activeElement != Element.Water)
+            {
+                activeElement = Element.Water;
+            }
+        }
+        if (Input.GetKey(KeyCode.Alpha3))
+        {
+            if (activeElement != Element.Earth)
+            {
+                activeElement = Element.Earth;
+            }
+        }
+        if (Input.GetKey(KeyCode.Alpha4))
+        {
+            if (activeElement != Element.Air)
+            {
+                activeElement = Element.Air;
+            }
         }
     }
+
+    public IEnumerator Spell_Primary()
+    {
+        if (activeElement == Element.Fire)
+        {
+            Lob(projectile_Fire, FacingDirection);
+        }
+        else if (activeElement == Element.Water)
+        {
+            Shoot(projectile_Water, FacingDirection);
+        }
+        else if (activeElement == Element.Earth)
+        {
+            Shoot(projectile_Earth, FacingDirection);
+        }
+        else if (activeElement == Element.Air)
+        {
+            Shoot(projectile_Air, FacingDirection);
+        }
+        yield return new WaitForSeconds(0.5f);
+    }
+
 }
