@@ -149,17 +149,12 @@ public class Character : MonoBehaviour
         isDashing = false;
     }
 
-    public void Shoot(GameObject projectile, Vector2 direction)
+    public GameObject Shoot(GameObject projectile, Vector2 direction)
     {
         ANIM.SetTrigger("Shoot");
         Vector2 spawnPos = new Vector2(transform.position.x, transform.position.y) + direction * 0.25f;
-        Destroy(Instantiate(projectile, spawnPos, Quaternion.Euler(0, 0, direction == Vector2.right ? 0 : 180)), 5f);
-    }
-
-    public void Lob(GameObject projectile, Vector2 direction)
-    {
-        Vector2 spawnPos = new Vector2(transform.position.x, transform.position.y + 0.25f) + direction * 0.25f;
-        Destroy(Instantiate(projectile, spawnPos, Quaternion.Euler(0, 0, direction == Vector2.right ? 45 : 135)), 5f);
+        GameObject proj = Instantiate(projectile, spawnPos, Quaternion.Euler(0, 0, direction == Vector2.right ? 0 : 180));
+        return proj;
     }
 
     public void Damage(int amount, Vector2 direction)

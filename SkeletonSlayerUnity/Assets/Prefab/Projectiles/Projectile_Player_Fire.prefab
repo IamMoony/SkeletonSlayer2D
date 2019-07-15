@@ -4762,9 +4762,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4439456849462767892}
   - component: {fileID: 9048653630674131608}
-  - component: {fileID: 4439456849462767889}
   - component: {fileID: 4439456849462767888}
   - component: {fileID: 7768758153057738238}
+  - component: {fileID: 1036273925}
   m_Layer: 11
   m_Name: Projectile_Player_Fire
   m_TagString: Projectile
@@ -4836,24 +4836,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &4439456849462767889
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4439456849462767887}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a3d06f9f18e873f4ea37f23d2fefd400, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 4
-  element: 0
-  dmg: 1
-  effect_Ground: {fileID: 0}
-  effect_Destroy: {fileID: 3593303007339290826, guid: 703c2dad49a614e4bb2fe4f44b474e2a,
-    type: 3}
 --- !u!50 &4439456849462767888
 Rigidbody2D:
   serializedVersion: 4
@@ -4871,7 +4853,7 @@ Rigidbody2D:
   m_AngularDrag: 0.05
   m_GravityScale: 0.5
   m_Material: {fileID: 0}
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
@@ -4884,13 +4866,50 @@ CircleCollider2D:
   m_GameObject: {fileID: 4439456849462767887}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_Material: {fileID: 6200000, guid: 2216fabdf638e9340bd47199da3631e0, type: 2}
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.15
+--- !u!114 &1036273925
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4439456849462767887}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18a8230657e9cc641bc81d0e810a8299, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  initalVelocity: 2
+  velocityModifier: {x: 0, y: 1.5, z: 0}
+  contactDamage: 1
+  effect_Activation: {fileID: 3593303007339290826, guid: 703c2dad49a614e4bb2fe4f44b474e2a,
+    type: 3}
+  effect_Contact_Character_PreActivation: {fileID: 3593303007339290826, guid: 703c2dad49a614e4bb2fe4f44b474e2a,
+    type: 3}
+  effect_Contact_Ground_PreActivation: {fileID: 3593303007339290826, guid: 703c2dad49a614e4bb2fe4f44b474e2a,
+    type: 3}
+  effect_Contact_Character_PostActivation: {fileID: 8171018927329503707, guid: abbe39b3e21c63543b578ec3aa761e2a,
+    type: 3}
+  effect_Contact_Ground_PostActivation: {fileID: 8171018927329503707, guid: abbe39b3e21c63543b578ec3aa761e2a,
+    type: 3}
+  effect_Destroy: {fileID: 3593303007339290826, guid: 703c2dad49a614e4bb2fe4f44b474e2a,
+    type: 3}
+  isActivated: 0
+  RB: {fileID: 0}
+  chargeVelocity: 4
+  explosionRadius: 1
+  explosionForce: 100
+  explosionDamage: 1
+  explosionBurn: 1
+  layerAffectedByExplosion:
+    serializedVersion: 2
+    m_Bits: 1024
 --- !u!1 &7007647216413584997
 GameObject:
   m_ObjectHideFlags: 0
