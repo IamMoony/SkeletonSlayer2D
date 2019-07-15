@@ -50,7 +50,8 @@ public class Firebolt : Projectile
         {
             if (targetsInRadius[i].tag == "Character")
             {
-                targetsInRadius[i].GetComponent<Character>().Burn(true);
+                if (explosionBurn)
+                    targetsInRadius[i].GetComponent<Character>().Burn(true);
                 targetsInRadius[i].GetComponent<Character>().Damage(explosionDamage, Vector2.up);
                 targetsInRadius[i].GetComponent<Rigidbody2D>().AddForce((targetsInRadius[i].transform.position - transform.position).normalized * explosionForce);
             }

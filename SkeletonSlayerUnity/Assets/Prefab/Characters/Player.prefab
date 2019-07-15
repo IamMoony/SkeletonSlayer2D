@@ -337,6 +337,9 @@ MonoBehaviour:
     type: 3}
   effect_Root: {fileID: 3100901961245998558, guid: 3640f9ad3ffe55547ace5d07abc2be73,
     type: 3}
+  effect_Wet: {fileID: 7271018466058181344, guid: 88cf6c989c4c9214f85f74dcca70918b,
+    type: 3}
+  effect_Stun: {fileID: 0}
   actionValue: 0
   isGrounded: 1
   isWalking: 0
