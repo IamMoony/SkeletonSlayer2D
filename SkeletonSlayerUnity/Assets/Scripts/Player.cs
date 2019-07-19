@@ -11,8 +11,11 @@ public class Player : Character
     public GameObject projectile_Earth;
     public GameObject projectile_Air;
 
+    private GameObject[] projectile_Instance;
+
     private void Start()
     {
+        projectile_Instance = new GameObject[4];
         activeElement = Element.Fire;
     }
 
@@ -39,7 +42,7 @@ public class Player : Character
         }
         if (Input.GetButtonDown("Dash"))
         {
-            Dash();
+            Teleport();
         }
         if (Input.GetButtonDown("Shoot"))
         {
@@ -47,6 +50,14 @@ public class Player : Character
             {
                 StartCoroutine(Cast("Spell_Primary", 1f));
             } 
+        }
+        if (Input.GetButtonDown("Activate"))
+        {
+            if (projectile_Instance[(int)activeElement] != null)
+            {
+                if (!projectile_Instance[(int)activeElement].GetComponent<Projectile>().isActivated)
+                    projectile_Instance[(int)activeElement].GetComponent<Projectile>().Activation();
+            }
         }
         if (Input.GetKey(KeyCode.Alpha1))
         {
@@ -82,19 +93,19 @@ public class Player : Character
     {
         if (activeElement == Element.Fire)
         {
-            Lob(projectile_Fire, FacingDirection);
+            projectile_Instance[(int)Element.Fire] = Shoot(projectile_Fire, FacingDirection);
         }
         else if (activeElement == Element.Water)
         {
-            Shoot(projectile_Water, FacingDirection);
+            projectile_Instance[(int)Element.Water] = Shoot(projectile_Water, FacingDirection);
         }
         else if (activeElement == Element.Earth)
         {
-            Shoot(projectile_Earth, FacingDirection);
+            projectile_Instance[(int)Element.Earth] = Shoot(projectile_Earth, FacingDirection);
         }
         else if (activeElement == Element.Air)
         {
-            Shoot(projectile_Air, FacingDirection);
+            projectile_Instance[(int)Element.Air] = Shoot(projectile_Air, FacingDirection);
         }
         yield return new WaitForSeconds(0.5f);
     }

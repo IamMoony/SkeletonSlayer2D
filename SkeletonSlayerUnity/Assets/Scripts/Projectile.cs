@@ -4,45 +4,55 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-    public float speed;
-    public Player.Element element;
-    public int dmg;
-    public GameObject effect_Ground;
+    public float initalVelocity;
+    public Vector3 velocityModifier;
+    public int contactDamage;
+    public GameObject effect_Activation;
+    public GameObject effect_Contact_Character_PreActivation;
+    public GameObject effect_Contact_Ground_PreActivation;
+    public GameObject effect_Contact_Character_PostActivation;
+    public GameObject effect_Contact_Ground_PostActivation;
     public GameObject effect_Destroy;
 
-    void Start()
+    public bool isActivated;
+
+    public Rigidbody2D RB;
+
+    private void Awake()
     {
-        GetComponent<Rigidbody2D>().velocity = transform.right * speed;
+        RB = GetComponent<Rigidbody2D>();
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    public virtual void Start()
     {
-        if (collision.tag == "Character")
+        RB.velocity = (transform.right + velocityModifier) * initalVelocity;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collider)
+    {
+        if (collider.tag == "Character")
         {
-            collision.GetComponent<Character>().Damage(dmg, transform.right);
-            if (element == Player.Element.Fire)
-            {
-                collision.GetComponent<Character>().Burn(true);
-            }
-            else if (element == Player.Element.Water)
-            {
-                collision.GetComponent<Character>().Freeze(true);
-            }
+            CharacterContact(collider.GetComponent<Character>());
         }
-        ProjectileDestroy();
+        else
+        {
+            GroundContact(transform.position);
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Character")
         {
-            collision.gameObject.GetComponent<Character>().Damage(dmg, transform.right);
-            collision.gameObject.GetComponent<Character>().Root(true);
-            ProjectileDestroy();
+            CharacterContact(collision.gameObject.GetComponent<Character>());
+        }
+        else
+        {
+            GroundContact(collision.contacts[0].point);
         }
     }
 
-    void ProjectileDestroy()
+    public void ProjectileDestroy()
     {
         if (transform.childCount > 0)
         {
@@ -54,8 +64,25 @@ public class Projectile : MonoBehaviour
         Destroy(gameObject);
     }
 
-    void GroundEffect()
+    public virtual void Activation()
     {
-        Instantiate(effect_Ground, transform.position, Quaternion.identity);
+        Destroy(Instantiate(effect_Activation, transform.position, Quaternion.identity), 5f);
+        isActivated = true;
+    }
+
+    public virtual void CharacterContact(Character characterInContact)
+    {
+        if (!isActivated)
+            Destroy(Instantiate(effect_Contact_Character_PreActivation, transform.position, Quaternion.identity), 5f);
+        else
+            Destroy(Instantiate(effect_Contact_Character_PostActivation, transform.position, Quaternion.identity), 5f);
+    }
+
+    public virtual void GroundContact(Vector2 contactPosition)
+    {
+        if (!isActivated)
+            Destroy(Instantiate(effect_Contact_Ground_PreActivation, contactPosition, Quaternion.identity), 5f);
+        else
+            Destroy(Instantiate(effect_Contact_Ground_PostActivation, contactPosition, Quaternion.identity), 5f);
     }
 }

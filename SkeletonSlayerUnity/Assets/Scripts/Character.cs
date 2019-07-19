@@ -12,9 +12,14 @@ public class Character : MonoBehaviour
     [HideInInspector] public int MoveSpeed_Current;
     public int JumpForce_Base;
     [HideInInspector] public int JumpForce_Current;
+    public float dash_Speed;
+    public float dash_Distance;
+    public float teleport_Distance;
     public GameObject effect_Burn;
     public GameObject effect_Freeze;
     public GameObject effect_Root;
+    public GameObject effect_Wet;
+    public GameObject effect_Stun;
 
     public float actionValue = 0;
     public bool isGrounded;
@@ -32,9 +37,11 @@ public class Character : MonoBehaviour
     private Rigidbody2D RB;
     public Animator ANIM;
     private float tick;
-    private int Burn_Ticks;
-    private int Freeze_Ticks;
-    private int Root_Ticks;
+    private int burn_Ticks;
+    private int freeze_Ticks;
+    private int root_Ticks;
+    private int wet_Ticks;
+    private int stun_Ticks;
 
     private void Awake()
     {
@@ -46,6 +53,10 @@ public class Character : MonoBehaviour
         effect_Freeze.SetActive(false);
         effect_Root = Instantiate(effect_Root, transform);
         effect_Root.SetActive(false);
+        effect_Wet = Instantiate(effect_Wet, transform);
+        effect_Wet.SetActive(false);
+        //effect_Stun = Instantiate(effect_Stun, transform);
+        //effect_Stun.SetActive(false);
         tick = 1f;
         HP_Current = HP_Base;
         DMG_Current = DMG_Base;
@@ -60,7 +71,7 @@ public class Character : MonoBehaviour
         ANIM.SetBool("IsWalking", isWalking);
         ANIM.SetBool("IsCasting", isCasting);
         ANIM.SetBool("IsClimbing", isClimbing);
-        if (Burn_Ticks > 0 || Freeze_Ticks > 0 || Root_Ticks > 0)
+        if (burn_Ticks > 0 || freeze_Ticks > 0 || root_Ticks > 0)
         {
             if (tick > 0)
             {
@@ -68,24 +79,36 @@ public class Character : MonoBehaviour
             }
             else
             {
-                if (Burn_Ticks > 0)
+                if (burn_Ticks > 0)
                 {
-                    Burn_Ticks--;
+                    burn_Ticks--;
                     Damage(1, Vector2.up);
-                    if (Burn_Ticks == 0)
+                    if (burn_Ticks == 0)
                         Burn(false);
                 }
-                if (Freeze_Ticks > 0)
+                if (freeze_Ticks > 0)
                 {
-                    Freeze_Ticks--;
-                    if (Freeze_Ticks == 0)
+                    freeze_Ticks--;
+                    if (freeze_Ticks == 0)
                         Freeze(false);
                 }
-                if (Root_Ticks > 0)
+                if (root_Ticks > 0)
                 {
-                    Root_Ticks--;
-                    if (Root_Ticks == 0)
+                    root_Ticks--;
+                    if (root_Ticks == 0)
                         Root(false);
+                }
+                if (wet_Ticks > 0)
+                {
+                    wet_Ticks--;
+                    if (wet_Ticks == 0)
+                        Wet(false);
+                }
+                if (stun_Ticks > 0)
+                {
+                    stun_Ticks--;
+                    if (stun_Ticks == 0)
+                        Stun(false, 0);
                 }
                 tick = 1f;
             }
@@ -129,7 +152,6 @@ public class Character : MonoBehaviour
     {
         if (!isDashing)
         {
-            isDashing = true;
             ANIM.SetTrigger("Dash");
             StartCoroutine(Dashing());
         }
@@ -137,29 +159,47 @@ public class Character : MonoBehaviour
 
     IEnumerator Dashing()
     {
-        Vector2 startPos = transform.position;
-        Vector2 targetPos = startPos + FacingDirection * 2f;
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, targetPos - startPos, 0.25f, GroundLayer);
-        while (Vector2.Distance(transform.position, targetPos) > 0.05f && !hit)
+        isDashing = true;
+        RB.gravityScale = 0;
+        Vector2 targetPos = (Vector2)transform.position + FacingDirection * dash_Distance;
+        Vector2 direction = FacingDirection;
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, 0.25f, GroundLayer);
+        while (Vector2.Distance(transform.position, targetPos) > 0.1f && !hit)
         {
-            transform.position = Vector2.MoveTowards(transform.position, targetPos, 25f * Time.deltaTime);
-            hit = Physics2D.Raycast(transform.position, targetPos - startPos, 0.25f, GroundLayer);
-            yield return 1;
+            RB.velocity = direction * dash_Speed;
+            hit = Physics2D.Raycast(transform.position, direction, 0.25f, GroundLayer);
+            yield return new WaitForEndOfFrame();
         }
+        RB.velocity = Vector2.zero;
+        RB.gravityScale = 1;
         isDashing = false;
     }
 
-    public void Shoot(GameObject projectile, Vector2 direction)
+    public void Teleport()
+    {
+        ANIM.SetTrigger("Dash");
+        StartCoroutine(Teleporting());
+    }
+
+    IEnumerator Teleporting()
+    {
+        Vector2 targetPos = (Vector2)transform.position + FacingDirection * teleport_Distance;
+        Collider2D obstructed = Physics2D.OverlapCircle(targetPos, 0.1f, GroundLayer);
+        if (obstructed)
+        {
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, FacingDirection, teleport_Distance, GroundLayer);
+            targetPos = hit.point;
+        }
+        transform.position = targetPos;
+        yield return null;
+    }
+
+    public GameObject Shoot(GameObject projectile, Vector2 direction)
     {
         ANIM.SetTrigger("Shoot");
         Vector2 spawnPos = new Vector2(transform.position.x, transform.position.y) + direction * 0.25f;
-        Destroy(Instantiate(projectile, spawnPos, Quaternion.Euler(0, 0, direction == Vector2.right ? 0 : 180)), 5f);
-    }
-
-    public void Lob(GameObject projectile, Vector2 direction)
-    {
-        Vector2 spawnPos = new Vector2(transform.position.x, transform.position.y + 0.25f) + direction * 0.25f;
-        Destroy(Instantiate(projectile, spawnPos, Quaternion.Euler(0, 0, direction == Vector2.right ? 45 : 135)), 5f);
+        GameObject proj = Instantiate(projectile, spawnPos, Quaternion.Euler(0, 0, direction == Vector2.right ? 0 : 180));
+        return proj;
     }
 
     public void Damage(int amount, Vector2 direction)
@@ -173,25 +213,32 @@ public class Character : MonoBehaviour
         }
     }
 
+    public void Stun(bool state, int time)
+    {
+        //effect_Stun.SetActive(state);
+        isStunned = state;
+        if (state)
+            stun_Ticks = time;
+    }
+
     public void Burn(bool state)
     {
         effect_Burn.SetActive(state);
         if (state)
-            Burn_Ticks = 5;
+            burn_Ticks = 5;
     }
 
     public void Freeze(bool state)
     {
         effect_Freeze.SetActive(state);
         MoveSpeed_Current = state ? 0 : MoveSpeed_Base;
+        //Stun(state, 5);
+        Wet(false);
         if (state)
         {
-            Freeze_Ticks = 5;
+            freeze_Ticks = 5;
             RB.velocity = Vector2.zero;
-            isStunned = true;
         }
-        else
-            isStunned = false;
     }
 
     public void Root(bool state)
@@ -200,9 +247,17 @@ public class Character : MonoBehaviour
         MoveSpeed_Current = state ? 0 : MoveSpeed_Base;
         if (state)
         {
-            Root_Ticks = 10;
+            root_Ticks = 10;
             RB.velocity = Vector2.zero;
         }
+    }
+
+    public void Wet(bool state)
+    {
+        effect_Wet.SetActive(state);
+        MoveSpeed_Current = state ? MoveSpeed_Base / 2 : MoveSpeed_Base;
+        if (state)
+            wet_Ticks = 10;
     }
 
     virtual public void OnTriggerEnter2D(Collider2D collision)

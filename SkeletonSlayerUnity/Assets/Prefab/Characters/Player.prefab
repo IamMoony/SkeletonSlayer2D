@@ -331,12 +331,18 @@ MonoBehaviour:
   MoveSpeed_Current: 0
   JumpForce_Base: 250
   JumpForce_Current: 0
+  dash_Speed: 10
+  dash_Distance: 2
+  teleport_Distance: 2
   effect_Burn: {fileID: 7310163276645880396, guid: 24d0ce4752c97ad4dbdff29e61179231,
     type: 3}
   effect_Freeze: {fileID: 5993968086995487863, guid: 8d7c5b53f9abdc6409b771e09df7ef19,
     type: 3}
   effect_Root: {fileID: 3100901961245998558, guid: 3640f9ad3ffe55547ace5d07abc2be73,
     type: 3}
+  effect_Wet: {fileID: 7271018466058181344, guid: 88cf6c989c4c9214f85f74dcca70918b,
+    type: 3}
+  effect_Stun: {fileID: 0}
   actionValue: 0
   isGrounded: 1
   isWalking: 0
