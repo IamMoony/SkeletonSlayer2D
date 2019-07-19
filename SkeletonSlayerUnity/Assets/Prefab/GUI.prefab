@@ -89,7 +89,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterPanel_Instance: {fileID: 4825159930591787562, guid: ffffa4184a3a7394bb5a66709e3b845b,
     type: 3}
-  panelOffsetY: 0.5
+  panelOffsetY: 0.6
 --- !u!1 &8971042295419610498
 GameObject:
   m_ObjectHideFlags: 0
