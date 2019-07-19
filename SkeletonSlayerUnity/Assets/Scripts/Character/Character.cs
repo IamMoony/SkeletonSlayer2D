@@ -198,7 +198,7 @@ public class Character : MonoBehaviour
     {
         ANIM.SetTrigger("Shoot");
         Vector2 spawnPos = new Vector2(transform.position.x, transform.position.y) + direction * 0.25f;
-        GameObject proj = Instantiate(projectile, spawnPos, Quaternion.Euler(0, 0, direction == Vector2.right ? 0 : 180));
+        GameObject proj = Instantiate(projectile, spawnPos, Quaternion.Euler(0, 0, direction == (Vector2)transform.right ? 0 : 180));
         return proj;
     }
 

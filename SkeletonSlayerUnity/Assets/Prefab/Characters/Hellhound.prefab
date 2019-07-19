@@ -115,7 +115,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.381958}
+  m_Offset: {x: 0, y: -0.5}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -126,7 +126,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.5, y: 1.263916}
+  m_Size: {x: 0.5, y: 1}
   m_EdgeRadius: 0
 --- !u!114 &7600444665912260022
 MonoBehaviour:
@@ -358,7 +358,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 3
-  m_Sprite: {fileID: 4767545128821921782, guid: bad13c7fdcd33f64ba2564248b1c7649,
+  m_Sprite: {fileID: 8470447989417536072, guid: e1dc1aa8503ea7d4ba2e9ab53c5d436e,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -446,6 +446,9 @@ MonoBehaviour:
   MoveSpeed_Current: 0
   JumpForce_Base: 150
   JumpForce_Current: 0
+  dash_Speed: 0
+  dash_Distance: 0
+  teleport_Distance: 0
   effect_Burn: {fileID: 7310163276645880396, guid: 24d0ce4752c97ad4dbdff29e61179231,
     type: 3}
   effect_Freeze: {fileID: 5993968086995487863, guid: 8d7c5b53f9abdc6409b771e09df7ef19,
@@ -474,7 +477,7 @@ MonoBehaviour:
   visible:
     serializedVersion: 2
     m_Bits: 768
-  attackRange: 0.5
+  attackRange: 1
   attackDuration: 1
   objectsInView: []
   target: {fileID: 0}
@@ -513,7 +516,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6178822397601025476}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.3, y: -0.7, z: 0}
+  m_LocalPosition: {x: 0.3, y: -0.75, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5939185117275640316}
@@ -543,7 +546,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.1, y: 0.25}
+  m_Size: {x: 0.1, y: 0.5}
   m_EdgeRadius: 0
 --- !u!114 &8610232683742110605
 MonoBehaviour:
