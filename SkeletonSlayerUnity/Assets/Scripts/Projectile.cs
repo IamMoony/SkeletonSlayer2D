@@ -23,20 +23,20 @@ public class Projectile : MonoBehaviour
         RB = GetComponent<Rigidbody2D>();
     }
 
-    private void Start()
+    public virtual void Start()
     {
         RB.velocity = (transform.right + velocityModifier) * initalVelocity;
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collider)
     {
-        if (collision.tag == "Character")
+        if (collider.tag == "Character")
         {
-            CharacterContact(collision.GetComponent<Character>());
+            CharacterContact(collider.GetComponent<Character>());
         }
         else
         {
-            GroundContact();
+            GroundContact(transform.position);
         }
     }
 
@@ -48,7 +48,7 @@ public class Projectile : MonoBehaviour
         }
         else
         {
-            GroundContact();
+            GroundContact(collision.contacts[0].point);
         }
     }
 
@@ -72,18 +72,17 @@ public class Projectile : MonoBehaviour
 
     public virtual void CharacterContact(Character characterInContact)
     {
-        characterInContact.Damage(contactDamage, transform.right);
         if (!isActivated)
             Destroy(Instantiate(effect_Contact_Character_PreActivation, transform.position, Quaternion.identity), 5f);
         else
             Destroy(Instantiate(effect_Contact_Character_PostActivation, transform.position, Quaternion.identity), 5f);
     }
 
-    public virtual void GroundContact()
+    public virtual void GroundContact(Vector2 contactPosition)
     {
         if (!isActivated)
-            Destroy(Instantiate(effect_Contact_Ground_PreActivation, transform.position, Quaternion.identity), 5f);
+            Destroy(Instantiate(effect_Contact_Ground_PreActivation, contactPosition, Quaternion.identity), 5f);
         else
-            Destroy(Instantiate(effect_Contact_Ground_PostActivation, transform.position, Quaternion.identity), 5f);
+            Destroy(Instantiate(effect_Contact_Ground_PostActivation, contactPosition, Quaternion.identity), 5f);
     }
 }

@@ -33,9 +33,9 @@ public class Firebolt : Projectile
         ProjectileDestroy();
     }
 
-    public override void GroundContact()
+    public override void GroundContact(Vector2 contactPosition)
     {
-        base.GroundContact();
+        base.GroundContact(contactPosition);
         if (isActivated)
         {
             Explode();
