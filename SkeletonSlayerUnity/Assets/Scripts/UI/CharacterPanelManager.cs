@@ -11,7 +11,7 @@ public class CharacterPanelManager : MonoBehaviour
     private List<Transform> characterInScene;
     private List<GameObject> characterPanelInScene;
     private List<Image> characterHealthBar;
-    private List<Image> characterActionBar;
+    private List<Image> characterCastBar;
 
     private void Awake()
     {
@@ -23,12 +23,12 @@ public class CharacterPanelManager : MonoBehaviour
         }
         characterPanelInScene = new List<GameObject>();
         characterHealthBar = new List<Image>();
-        characterActionBar = new List<Image>();
+        characterCastBar = new List<Image>();
         for (int i = 0; i < characterInScene.Count; i++)
         {
             GameObject panel = Instantiate(characterPanel_Instance, transform);
-            characterHealthBar.Add(panel.transform.Find("Health_Bar").GetComponent<Image>());
-            characterActionBar.Add(panel.transform.Find("Action_Bar").GetComponent<Image>());
+            characterHealthBar.Add(panel.transform.Find("Bar_Health").GetChild(0).GetComponent<Image>());
+            characterCastBar.Add(panel.transform.Find("Bar_Cast").GetChild(0).GetComponent<Image>());
             characterPanelInScene.Add(panel);
         }
     }
@@ -46,14 +46,14 @@ public class CharacterPanelManager : MonoBehaviour
             {
                 characterPanelInScene[i].transform.position = Camera.main.WorldToScreenPoint(characterInScene[i].position + Vector3.up * panelOffsetY);
                 characterHealthBar[i].fillAmount = Mathf.Clamp((float)characterInScene[i].GetComponent<Character>().HP_Current / (float)characterInScene[i].GetComponent<Character>().HP_Base, 0, 1);
-                characterActionBar[i].fillAmount = characterInScene[i].GetComponent<Character>().actionValue;
+                characterCastBar[i].fillAmount = characterInScene[i].GetComponent<Character>().actionValue;
             }
             else
             {
                 int indexToRemove = i;
                 characterInScene.RemoveAt(indexToRemove);
                 characterHealthBar.RemoveAt(indexToRemove);
-                characterActionBar.RemoveAt(indexToRemove);
+                characterCastBar.RemoveAt(indexToRemove);
                 GameObject panel = characterPanelInScene[indexToRemove];
                 characterPanelInScene.RemoveAt(indexToRemove);
                 Destroy(panel);
