@@ -12,6 +12,9 @@ public class Character : MonoBehaviour
     [HideInInspector] public int MoveSpeed_Current;
     public int JumpForce_Base;
     [HideInInspector] public int JumpForce_Current;
+    public float dash_Speed;
+    public float dash_Distance;
+    public float teleport_Distance;
     public GameObject effect_Burn;
     public GameObject effect_Freeze;
     public GameObject effect_Root;
@@ -149,7 +152,6 @@ public class Character : MonoBehaviour
     {
         if (!isDashing)
         {
-            isDashing = true;
             ANIM.SetTrigger("Dash");
             StartCoroutine(Dashing());
         }
@@ -157,16 +159,39 @@ public class Character : MonoBehaviour
 
     IEnumerator Dashing()
     {
-        Vector2 startPos = transform.position;
-        Vector2 targetPos = startPos + FacingDirection * 2f;
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, targetPos - startPos, 0.25f, GroundLayer);
-        while (Vector2.Distance(transform.position, targetPos) > 0.05f && !hit)
+        isDashing = true;
+        RB.gravityScale = 0;
+        Vector2 targetPos = (Vector2)transform.position + FacingDirection * dash_Distance;
+        Vector2 direction = FacingDirection;
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, 0.25f, GroundLayer);
+        while (Vector2.Distance(transform.position, targetPos) > 0.1f && !hit)
         {
-            transform.position = Vector2.MoveTowards(transform.position, targetPos, 25f * Time.deltaTime);
-            hit = Physics2D.Raycast(transform.position, targetPos - startPos, 0.25f, GroundLayer);
-            yield return 1;
+            RB.velocity = direction * dash_Speed;
+            hit = Physics2D.Raycast(transform.position, direction, 0.25f, GroundLayer);
+            yield return new WaitForEndOfFrame();
         }
+        RB.velocity = Vector2.zero;
+        RB.gravityScale = 1;
         isDashing = false;
+    }
+
+    public void Teleport()
+    {
+        ANIM.SetTrigger("Dash");
+        StartCoroutine(Teleporting());
+    }
+
+    IEnumerator Teleporting()
+    {
+        Vector2 targetPos = (Vector2)transform.position + FacingDirection * teleport_Distance;
+        Collider2D obstructed = Physics2D.OverlapCircle(targetPos, 0.1f, GroundLayer);
+        if (obstructed)
+        {
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, FacingDirection, teleport_Distance, GroundLayer);
+            targetPos = hit.point;
+        }
+        transform.position = targetPos;
+        yield return null;
     }
 
     public GameObject Shoot(GameObject projectile, Vector2 direction)

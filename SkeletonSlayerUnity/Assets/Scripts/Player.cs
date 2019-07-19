@@ -42,7 +42,7 @@ public class Player : Character
         }
         if (Input.GetButtonDown("Dash"))
         {
-            Dash();
+            Teleport();
         }
         if (Input.GetButtonDown("Shoot"))
         {

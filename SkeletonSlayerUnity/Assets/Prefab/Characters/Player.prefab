@@ -331,6 +331,9 @@ MonoBehaviour:
   MoveSpeed_Current: 0
   JumpForce_Base: 250
   JumpForce_Current: 0
+  dash_Speed: 10
+  dash_Distance: 2
+  teleport_Distance: 2
   effect_Burn: {fileID: 7310163276645880396, guid: 24d0ce4752c97ad4dbdff29e61179231,
     type: 3}
   effect_Freeze: {fileID: 5993968086995487863, guid: 8d7c5b53f9abdc6409b771e09df7ef19,
