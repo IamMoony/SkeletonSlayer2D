@@ -4766,7 +4766,7 @@ GameObject:
   - component: {fileID: 8695658461861994152}
   - component: {fileID: -1178161966412068590}
   m_Layer: 11
-  m_Name: Projectile_Player_Earth
+  m_Name: Projectile_Player_Earthbolt
   m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4904,10 +4904,12 @@ MonoBehaviour:
   RB: {fileID: 0}
   burrowVelocity: 1
   burrowDepth: 0.3
-  emergingRock: {fileID: 0}
+  emergingRock: {fileID: 7558583483699128047, guid: 3afcd1038d8b65548b13419ed07b412d,
+    type: 3}
   groundLayer:
     serializedVersion: 2
     m_Bits: 256
+  rockOffset: 0.1
 --- !u!1 &6394692960063248806
 GameObject:
   m_ObjectHideFlags: 0

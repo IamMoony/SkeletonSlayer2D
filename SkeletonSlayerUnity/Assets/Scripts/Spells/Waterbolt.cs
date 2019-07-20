@@ -6,9 +6,9 @@ public class Waterbolt : Projectile
 {
     public GameObject iceBlock;
 
-    public override void Activation()
+    public override void Activation(Vector2 direction)
     {
-        base.Activation();
+        base.Activation(direction);
         CreateIceBlock();
     }
 

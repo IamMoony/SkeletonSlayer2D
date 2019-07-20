@@ -82,7 +82,7 @@ public class Character : MonoBehaviour
                 if (burn_Ticks > 0)
                 {
                     burn_Ticks--;
-                    Damage(1, Vector2.up);
+                    Damage(1);
                     if (burn_Ticks == 0)
                         Burn(false);
                 }
@@ -198,19 +198,22 @@ public class Character : MonoBehaviour
     {
         ANIM.SetTrigger("Shoot");
         Vector2 spawnPos = new Vector2(transform.position.x, transform.position.y) + direction * 0.25f;
-        GameObject proj = Instantiate(projectile, spawnPos, Quaternion.Euler(0, 0, direction == (Vector2)transform.right ? 0 : 180));
+        GameObject proj = Instantiate(projectile, spawnPos, Quaternion.Euler(direction == (Vector2)transform.right ? 0 : 180, 0, direction == (Vector2)transform.right ? 0 : 180));
         return proj;
     }
 
-    public void Damage(int amount, Vector2 direction)
+    public void Damage(int amount)
     {
-        if (isGrounded)
-            RB.velocity = direction + Vector2.up;
         HP_Current = Mathf.Clamp(HP_Current - amount, 0, HP_Base);
         if (HP_Current == 0)
         {
             isDead = true;
         }
+    }
+
+    public void Knockback(Vector2 direction, int force)
+    {
+        RB.AddForce(direction * force);
     }
 
     public void Stun(bool state, int time)

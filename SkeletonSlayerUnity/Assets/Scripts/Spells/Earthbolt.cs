@@ -8,10 +8,11 @@ public class Earthbolt : Projectile
     public float burrowDepth;
     public GameObject emergingRock;
     public LayerMask groundLayer;
+    public float rockOffset;
 
-    public override void Activation()
+    public override void Activation(Vector2 direction)
     {
-        base.Activation();
+        base.Activation(direction);
         EmergingRock();
     }
 
@@ -36,7 +37,7 @@ public class Earthbolt : Projectile
 
     void EmergingRock()
     {
-        Instantiate(emergingRock, transform.position, Quaternion.Euler(transform.up * (isDirectionObstructed(transform.up) ? -1 : 1)));
+        Instantiate(emergingRock, transform.position + -transform.up * rockOffset, transform.rotation);
         ProjectileDestroy();
     }
 
@@ -52,19 +53,23 @@ public class Earthbolt : Projectile
             transform.position = Vector2.MoveTowards(transform.position, targetPos, Time.deltaTime * burrowVelocity);
             yield return new WaitForEndOfFrame();
         }
+        if (targetDir != Vector2.down)
+        {
+            transform.Rotate(new Vector3(0, 0, Vector3.Distance(targetDir, Vector3.right) < 0.1f ? 90 : -90));
+        }
         while (!isActivated)
         {
             if (isDirectionObstructed(transform.right))
             {
                 RB.velocity = transform.right * burrowVelocity;
             }
-            else if (isDirectionObstructed(transform.up))
-            {
-                transform.Rotate(new Vector3(0, 0, 90));
-            }
             else if (isDirectionObstructed(-transform.up))
             {
                 transform.Rotate(new Vector3(0, 0, -90));
+            }
+            else
+            {
+                transform.Rotate(new Vector3(0, 0, 90));
             }
             yield return new WaitForEndOfFrame();
         }
