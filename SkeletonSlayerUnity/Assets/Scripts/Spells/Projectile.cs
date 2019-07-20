@@ -48,7 +48,7 @@ public class Projectile : MonoBehaviour
         }
         else
         {
-            GroundContact(collision.contacts[0].point);
+            GroundContact(collision.GetContact(0).point);
         }
     }
 
@@ -64,7 +64,7 @@ public class Projectile : MonoBehaviour
         Destroy(gameObject);
     }
 
-    public virtual void Activation()
+    public virtual void Activation(Vector2 direction)
     {
         Destroy(Instantiate(effect_Activation, transform.position, Quaternion.identity), 5f);
         isActivated = true;

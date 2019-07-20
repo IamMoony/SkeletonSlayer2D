@@ -10,9 +10,9 @@ public class Earthbolt : Projectile
     public LayerMask groundLayer;
     public float rockOffset;
 
-    public override void Activation()
+    public override void Activation(Vector2 direction)
     {
-        base.Activation();
+        base.Activation(direction);
         EmergingRock();
     }
 

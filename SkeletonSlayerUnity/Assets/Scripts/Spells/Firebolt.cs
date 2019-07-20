@@ -11,12 +11,12 @@ public class Firebolt : Projectile
     public bool explosionBurn;
     public LayerMask layerAffectedByExplosion;
 
-    public override void Activation()
+    public override void Activation(Vector2 direction)
     {
-        base.Activation();
+        base.Activation(direction);
         RB.velocity = Vector2.zero;
         RB.gravityScale = 0;
-        RB.velocity = transform.right * chargeVelocity;
+        RB.velocity = direction * chargeVelocity;
     }
 
     public override void CharacterContact(Character characterInContact)

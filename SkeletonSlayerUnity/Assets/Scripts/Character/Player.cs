@@ -56,7 +56,7 @@ public class Player : Character
             if (projectile_Instance[(int)activeElement] != null)
             {
                 if (!projectile_Instance[(int)activeElement].GetComponent<Projectile>().isActivated)
-                    projectile_Instance[(int)activeElement].GetComponent<Projectile>().Activation();
+                    projectile_Instance[(int)activeElement].GetComponent<Projectile>().Activation(FacingDirection);
             }
         }
         if (Input.GetKey(KeyCode.Alpha1))
