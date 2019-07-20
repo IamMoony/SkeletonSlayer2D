@@ -6,9 +6,10 @@ public class IceBlock : Projectile
 {
     public float lifeTime;
     public int stunDuration;
+    public int knockDownForce;
     public ContactFilter2D viableFreezeTargets;
     
-    public bool grounded;
+    public bool hasFrozenCharacter;
     private List<Character> touchingCharacter = new List<Character>();
 
     public override void Start()
@@ -29,23 +30,26 @@ public class IceBlock : Projectile
             FixedJoint2D joint = gameObject.AddComponent<FixedJoint2D>();
             joint.connectedBody = touchingCharacter[i].GetComponent<Rigidbody2D>();
         }
+        if (touchingCharacter.Count > 0)
+        {
+            hasFrozenCharacter = true;
+        }
     }
 
     public override void CharacterContact(Character characterInContact)
     {
         base.CharacterContact(characterInContact);
-        if (!grounded)
+        if (!hasFrozenCharacter)
         {
-            characterInContact.Damage(contactDamage, Vector2.down);
+            characterInContact.Damage(contactDamage);
+            characterInContact.Knockback(Vector2.down, knockDownForce);
             //characterInContact.Stun(true, stunDuration);
-            //ProjectileDestroy();
+            ProjectileDestroy();
         }
     }
 
     public override void GroundContact(Vector2 contactPosition)
     {
-        base.GroundContact(contactPosition);
-        grounded = true;
-        Destroy(gameObject, lifeTime);
+        //base.GroundContact(contactPosition);
     }
 }
