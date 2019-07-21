@@ -95,10 +95,10 @@ TextureImporter:
         serializedVersion: 2
         x: 14
         y: 94
-        width: 112
+        width: 134
         height: 18
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -106,27 +106,6 @@ TextureImporter:
       bones: []
       spriteID: d19dfdb5eb7c1624aba8e45c488890b3
       internalID: -2119497120712399148
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: player-gui_1
-      rect:
-        serializedVersion: 2
-        x: 127
-        y: 94
-        width: 21
-        height: 18
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 1e680650ae2e9ee42ab0b3ec61d4b197
-      internalID: -3242949604420554930
       vertices: []
       indices: 
       edges: []
