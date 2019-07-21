@@ -23,7 +23,7 @@ public class Player : Character
     {
         if (Input.GetAxis("Horizontal") != 0)
         {
-            Move(Input.GetAxis("Horizontal") > 0 ? Vector2.right : Vector2.left, 1f);
+            Move(Input.GetAxis("Horizontal") > 0 ? Vector2.right : Vector2.left);
         }
         else
         {

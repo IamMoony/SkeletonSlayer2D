@@ -95,6 +95,7 @@ public class NPC : Character
     public IEnumerator Pursue()
     {
         //Debug.Log("Start Pursue Routine");
+        MoveSpeed_Current = MoveSpeed_Base;
         while (!targetInRange)
         {
             if (!TargetInSight())
@@ -112,7 +113,7 @@ public class NPC : Character
             }
             else
             {
-                Move(FacingDirection, 1f);
+                Move(FacingDirection);
             }
             yield return new WaitForEndOfFrame();
         }
@@ -121,6 +122,7 @@ public class NPC : Character
     public IEnumerator Patrol()
     {
         //Debug.Log("Start Patrol Routine");
+        MoveSpeed_Current = MoveSpeed_Base / 2;
         while (target == null)
         {
             if (!isStunned && isGrounded)
@@ -162,7 +164,7 @@ public class NPC : Character
                             if (!GetTarget())
                             {
                                 //Debug.Log("No Target found - Moving");
-                                Move(FacingDirection, 0.5f);
+                                Move(FacingDirection);
                             }
                             else
                             {
@@ -173,7 +175,7 @@ public class NPC : Character
                         else
                         {
                             //Debug.Log("View clear - Moving");
-                            Move(FacingDirection, 0.5f);
+                            Move(FacingDirection);
                         }
                     }
                 }
