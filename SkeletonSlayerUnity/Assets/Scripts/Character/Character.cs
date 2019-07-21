@@ -287,7 +287,7 @@ public class Character : MonoBehaviour
     public IEnumerator Cast(string spell, float castTime)
     {
         ANIM.SetTrigger("Cast");
-        //isCasting = true;
+        isCasting = true;
         while(actionValue < castTime)
         {
             if (actionValue >= castTime - animation_PreShoot_Duration)
@@ -299,7 +299,7 @@ public class Character : MonoBehaviour
             yield return new WaitForEndOfFrame();
         }
         actionValue = 0;
-        //isCasting = false;
+        isCasting = false;
         if (isGrounded && !isWalking)
         {
             isEvoking = true;
