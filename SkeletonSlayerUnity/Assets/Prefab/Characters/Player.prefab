@@ -334,6 +334,7 @@ MonoBehaviour:
   dash_Speed: 10
   dash_Distance: 2
   teleport_Distance: 2
+  animation_PreShoot: {fileID: 7400000, guid: 7396811462535b648a02866eb74f1259, type: 2}
   effect_Burn: {fileID: 7310163276645880396, guid: 24d0ce4752c97ad4dbdff29e61179231,
     type: 3}
   effect_Freeze: {fileID: 5993968086995487863, guid: 8d7c5b53f9abdc6409b771e09df7ef19,
@@ -358,6 +359,11 @@ MonoBehaviour:
   isDead: 0
   isStunned: 0
   ANIM: {fileID: 0}
+  burn_Ticks: 0
+  freeze_Ticks: 0
+  root_Ticks: 0
+  wet_Ticks: 0
+  stun_Ticks: 0
   activeElement: 0
   projectile_Fire: {fileID: 4439456849462767887, guid: b50c293318cb0fc4999618cf21e66765,
     type: 3}

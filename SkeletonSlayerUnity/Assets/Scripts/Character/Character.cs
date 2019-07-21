@@ -15,6 +15,7 @@ public class Character : MonoBehaviour
     public float dash_Speed;
     public float dash_Distance;
     public float teleport_Distance;
+    public float animation_PreShoot_Duration;
     public GameObject effect_Burn;
     public GameObject effect_Freeze;
     public GameObject effect_Root;
@@ -37,11 +38,11 @@ public class Character : MonoBehaviour
     private Rigidbody2D RB;
     public Animator ANIM;
     private float tick;
-    private int burn_Ticks;
-    private int freeze_Ticks;
-    private int root_Ticks;
-    private int wet_Ticks;
-    private int stun_Ticks;
+    public int burn_Ticks;
+    public int freeze_Ticks;
+    public int root_Ticks;
+    public int wet_Ticks;
+    public int stun_Ticks;
 
     private void Awake()
     {
@@ -71,7 +72,7 @@ public class Character : MonoBehaviour
         ANIM.SetBool("IsWalking", isWalking);
         ANIM.SetBool("IsCasting", isCasting);
         ANIM.SetBool("IsClimbing", isClimbing);
-        if (burn_Ticks > 0 || freeze_Ticks > 0 || root_Ticks > 0)
+        if (burn_Ticks > 0 || freeze_Ticks > 0 || root_Ticks > 0 || wet_Ticks > 0 || stun_Ticks > 0)
         {
             if (tick > 0)
             {
@@ -125,12 +126,12 @@ public class Character : MonoBehaviour
             ANIM.speed = 1;
     }
 
-    public void Move(Vector2 direction)
+    public void Move(Vector2 direction, float speedMod)
     {
         isWalking = true;
         if (direction.x < 0 && FacingDirection == Vector2.right || direction.x > 0 && FacingDirection == Vector2.left)
             Turn();
-        RB.velocity = new Vector2(direction.x * MoveSpeed_Current, RB.velocity.y);
+        RB.velocity = new Vector2((direction.x * MoveSpeed_Current) * speedMod, RB.velocity.y);
     }
 
     public void Turn()
@@ -196,7 +197,7 @@ public class Character : MonoBehaviour
 
     public GameObject Shoot(GameObject projectile, Vector2 direction)
     {
-        ANIM.SetTrigger("Shoot");
+        //ANIM.SetTrigger("Shoot");
         Vector2 spawnPos = new Vector2(transform.position.x, transform.position.y) + direction * 0.25f;
         GameObject proj = Instantiate(projectile, spawnPos, Quaternion.Euler(direction == (Vector2)transform.right ? 0 : 180, 0, direction == (Vector2)transform.right ? 0 : 180));
         return proj;
@@ -235,11 +236,11 @@ public class Character : MonoBehaviour
     {
         effect_Freeze.SetActive(state);
         MoveSpeed_Current = state ? 0 : MoveSpeed_Base;
-        //Stun(state, 5);
         Wet(false);
         if (state)
         {
             freeze_Ticks = 5;
+            Stun(state, 5);
             RB.velocity = Vector2.zero;
         }
     }
@@ -286,9 +287,12 @@ public class Character : MonoBehaviour
 
     public IEnumerator Cast(string spell, float castTime)
     {
-        isCasting = true;
+        ANIM.SetTrigger("Cast");
+        //isCasting = true;
         while(actionValue < castTime)
         {
+            if (actionValue >= castTime - animation_PreShoot_Duration)
+                ANIM.SetTrigger("Shoot");
             if (isGrounded && !isWalking)
                 actionValue = Mathf.Clamp(actionValue + Time.deltaTime, 0, 1);
             else
@@ -296,7 +300,7 @@ public class Character : MonoBehaviour
             yield return new WaitForEndOfFrame();
         }
         actionValue = 0;
-        isCasting = false;
+        //isCasting = false;
         if (isGrounded && !isWalking)
         {
             isEvoking = true;

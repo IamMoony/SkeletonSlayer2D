@@ -33,6 +33,7 @@ public class IceBlock : Projectile
         if (touchingCharacter.Count > 0)
         {
             hasFrozenCharacter = true;
+            Destroy(gameObject, lifeTime);
         }
     }
 
@@ -43,13 +44,13 @@ public class IceBlock : Projectile
         {
             characterInContact.Damage(contactDamage);
             characterInContact.Knockback(Vector2.down, knockDownForce);
-            //characterInContact.Stun(true, stunDuration);
+            characterInContact.Stun(true, stunDuration);
             ProjectileDestroy();
         }
     }
 
     public override void GroundContact(Vector2 contactPosition)
     {
-        //base.GroundContact(contactPosition);
+        base.GroundContact(contactPosition);
     }
 }
