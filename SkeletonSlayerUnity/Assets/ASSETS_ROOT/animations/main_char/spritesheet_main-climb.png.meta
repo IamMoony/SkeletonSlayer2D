@@ -158,6 +158,18 @@ TextureImporter:
   - first:
       213: 6152539379392269998
     second: spritesheet_main-climb_51
+  - first:
+      213: -4686991163816257893
+    second: spritesheet_main-climb_52
+  - first:
+      213: 2009470639750804570
+    second: spritesheet_main-climb_53
+  - first:
+      213: 3739736622826650233
+    second: spritesheet_main-climb_54
+  - first:
+      213: -1596781017472815475
+    second: spritesheet_main-climb_55
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -254,7 +266,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7c85c2b97a00fb74d878c8c4980e423b
+      spriteID: 6626ba3d39082464a8209bfd15561469
       internalID: 7143301077600152351
       vertices: []
       indices: 
@@ -275,7 +287,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 77fbaac4ac6300b40945f3b6c0e6cabf
+      spriteID: 25ca0858c3640b54cafcd990eea9e179
       internalID: -437533789174259717
       vertices: []
       indices: 
@@ -296,7 +308,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 46c675f87e8c2fc4b834c95078dea99b
+      spriteID: 487c9f438d9bf2b4a9692dcb13ccfc12
       internalID: 778221147692534398
       vertices: []
       indices: 
@@ -317,7 +329,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 44c772279a5541b41a42cc5151b755ec
+      spriteID: 80797bc5111122f4b984c65b1dcdab2a
       internalID: 3593806578657953107
       vertices: []
       indices: 
@@ -338,7 +350,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 791ef3227d2e71941ac376d79cb11ba5
+      spriteID: fa54e6bf28f22f34ba34b734d2f62b89
       internalID: -1723900712480343376
       vertices: []
       indices: 
@@ -359,7 +371,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7046553725d49b64e9487d821d7a4f42
+      spriteID: b71ba0ea3c7d89f4684df0ccc027dc7e
       internalID: -2000174118307760140
       vertices: []
       indices: 
@@ -380,7 +392,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 688b87fd3cf25ac46b0797b38ab69c53
+      spriteID: b538f47aa57824f41bdad86313a85cb0
       internalID: -4895412185801080135
       vertices: []
       indices: 
@@ -401,7 +413,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c70bc1136defded44b5670db20dd4d5f
+      spriteID: 0696cab4eaba4094e83fd1121554a4c9
       internalID: -841855094591160403
       vertices: []
       indices: 
@@ -422,7 +434,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d657e198d37ced0489dbeaa0b130e739
+      spriteID: 188b60e9d23c5db479ad701e1bde7d0b
       internalID: -2627208608810462823
       vertices: []
       indices: 
@@ -432,8 +444,8 @@ TextureImporter:
       name: spritesheet_main-climb_9
       rect:
         serializedVersion: 2
-        x: 224
-        y: 256
+        x: 0
+        y: 224
         width: 32
         height: 32
       alignment: 0
@@ -443,7 +455,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 344267d97ccbb8c479a7048dd0d88286
+      spriteID: a52159ac0f5befa45810431b9eb5de49
       internalID: -7675689920269913247
       vertices: []
       indices: 
@@ -453,7 +465,7 @@ TextureImporter:
       name: spritesheet_main-climb_10
       rect:
         serializedVersion: 2
-        x: 0
+        x: 32
         y: 224
         width: 32
         height: 32
@@ -464,7 +476,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5c0c047a91e118a479eca83caefc6ff2
+      spriteID: f15e62dd7cf2e3847845edec742f9fe8
       internalID: 8517893375127545923
       vertices: []
       indices: 
@@ -474,7 +486,7 @@ TextureImporter:
       name: spritesheet_main-climb_11
       rect:
         serializedVersion: 2
-        x: 32
+        x: 64
         y: 224
         width: 32
         height: 32
@@ -485,7 +497,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 98da3a8be00bbe046ac6ef8afb38aa91
+      spriteID: 53e652af5ce5e0348b669a1524480be2
       internalID: -6319095850996543563
       vertices: []
       indices: 
@@ -495,7 +507,7 @@ TextureImporter:
       name: spritesheet_main-climb_12
       rect:
         serializedVersion: 2
-        x: 64
+        x: 96
         y: 224
         width: 32
         height: 32
@@ -506,7 +518,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 01c2aad0c0d1af6438478aabaa3d337b
+      spriteID: 3284e6122372f43409fdd06295f8579b
       internalID: 5366103349511700128
       vertices: []
       indices: 
@@ -516,7 +528,7 @@ TextureImporter:
       name: spritesheet_main-climb_13
       rect:
         serializedVersion: 2
-        x: 96
+        x: 128
         y: 224
         width: 32
         height: 32
@@ -527,7 +539,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 58384d3c9488d7645b395673a3b2989d
+      spriteID: c96069c224d9e1147a9fd4168b323fd5
       internalID: -130445571566759188
       vertices: []
       indices: 
@@ -537,7 +549,7 @@ TextureImporter:
       name: spritesheet_main-climb_14
       rect:
         serializedVersion: 2
-        x: 128
+        x: 160
         y: 224
         width: 32
         height: 32
@@ -548,7 +560,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 84890657d51fa0142ad948d1ea83a833
+      spriteID: 29c7b6f84841ed04c8f3e72cd8e8b9ac
       internalID: -4146101246912632096
       vertices: []
       indices: 
@@ -558,7 +570,7 @@ TextureImporter:
       name: spritesheet_main-climb_15
       rect:
         serializedVersion: 2
-        x: 160
+        x: 192
         y: 224
         width: 32
         height: 32
@@ -569,7 +581,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1f61a911e2b16bb4b94da0557354b0e4
+      spriteID: b9ffa2d1ae6499d439e8b2632fd8c512
       internalID: -1082249191390362765
       vertices: []
       indices: 
@@ -579,7 +591,7 @@ TextureImporter:
       name: spritesheet_main-climb_16
       rect:
         serializedVersion: 2
-        x: 192
+        x: 224
         y: 224
         width: 32
         height: 32
@@ -590,7 +602,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 04c9da7536016454e9793d0596d09aaf
+      spriteID: b4b1f423d38c4eb4ab7723a6be7f2976
       internalID: 1962910620610122764
       vertices: []
       indices: 
@@ -600,7 +612,7 @@ TextureImporter:
       name: spritesheet_main-climb_17
       rect:
         serializedVersion: 2
-        x: 224
+        x: 256
         y: 224
         width: 32
         height: 32
@@ -611,7 +623,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2e7d41d32d6bce64c9f7702dd7193523
+      spriteID: 934c97dcc48a0084cbacf07d36160eb0
       internalID: -1154921342485570749
       vertices: []
       indices: 
@@ -621,8 +633,8 @@ TextureImporter:
       name: spritesheet_main-climb_18
       rect:
         serializedVersion: 2
-        x: 256
-        y: 224
+        x: 0
+        y: 192
         width: 32
         height: 32
       alignment: 0
@@ -632,7 +644,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8a78d15c1e93b43499687ffbc843b0bc
+      spriteID: 581d5e850264f1e418acbeafa107039d
       internalID: 873698759009497712
       vertices: []
       indices: 
@@ -642,7 +654,7 @@ TextureImporter:
       name: spritesheet_main-climb_19
       rect:
         serializedVersion: 2
-        x: 0
+        x: 32
         y: 192
         width: 32
         height: 32
@@ -653,7 +665,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4d3477738beb36748ac6f4b00eb5e1c4
+      spriteID: 2f8010dba24a6ce4195e78ce2f8c83d4
       internalID: 828603091207658791
       vertices: []
       indices: 
@@ -663,27 +675,6 @@ TextureImporter:
       name: spritesheet_main-climb_20
       rect:
         serializedVersion: 2
-        x: 32
-        y: 192
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: b58571c43bdd8bf44a323b99b67360ce
-      internalID: 412817368604167271
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: spritesheet_main-climb_21
-      rect:
-        serializedVersion: 2
         x: 64
         y: 192
         width: 32
@@ -695,14 +686,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3d8f4e8b0c4142547aaa86d0257f5c1a
-      internalID: 1482589390320942402
+      spriteID: 03dbade6e40fd674f91c1af3ebf99643
+      internalID: 412817368604167271
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spritesheet_main-climb_22
+      name: spritesheet_main-climb_21
       rect:
         serializedVersion: 2
         x: 96
@@ -716,14 +707,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 80da5f05f519b8e4882b6999b91c3766
-      internalID: -122402533485937670
+      spriteID: a5dbdf428bbc053489408702d9ee3df1
+      internalID: 1482589390320942402
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spritesheet_main-climb_23
+      name: spritesheet_main-climb_22
       rect:
         serializedVersion: 2
         x: 128
@@ -737,14 +728,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fac7fa69106fa1648b8ffd3166d54164
-      internalID: -297422436191407184
+      spriteID: eec1dc992bf364f41903923f4cd228d4
+      internalID: -122402533485937670
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spritesheet_main-climb_24
+      name: spritesheet_main-climb_23
       rect:
         serializedVersion: 2
         x: 160
@@ -758,14 +749,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 23aee9ea88ae8df48a1869d0fadd2ee9
-      internalID: -1130483443598557493
+      spriteID: 246597586ee733640ac95e0dd4f5e939
+      internalID: -297422436191407184
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spritesheet_main-climb_25
+      name: spritesheet_main-climb_24
       rect:
         serializedVersion: 2
         x: 192
@@ -779,14 +770,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a48e4b71232144a428fd783632aba15b
-      internalID: -6994695418803077895
+      spriteID: e66713b2d3031d74f81cffb082462ab0
+      internalID: -1130483443598557493
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spritesheet_main-climb_26
+      name: spritesheet_main-climb_25
       rect:
         serializedVersion: 2
         x: 224
@@ -800,14 +791,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fdd9f06c60ea05746b0062da36bb79b0
-      internalID: -1547159062184086426
+      spriteID: 513ea640f8c49c44bb12a40a8ed7114e
+      internalID: -6994695418803077895
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spritesheet_main-climb_27
+      name: spritesheet_main-climb_26
       rect:
         serializedVersion: 2
         x: 0
@@ -821,14 +812,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: dcf06fb7be1f0894fbc510a54a9ce8a0
-      internalID: 3909017357214237339
+      spriteID: 4ae8c54c97f40304d8d6828947c1f231
+      internalID: -1547159062184086426
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spritesheet_main-climb_28
+      name: spritesheet_main-climb_27
       rect:
         serializedVersion: 2
         x: 32
@@ -842,14 +833,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fa5c6d15179167a438538b5b99549412
-      internalID: 7313474046447561817
+      spriteID: 25f8dd9b0f0ac2a4b94498951d726ad6
+      internalID: 3909017357214237339
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spritesheet_main-climb_29
+      name: spritesheet_main-climb_28
       rect:
         serializedVersion: 2
         x: 64
@@ -863,14 +854,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7625364deb16aa049bf7a8821d482d45
-      internalID: 8758479059102275843
+      spriteID: 9fa465d2da6de9b42acb5ba54bc1c60d
+      internalID: 7313474046447561817
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spritesheet_main-climb_30
+      name: spritesheet_main-climb_29
       rect:
         serializedVersion: 2
         x: 96
@@ -884,14 +875,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a4c493ccbd7510448b0d1e2b30dd6085
-      internalID: -3991563467517757692
+      spriteID: dd51841d406352b429db49fafe231e0c
+      internalID: 8758479059102275843
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spritesheet_main-climb_31
+      name: spritesheet_main-climb_30
       rect:
         serializedVersion: 2
         x: 128
@@ -905,14 +896,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f25ccf37cd57b4a4f9394678afdd214a
-      internalID: 2293508797660808837
+      spriteID: d971d4e6e012bf34b96cc8f4fa83f07b
+      internalID: -3991563467517757692
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spritesheet_main-climb_32
+      name: spritesheet_main-climb_31
       rect:
         serializedVersion: 2
         x: 160
@@ -926,14 +917,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7b14f63791e337e44b81c3ee5ef0c713
-      internalID: -3268453686159112371
+      spriteID: 0e25843440e770c42bc91e07e681a816
+      internalID: 2293508797660808837
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spritesheet_main-climb_33
+      name: spritesheet_main-climb_32
       rect:
         serializedVersion: 2
         x: 192
@@ -947,14 +938,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9dc75adb182fa134b85d7cff58e6d202
-      internalID: 8730313783656885403
+      spriteID: 434b495b799eec143af681d2f3f555f6
+      internalID: -3268453686159112371
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spritesheet_main-climb_34
+      name: spritesheet_main-climb_33
       rect:
         serializedVersion: 2
         x: 224
@@ -968,14 +959,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b31883ee778c0c840902aaec5607619d
-      internalID: -4892297711156953255
+      spriteID: 890db71c9c9e83741b6cae9e8e2e0354
+      internalID: 8730313783656885403
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spritesheet_main-climb_35
+      name: spritesheet_main-climb_34
       rect:
         serializedVersion: 2
         x: 256
@@ -989,14 +980,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3a9ef5a87af32ef44885b24697a1656f
-      internalID: -8634929756545324352
+      spriteID: e73f54f6be2b3d04d88806a3d3b6561c
+      internalID: -4892297711156953255
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spritesheet_main-climb_36
+      name: spritesheet_main-climb_35
       rect:
         serializedVersion: 2
         x: 288
@@ -1010,14 +1001,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d4e79a4fe934b884ea873dba4708ab44
-      internalID: -8042717121240852274
+      spriteID: 6183a0a0472c0614ebd7815243e35842
+      internalID: -8634929756545324352
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spritesheet_main-climb_37
+      name: spritesheet_main-climb_36
       rect:
         serializedVersion: 2
         x: 320
@@ -1031,14 +1022,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8eaf2496a3ad5834b86d56dcf7374e90
-      internalID: 781593091639096284
+      spriteID: d754b2e4ca9804548b41a622c4990684
+      internalID: -8042717121240852274
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spritesheet_main-climb_38
+      name: spritesheet_main-climb_37
       rect:
         serializedVersion: 2
         x: 352
@@ -1052,14 +1043,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e686d04f973009a479fdae39f5b35980
-      internalID: 258183687570082565
+      spriteID: f435ccec7e0bcb748a5595b2f3fe1377
+      internalID: 781593091639096284
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spritesheet_main-climb_39
+      name: spritesheet_main-climb_38
       rect:
         serializedVersion: 2
         x: 384
@@ -1073,14 +1064,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ad44f802d3683fb499cbb73ace0ae57f
-      internalID: -8078701655555564544
+      spriteID: 71079f771c4bb99428f869dd97f80672
+      internalID: 258183687570082565
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spritesheet_main-climb_40
+      name: spritesheet_main-climb_39
       rect:
         serializedVersion: 2
         x: 416
@@ -1094,14 +1085,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 169e2690615a7304081e905bbfd9dfda
-      internalID: 1474137948039543139
+      spriteID: ba269bd2af003814898a944cd8cc0ece
+      internalID: -8078701655555564544
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spritesheet_main-climb_41
+      name: spritesheet_main-climb_40
       rect:
         serializedVersion: 2
         x: 448
@@ -1115,14 +1106,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cc97e8d11c6588b489205338842fde10
-      internalID: 3337895269568651015
+      spriteID: 6def11923411497449df7efd6e713586
+      internalID: 1474137948039543139
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spritesheet_main-climb_42
+      name: spritesheet_main-climb_41
       rect:
         serializedVersion: 2
         x: 480
@@ -1136,14 +1127,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fe55e491c03b92c46927aefef299f494
-      internalID: 6717987022972338888
+      spriteID: 5b9b33f0795bf4c4999dae75f588533d
+      internalID: 3337895269568651015
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spritesheet_main-climb_43
+      name: spritesheet_main-climb_42
       rect:
         serializedVersion: 2
         x: 512
@@ -1157,14 +1148,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 375150f120cb0b344be78e7a8650129f
-      internalID: 4139971789850339794
+      spriteID: 4e36f0a7632fbde4097a19874aefd345
+      internalID: 6717987022972338888
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spritesheet_main-climb_44
+      name: spritesheet_main-climb_43
       rect:
         serializedVersion: 2
         x: 544
@@ -1178,14 +1169,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 777b6859717a7f342a663f1a85088e32
-      internalID: 7779646796935677607
+      spriteID: 3c8a1bc6bcd280f4eb137abdfbea6113
+      internalID: 4139971789850339794
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spritesheet_main-climb_45
+      name: spritesheet_main-climb_44
       rect:
         serializedVersion: 2
         x: 576
@@ -1199,14 +1190,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 74c4a14709633e64d94779f1f9f3c0b8
-      internalID: -4716286621760963195
+      spriteID: a590365366b99b546872df8506584563
+      internalID: 7779646796935677607
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spritesheet_main-climb_46
+      name: spritesheet_main-climb_45
       rect:
         serializedVersion: 2
         x: 608
@@ -1220,14 +1211,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 32d311d84d06f0944817905c2038c721
-      internalID: 4766450742623252152
+      spriteID: 5be900184818cc249bbb45ad75b8dd5b
+      internalID: -4716286621760963195
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spritesheet_main-climb_47
+      name: spritesheet_main-climb_46
       rect:
         serializedVersion: 2
         x: 640
@@ -1241,14 +1232,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 35a6d17224939cc4191222b577aa34f2
-      internalID: 9221198304517362570
+      spriteID: a77245181094381438f138da536132b0
+      internalID: 4766450742623252152
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spritesheet_main-climb_48
+      name: spritesheet_main-climb_47
       rect:
         serializedVersion: 2
         x: 672
@@ -1262,14 +1253,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c9ebb1274ef2b4642806456372f2d630
-      internalID: 8204656806746592544
+      spriteID: 907dd61040ceef0498e31ce0f5500011
+      internalID: 9221198304517362570
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spritesheet_main-climb_49
+      name: spritesheet_main-climb_48
       rect:
         serializedVersion: 2
         x: 0
@@ -1283,14 +1274,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4aef82c0868073e46994a9b353b743be
-      internalID: 2331908618226533465
+      spriteID: 75395c066691bf648918ac98a0fd9d08
+      internalID: 8204656806746592544
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spritesheet_main-climb_50
+      name: spritesheet_main-climb_49
       rect:
         serializedVersion: 2
         x: 32
@@ -1304,14 +1295,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2f70e3ef034ceb44ba147901a7b0ee54
-      internalID: -7553821477840652816
+      spriteID: 3d59b24d7cf20c848a22d3854d1d1234
+      internalID: 2331908618226533465
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spritesheet_main-climb_51
+      name: spritesheet_main-climb_50
       rect:
         serializedVersion: 2
         x: 64
@@ -1325,8 +1316,113 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9582d883b61acdc48a215e3fce0aed61
+      spriteID: 243359fe7b1e10340a3f1a95446d7e33
+      internalID: -7553821477840652816
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheet_main-climb_51
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 96
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 42c60065cccb124458b3ce7968fe55da
       internalID: 6152539379392269998
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheet_main-climb_52
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 96
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3c71a12019989bb41a5885ab92f0ca87
+      internalID: -4686991163816257893
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheet_main-climb_53
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 96
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 227eda5c14ecdb84f8a5cfd9ebffec79
+      internalID: 2009470639750804570
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheet_main-climb_54
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 96
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e39b605d13f57c04db67f3255a5a3d3f
+      internalID: 3739736622826650233
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: spritesheet_main-climb_55
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 96
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 37678a7afe6267f44a2a361100923f24
+      internalID: -1596781017472815475
       vertices: []
       indices: 
       edges: []
