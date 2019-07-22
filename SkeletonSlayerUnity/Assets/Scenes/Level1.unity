@@ -141,7 +141,7 @@ PrefabInstance:
     - target: {fileID: 5939185117275640315, guid: cccb138ef246ae74688c8ec65d845d7d,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5939185117275640316, guid: cccb138ef246ae74688c8ec65d845d7d,
         type: 3}
@@ -396,6 +396,11 @@ PrefabInstance:
       propertyPath: animation_PreShoot_Duration
       value: 0.1
       objectReference: {fileID: 0}
+    - target: {fileID: 2065848936377577216, guid: 0e83d9b3cf66e2d4899690cdc75f64a0,
+        type: 3}
+      propertyPath: animation_PreShoot
+      value: 
+      objectReference: {fileID: 7400000, guid: 7396811462535b648a02866eb74f1259, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0e83d9b3cf66e2d4899690cdc75f64a0, type: 3}
 --- !u!1 &1669136812
@@ -1438,7 +1443,7 @@ PrefabInstance:
     - target: {fileID: 5939185117275640315, guid: cccb138ef246ae74688c8ec65d845d7d,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5939185117275640316, guid: cccb138ef246ae74688c8ec65d845d7d,
         type: 3}

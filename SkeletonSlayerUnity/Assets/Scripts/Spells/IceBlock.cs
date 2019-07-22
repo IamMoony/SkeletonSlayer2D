@@ -9,7 +9,6 @@ public class IceBlock : Projectile
     public int knockDownForce;
     public ContactFilter2D viableFreezeTargets;
     
-    public bool hasFrozenCharacter;
     private List<Character> touchingCharacter = new List<Character>();
 
     public override void Start()
@@ -32,15 +31,14 @@ public class IceBlock : Projectile
         }
         if (touchingCharacter.Count > 0)
         {
-            hasFrozenCharacter = true;
             Destroy(gameObject, lifeTime);
         }
     }
 
-    public override void CharacterContact(Character characterInContact)
+    public override void CharacterContact(Character characterInContact, Vector2 contactPosition)
     {
-        base.CharacterContact(characterInContact);
-        if (!hasFrozenCharacter)
+        base.CharacterContact(characterInContact, contactPosition);
+        if (RB.velocity.magnitude > 0.5f)
         {
             characterInContact.Damage(contactDamage);
             characterInContact.Knockback(Vector2.down, knockDownForce);

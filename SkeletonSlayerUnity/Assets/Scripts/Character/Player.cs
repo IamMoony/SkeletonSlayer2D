@@ -48,7 +48,7 @@ public class Player : Character
         {
             if (isGrounded && !isWalking)
             {
-                StartCoroutine(Cast("Spell_Primary", 1f));
+                StartCoroutine(Cast("Spell_Primary", 2f));
             } 
         }
         if (Input.GetButtonDown("Activate"))

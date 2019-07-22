@@ -15,7 +15,7 @@ public class Character : MonoBehaviour
     public float dash_Speed;
     public float dash_Distance;
     public float teleport_Distance;
-    public float animation_PreShoot_Duration;
+    public AnimationClip animation_PreShoot;
     public GameObject effect_Burn;
     public GameObject effect_Freeze;
     public GameObject effect_Root;
@@ -287,19 +287,19 @@ public class Character : MonoBehaviour
     public IEnumerator Cast(string spell, float castTime)
     {
         ANIM.SetTrigger("Cast");
-        isCasting = true;
-        while(actionValue < castTime)
+        //isCasting = true;
+        while(actionValue < 1)
         {
-            if (actionValue >= castTime - animation_PreShoot_Duration)
+            if (actionValue >= (castTime - animation_PreShoot.averageDuration) / castTime)
                 ANIM.SetTrigger("Shoot");
             if (isGrounded && !isWalking)
-                actionValue = Mathf.Clamp(actionValue + Time.deltaTime, 0, 1);
+                actionValue = Mathf.Clamp(actionValue + Time.deltaTime / castTime, 0, 1);
             else
                 break;
             yield return new WaitForEndOfFrame();
         }
         actionValue = 0;
-        isCasting = false;
+        //isCasting = false;
         if (isGrounded && !isWalking)
         {
             isEvoking = true;

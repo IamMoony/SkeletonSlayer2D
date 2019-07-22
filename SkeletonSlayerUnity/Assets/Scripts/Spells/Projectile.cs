@@ -32,11 +32,11 @@ public class Projectile : MonoBehaviour
     {
         if (collider.tag == "Character")
         {
-            CharacterContact(collider.GetComponent<Character>());
+            CharacterContact(collider.GetComponent<Character>(), (transform.position + collider.transform.position) / 2);
         }
         else
         {
-            GroundContact(transform.position);
+            GroundContact((transform.position + collider.transform.position) / 2);
         }
     }
 
@@ -44,7 +44,7 @@ public class Projectile : MonoBehaviour
     {
         if (collision.gameObject.tag == "Character")
         {
-            CharacterContact(collision.gameObject.GetComponent<Character>());
+            CharacterContact(collision.gameObject.GetComponent<Character>(), collision.GetContact(0).point);
         }
         else
         {
@@ -70,12 +70,12 @@ public class Projectile : MonoBehaviour
         isActivated = true;
     }
 
-    public virtual void CharacterContact(Character characterInContact)
+    public virtual void CharacterContact(Character characterInContact, Vector2 contactPosition)
     {
         if (!isActivated)
-            Destroy(Instantiate(effect_Contact_Character_PreActivation, transform.position, Quaternion.identity), 5f);
+            Destroy(Instantiate(effect_Contact_Character_PreActivation, contactPosition, Quaternion.identity), 5f);
         else
-            Destroy(Instantiate(effect_Contact_Character_PostActivation, transform.position, Quaternion.identity), 5f);
+            Destroy(Instantiate(effect_Contact_Character_PostActivation, contactPosition, Quaternion.identity), 5f);
     }
 
     public virtual void GroundContact(Vector2 contactPosition)
