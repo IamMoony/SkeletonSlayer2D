@@ -323,9 +323,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab8ea943a0096424f8b89b417c2b1bed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HP_Base: 100
+  HP_Base: 10
   HP_Current: 0
-  DMG_Base: 10
+  DMG_Base: 1
   DMG_Current: 0
   MoveSpeed_Base: 2
   MoveSpeed_Current: 0
@@ -334,6 +334,7 @@ MonoBehaviour:
   dash_Speed: 10
   dash_Distance: 2
   teleport_Distance: 2
+  animation_PreShoot_Duration: 0
   effect_Burn: {fileID: 7310163276645880396, guid: 24d0ce4752c97ad4dbdff29e61179231,
     type: 3}
   effect_Freeze: {fileID: 5993968086995487863, guid: 8d7c5b53f9abdc6409b771e09df7ef19,
