@@ -36,7 +36,7 @@ public class PlayerPanelManager : MonoBehaviour
 
     void Setup()
     {
-        curHealth = player.HP_Base;
+        curHealth = player.HP_Current;
         hearts = new GameObject[curHealth];
         for (int i = 0; i < hearts.Length; i++)
         {
@@ -52,7 +52,7 @@ public class PlayerPanelManager : MonoBehaviour
         curHealth = player.HP_Current;
         for (int i = 0; i < hearts.Length; i++)
         {
-            if (i > curHealth)
+            if (i < curHealth)
             {
                 if (!hearts[i].activeSelf)
                     hearts[i].SetActive(true);

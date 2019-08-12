@@ -449,6 +449,7 @@ MonoBehaviour:
   dash_Speed: 0
   dash_Distance: 0
   teleport_Distance: 0
+  animation_PreShoot: {fileID: 0}
   effect_Burn: {fileID: 7310163276645880396, guid: 24d0ce4752c97ad4dbdff29e61179231,
     type: 3}
   effect_Freeze: {fileID: 5993968086995487863, guid: 8d7c5b53f9abdc6409b771e09df7ef19,
@@ -477,8 +478,13 @@ MonoBehaviour:
   visible:
     serializedVersion: 2
     m_Bits: 768
-  attackRange: 1
-  attackDuration: 1
+  meleeAttackRange: 0
+  meleeAttackAnimation: {fileID: 0}
+  rangedAttackRange: 3
+  rangedAttackAnimation: {fileID: 7400000, guid: 08b7579aa9e59dd4e9acbbb1063fb645,
+    type: 2}
+  rangedAttackProjectile: {fileID: 4439456849462767887, guid: e72c3ac73ff8abd46bebc650bfd99cfa,
+    type: 3}
   objectsInView: []
   target: {fileID: 0}
   targetInRange: 0
@@ -621,3 +627,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dmgAmount: 1
+  knockbackForce: 0

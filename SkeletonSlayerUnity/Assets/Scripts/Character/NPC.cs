@@ -7,8 +7,11 @@ public class NPC : Character
     public float viewDistance;
     public LayerMask visible;
 
-    public float attackRange;
-    public float attackDuration;
+    public float meleeAttackRange;
+    public AnimationClip meleeAttackAnimation;
+    public float rangedAttackRange;
+    public AnimationClip rangedAttackAnimation;
+    public GameObject rangedAttackProjectile;
 
     public List<GameObject> objectsInView;
     public GameObject target;
@@ -47,46 +50,32 @@ public class NPC : Character
         }
     }
 
-    public bool GetTarget()
-    {
-        for (int i = 0; i < objectsInView.Count; i++)
-        {
-            if (objectsInView[i].tag == "Character")
-            {
-                target = objectsInView[i];
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public bool TargetInSight()
-    {
-        RaycastHit2D check = Physics2D.Raycast(transform.position, target.transform.position - transform.position, 10f, visible);
-        if (check)
-        {
-            if (check.collider.tag == "Character")
-            {
-                return true;
-            }
-            else if (Vector2.Distance(transform.position, target.transform.position) < check.distance)
-                return true;
-        }
-        else if (Vector2.Distance(transform.position, target.transform.position) < 1f)
-            return true;
-        return false;
-    }
-
     public IEnumerator Attack_Melee()
     {
-        //Debug.Log("Start Attack Routine");
+        //Debug.Log("Start Melee Attack Routine");
         while (targetInRange)
         {
             if (target.transform.position.x < transform.position.x && FacingDirection == Vector2.right || target.transform.position.x > transform.position.x && FacingDirection == Vector2.left)
                 Turn();
             ANIM.SetTrigger("Attack_Melee");
-            yield return new WaitForSeconds(attackDuration);
-            if (Vector2.Distance(target.transform.position, transform.position) > attackRange)
+            yield return new WaitForSeconds(meleeAttackAnimation.averageDuration);
+            if (Vector2.Distance(target.transform.position, transform.position) > meleeAttackRange)
+                targetInRange = false;
+        }
+        //Debug.Log("Out of Range");
+    }
+
+    public IEnumerator Attack_Ranged()
+    {
+        //Debug.Log("Start Ranged Attack Routine");
+        while (targetInRange)
+        {
+            if (target.transform.position.x < transform.position.x && FacingDirection == Vector2.right || target.transform.position.x > transform.position.x && FacingDirection == Vector2.left)
+                Turn();
+            ANIM.SetTrigger("Attack_Ranged");
+            yield return new WaitForSeconds(rangedAttackAnimation.averageDuration);
+            Shoot(rangedAttackProjectile, FacingDirection);
+            if (Vector2.Distance(target.transform.position, transform.position) > rangedAttackRange)
                 targetInRange = false;
         }
         //Debug.Log("Out of Range");
@@ -104,7 +93,7 @@ public class NPC : Character
             }
             if (target.transform.position.x < transform.position.x && FacingDirection == Vector2.right || target.transform.position.x > transform.position.x && FacingDirection == Vector2.left)
                 Turn();
-            if (Vector2.Distance(target.transform.position, transform.position) < attackRange)
+            if (Vector2.Distance(target.transform.position, transform.position) < (rangedAttackRange > meleeAttackRange ? rangedAttackRange : meleeAttackRange))
             {
                 //Debug.Log("In Range");
                 isWalking = false;
@@ -204,5 +193,35 @@ public class NPC : Character
             }
             yield return new WaitForEndOfFrame();
         }
+    }
+
+    public bool GetTarget()
+    {
+        for (int i = 0; i < objectsInView.Count; i++)
+        {
+            if (objectsInView[i].tag == "Character")
+            {
+                target = objectsInView[i];
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public bool TargetInSight()
+    {
+        RaycastHit2D check = Physics2D.Raycast(transform.position, target.transform.position - transform.position, 10f, visible);
+        if (check)
+        {
+            if (check.collider.tag == "Character")
+            {
+                return true;
+            }
+            else if (Vector2.Distance(transform.position, target.transform.position) < check.distance)
+                return true;
+        }
+        else if (Vector2.Distance(transform.position, target.transform.position) < 1f)
+            return true;
+        return false;
     }
 }
