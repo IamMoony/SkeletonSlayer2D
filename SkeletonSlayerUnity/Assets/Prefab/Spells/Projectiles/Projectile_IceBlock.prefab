@@ -4814,8 +4814,8 @@ GameObject:
   - component: {fileID: 7636025900996775930}
   - component: {fileID: 3929051326079461432}
   - component: {fileID: 6927488732852042690}
-  m_Layer: 11
-  m_Name: Projectile_Player_IceBlock
+  m_Layer: 12
+  m_Name: Spell_Projectile_IceBlock
   m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4934,6 +4934,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa0d4cfee0caad444bba82726cd6ae06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spellName: 
+  spellDescription: 
+  spellIcon: {fileID: 0}
+  caster: {fileID: 0}
+  castTime: 0
+  coolDown: 0
   initalVelocity: 0
   velocityModifier: {x: 0, y: 0, z: 0}
   contactDamage: 1
@@ -4953,18 +4959,4 @@ MonoBehaviour:
   RB: {fileID: 0}
   lifeTime: 5
   stunDuration: 0
-  viableFreezeTargets:
-    useTriggers: 0
-    useLayerMask: 1
-    useDepth: 0
-    useOutsideDepth: 0
-    useNormalAngle: 0
-    useOutsideNormalAngle: 0
-    layerMask:
-      serializedVersion: 2
-      m_Bits: 1024
-    minDepth: 0
-    maxDepth: 0
-    minNormalAngle: 0
-    maxNormalAngle: 0
-  grounded: 0
+  knockDownForce: 0

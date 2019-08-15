@@ -26,7 +26,6 @@ public class Character : MonoBehaviour
     public bool isGrounded;
     public bool isWalking;
     public bool isCasting;
-    public bool isEvoking;
     public bool canClimb;
     public bool isClimbing;
     public LayerMask GroundLayer;
@@ -35,8 +34,8 @@ public class Character : MonoBehaviour
     public bool isDead;
     public bool isStunned;
 
-    private Rigidbody2D RB;
-    public Animator ANIM;
+    public Rigidbody2D rb;
+    public Animator anim;
     private float tick;
     private int burn_Ticks;
     private int freeze_Ticks;
@@ -46,8 +45,8 @@ public class Character : MonoBehaviour
 
     private void Awake()
     {
-        RB = GetComponent<Rigidbody2D>();
-        ANIM = GetComponent<Animator>();
+        rb = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
         effect_Burn = Instantiate(effect_Burn, transform);
         effect_Burn.SetActive(false);
         effect_Freeze = Instantiate(effect_Freeze, transform);
@@ -68,10 +67,10 @@ public class Character : MonoBehaviour
 
     public virtual void FixedUpdate()
     {
-        ANIM.SetBool("IsGrounded", isGrounded);
-        ANIM.SetBool("IsWalking", isWalking);
-        ANIM.SetBool("IsCasting", isCasting);
-        ANIM.SetBool("IsClimbing", isClimbing);
+        anim.SetBool("IsGrounded", isGrounded);
+        anim.SetBool("IsWalking", isWalking);
+        anim.SetBool("IsCasting", isCasting);
+        anim.SetBool("IsClimbing", isClimbing);
         if (burn_Ticks > 0 || freeze_Ticks > 0 || root_Ticks > 0 || wet_Ticks > 0 || stun_Ticks > 0)
         {
             if (tick > 0)
@@ -116,14 +115,14 @@ public class Character : MonoBehaviour
         }
         if (isClimbing && Input.GetAxis("Vertical") == 0)
         {
-            ANIM.speed = 0;
+            anim.speed = 0;
         }
         else if (isWalking)
         {
-            ANIM.speed = Mathf.Clamp((float)MoveSpeed_Current / (float)MoveSpeed_Base, 0, 1);
+            anim.speed = Mathf.Clamp((float)MoveSpeed_Current / (float)MoveSpeed_Base, 0, 1);
         }
-        else if (ANIM.speed == 0)
-            ANIM.speed = 1;
+        else if (anim.speed == 0)
+            anim.speed = 1;
     }
 
     public void Move(Vector2 direction, float speedMod)
@@ -131,7 +130,7 @@ public class Character : MonoBehaviour
         isWalking = true;
         if (direction.x < 0 && FacingDirection == Vector2.right || direction.x > 0 && FacingDirection == Vector2.left)
             Turn();
-        RB.velocity = new Vector2((direction.x * MoveSpeed_Current) * speedMod, RB.velocity.y);
+        rb.velocity = new Vector2((direction.x * MoveSpeed_Current) * speedMod, rb.velocity.y);
     }
 
     public void Turn()
@@ -144,8 +143,8 @@ public class Character : MonoBehaviour
     {
         if (isGrounded || isClimbing)
         {
-            ANIM.SetTrigger("Jump");
-            RB.AddForce((Vector2.up + direction) * JumpForce_Current);
+            anim.SetTrigger("Jump");
+            rb.AddForce((Vector2.up + direction) * JumpForce_Current);
         }
     }
 
@@ -153,7 +152,7 @@ public class Character : MonoBehaviour
     {
         if (!isDashing)
         {
-            ANIM.SetTrigger("Dash");
+            anim.SetTrigger("Dash");
             StartCoroutine(Dashing());
         }
     }
@@ -161,24 +160,24 @@ public class Character : MonoBehaviour
     IEnumerator Dashing()
     {
         isDashing = true;
-        RB.gravityScale = 0;
+        rb.gravityScale = 0;
         Vector2 targetPos = (Vector2)transform.position + FacingDirection * dash_Distance;
         Vector2 direction = FacingDirection;
         RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, 0.25f, GroundLayer);
         while (Vector2.Distance(transform.position, targetPos) > 0.1f && !hit)
         {
-            RB.velocity = direction * dash_Speed;
+            rb.velocity = direction * dash_Speed;
             hit = Physics2D.Raycast(transform.position, direction, 0.25f, GroundLayer);
             yield return new WaitForEndOfFrame();
         }
-        RB.velocity = Vector2.zero;
-        RB.gravityScale = 1;
+        rb.velocity = Vector2.zero;
+        rb.gravityScale = 1;
         isDashing = false;
     }
 
     public void Teleport()
     {
-        ANIM.SetTrigger("Dash");
+        anim.SetTrigger("Dash");
         StartCoroutine(Teleporting());
     }
 
@@ -213,7 +212,7 @@ public class Character : MonoBehaviour
 
     public void Knockback(Vector2 direction, int force)
     {
-        RB.AddForce(direction * force);
+        rb.AddForce(direction * force);
     }
 
     public void Stun(bool state, int time)
@@ -240,7 +239,7 @@ public class Character : MonoBehaviour
         {
             freeze_Ticks = 5;
             Stun(state, 5);
-            RB.velocity = Vector2.zero;
+            rb.velocity = Vector2.zero;
         }
     }
 
@@ -251,7 +250,7 @@ public class Character : MonoBehaviour
         if (state)
         {
             root_Ticks = 10;
-            RB.velocity = Vector2.zero;
+            rb.velocity = Vector2.zero;
         }
     }
 
@@ -279,32 +278,28 @@ public class Character : MonoBehaviour
             if (isClimbing)
             {
                 isClimbing = false;
-                RB.gravityScale = 1f;
+                rb.gravityScale = 1f;
             }
         }
     }
 
-    public IEnumerator Cast(string spell, float castTime)
+    public IEnumerator Cast(Spell spell)
     {
-        ANIM.SetTrigger("Cast");
-        //isCasting = true;
+        anim.SetTrigger("Cast");
         while(actionValue < 1)
         {
-            if (actionValue >= (castTime - animation_PreShoot.averageDuration) / castTime)
-                ANIM.SetTrigger("Shoot");
+            if (actionValue >= (spell.castTime - animation_PreShoot.averageDuration) / spell.castTime)
+                anim.SetTrigger("Shoot");
             if (isGrounded && !isWalking)
-                actionValue = Mathf.Clamp(actionValue + Time.deltaTime / castTime, 0, 1);
+                actionValue = Mathf.Clamp(actionValue + Time.deltaTime / spell.castTime, 0, 1);
             else
                 break;
             yield return new WaitForEndOfFrame();
         }
         actionValue = 0;
-        //isCasting = false;
         if (isGrounded && !isWalking)
         {
-            isEvoking = true;
-            yield return StartCoroutine(spell);
-            isEvoking = false;
+            spell.Cast((Vector2)transform.position + FacingDirection, this);
         }
     }
 
@@ -313,8 +308,8 @@ public class Character : MonoBehaviour
         if (!isClimbing)
         {
             isClimbing = true;
-            RB.velocity = Vector2.zero;
-            RB.gravityScale = 0;
+            rb.velocity = Vector2.zero;
+            rb.gravityScale = 0;
         }
         transform.position = Vector2.MoveTowards(transform.position, transform.position + new Vector3(0, direction.y, 0), Time.deltaTime * 2f);
     }

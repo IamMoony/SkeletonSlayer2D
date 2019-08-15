@@ -55,9 +55,11 @@ public class NPC : Character
         //Debug.Log("Start Melee Attack Routine");
         while (targetInRange)
         {
+            if (isStunned)
+                yield break;
             if (target.transform.position.x < transform.position.x && FacingDirection == Vector2.right || target.transform.position.x > transform.position.x && FacingDirection == Vector2.left)
                 Turn();
-            ANIM.SetTrigger("Attack_Melee");
+            anim.SetTrigger("Attack_Melee");
             yield return new WaitForSeconds(meleeAttackAnimation.averageDuration);
             if (Vector2.Distance(target.transform.position, transform.position) > meleeAttackRange)
                 targetInRange = false;
@@ -70,9 +72,11 @@ public class NPC : Character
         //Debug.Log("Start Ranged Attack Routine");
         while (targetInRange)
         {
+            if (isStunned)
+                yield break;
             if (target.transform.position.x < transform.position.x && FacingDirection == Vector2.right || target.transform.position.x > transform.position.x && FacingDirection == Vector2.left)
                 Turn();
-            ANIM.SetTrigger("Attack_Ranged");
+            anim.SetTrigger("Attack_Ranged");
             yield return new WaitForSeconds(rangedAttackAnimation.averageDuration);
             Shoot(rangedAttackProjectile, FacingDirection);
             if (Vector2.Distance(target.transform.position, transform.position) > rangedAttackRange)
@@ -86,6 +90,8 @@ public class NPC : Character
         //Debug.Log("Start Pursue Routine");
         while (!targetInRange)
         {
+            if (isStunned)
+                yield break;
             if (!TargetInSight())
             {
                 target = null;
@@ -201,8 +207,13 @@ public class NPC : Character
         {
             if (objectsInView[i].tag == "Character")
             {
-                target = objectsInView[i];
-                return true;
+                if (objectsInView[i].GetComponent<Character>() is Player)
+                {
+                    target = objectsInView[i];
+                    return true;
+                }
+                else
+                    objectsInView.RemoveAt(i);
             }
         }
         return false;

@@ -70,8 +70,8 @@ GameObject:
   - component: {fileID: 7558583483699128048}
   - component: {fileID: 4006846758547308850}
   - component: {fileID: 4383813011121581093}
-  m_Layer: 11
-  m_Name: Projectile_Player_EmergingRock
+  m_Layer: 12
+  m_Name: Spell_Projectile_EmergingRock
   m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -189,6 +189,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70000caad4ba89b4f8c6cbc241d31c41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spellName: 
+  spellDescription: 
+  spellIcon: {fileID: 0}
+  caster: {fileID: 0}
+  castTime: 0
+  coolDown: 0
   initalVelocity: 0
   velocityModifier: {x: 0, y: 0, z: 0}
   contactDamage: 1

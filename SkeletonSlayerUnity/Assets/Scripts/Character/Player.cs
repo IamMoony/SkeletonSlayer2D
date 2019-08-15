@@ -4,19 +4,15 @@ using UnityEngine;
 
 public class Player : Character
 {
-    public enum Element {Fire, Water, Earth, Air};
-    public Element activeElement;
-    public GameObject projectile_Fire;
-    public GameObject projectile_Water;
-    public GameObject projectile_Earth;
-    public GameObject projectile_Air;
+    public GameObject spell_Firebolt;
+    public GameObject spell_Waterbolt;
+    public GameObject spell_Earthbolt;
 
-    private GameObject[] projectile_Instance;
+    public Spell activeSpell;
 
     private void Start()
     {
-        projectile_Instance = new GameObject[4];
-        activeElement = Element.Fire;
+        activeSpell = spell_Firebolt.GetComponent<Spell>();
     }
 
     public void Update()
@@ -48,66 +44,24 @@ public class Player : Character
         {
             if (isGrounded && !isWalking)
             {
-                StartCoroutine(Cast("Spell_Primary", 2f));
+                StartCoroutine(Cast(activeSpell));
             } 
         }
         if (Input.GetButtonDown("Activate"))
         {
-            if (projectile_Instance[(int)activeElement] != null)
-            {
-                if (!projectile_Instance[(int)activeElement].GetComponent<Projectile>().isActivated)
-                    projectile_Instance[(int)activeElement].GetComponent<Projectile>().Activation(FacingDirection);
-            }
+            activeSpell.Activate(FacingDirection);
         }
         if (Input.GetKey(KeyCode.Alpha1))
         {
-            if (activeElement != Element.Fire)
-            {
-                activeElement = Element.Fire;
-            }
+            activeSpell = spell_Firebolt.GetComponent<Spell>();
         }
         if (Input.GetKey(KeyCode.Alpha2))
         {
-            if (activeElement != Element.Water)
-            {
-                activeElement = Element.Water;
-            }
+            activeSpell = spell_Waterbolt.GetComponent<Spell>();
         }
         if (Input.GetKey(KeyCode.Alpha3))
         {
-            if (activeElement != Element.Earth)
-            {
-                activeElement = Element.Earth;
-            }
-        }
-        if (Input.GetKey(KeyCode.Alpha4))
-        {
-            if (activeElement != Element.Air)
-            {
-                activeElement = Element.Air;
-            }
+            activeSpell = spell_Earthbolt.GetComponent<Spell>();
         }
     }
-
-    public IEnumerator Spell_Primary()
-    {
-        if (activeElement == Element.Fire)
-        {
-            projectile_Instance[(int)Element.Fire] = Shoot(projectile_Fire, FacingDirection);
-        }
-        else if (activeElement == Element.Water)
-        {
-            projectile_Instance[(int)Element.Water] = Shoot(projectile_Water, FacingDirection);
-        }
-        else if (activeElement == Element.Earth)
-        {
-            projectile_Instance[(int)Element.Earth] = Shoot(projectile_Earth, FacingDirection);
-        }
-        else if (activeElement == Element.Air)
-        {
-            projectile_Instance[(int)Element.Air] = Shoot(projectile_Air, FacingDirection);
-        }
-        yield return new WaitForSeconds(0.5f);
-    }
-
 }

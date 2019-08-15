@@ -17,14 +17,14 @@ TagManager:
   - 
   - 
   - Ground
-  - Character_Player
-  - Character_Enemy
-  - Projectile_Player
-  - Projectile_Enemy
-  - Attack_Player
-  - Attack_Enemy
   - GroundCheck
   - ViewCheck
+  - Character
+  - Spell
+  - 
+  - 
+  - 
+  - 
   - 
   - 
   - 

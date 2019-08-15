@@ -15,6 +15,7 @@ public class Projectile : MonoBehaviour
     public GameObject effect_Destroy;
 
     public bool isActivated;
+    public Character owner;
 
     public Rigidbody2D RB;
 

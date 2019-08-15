@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 620305938}
   - component: {fileID: 620305940}
   - component: {fileID: 620305939}
-  m_Layer: 15
+  m_Layer: 9
   m_Name: GroundCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -81,7 +81,7 @@ GameObject:
   - component: {fileID: 1244587924833759147}
   - component: {fileID: 5887662510174506799}
   - component: {fileID: 7600444665912260022}
-  m_Layer: 15
+  m_Layer: 9
   m_Name: JumpCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -151,7 +151,7 @@ GameObject:
   - component: {fileID: 6704988464930806701}
   - component: {fileID: 4505959390573047987}
   - component: {fileID: 7465965976168864412}
-  m_Layer: 16
+  m_Layer: 10
   m_Name: ViewCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -221,7 +221,7 @@ GameObject:
   - component: {fileID: 277103070990025851}
   - component: {fileID: 290398442319066112}
   - component: {fileID: 2189548131499729687}
-  m_Layer: 15
+  m_Layer: 9
   m_Name: PathCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -294,7 +294,7 @@ GameObject:
   - component: {fileID: 5939185117275640319}
   - component: {fileID: 5939185117275640305}
   - component: {fileID: 5939185117275640318}
-  m_Layer: 10
+  m_Layer: 11
   m_Name: Hellhound
   m_TagString: Character
   m_Icon: {fileID: 0}
@@ -473,11 +473,12 @@ MonoBehaviour:
   FacingDirection: {x: 0, y: 0}
   isDead: 0
   isStunned: 0
-  ANIM: {fileID: 0}
+  rb: {fileID: 0}
+  anim: {fileID: 0}
   viewDistance: 1
   visible:
     serializedVersion: 2
-    m_Bits: 768
+    m_Bits: 2304
   meleeAttackRange: 0
   meleeAttackAnimation: {fileID: 0}
   rangedAttackRange: 3
@@ -507,7 +508,7 @@ GameObject:
   - component: {fileID: 1644478996408046079}
   - component: {fileID: 2078788522180131799}
   - component: {fileID: 8610232683742110605}
-  m_Layer: 15
+  m_Layer: 9
   m_Name: FloorCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -577,7 +578,7 @@ GameObject:
   - component: {fileID: 1929384199219962796}
   - component: {fileID: 682473212729217438}
   - component: {fileID: 5372465020142630572}
-  m_Layer: 14
+  m_Layer: 0
   m_Name: AttackCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}

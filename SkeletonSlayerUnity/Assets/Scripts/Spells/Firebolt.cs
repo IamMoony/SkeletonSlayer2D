@@ -22,15 +22,18 @@ public class Firebolt : Projectile
     public override void CharacterContact(Character characterInContact, Vector2 contactPosition)
     {
         base.CharacterContact(characterInContact, contactPosition);
-        if (!isActivated)
+        if (characterInContact != owner)
         {
-            characterInContact.Burn(true);
+            if (!isActivated)
+            {
+                characterInContact.Burn(true);
+            }
+            else
+            {
+                Explode();
+            }
+            ProjectileDestroy();
         }
-        else
-        {
-            Explode();
-        }
-        ProjectileDestroy();
     }
 
     public override void GroundContact(Vector2 contactPosition)
