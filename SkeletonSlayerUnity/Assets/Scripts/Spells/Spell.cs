@@ -12,7 +12,7 @@ public class Spell : MonoBehaviour
     public float castTime;
     public float coolDown;
 
-    [HideInInspector] public float cd;
+    public float cd;
 
     private GameObject spellInstance;
 
@@ -22,6 +22,7 @@ public class Spell : MonoBehaviour
         if (spellInstance)
             spellInstance.GetComponent<Projectile>().ProjectileDestroy();
         spellInstance = Instantiate(spellPrefab, position, Quaternion.Euler(source.FacingDirection == (Vector2)transform.right ? 0 : 180, 0, source.FacingDirection == (Vector2)transform.right ? 0 : 180));
+        spellInstance.GetComponent<Projectile>().owner = source;
     }
 
     public void Activate(Vector2 activationDirection)

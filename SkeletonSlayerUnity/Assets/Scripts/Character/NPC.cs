@@ -12,6 +12,7 @@ public class NPC : Character
     public float rangedAttackRange;
     public AnimationClip rangedAttackAnimation;
     public GameObject rangedAttackProjectile;
+    public GameObject spell;
 
     public List<GameObject> objectsInView;
     public GameObject target;
@@ -76,9 +77,8 @@ public class NPC : Character
                 yield break;
             if (target.transform.position.x < transform.position.x && FacingDirection == Vector2.right || target.transform.position.x > transform.position.x && FacingDirection == Vector2.left)
                 Turn();
-            anim.SetTrigger("Attack_Ranged");
-            yield return new WaitForSeconds(rangedAttackAnimation.averageDuration);
-            Shoot(rangedAttackProjectile, FacingDirection);
+            yield return new WaitForSeconds(spell.GetComponent<Spell>().cd);
+            yield return StartCoroutine(Cast(spell.GetComponent<Spell>()));
             if (Vector2.Distance(target.transform.position, transform.position) > rangedAttackRange)
                 targetInRange = false;
         }

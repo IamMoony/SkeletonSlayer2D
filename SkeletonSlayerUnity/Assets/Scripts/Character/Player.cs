@@ -17,6 +17,8 @@ public class Player : Character
 
     public void Update()
     {
+        if (isStunned)
+            return;
         if (Input.GetAxis("Horizontal") != 0)
         {
             Move(Input.GetAxis("Horizontal") > 0 ? Vector2.right : Vector2.left, 1f);
@@ -42,7 +44,7 @@ public class Player : Character
         }
         if (Input.GetButtonDown("Shoot"))
         {
-            if (isGrounded && !isWalking)
+            if (isGrounded && !isWalking && activeSpell.cd <= 0)
             {
                 StartCoroutine(Cast(activeSpell));
             } 

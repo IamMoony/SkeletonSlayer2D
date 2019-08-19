@@ -391,38 +391,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2065848936377577216, guid: 0e83d9b3cf66e2d4899690cdc75f64a0,
-        type: 3}
-      propertyPath: animation_PreShoot_Duration
-      value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2065848936377577216, guid: 0e83d9b3cf66e2d4899690cdc75f64a0,
-        type: 3}
-      propertyPath: animation_PreShoot
-      value: 
-      objectReference: {fileID: 7400000, guid: 7396811462535b648a02866eb74f1259, type: 2}
-    - target: {fileID: 2065848936377577216, guid: 0e83d9b3cf66e2d4899690cdc75f64a0,
-        type: 3}
-      propertyPath: spell_Firebolt
-      value: 
-      objectReference: {fileID: 3234334099831997495, guid: a18e133cccd24c549ba8ffa6a15e6ff3,
-        type: 3}
-    - target: {fileID: 2065848936377577216, guid: 0e83d9b3cf66e2d4899690cdc75f64a0,
-        type: 3}
-      propertyPath: spell_Waterbolt
-      value: 
-      objectReference: {fileID: 9117698377554354511, guid: eda999b89b2e23249b90b06baed25cf1,
-        type: 3}
-    - target: {fileID: 2065848936377577216, guid: 0e83d9b3cf66e2d4899690cdc75f64a0,
-        type: 3}
-      propertyPath: spell_Earthbolt
-      value: 
-      objectReference: {fileID: 2419523090019864414, guid: 32bce0f2158c8f64a9e3bd8f9a654f38,
-        type: 3}
-    - target: {fileID: 739753492, guid: 0e83d9b3cf66e2d4899690cdc75f64a0, type: 3}
-      propertyPath: m_Layer
-      value: 15
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0e83d9b3cf66e2d4899690cdc75f64a0, type: 3}
 --- !u!1 &1669136812

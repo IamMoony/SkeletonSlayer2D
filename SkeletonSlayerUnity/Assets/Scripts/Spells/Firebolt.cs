@@ -21,9 +21,12 @@ public class Firebolt : Projectile
 
     public override void CharacterContact(Character characterInContact, Vector2 contactPosition)
     {
-        base.CharacterContact(characterInContact, contactPosition);
         if (characterInContact != owner)
         {
+            if (owner is NPC)
+                if (characterInContact is NPC)
+                    return;
+            base.CharacterContact(characterInContact, contactPosition);
             if (!isActivated)
             {
                 characterInContact.Burn(true);
@@ -43,6 +46,11 @@ public class Firebolt : Projectile
         {
             Explode();
             ProjectileDestroy();
+        }
+        else
+        {
+            RaycastHit2D ground = Physics2D.Raycast(transform.position, RB.velocity.normalized);
+            RB.velocity = Vector2.Reflect(RB.velocity, ground.normal);
         }
     }
 

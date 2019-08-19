@@ -31,25 +31,14 @@ public class Projectile : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collider)
     {
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, RB.velocity.normalized);
         if (collider.tag == "Character")
         {
-            CharacterContact(collider.GetComponent<Character>(), (transform.position + collider.transform.position) / 2);
+            CharacterContact(collider.GetComponent<Character>(), hit.point);
         }
         else
         {
-            GroundContact((transform.position + collider.transform.position) / 2);
-        }
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.tag == "Character")
-        {
-            CharacterContact(collision.gameObject.GetComponent<Character>(), collision.GetContact(0).point);
-        }
-        else
-        {
-            GroundContact(collision.GetContact(0).point);
+            GroundContact(hit.point);
         }
     }
 

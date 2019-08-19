@@ -23,6 +23,8 @@ public class Waterbolt : Projectile
         }
         if (frozen == 0)
             CreateIceBlock();
+        else
+            ProjectileDestroy();
     }
 
     public override void CharacterContact(Character characterInContact, Vector2 contactPosition)
@@ -36,7 +38,7 @@ public class Waterbolt : Projectile
             }
             else
             {
-                characterInContact.rb.gravityScale = 0;
+                //characterInContact.rb.gravityScale = 0;
             }
         }
     }
@@ -49,7 +51,7 @@ public class Waterbolt : Projectile
             ProjectileDestroy();
         }
     }
-
+    /*
     private void OnTriggerExit2D(Collider2D collider)
     {
         if (collider.tag == "Character")
@@ -60,7 +62,7 @@ public class Waterbolt : Projectile
             }
         }
     }
-
+    */
     private void CreateIceBlock()
     {
         Instantiate(iceBlock, transform.position, Quaternion.identity);

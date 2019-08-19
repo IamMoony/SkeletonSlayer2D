@@ -49,5 +49,5 @@ MonoBehaviour:
   spellPrefab: {fileID: 4053248971094408233, guid: 30379c95a7c27ec43a2df2d5ea54b593,
     type: 3}
   castTime: 1
-  coolDown: 1
+  coolDown: 0
   cd: 0

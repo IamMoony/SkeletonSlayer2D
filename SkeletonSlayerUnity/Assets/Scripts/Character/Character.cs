@@ -25,7 +25,6 @@ public class Character : MonoBehaviour
     public float actionValue = 0;
     public bool isGrounded;
     public bool isWalking;
-    public bool isCasting;
     public bool canClimb;
     public bool isClimbing;
     public LayerMask GroundLayer;
@@ -69,7 +68,6 @@ public class Character : MonoBehaviour
     {
         anim.SetBool("IsGrounded", isGrounded);
         anim.SetBool("IsWalking", isWalking);
-        anim.SetBool("IsCasting", isCasting);
         anim.SetBool("IsClimbing", isClimbing);
         if (burn_Ticks > 0 || freeze_Ticks > 0 || root_Ticks > 0 || wet_Ticks > 0 || stun_Ticks > 0)
         {
@@ -117,11 +115,11 @@ public class Character : MonoBehaviour
         {
             anim.speed = 0;
         }
-        else if (isWalking)
+        else if (isWalking && !isStunned)
         {
             anim.speed = Mathf.Clamp((float)MoveSpeed_Current / (float)MoveSpeed_Base, 0, 1);
         }
-        else if (anim.speed == 0)
+        else if (anim.speed == 0 && !isStunned)
             anim.speed = 1;
     }
 
@@ -220,7 +218,12 @@ public class Character : MonoBehaviour
         //effect_Stun.SetActive(state);
         isStunned = state;
         if (state)
+        {
             stun_Ticks = time;
+            anim.speed = 0;
+        }
+        else
+            anim.speed = 1;
     }
 
     public void Burn(bool state)
@@ -288,7 +291,7 @@ public class Character : MonoBehaviour
         anim.SetTrigger("Cast");
         while(actionValue < 1)
         {
-            if (actionValue >= (spell.castTime - animation_PreShoot.averageDuration) / spell.castTime)
+            if (actionValue >= (spell.castTime - (animation_PreShoot == null ? 0 : animation_PreShoot.averageDuration)) / spell.castTime)
                 anim.SetTrigger("Shoot");
             if (isGrounded && !isWalking)
                 actionValue = Mathf.Clamp(actionValue + Time.deltaTime / spell.castTime, 0, 1);
