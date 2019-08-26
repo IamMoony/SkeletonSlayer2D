@@ -31,14 +31,13 @@ public class Projectile : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collider)
     {
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, RB.velocity.normalized);
         if (collider.tag == "Character")
         {
-            CharacterContact(collider.GetComponent<Character>(), hit.point);
+            CharacterContact(collider.GetComponent<Character>(), collider.ClosestPoint(transform.position));
         }
         else
         {
-            GroundContact(hit.point);
+            GroundContact(collider.ClosestPoint(transform.position));
         }
     }
 
@@ -62,6 +61,7 @@ public class Projectile : MonoBehaviour
 
     public virtual void CharacterContact(Character characterInContact, Vector2 contactPosition)
     {
+        characterInContact.Damage(contactDamage);
         if (!isActivated)
             Destroy(Instantiate(effect_Contact_Character_PreActivation, contactPosition, Quaternion.identity), 5f);
         else

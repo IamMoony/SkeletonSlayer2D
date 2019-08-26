@@ -334,6 +334,10 @@ MonoBehaviour:
   dash_Speed: 10
   dash_Distance: 2
   teleport_Distance: 2
+  spells:
+  - {fileID: 2875361491215119421, guid: a18e133cccd24c549ba8ffa6a15e6ff3, type: 3}
+  - {fileID: 8470547339341582661, guid: eda999b89b2e23249b90b06baed25cf1, type: 3}
+  - {fileID: 3068676336632528724, guid: 32bce0f2158c8f64a9e3bd8f9a654f38, type: 3}
   animation_PreShoot: {fileID: 7400000, guid: 7396811462535b648a02866eb74f1259, type: 2}
   effect_Burn: {fileID: 7310163276645880396, guid: 24d0ce4752c97ad4dbdff29e61179231,
     type: 3}
@@ -347,7 +351,6 @@ MonoBehaviour:
   actionValue: 0
   isGrounded: 1
   isWalking: 0
-  isCasting: 0
   canClimb: 0
   isClimbing: 0
   GroundLayer:
@@ -359,12 +362,6 @@ MonoBehaviour:
   isStunned: 0
   rb: {fileID: 0}
   anim: {fileID: 0}
-  spell_Firebolt: {fileID: 3234334099831997495, guid: a18e133cccd24c549ba8ffa6a15e6ff3,
-    type: 3}
-  spell_Waterbolt: {fileID: 9117698377554354511, guid: eda999b89b2e23249b90b06baed25cf1,
-    type: 3}
-  spell_Earthbolt: {fileID: 2419523090019864414, guid: 32bce0f2158c8f64a9e3bd8f9a654f38,
-    type: 3}
   activeSpell: {fileID: 0}
 --- !u!95 &2065848936377577219
 Animator:

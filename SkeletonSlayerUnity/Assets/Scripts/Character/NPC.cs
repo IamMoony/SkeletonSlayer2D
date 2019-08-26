@@ -12,7 +12,6 @@ public class NPC : Character
     public float rangedAttackRange;
     public AnimationClip rangedAttackAnimation;
     public GameObject rangedAttackProjectile;
-    public GameObject spell;
 
     public List<GameObject> objectsInView;
     public GameObject target;
@@ -42,9 +41,9 @@ public class NPC : Character
         objectsInView = new List<GameObject>();
     }
 
-    public override void FixedUpdate()
+    public override void Update()
     {
-        base.FixedUpdate();
+        base.Update();
         if (isDead)
         {
             Destroy(gameObject,0.1f);
@@ -77,8 +76,26 @@ public class NPC : Character
                 yield break;
             if (target.transform.position.x < transform.position.x && FacingDirection == Vector2.right || target.transform.position.x > transform.position.x && FacingDirection == Vector2.left)
                 Turn();
-            yield return new WaitForSeconds(spell.GetComponent<Spell>().cd);
-            yield return StartCoroutine(Cast(spell.GetComponent<Spell>()));
+            anim.SetTrigger("Attack_Ranged");
+            yield return new WaitForSeconds(rangedAttackAnimation.averageDuration);
+            Shoot(rangedAttackProjectile, FacingDirection);
+            if (Vector2.Distance(target.transform.position, transform.position) > rangedAttackRange)
+                targetInRange = false;
+        }
+        //Debug.Log("Out of Range");
+    }
+
+    public IEnumerator Cast_Spell()
+    {
+        //Debug.Log("Start Ranged Attack Routine");
+        while (targetInRange)
+        {
+            if (isStunned)
+                yield break;
+            if (target.transform.position.x < transform.position.x && FacingDirection == Vector2.right || target.transform.position.x > transform.position.x && FacingDirection == Vector2.left)
+                Turn();
+            yield return new WaitForSeconds(spells[0].cd);
+            yield return StartCoroutine(Cast(spells[0]));
             if (Vector2.Distance(target.transform.position, transform.position) > rangedAttackRange)
                 targetInRange = false;
         }

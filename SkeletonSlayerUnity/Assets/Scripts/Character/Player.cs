@@ -4,19 +4,16 @@ using UnityEngine;
 
 public class Player : Character
 {
-    public GameObject spell_Firebolt;
-    public GameObject spell_Waterbolt;
-    public GameObject spell_Earthbolt;
-
     public Spell activeSpell;
 
     private void Start()
     {
-        activeSpell = spell_Firebolt.GetComponent<Spell>();
+        activeSpell = spells[0];
     }
 
-    public void Update()
+    public override void Update()
     {
+        base.Update();
         if (isStunned)
             return;
         if (Input.GetAxis("Horizontal") != 0)
@@ -55,15 +52,15 @@ public class Player : Character
         }
         if (Input.GetKey(KeyCode.Alpha1))
         {
-            activeSpell = spell_Firebolt.GetComponent<Spell>();
+            activeSpell = spells[0];
         }
         if (Input.GetKey(KeyCode.Alpha2))
         {
-            activeSpell = spell_Waterbolt.GetComponent<Spell>();
+            activeSpell = spells[1];
         }
         if (Input.GetKey(KeyCode.Alpha3))
         {
-            activeSpell = spell_Earthbolt.GetComponent<Spell>();
+            activeSpell = spells[2];
         }
     }
 }

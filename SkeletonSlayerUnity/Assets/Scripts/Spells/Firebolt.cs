@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Firebolt : Projectile
 {
+    public bool projectileBurn;
+    public bool projectileBounce;
     public float chargeVelocity;
     public float explosionRadius;
     public int explosionForce;
@@ -29,7 +31,8 @@ public class Firebolt : Projectile
             base.CharacterContact(characterInContact, contactPosition);
             if (!isActivated)
             {
-                characterInContact.Burn(true);
+                if (projectileBurn)
+                    characterInContact.Burn(true);
             }
             else
             {
@@ -49,8 +52,15 @@ public class Firebolt : Projectile
         }
         else
         {
-            RaycastHit2D ground = Physics2D.Raycast(transform.position, RB.velocity.normalized);
-            RB.velocity = Vector2.Reflect(RB.velocity, ground.normal);
+            if (projectileBounce)
+            {
+                RaycastHit2D ground = Physics2D.Raycast(transform.position, RB.velocity.normalized);
+                RB.velocity = Vector2.Reflect(RB.velocity, ground.normal);
+            }
+            else
+            {
+                ProjectileDestroy();
+            }
         }
     }
 

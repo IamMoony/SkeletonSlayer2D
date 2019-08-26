@@ -12,7 +12,7 @@ public class Spell : MonoBehaviour
     public float castTime;
     public float coolDown;
 
-    public float cd;
+    [HideInInspector] public float cd;
 
     private GameObject spellInstance;
 
@@ -31,14 +31,6 @@ public class Spell : MonoBehaviour
         {
             if (!spellInstance.GetComponent<Projectile>().isActivated)
                 spellInstance.GetComponent<Projectile>().Activation(activationDirection);
-        }
-    }
-
-    private void Update()
-    {
-        if (cd > 0)
-        {
-            cd -= Time.deltaTime;
         }
     }
 }

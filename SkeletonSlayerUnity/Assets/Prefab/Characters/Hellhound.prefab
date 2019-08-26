@@ -449,6 +449,8 @@ MonoBehaviour:
   dash_Speed: 0
   dash_Distance: 0
   teleport_Distance: 0
+  spells:
+  - {fileID: 8881317040600442969, guid: 1417bb59d291c1f4581e5aeb6e63c830, type: 3}
   animation_PreShoot: {fileID: 0}
   effect_Burn: {fileID: 7310163276645880396, guid: 24d0ce4752c97ad4dbdff29e61179231,
     type: 3}
@@ -484,7 +486,6 @@ MonoBehaviour:
     type: 2}
   rangedAttackProjectile: {fileID: 4439456849462767887, guid: e72c3ac73ff8abd46bebc650bfd99cfa,
     type: 3}
-  spell: {fileID: 8089935510165870675, guid: 1417bb59d291c1f4581e5aeb6e63c830, type: 3}
   objectsInView: []
   target: {fileID: 0}
   targetInRange: 0

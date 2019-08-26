@@ -4903,6 +4903,8 @@ MonoBehaviour:
   isActivated: 0
   owner: {fileID: 0}
   RB: {fileID: 0}
+  projectileBurn: 1
+  projectileBounce: 1
   chargeVelocity: 4
   explosionRadius: 1
   explosionForce: 100

@@ -15,6 +15,7 @@ public class Character : MonoBehaviour
     public float dash_Speed;
     public float dash_Distance;
     public float teleport_Distance;
+    public Spell[] spells;
     public AnimationClip animation_PreShoot;
     public GameObject effect_Burn;
     public GameObject effect_Freeze;
@@ -22,19 +23,19 @@ public class Character : MonoBehaviour
     public GameObject effect_Wet;
     public GameObject effect_Stun;
 
-    public float actionValue = 0;
-    public bool isGrounded;
-    public bool isWalking;
-    public bool canClimb;
-    public bool isClimbing;
-    public LayerMask GroundLayer;
-    public bool isDashing;
-    public Vector2 FacingDirection;
-    public bool isDead;
-    public bool isStunned;
+    [HideInInspector] public float actionValue = 0;
+    [HideInInspector] public bool isGrounded;
+    [HideInInspector] public bool isWalking;
+    [HideInInspector] public bool canClimb;
+    [HideInInspector] public bool isClimbing;
+    [HideInInspector] public LayerMask GroundLayer;
+    [HideInInspector] public bool isDashing;
+    [HideInInspector] public Vector2 FacingDirection;
+    [HideInInspector] public bool isDead;
+    [HideInInspector] public bool isStunned;
 
-    public Rigidbody2D rb;
-    public Animator anim;
+    [HideInInspector] public Rigidbody2D rb;
+    [HideInInspector] public Animator anim;
     private float tick;
     private int burn_Ticks;
     private int freeze_Ticks;
@@ -64,7 +65,7 @@ public class Character : MonoBehaviour
         FacingDirection = Vector2.right;
     }
 
-    public virtual void FixedUpdate()
+    public virtual void Update()
     {
         anim.SetBool("IsGrounded", isGrounded);
         anim.SetBool("IsWalking", isWalking);
@@ -73,7 +74,7 @@ public class Character : MonoBehaviour
         {
             if (tick > 0)
             {
-                tick -= Time.fixedDeltaTime;
+                tick -= Time.deltaTime;
             }
             else
             {
@@ -121,6 +122,11 @@ public class Character : MonoBehaviour
         }
         else if (anim.speed == 0 && !isStunned)
             anim.speed = 1;
+        for (int i = 0; i < spells.Length; i++)
+        {
+            if (spells[i].cd > 0)
+                spells[i].cd -= Time.deltaTime;
+        }
     }
 
     public void Move(Vector2 direction, float speedMod)
@@ -192,11 +198,11 @@ public class Character : MonoBehaviour
         yield return null;
     }
 
-    public GameObject Shoot(GameObject projectile, Vector2 direction)
+    public void Shoot(GameObject projectile, Vector2 direction)
     {
         Vector2 spawnPos = new Vector2(transform.position.x, transform.position.y) + direction * 0.25f;
         GameObject proj = Instantiate(projectile, spawnPos, Quaternion.Euler(direction == (Vector2)transform.right ? 0 : 180, 0, direction == (Vector2)transform.right ? 0 : 180));
-        return proj;
+        proj.GetComponent<Projectile>().owner = this;
     }
 
     public void Damage(int amount)
