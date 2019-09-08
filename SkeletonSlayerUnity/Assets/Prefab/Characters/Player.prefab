@@ -102,7 +102,7 @@ GameObject:
   - component: {fileID: 739753493}
   - component: {fileID: 739753495}
   - component: {fileID: 739753494}
-  m_Layer: 5
+  m_Layer: 15
   m_Name: GroundCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -176,7 +176,7 @@ GameObject:
   - component: {fileID: 2065848936377577230}
   - component: {fileID: 2065848936377577216}
   - component: {fileID: 2065848936377577219}
-  m_Layer: 9
+  m_Layer: 11
   m_Name: Player
   m_TagString: Character
   m_Icon: {fileID: 0}
@@ -323,9 +323,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab8ea943a0096424f8b89b417c2b1bed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HP_Base: 100
+  HP_Base: 10
   HP_Current: 0
-  DMG_Base: 10
+  DMG_Base: 1
   DMG_Current: 0
   MoveSpeed_Base: 2
   MoveSpeed_Current: 0
@@ -334,6 +334,11 @@ MonoBehaviour:
   dash_Speed: 10
   dash_Distance: 2
   teleport_Distance: 2
+  spells:
+  - {fileID: 2875361491215119421, guid: a18e133cccd24c549ba8ffa6a15e6ff3, type: 3}
+  - {fileID: 8470547339341582661, guid: eda999b89b2e23249b90b06baed25cf1, type: 3}
+  - {fileID: 3068676336632528724, guid: 32bce0f2158c8f64a9e3bd8f9a654f38, type: 3}
+  animation_PreShoot: {fileID: 7400000, guid: 7396811462535b648a02866eb74f1259, type: 2}
   effect_Burn: {fileID: 7310163276645880396, guid: 24d0ce4752c97ad4dbdff29e61179231,
     type: 3}
   effect_Freeze: {fileID: 5993968086995487863, guid: 8d7c5b53f9abdc6409b771e09df7ef19,
@@ -346,8 +351,6 @@ MonoBehaviour:
   actionValue: 0
   isGrounded: 1
   isWalking: 0
-  isCasting: 0
-  isEvoking: 0
   canClimb: 0
   isClimbing: 0
   GroundLayer:
@@ -357,15 +360,9 @@ MonoBehaviour:
   FacingDirection: {x: 0, y: 0}
   isDead: 0
   isStunned: 0
-  ANIM: {fileID: 0}
-  activeElement: 0
-  projectile_Fire: {fileID: 4439456849462767887, guid: b50c293318cb0fc4999618cf21e66765,
-    type: 3}
-  projectile_Water: {fileID: 2390927443734499096, guid: db8a3a7c3c29fbe419ff2a9f898da5f9,
-    type: 3}
-  projectile_Earth: {fileID: 4053248971094408233, guid: 30379c95a7c27ec43a2df2d5ea54b593,
-    type: 3}
-  projectile_Air: {fileID: 0}
+  rb: {fileID: 0}
+  anim: {fileID: 0}
+  activeSpell: {fileID: 0}
 --- !u!95 &2065848936377577219
 Animator:
   serializedVersion: 3

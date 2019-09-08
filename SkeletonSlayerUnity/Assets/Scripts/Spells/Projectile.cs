@@ -15,6 +15,7 @@ public class Projectile : MonoBehaviour
     public GameObject effect_Destroy;
 
     public bool isActivated;
+    public Character owner;
 
     public Rigidbody2D RB;
 
@@ -32,23 +33,11 @@ public class Projectile : MonoBehaviour
     {
         if (collider.tag == "Character")
         {
-            CharacterContact(collider.GetComponent<Character>());
+            CharacterContact(collider.GetComponent<Character>(), collider.ClosestPoint(transform.position));
         }
         else
         {
-            GroundContact(transform.position);
-        }
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.tag == "Character")
-        {
-            CharacterContact(collision.gameObject.GetComponent<Character>());
-        }
-        else
-        {
-            GroundContact(collision.GetContact(0).point);
+            GroundContact(collider.ClosestPoint(transform.position));
         }
     }
 
@@ -70,12 +59,13 @@ public class Projectile : MonoBehaviour
         isActivated = true;
     }
 
-    public virtual void CharacterContact(Character characterInContact)
+    public virtual void CharacterContact(Character characterInContact, Vector2 contactPosition)
     {
+        characterInContact.Damage(contactDamage);
         if (!isActivated)
-            Destroy(Instantiate(effect_Contact_Character_PreActivation, transform.position, Quaternion.identity), 5f);
+            Destroy(Instantiate(effect_Contact_Character_PreActivation, contactPosition, Quaternion.identity), 5f);
         else
-            Destroy(Instantiate(effect_Contact_Character_PostActivation, transform.position, Quaternion.identity), 5f);
+            Destroy(Instantiate(effect_Contact_Character_PostActivation, contactPosition, Quaternion.identity), 5f);
     }
 
     public virtual void GroundContact(Vector2 contactPosition)

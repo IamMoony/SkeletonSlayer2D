@@ -19,9 +19,9 @@ public class EmergingRock : Projectile
         StartCoroutine(Emerge());
     }
 
-    public override void CharacterContact(Character characterInContact)
+    public override void CharacterContact(Character characterInContact, Vector2 contactPosition)
     {
-        base.CharacterContact(characterInContact);
+        base.CharacterContact(characterInContact, contactPosition);
         if (emerging)
         {
             characterInContact.Damage(contactDamage);

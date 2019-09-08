@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Firebolt : Projectile
 {
+    public bool projectileBurn;
+    public bool projectileBounce;
     public float chargeVelocity;
     public float explosionRadius;
     public int explosionForce;
@@ -19,18 +21,25 @@ public class Firebolt : Projectile
         RB.velocity = direction * chargeVelocity;
     }
 
-    public override void CharacterContact(Character characterInContact)
+    public override void CharacterContact(Character characterInContact, Vector2 contactPosition)
     {
-        base.CharacterContact(characterInContact);
-        if (!isActivated)
+        if (characterInContact != owner)
         {
-            characterInContact.Burn(true);
+            if (owner is NPC)
+                if (characterInContact is NPC)
+                    return;
+            base.CharacterContact(characterInContact, contactPosition);
+            if (!isActivated)
+            {
+                if (projectileBurn)
+                    characterInContact.Burn(true);
+            }
+            else
+            {
+                Explode();
+            }
+            ProjectileDestroy();
         }
-        else
-        {
-            Explode();
-        }
-        ProjectileDestroy();
     }
 
     public override void GroundContact(Vector2 contactPosition)
@@ -40,6 +49,18 @@ public class Firebolt : Projectile
         {
             Explode();
             ProjectileDestroy();
+        }
+        else
+        {
+            if (projectileBounce)
+            {
+                RaycastHit2D ground = Physics2D.Raycast(transform.position, RB.velocity.normalized);
+                RB.velocity = Vector2.Reflect(RB.velocity, ground.normal);
+            }
+            else
+            {
+                ProjectileDestroy();
+            }
         }
     }
 

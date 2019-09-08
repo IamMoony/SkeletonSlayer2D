@@ -16,9 +16,9 @@ public class Earthbolt : Projectile
         EmergingRock();
     }
 
-    public override void CharacterContact(Character characterInContact)
+    public override void CharacterContact(Character characterInContact, Vector2 contactPosition)
     {
-        base.CharacterContact(characterInContact);
+        base.CharacterContact(characterInContact, contactPosition);
         if (!isActivated)
         {
             characterInContact.Root(true);

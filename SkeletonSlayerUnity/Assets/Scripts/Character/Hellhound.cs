@@ -22,7 +22,7 @@ public class Hellhound : NPC
                 if (!targetInRange)
                     yield return StartCoroutine(Pursue());
                 else
-                    yield return StartCoroutine(Attack_Melee());
+                    yield return StartCoroutine(Attack_Ranged());
             }
         }
     }

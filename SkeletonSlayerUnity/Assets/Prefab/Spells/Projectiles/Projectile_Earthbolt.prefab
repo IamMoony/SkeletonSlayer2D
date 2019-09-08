@@ -4765,8 +4765,8 @@ GameObject:
   - component: {fileID: 4053248971094408246}
   - component: {fileID: 8695658461861994152}
   - component: {fileID: -1178161966412068590}
-  m_Layer: 11
-  m_Name: Projectile_Player_Earthbolt
+  m_Layer: 12
+  m_Name: Projectile_Earthbolt
   m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4867,7 +4867,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -4901,6 +4901,7 @@ MonoBehaviour:
   effect_Destroy: {fileID: 7222003547137436195, guid: fb7c51cddce6ecb4bb5b6e2fde91559b,
     type: 3}
   isActivated: 0
+  owner: {fileID: 0}
   RB: {fileID: 0}
   burrowVelocity: 1
   burrowDepth: 0.3

@@ -4765,8 +4765,8 @@ GameObject:
   - component: {fileID: 4439456849462767888}
   - component: {fileID: 7768758153057738238}
   - component: {fileID: 1036273925}
-  m_Layer: 11
-  m_Name: Projectile_Player_Firebolt
+  m_Layer: 12
+  m_Name: Projectile_Firebolt
   m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4866,8 +4866,8 @@ CircleCollider2D:
   m_GameObject: {fileID: 4439456849462767887}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 6200000, guid: 2216fabdf638e9340bd47199da3631e0, type: 2}
-  m_IsTrigger: 0
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -4885,8 +4885,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18a8230657e9cc641bc81d0e810a8299, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initalVelocity: 2
-  velocityModifier: {x: 0, y: 1.5, z: 0}
+  initalVelocity: 1
+  velocityModifier: {x: 0, y: 3, z: 0}
   contactDamage: 1
   effect_Activation: {fileID: 8539672803853196081, guid: 7771442331baaa34696f217397db3a73,
     type: 3}
@@ -4901,7 +4901,10 @@ MonoBehaviour:
   effect_Destroy: {fileID: 3593303007339290826, guid: 703c2dad49a614e4bb2fe4f44b474e2a,
     type: 3}
   isActivated: 0
+  owner: {fileID: 0}
   RB: {fileID: 0}
+  projectileBurn: 1
+  projectileBounce: 1
   chargeVelocity: 4
   explosionRadius: 1
   explosionForce: 100
@@ -4909,7 +4912,7 @@ MonoBehaviour:
   explosionBurn: 1
   layerAffectedByExplosion:
     serializedVersion: 2
-    m_Bits: 1024
+    m_Bits: 2048
 --- !u!1 &7007647216413584997
 GameObject:
   m_ObjectHideFlags: 0

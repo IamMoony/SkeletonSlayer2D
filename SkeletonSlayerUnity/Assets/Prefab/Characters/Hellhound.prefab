@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 620305938}
   - component: {fileID: 620305940}
   - component: {fileID: 620305939}
-  m_Layer: 15
+  m_Layer: 9
   m_Name: GroundCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -81,7 +81,7 @@ GameObject:
   - component: {fileID: 1244587924833759147}
   - component: {fileID: 5887662510174506799}
   - component: {fileID: 7600444665912260022}
-  m_Layer: 15
+  m_Layer: 9
   m_Name: JumpCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -151,7 +151,7 @@ GameObject:
   - component: {fileID: 6704988464930806701}
   - component: {fileID: 4505959390573047987}
   - component: {fileID: 7465965976168864412}
-  m_Layer: 16
+  m_Layer: 10
   m_Name: ViewCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -221,7 +221,7 @@ GameObject:
   - component: {fileID: 277103070990025851}
   - component: {fileID: 290398442319066112}
   - component: {fileID: 2189548131499729687}
-  m_Layer: 15
+  m_Layer: 9
   m_Name: PathCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -294,7 +294,7 @@ GameObject:
   - component: {fileID: 5939185117275640319}
   - component: {fileID: 5939185117275640305}
   - component: {fileID: 5939185117275640318}
-  m_Layer: 10
+  m_Layer: 11
   m_Name: Hellhound
   m_TagString: Character
   m_Icon: {fileID: 0}
@@ -449,6 +449,9 @@ MonoBehaviour:
   dash_Speed: 0
   dash_Distance: 0
   teleport_Distance: 0
+  spells:
+  - {fileID: 8881317040600442969, guid: 1417bb59d291c1f4581e5aeb6e63c830, type: 3}
+  animation_PreShoot: {fileID: 0}
   effect_Burn: {fileID: 7310163276645880396, guid: 24d0ce4752c97ad4dbdff29e61179231,
     type: 3}
   effect_Freeze: {fileID: 5993968086995487863, guid: 8d7c5b53f9abdc6409b771e09df7ef19,
@@ -461,8 +464,6 @@ MonoBehaviour:
   actionValue: 0
   isGrounded: 0
   isWalking: 0
-  isCasting: 0
-  isEvoking: 0
   canClimb: 0
   isClimbing: 0
   GroundLayer:
@@ -472,13 +473,19 @@ MonoBehaviour:
   FacingDirection: {x: 0, y: 0}
   isDead: 0
   isStunned: 0
-  ANIM: {fileID: 0}
+  rb: {fileID: 0}
+  anim: {fileID: 0}
   viewDistance: 1
   visible:
     serializedVersion: 2
-    m_Bits: 768
-  attackRange: 1
-  attackDuration: 1
+    m_Bits: 2304
+  meleeAttackRange: 0
+  meleeAttackAnimation: {fileID: 0}
+  rangedAttackRange: 3
+  rangedAttackAnimation: {fileID: 7400000, guid: 08b7579aa9e59dd4e9acbbb1063fb645,
+    type: 2}
+  rangedAttackProjectile: {fileID: 4439456849462767887, guid: e72c3ac73ff8abd46bebc650bfd99cfa,
+    type: 3}
   objectsInView: []
   target: {fileID: 0}
   targetInRange: 0
@@ -501,7 +508,7 @@ GameObject:
   - component: {fileID: 1644478996408046079}
   - component: {fileID: 2078788522180131799}
   - component: {fileID: 8610232683742110605}
-  m_Layer: 15
+  m_Layer: 9
   m_Name: FloorCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -571,7 +578,7 @@ GameObject:
   - component: {fileID: 1929384199219962796}
   - component: {fileID: 682473212729217438}
   - component: {fileID: 5372465020142630572}
-  m_Layer: 14
+  m_Layer: 0
   m_Name: AttackCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -621,3 +628,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dmgAmount: 1
+  knockbackForce: 0

@@ -141,7 +141,7 @@ PrefabInstance:
     - target: {fileID: 5939185117275640315, guid: cccb138ef246ae74688c8ec65d845d7d,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5939185117275640316, guid: cccb138ef246ae74688c8ec65d845d7d,
         type: 3}
@@ -390,11 +390,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2065848936377577216, guid: 0e83d9b3cf66e2d4899690cdc75f64a0,
-        type: 3}
-      propertyPath: animation_PreShoot_Duration
-      value: 0.1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0e83d9b3cf66e2d4899690cdc75f64a0, type: 3}
@@ -1438,7 +1433,7 @@ PrefabInstance:
     - target: {fileID: 5939185117275640315, guid: cccb138ef246ae74688c8ec65d845d7d,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5939185117275640316, guid: cccb138ef246ae74688c8ec65d845d7d,
         type: 3}
@@ -1687,11 +1682,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8971042294480953251, guid: 5dd749681c0b1c0498f7fb0aa28e8928,
-        type: 3}
-      propertyPath: panelOffsetY
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5dd749681c0b1c0498f7fb0aa28e8928, type: 3}
