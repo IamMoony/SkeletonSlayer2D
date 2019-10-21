@@ -19,10 +19,12 @@ public class Hellhound : NPC
             }
             else
             {
-                if (!targetInRange)
-                    yield return StartCoroutine(Pursue());
+                if (TargetInRange(true))
+                    yield return StartCoroutine(Attack_Melee());
+                else if (TargetInRange(false))
+                    yield return StartCoroutine(Cast_Spell());
                 else
-                    yield return StartCoroutine(Attack_Ranged());
+                    yield return StartCoroutine(GetInRange(false));
             }
         }
     }
