@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4334904172323635609}
   - component: {fileID: 7125245710770711917}
   m_Layer: 0
-  m_Name: BasicSkullTorch
+  m_Name: Basic_Skull_Torch
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -68,7 +68,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -2
   m_Sprite: {fileID: -4732471471219183221, guid: 635dced25e4eff44da0365b37b1e3f76,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
