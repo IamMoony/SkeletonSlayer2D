@@ -327,7 +327,7 @@ MonoBehaviour:
   HP_Current: 0
   DMG_Base: 1
   DMG_Current: 0
-  MoveSpeed_Base: 2
+  MoveSpeed_Base: 1
   MoveSpeed_Current: 0
   JumpForce_Base: 250
   JumpForce_Current: 0

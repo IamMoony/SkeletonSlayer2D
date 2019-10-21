@@ -22,7 +22,7 @@ public class Player : Character
         }
         else
         {
-            isWalking = false;
+            Stop(true);
         }
         if (canClimb)
         {
