@@ -146,12 +146,12 @@ PrefabInstance:
     - target: {fileID: 5939185117275640316, guid: cccb138ef246ae74688c8ec65d845d7d,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -9.9
+      value: -9.74
       objectReference: {fileID: 0}
     - target: {fileID: 5939185117275640316, guid: cccb138ef246ae74688c8ec65d845d7d,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.526
+      value: 2.361
       objectReference: {fileID: 0}
     - target: {fileID: 5939185117275640316, guid: cccb138ef246ae74688c8ec65d845d7d,
         type: 3}
@@ -196,6 +196,16 @@ PrefabInstance:
     - target: {fileID: 5939185117275640316, guid: cccb138ef246ae74688c8ec65d845d7d,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5939185117275640318, guid: cccb138ef246ae74688c8ec65d845d7d,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5939185117275640314, guid: cccb138ef246ae74688c8ec65d845d7d,
+        type: 3}
+      propertyPath: m_ApplyRootMotion
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -1438,12 +1448,12 @@ PrefabInstance:
     - target: {fileID: 5939185117275640316, guid: cccb138ef246ae74688c8ec65d845d7d,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -9.36
+      value: -9.311
       objectReference: {fileID: 0}
     - target: {fileID: 5939185117275640316, guid: cccb138ef246ae74688c8ec65d845d7d,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.526
+      value: 2.191
       objectReference: {fileID: 0}
     - target: {fileID: 5939185117275640316, guid: cccb138ef246ae74688c8ec65d845d7d,
         type: 3}
@@ -1488,6 +1498,26 @@ PrefabInstance:
     - target: {fileID: 5939185117275640316, guid: cccb138ef246ae74688c8ec65d845d7d,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5939185117275640318, guid: cccb138ef246ae74688c8ec65d845d7d,
+        type: 3}
+      propertyPath: meleeAttackRange
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5939185117275640318, guid: cccb138ef246ae74688c8ec65d845d7d,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5939185117275640314, guid: cccb138ef246ae74688c8ec65d845d7d,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5939185117275640314, guid: cccb138ef246ae74688c8ec65d845d7d,
+        type: 3}
+      propertyPath: m_ApplyRootMotion
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

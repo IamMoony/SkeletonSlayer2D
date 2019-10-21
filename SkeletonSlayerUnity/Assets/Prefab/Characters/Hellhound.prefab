@@ -185,7 +185,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: 0.043673404}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -196,7 +196,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2, y: 0.5}
+  m_Size: {x: 2, y: 0.4126532}
   m_EdgeRadius: 0
 --- !u!114 &7465965976168864412
 MonoBehaviour:
@@ -309,7 +309,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5939185117275640315}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.245, y: 1.526, z: 0}
+  m_LocalPosition: {x: 0.33, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1929384199219962796}
@@ -479,8 +479,9 @@ MonoBehaviour:
   visible:
     serializedVersion: 2
     m_Bits: 2304
-  meleeAttackRange: 0
-  meleeAttackAnimation: {fileID: 0}
+  meleeAttackRange: 0.5
+  meleeAttackAnimation: {fileID: 7400000, guid: 10f80ca7d78c3be4594f65fc1e3a05c3,
+    type: 2}
   rangedAttackRange: 3
   rangedAttackAnimation: {fileID: 7400000, guid: 08b7579aa9e59dd4e9acbbb1063fb645,
     type: 2}

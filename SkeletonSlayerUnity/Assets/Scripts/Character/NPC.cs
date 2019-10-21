@@ -132,59 +132,59 @@ public class NPC : Character
 
     public IEnumerator Patrol()
     {
-        //Debug.Log("Start Patrol Routine");
+        Debug.Log("Start Patrol Routine");
         while (target == null)
         {
             if (!isStunned && isGrounded)
             {
                 if (!floorClear)
                 {
-                    //Debug.Log("No floor detected - Stoping");
+                    Debug.Log("No floor detected - Stoping");
                     isWalking = false;
                     yield return new WaitForSeconds(Random.Range(0.25f, 1.5f));
                     if (!jumpClear)
                     {
-                        //Debug.Log("Jump not possible - Turning");
+                        Debug.Log("Jump not possible - Turning");
                         Turn();
                     }
                     else
                     {
-                        //Debug.Log("Jump TakeOff");
+                        Debug.Log("Jump TakeOff");
                         Jump(FacingDirection);
                         isGrounded = false;
                         while (!isGrounded)
                             yield return new WaitForEndOfFrame();
-                        //Debug.Log("Jump Landing");
+                        Debug.Log("Jump Landing");
                     }
                 }
                 else
                 {
-                    //Debug.Log("Floor detected");
+                    Debug.Log("Floor detected");
                     if (!pathClear)
                     {
-                        //Debug.Log("Path obstructed - Turning");
+                        Debug.Log("Path obstructed - Turning");
                         Turn();
                     }
                     else
                     {
-                        //Debug.Log("Path clear");
+                        Debug.Log("Path clear");
                         if (!viewClear)
                         {
-                            //Debug.Log("Something is in View");
+                            Debug.Log("Something is in View");
                             if (!GetTarget())
                             {
-                                //Debug.Log("No Target found - Moving");
+                                Debug.Log("No Target found - Moving");
                                 Move(FacingDirection, 0.5f);
                             }
                             else
                             {
-                                //Debug.Log("Target found - Stoping");
+                                Debug.Log("Target found - Stoping");
                                 isWalking = false;
                             }
                         }
                         else
                         {
-                            //Debug.Log("View clear - Moving");
+                            Debug.Log("View clear - Moving");
                             Move(FacingDirection, 0.5f);
                         }
                     }
