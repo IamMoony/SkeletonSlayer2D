@@ -15,6 +15,7 @@ public class Character : MonoBehaviour
     public float dash_Speed;
     public float dash_Distance;
     public float teleport_Distance;
+    public float climbing_Speed;
     public Spell[] spells;
     public AnimationClip animation_PreShoot;
     public GameObject effect_Burn;
@@ -154,9 +155,25 @@ public class Character : MonoBehaviour
     {
         if (isGrounded || isClimbing)
         {
+            if (isClimbing)
+            {
+                isClimbing = false;
+                rb.gravityScale = 1f;
+            }
             anim.SetTrigger("Jump");
             rb.AddForce((Vector2.up + direction) * JumpForce_Current);
         }
+    }
+
+    public void Climb(Vector2 direction)
+    {
+        if (!isClimbing)
+        {
+            isClimbing = true;
+            rb.velocity = Vector2.zero;
+            rb.gravityScale = 0;
+        }
+        rb.MovePosition(Vector2.MoveTowards(transform.position, (Vector2)transform.position + direction, Time.deltaTime * climbing_Speed));
     }
 
     public void Dash()
@@ -317,16 +334,5 @@ public class Character : MonoBehaviour
         {
             spell.Cast((Vector2)transform.position + FacingDirection, this);
         }
-    }
-
-    public void Climb(Vector2 direction)
-    {
-        if (!isClimbing)
-        {
-            isClimbing = true;
-            rb.velocity = Vector2.zero;
-            rb.gravityScale = 0;
-        }
-        transform.position = Vector2.MoveTowards(transform.position, transform.position + new Vector3(0, direction.y, 0), Time.deltaTime * 2f);
     }
 }

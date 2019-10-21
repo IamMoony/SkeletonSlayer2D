@@ -24,11 +24,18 @@ public class Player : Character
         {
             Stop(true);
         }
-        if (canClimb)
+        if (canClimb && !isClimbing)
         {
             if (Input.GetAxis("Vertical") != 0)
             {
                 Climb(new Vector2(0, Input.GetAxis("Vertical")));
+            }
+        }
+        if (canClimb && isClimbing)
+        {
+            if (Input.GetAxis("Vertical") != 0 || Input.GetAxis("Horizontal") != 0)
+            {
+                Climb(new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")));
             }
         }
         if (Input.GetButtonDown("Jump"))
