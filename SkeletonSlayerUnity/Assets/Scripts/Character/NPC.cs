@@ -105,7 +105,7 @@ public class NPC : Character
             if (!TargetInRange(melee))
                 Move(FacingDirection, 1f);
             else
-                isWalking = false;
+                Stop(false);
             yield return new WaitForEndOfFrame();
         }
     }
@@ -120,7 +120,7 @@ public class NPC : Character
                 if (!floorClear)
                 {
                     //Debug.Log("No floor detected - Stoping");
-                    isWalking = false;
+                    Stop(false);
                     yield return new WaitForSeconds(Random.Range(0.25f, 1.5f));
                     if (!jumpClear)
                     {
@@ -159,7 +159,7 @@ public class NPC : Character
                             else
                             {
                                 //Debug.Log("Target found - Stoping");
-                                isWalking = false;
+                                Stop(false);
                             }
                         }
                         else
@@ -241,6 +241,13 @@ public class NPC : Character
                 targetInRange_Melee = true;
             targetInRange_Ranged = true;
             return true;
+        }
+        else
+        {
+            if (melee)
+                targetInRange_Melee = false;
+            else
+                targetInRange_Ranged = false;
         }
         return false;
     }

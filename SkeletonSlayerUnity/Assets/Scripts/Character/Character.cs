@@ -137,6 +137,13 @@ public class Character : MonoBehaviour
         rb.velocity = new Vector2((direction.x * MoveSpeed_Current) * speedMod, rb.velocity.y);
     }
 
+    public void Stop(bool snappy)
+    {
+        isWalking = false;
+        if (snappy)
+            rb.velocity = new Vector2(0, rb.velocity.y);
+    }
+
     public void Turn()
     {
         transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
