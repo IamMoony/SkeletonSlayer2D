@@ -8,15 +8,19 @@ public class NPC : Character
     public LayerMask visible;
 
     public float attackRange_Melee;
+    public float attackCooldown_Melee;
     public AnimationClip attackAnimation_Melee;
     public float attackRange_Ranged;
+    public float attackCooldown_Ranged;
     public AnimationClip attackAnimation_Ranged;
     public GameObject attackProjectile_Ranged;
 
     public List<GameObject> objectsInView;
     public GameObject target;
     public bool targetInRange_Melee;
+    public float cooldown_Melee;
     public bool targetInRange_Ranged;
+    public float cooldown_Ranged;
     public bool viewClear = true;
     public bool jumpClear = true;
     public bool floorClear = true;
@@ -49,15 +53,20 @@ public class NPC : Character
         {
             Destroy(gameObject,0.1f);
         }
+        if (cooldown_Melee > 0)
+            cooldown_Melee -= Time.deltaTime;
+        if (cooldown_Ranged > 0)
+            cooldown_Ranged -= Time.deltaTime;
     }
 
     public IEnumerator Attack_Melee()
     {
         //Debug.Log("Start Melee Attack Routine");
-        if (isStunned)
+        if (isStunned || cooldown_Melee > 0)
             yield break;
         if (target.transform.position.x < transform.position.x && FacingDirection == Vector2.right || target.transform.position.x > transform.position.x && FacingDirection == Vector2.left)
             Turn();
+        cooldown_Melee = attackCooldown_Melee;
         anim.SetTrigger("Attack_Melee");
         yield return new WaitForSeconds(attackAnimation_Melee.averageDuration);
     }
@@ -65,10 +74,11 @@ public class NPC : Character
     public IEnumerator Attack_Ranged()
     {
         //Debug.Log("Start Ranged Attack Routine");
-        if (isStunned)
+        if (isStunned || cooldown_Ranged > 0)
             yield break;
         if (target.transform.position.x < transform.position.x && FacingDirection == Vector2.right || target.transform.position.x > transform.position.x && FacingDirection == Vector2.left)
             Turn();
+        cooldown_Ranged = attackCooldown_Ranged;
         anim.SetTrigger("Attack_Ranged");
         yield return new WaitForSeconds(attackAnimation_Ranged.averageDuration);
         Shoot(attackProjectile_Ranged, FacingDirection);

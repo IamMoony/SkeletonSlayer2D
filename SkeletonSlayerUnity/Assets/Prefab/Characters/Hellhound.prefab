@@ -480,9 +480,11 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 2304
   attackRange_Melee: 0.5
+  attackCooldown_Melee: 1
   attackAnimation_Melee: {fileID: 7400000, guid: 10f80ca7d78c3be4594f65fc1e3a05c3,
     type: 2}
   attackRange_Ranged: 3
+  attackCooldown_Ranged: 2
   attackAnimation_Ranged: {fileID: 7400000, guid: 08b7579aa9e59dd4e9acbbb1063fb645,
     type: 2}
   attackProjectile_Ranged: {fileID: 4439456849462767887, guid: e72c3ac73ff8abd46bebc650bfd99cfa,
@@ -490,7 +492,9 @@ MonoBehaviour:
   objectsInView: []
   target: {fileID: 0}
   targetInRange_Melee: 0
+  cooldown_Melee: 0
   targetInRange_Ranged: 0
+  cooldown_Ranged: 0
   viewClear: 1
   jumpClear: 1
   floorClear: 1

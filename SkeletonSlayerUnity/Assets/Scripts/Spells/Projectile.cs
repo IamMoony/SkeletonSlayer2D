@@ -46,8 +46,8 @@ public class Projectile : MonoBehaviour
         if (transform.childCount > 0)
         {
             Transform child = transform.GetChild(0);
-            child.SetParent(null);
             Destroy(child.gameObject, 5f);
+            child.SetParent(null);
         }
         Destroy(Instantiate(effect_Destroy, transform.position, Quaternion.identity), 5f);
         Destroy(gameObject);

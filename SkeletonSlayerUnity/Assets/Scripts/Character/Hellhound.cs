@@ -20,9 +20,13 @@ public class Hellhound : NPC
             else
             {
                 if (TargetInRange(true))
+                {
                     yield return StartCoroutine(Attack_Melee());
+                }
                 else if (TargetInRange(false))
-                    yield return StartCoroutine(Cast_Spell());
+                {
+                    yield return StartCoroutine(Attack_Ranged());
+                }
                 else
                     yield return StartCoroutine(GetInRange(false));
             }
