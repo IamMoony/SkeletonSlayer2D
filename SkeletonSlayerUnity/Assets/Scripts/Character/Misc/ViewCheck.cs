@@ -21,6 +21,6 @@ public class ViewCheck : MonoBehaviour
     {
         Parent.objectsInView.Remove(collision.gameObject);
         if (Parent.objectsInView.Count == 0)
-            Parent.viewClear = false;
+            Parent.viewClear = true;
     }
 }

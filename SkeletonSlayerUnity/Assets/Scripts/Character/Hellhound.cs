@@ -13,22 +13,25 @@ public class Hellhound : NPC
     {
         while (true)
         {
-            if (target == null)
+            if (!isStunned)
             {
-                yield return StartCoroutine(Patrol());
-            }
-            else
-            {
-                if (TargetInRange(true))
+                if (target == null)
                 {
-                    yield return StartCoroutine(Attack_Melee());
-                }
-                else if (TargetInRange(false))
-                {
-                    yield return StartCoroutine(Attack_Ranged());
+                    yield return StartCoroutine(Patrol());
                 }
                 else
-                    yield return StartCoroutine(GetInRange(false));
+                {
+                    if (TargetInRange(true))
+                    {
+                        yield return StartCoroutine(Attack_Melee());
+                    }
+                    else if (TargetInRange(false))
+                    {
+                        yield return StartCoroutine(Attack_Ranged());
+                    }
+                    else
+                        yield return StartCoroutine(GetInRange(false));
+                }
             }
         }
     }
