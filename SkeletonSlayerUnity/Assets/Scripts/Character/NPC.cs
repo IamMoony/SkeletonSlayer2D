@@ -62,10 +62,10 @@ public class NPC : Character
     public IEnumerator Attack_Melee()
     {
         //Debug.Log("Start Melee Attack Routine");
-        if (cooldown_Melee > 0)
+        if (isStunned || cooldown_Melee > 0)
             yield break;
-        //if (target.transform.position.x < transform.position.x && FacingDirection == Vector2.right || target.transform.position.x > transform.position.x && FacingDirection == Vector2.left)
-        //    Turn();
+        if (target.transform.position.x < transform.position.x && FacingDirection == Vector2.right || target.transform.position.x > transform.position.x && FacingDirection == Vector2.left)
+            Turn();
         cooldown_Melee = attackCooldown_Melee;
         anim.SetTrigger("Attack_Melee");
         yield return new WaitForSeconds(attackAnimation_Melee.averageDuration);
@@ -74,10 +74,10 @@ public class NPC : Character
     public IEnumerator Attack_Ranged()
     {
         //Debug.Log("Start Ranged Attack Routine");
-        if (cooldown_Ranged > 0)
+        if (isStunned || cooldown_Ranged > 0)
             yield break;
-        //if (target.transform.position.x < transform.position.x && FacingDirection == Vector2.right || target.transform.position.x > transform.position.x && FacingDirection == Vector2.left)
-        //    Turn();
+        if (target.transform.position.x < transform.position.x && FacingDirection == Vector2.right || target.transform.position.x > transform.position.x && FacingDirection == Vector2.left)
+            Turn();
         cooldown_Ranged = attackCooldown_Ranged;
         anim.SetTrigger("Attack_Ranged");
         yield return new WaitForSeconds(attackAnimation_Ranged.averageDuration);
@@ -87,6 +87,8 @@ public class NPC : Character
     public IEnumerator Cast_Spell()
     {
         //Debug.Log("Start Cast_Spell Routine");
+        if (isStunned)
+            yield break;
         if (target.transform.position.x < transform.position.x && FacingDirection == Vector2.right || target.transform.position.x > transform.position.x && FacingDirection == Vector2.left)
             Turn();
         //yield return new WaitForSeconds(spells[0].cd);
@@ -98,14 +100,16 @@ public class NPC : Character
     public IEnumerator GetInRange(bool melee)
     {
         //Debug.Log("Start GetInRange Routine");
-        while (melee ? !targetInRange_Melee : !targetInRange_Ranged && target)
+        while (melee ? !targetInRange_Melee : !targetInRange_Ranged)
         {
-            /*if (!TargetInSight())
+            if (isStunned)
+                yield break;
+            if (!TargetInSight())
             {
                 //Target out of Sight
                 target = null;
                 yield break;
-            }*/
+            }
             if (target.transform.position.x < transform.position.x && FacingDirection == Vector2.right || target.transform.position.x > transform.position.x && FacingDirection == Vector2.left)
                 Turn();
             if (!TargetInRange(melee))
@@ -121,7 +125,7 @@ public class NPC : Character
         //Debug.Log("Start Patrol Routine");
         while (target == null)
         {
-            if (isGrounded)
+            if (!isStunned && isGrounded)
             {
                 if (!floorClear)
                 {
@@ -185,17 +189,20 @@ public class NPC : Character
         turnTimer = 3f;
         while (target == null)
         {
-            if (!viewClear)
+            if (!isStunned)
             {
-                if (GetTarget())
-                    break;
-            }
-            if (turnTimer > 0)
-                turnTimer -= Time.deltaTime;
-            else
-            {
-                Turn();
-                turnTimer = 3f;
+                if (!viewClear)
+                {
+                    if (GetTarget())
+                       break;
+                }
+                if (turnTimer > 0)
+                    turnTimer -= Time.deltaTime;
+                else
+                {
+                    Turn();
+                    turnTimer = 3f;
+                }
             }
             yield return new WaitForEndOfFrame();
         }
