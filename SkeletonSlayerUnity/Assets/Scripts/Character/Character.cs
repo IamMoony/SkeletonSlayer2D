@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Mirror;
 
-public class Character : MonoBehaviour
+public class Character : NetworkBehaviour
 {
     public int HP_Base;
     [HideInInspector] public int HP_Current;
@@ -23,20 +24,21 @@ public class Character : MonoBehaviour
     public GameObject effect_Root;
     public GameObject effect_Wet;
     public GameObject effect_Stun;
+    public Transform projectileSpawn;
 
     [HideInInspector] public float actionValue = 0;
     [HideInInspector] public bool isGrounded;
     [HideInInspector] public bool isWalking;
     [HideInInspector] public bool canClimb;
     [HideInInspector] public bool isClimbing;
-    [HideInInspector] public LayerMask GroundLayer;
     [HideInInspector] public bool isDashing;
-    [HideInInspector] public Vector2 FacingDirection;
     [HideInInspector] public bool isDead;
     [HideInInspector] public bool isStunned;
-
+    [HideInInspector] public Vector2 FacingDirection;
+    [HideInInspector] public LayerMask GroundLayer;
     [HideInInspector] public Rigidbody2D rb;
     [HideInInspector] public Animator anim;
+
     private float tick;
     private int burn_Ticks;
     private int freeze_Ticks;
@@ -64,6 +66,8 @@ public class Character : MonoBehaviour
         MoveSpeed_Current = MoveSpeed_Base;
         JumpForce_Current = JumpForce_Base;
         FacingDirection = Vector2.right;
+        if (GameObject.Find("GUI"))
+            GameObject.Find("GUI").transform.Find("Panel_Character").GetComponent<CharacterPanelManager>().NewPanel(transform);
     }
 
     public virtual void Update()
@@ -224,9 +228,7 @@ public class Character : MonoBehaviour
 
     public void Shoot(GameObject projectile, Vector2 direction)
     {
-        Vector2 spawnPos = new Vector2(transform.position.x, transform.position.y) + direction * 0.25f;
-        GameObject proj = Instantiate(projectile, spawnPos, Quaternion.Euler(direction == (Vector2)transform.right ? 0 : 180, 0, direction == (Vector2)transform.right ? 0 : 180));
-        proj.GetComponent<Projectile>().owner = this;
+        NetworkClient.connection.identity.gameObject.GetComponent<PlayerConnection>().CmdSpawnProjectile(projectile, direction, projectileSpawn.position, gameObject);
     }
 
     public void Damage(int amount)
@@ -258,6 +260,7 @@ public class Character : MonoBehaviour
 
     public void Burn(bool state)
     {
+        Debug.Log(name + " - Burn: " + state);
         effect_Burn.SetActive(state);
         if (state)
             burn_Ticks = 5;

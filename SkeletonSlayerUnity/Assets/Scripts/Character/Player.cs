@@ -1,19 +1,29 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 public class Player : Character
 {
     public Spell activeSpell;
 
-    private void Start()
+    CinemachineVirtualCamera vcam;
+
+    public override void OnStartAuthority()
     {
+        base.OnStartAuthority();
+        if (!hasAuthority)
+            return;
         activeSpell = spells[0];
+        vcam = GameObject.Find("Camera_Control").GetComponent<CinemachineVirtualCamera>();
+        vcam.Follow = transform;
     }
 
     public override void Update()
     {
         base.Update();
+        if (!hasAuthority)
+            return;
         if (isStunned)
             return;
         if (Input.GetAxis("Horizontal") != 0)
@@ -50,7 +60,7 @@ public class Player : Character
         {
             if (isGrounded && !isWalking && activeSpell.cd <= 0)
             {
-                StartCoroutine(Cast(activeSpell));
+                Shoot(activeSpell.spellPrefab, FacingDirection);
             } 
         }
         if (Input.GetButtonDown("Activate"))

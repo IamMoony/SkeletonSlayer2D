@@ -16,21 +16,18 @@ public class CharacterPanelManager : MonoBehaviour
     private void Awake()
     {
         characterInScene = new List<Transform>();
-        Transform charContainer = GameObject.Find("Characters").transform;
-        for (int i = 0; i < charContainer.childCount; i++)
-        {
-            characterInScene.Add(charContainer.GetChild(i));
-        }
         characterPanelInScene = new List<GameObject>();
         characterHealthBar = new List<Image>();
         characterCastBar = new List<Image>();
-        for (int i = 0; i < characterInScene.Count; i++)
-        {
-            GameObject panel = Instantiate(characterPanel_Instance, transform);
-            characterHealthBar.Add(panel.transform.Find("Bar_Health").GetChild(0).GetComponent<Image>());
-            characterCastBar.Add(panel.transform.Find("Bar_Cast").GetChild(0).GetComponent<Image>());
-            characterPanelInScene.Add(panel);
-        }
+    }
+
+    public void NewPanel(Transform character)
+    {
+        characterInScene.Add(character);
+        GameObject panel = Instantiate(characterPanel_Instance, transform);
+        characterHealthBar.Add(panel.transform.Find("Bar_Health").GetChild(0).GetComponent<Image>());
+        characterCastBar.Add(panel.transform.Find("Bar_Cast").GetChild(0).GetComponent<Image>());
+        characterPanelInScene.Add(panel);
     }
 
     private void Update()
