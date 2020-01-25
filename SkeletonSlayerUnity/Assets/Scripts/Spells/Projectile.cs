@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Mirror;
 
 public class Projectile : MonoBehaviour
 {
@@ -46,11 +47,11 @@ public class Projectile : MonoBehaviour
         if (transform.childCount > 0)
         {
             Transform child = transform.GetChild(0);
-            Destroy(child.gameObject, 5f);
+            Destroy(child.gameObject, 1f);
             child.SetParent(null);
         }
         Destroy(Instantiate(effect_Destroy, transform.position, Quaternion.identity), 5f);
-        Destroy(gameObject);
+        NetworkServer.Destroy(gameObject);
     }
 
     public virtual void Activation(Vector2 direction)
@@ -61,7 +62,7 @@ public class Projectile : MonoBehaviour
 
     public virtual void CharacterContact(Character characterInContact, Vector2 contactPosition)
     {
-        characterInContact.Damage(contactDamage);
+        characterInContact.CmdDamage(contactDamage);
         if (!isActivated)
             Destroy(Instantiate(effect_Contact_Character_PreActivation, contactPosition, Quaternion.identity), 5f);
         else

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1941037524221788951}
   - component: {fileID: 2875361491215119421}
-  - component: {fileID: -300961796706932136}
+  - component: {fileID: -1572586754479808512}
   m_Layer: 0
   m_Name: Spell_Firebolt
   m_TagString: Untagged
@@ -53,8 +53,9 @@ MonoBehaviour:
     type: 3}
   castTime: 1
   coolDown: 2
-  cd: -0.0015657172
---- !u!114 &-300961796706932136
+  cd: -0.0011812858
+  spellInstance: {fileID: 0}
+--- !u!114 &-1572586754479808512
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -69,4 +70,4 @@ MonoBehaviour:
   serverOnly: 0
   localPlayerAuthority: 1
   m_AssetId: 
-  m_SceneId: 2146616413
+  m_SceneId: 935044117

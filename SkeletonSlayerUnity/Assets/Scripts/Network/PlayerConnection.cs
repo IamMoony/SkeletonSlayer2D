@@ -7,6 +7,8 @@ public class PlayerConnection : NetworkBehaviour
 {
     public GameObject playerPrefab;
 
+    private GameObject player;
+
     private void Start()
     {
         if (!isLocalPlayer)
@@ -17,15 +19,40 @@ public class PlayerConnection : NetworkBehaviour
     [Command]
     void CmdSpawnPlayer()
     {
-        GameObject go = Instantiate(playerPrefab);
-        NetworkServer.SpawnWithClientAuthority(go, connectionToClient);
+        player = Instantiate(playerPrefab);
+        NetworkServer.SpawnWithClientAuthority(player, connectionToClient);
     }
 
     [Command]
-    public void CmdSpawnProjectile(GameObject projectile, Vector2 direction, Vector2 spawnPos, GameObject owner)
+    public void CmdCast(Vector2 direction, Vector2 spawnPos, GameObject owner)
     {
-        GameObject proj = Instantiate(projectile, spawnPos, Quaternion.Euler(direction == (Vector2)transform.right ? 0 : 180, 0, direction == (Vector2)transform.right ? 0 : 180));
-        proj.GetComponent<Projectile>().owner = owner.GetComponent<Character>();
-        NetworkServer.SpawnWithClientAuthority(proj, connectionToClient);
+        owner.GetComponent<Character>().spells[owner.GetComponent<Character>().activeSpellID].Cast(direction, spawnPos, owner.GetComponent<Character>());
+        RpcCast(direction, spawnPos, owner);
+        //NetworkServer.SpawnWithClientAuthority(owner.GetComponent<Character>().activeSpell.spellInstance, connectionToClient);
+    }
+
+    [Command]
+    public void CmdActivateSpell(Vector2 direction, GameObject owner)
+    {
+        owner.GetComponent<Character>().spells[owner.GetComponent<Character>().activeSpellID].Activate(direction);
+        RpcActivateSpell(direction, owner);
+    }
+
+    [Command]
+    public void CmdChangeSpell(int id, GameObject owner)
+    {
+        owner.GetComponent<Character>().activeSpellID = id;
+    }
+
+    [ClientRpc]
+    void RpcCast(Vector2 direction, Vector2 spawnPos, GameObject owner)
+    {
+        owner.GetComponent<Character>().spells[owner.GetComponent<Character>().activeSpellID].Cast(direction, spawnPos, owner.GetComponent<Character>());
+    }
+
+    [ClientRpc]
+    void RpcActivateSpell(Vector2 direction, GameObject owner)
+    {
+        owner.GetComponent<Character>().spells[owner.GetComponent<Character>().activeSpellID].Activate(direction);
     }
 }

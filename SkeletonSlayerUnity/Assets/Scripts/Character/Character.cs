@@ -6,7 +6,7 @@ using Mirror;
 public class Character : NetworkBehaviour
 {
     public int HP_Base;
-    [HideInInspector] public int HP_Current;
+    [HideInInspector, SyncVar] public int HP_Current;
     public int DMG_Base;
     [HideInInspector] public int DMG_Current;
     public int MoveSpeed_Base;
@@ -18,6 +18,7 @@ public class Character : NetworkBehaviour
     public float teleport_Distance;
     public float climbing_Speed;
     public Spell[] spells;
+    [SyncVar] public int activeSpellID;
     public AnimationClip animation_PreShoot;
     public GameObject effect_Burn;
     public GameObject effect_Freeze;
@@ -34,7 +35,7 @@ public class Character : NetworkBehaviour
     [HideInInspector] public bool isDashing;
     [HideInInspector] public bool isDead;
     [HideInInspector] public bool isStunned;
-    [HideInInspector] public Vector2 FacingDirection;
+    [HideInInspector, SyncVar] public Vector2 FacingDirection;
     [HideInInspector] public LayerMask GroundLayer;
     [HideInInspector] public Rigidbody2D rb;
     [HideInInspector] public Animator anim;
@@ -86,9 +87,9 @@ public class Character : NetworkBehaviour
                 if (burn_Ticks > 0)
                 {
                     burn_Ticks--;
-                    Damage(1);
+                    CmdDamage(1);
                     if (burn_Ticks == 0)
-                        Burn(false);
+                        CmdBurn(false);
                 }
                 if (freeze_Ticks > 0)
                 {
@@ -117,6 +118,8 @@ public class Character : NetworkBehaviour
                 tick = 1f;
             }
         }
+        if (rb.velocity.x < 0 && FacingDirection == Vector2.right || rb.velocity.x > 0 && FacingDirection == Vector2.left)
+            Turn();
         if (isClimbing && Input.GetAxis("Vertical") == 0)
         {
             anim.speed = 0;
@@ -137,8 +140,6 @@ public class Character : NetworkBehaviour
     public void Move(Vector2 direction, float speedMod)
     {
         isWalking = true;
-        if (direction.x < 0 && FacingDirection == Vector2.right || direction.x > 0 && FacingDirection == Vector2.left)
-            Turn();
         rb.velocity = new Vector2((direction.x * MoveSpeed_Current) * speedMod, rb.velocity.y);
     }
 
@@ -228,10 +229,11 @@ public class Character : NetworkBehaviour
 
     public void Shoot(GameObject projectile, Vector2 direction)
     {
-        NetworkClient.connection.identity.gameObject.GetComponent<PlayerConnection>().CmdSpawnProjectile(projectile, direction, projectileSpawn.position, gameObject);
+        //NetworkClient.connection.identity.gameObject.GetComponent<PlayerConnection>().CmdSpawnProjectile(direction, projectileSpawn.position, gameObject);
     }
 
-    public void Damage(int amount)
+    [Command]
+    public void CmdDamage(int amount)
     {
         HP_Current = Mathf.Clamp(HP_Current - amount, 0, HP_Base);
         if (HP_Current == 0)
@@ -258,7 +260,18 @@ public class Character : NetworkBehaviour
             anim.speed = 1;
     }
 
-    public void Burn(bool state)
+    [Command]
+    public void CmdBurn(bool state)
+    {
+        Debug.Log(name + " - Burn: " + state);
+        effect_Burn.SetActive(state);
+        if (state)
+            burn_Ticks = 5;
+        RpcBurn(state);
+    }
+
+    [ClientRpc]
+    public void RpcBurn(bool state)
     {
         Debug.Log(name + " - Burn: " + state);
         effect_Burn.SetActive(state);
@@ -335,7 +348,7 @@ public class Character : NetworkBehaviour
         actionValue = 0;
         if (isGrounded && !isWalking)
         {
-            spell.Cast((Vector2)transform.position + FacingDirection, this);
+            NetworkClient.connection.identity.gameObject.GetComponent<PlayerConnection>().CmdCast(FacingDirection, projectileSpawn.position, gameObject);
         }
     }
 }

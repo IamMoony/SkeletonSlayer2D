@@ -23,8 +23,10 @@ public class Firebolt : Projectile
 
     public override void CharacterContact(Character characterInContact, Vector2 contactPosition)
     {
+        Debug.Log("Contact, Owner = " + owner + ", Contact = " + characterInContact);
         if (characterInContact != owner)
         {
+            Debug.Log("Contacting not Owner");
             if (owner is NPC)
                 if (characterInContact is NPC)
                     return;
@@ -32,7 +34,7 @@ public class Firebolt : Projectile
             if (!isActivated)
             {
                 if (projectileBurn)
-                    characterInContact.Burn(true);
+                    characterInContact.CmdBurn(true);
             }
             else
             {
@@ -73,8 +75,8 @@ public class Firebolt : Projectile
             {
                 Character character = targetsInRadius[i].GetComponent<Character>();
                 if (explosionBurn)
-                    character.Burn(true);
-                character.Damage(explosionDamage);
+                    character.CmdBurn(true);
+                character.CmdDamage(explosionDamage);
                 character.Knockback((targetsInRadius[i].transform.position - transform.position).normalized,  explosionForce);
             }
         }

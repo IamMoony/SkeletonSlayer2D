@@ -13,7 +13,7 @@ public class IceBlock : Projectile
         base.CharacterContact(characterInContact, contactPosition);
         if (RB.velocity.magnitude > 0.5f)
         {
-            characterInContact.Damage(contactDamage);
+            characterInContact.CmdDamage(contactDamage);
             characterInContact.Knockback(Vector2.down, knockDownForce);
             characterInContact.Stun(true, stunDuration);
             ProjectileDestroy();

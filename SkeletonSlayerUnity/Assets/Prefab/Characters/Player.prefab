@@ -328,7 +328,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  HP_Base: 10
+  HP_Base: 25
   HP_Current: 0
   DMG_Base: 1
   DMG_Current: 0
@@ -344,6 +344,10 @@ MonoBehaviour:
   - {fileID: 2875361491215119421, guid: a18e133cccd24c549ba8ffa6a15e6ff3, type: 3}
   - {fileID: 8470547339341582661, guid: eda999b89b2e23249b90b06baed25cf1, type: 3}
   - {fileID: 3068676336632528724, guid: 32bce0f2158c8f64a9e3bd8f9a654f38, type: 3}
+  activeSpell: {fileID: 2875361491215119421, guid: a18e133cccd24c549ba8ffa6a15e6ff3,
+    type: 3}
+  firebolt: {fileID: 4439456849462767887, guid: b50c293318cb0fc4999618cf21e66765,
+    type: 3}
   animation_PreShoot: {fileID: 7400000, guid: 7396811462535b648a02866eb74f1259, type: 2}
   effect_Burn: {fileID: 7310163276645880396, guid: 24d0ce4752c97ad4dbdff29e61179231,
     type: 3}
@@ -369,7 +373,6 @@ MonoBehaviour:
     m_Bits: 256
   rb: {fileID: 0}
   anim: {fileID: 0}
-  activeSpell: {fileID: 0}
 --- !u!95 &2065848936377577219
 Animator:
   serializedVersion: 3
@@ -403,8 +406,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   serverOnly: 0
   localPlayerAuthority: 1
-  m_AssetId: 0e83d9b3cf66e2d4899690cdc75f64a0
-  m_SceneId: 0
+  m_AssetId: 
+  m_SceneId: 2245373213
 --- !u!114 &7501545214987665374
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -418,7 +421,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   syncMode: 0
-  syncInterval: 0.1
+  syncInterval: 0
   compressRotation: 1
 --- !u!1 &6036940040080808765
 GameObject:

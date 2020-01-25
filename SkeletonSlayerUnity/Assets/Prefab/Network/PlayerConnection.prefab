@@ -47,7 +47,7 @@ MonoBehaviour:
   serverOnly: 0
   localPlayerAuthority: 0
   m_AssetId: 
-  m_SceneId: 3442350884
+  m_SceneId: 3591684621
 --- !u!114 &8214497003230088269
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -63,4 +63,6 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   playerPrefab: {fileID: 2065848936377577231, guid: 0e83d9b3cf66e2d4899690cdc75f64a0,
+    type: 3}
+  firebolt: {fileID: 4439456849462767887, guid: b50c293318cb0fc4999618cf21e66765,
     type: 3}
