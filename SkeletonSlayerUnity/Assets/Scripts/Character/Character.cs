@@ -35,7 +35,7 @@ public class Character : NetworkBehaviour
     [HideInInspector] public bool isDashing;
     [HideInInspector] public bool isDead;
     [HideInInspector] public bool isStunned;
-    public bool climbLock;
+    [HideInInspector] public bool climbLock;
     [HideInInspector, SyncVar] public Vector2 FacingDirection;
     [HideInInspector] public LayerMask GroundLayer;
     [HideInInspector] public Rigidbody2D rb;

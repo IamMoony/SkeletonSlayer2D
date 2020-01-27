@@ -219,7 +219,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: f51f107996f09404794a333c1e078e76, type: 2}
+  - {fileID: 2100000, guid: 77f7daff463fba5428cb158eb0a8ddad, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -364,6 +364,7 @@ MonoBehaviour:
   isDashing: 0
   isDead: 0
   isStunned: 0
+  climbLock: 0
   FacingDirection: {x: 0, y: 0}
   GroundLayer:
     serializedVersion: 2
