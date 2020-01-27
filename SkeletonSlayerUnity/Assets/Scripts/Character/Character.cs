@@ -139,7 +139,16 @@ public class Character : NetworkBehaviour
         }
     }
 
-    public void Move(Vector2 direction, float speedMod)
+    [Command]
+    public void CmdMove(Vector2 direction, float speedMod)
+    {
+        isWalking = true;
+        rb.velocity = new Vector2((direction.x * MoveSpeed_Current) * speedMod, rb.velocity.y);
+        RpcMove(direction, speedMod);
+    }
+
+    [ClientRpc]
+    public void RpcMove(Vector2 direction, float speedMod)
     {
         isWalking = true;
         rb.velocity = new Vector2((direction.x * MoveSpeed_Current) * speedMod, rb.velocity.y);

@@ -27,7 +27,7 @@ public class Player : Character
             return;
         if (Input.GetAxis("Horizontal") != 0 && !isClimbing || isGrounded && isClimbing)
         {
-            Move(Input.GetAxis("Horizontal") > 0 ? Vector2.right : Vector2.left, 1f);
+            CmdMove(Input.GetAxis("Horizontal") > 0 ? Vector2.right : Vector2.left, 1f);
         }
         else
         {

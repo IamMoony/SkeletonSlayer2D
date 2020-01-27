@@ -113,7 +113,7 @@ public class NPC : Character
             if (target.transform.position.x < transform.position.x && FacingDirection == Vector2.right || target.transform.position.x > transform.position.x && FacingDirection == Vector2.left)
             Turn();
             if (!TargetInRange(melee))
-                Move(FacingDirection, 1f);
+                CmdMove(FacingDirection, 1f);
             else
                 Stop(false);
             yield return new WaitForEndOfFrame();
@@ -164,7 +164,7 @@ public class NPC : Character
                             if (!GetTarget())
                             {
                                 //Debug.Log("No Target found - Moving");
-                                Move(FacingDirection, 0.5f);
+                                CmdMove(FacingDirection, 0.5f);
                             }
                             else
                             {
@@ -175,7 +175,7 @@ public class NPC : Character
                         else
                         {
                             //Debug.Log("View clear - Moving");
-                            Move(FacingDirection, 0.5f);
+                            CmdMove(FacingDirection, 0.5f);
                         }
                     }
                 }
