@@ -39,6 +39,8 @@ public class PlayerConnection : NetworkBehaviour
     [ClientRpc]
     void RpcActivateSpell(Vector2 direction, GameObject owner)
     {
+        if (!isClientOnly)
+            return;
         owner.GetComponent<Character>().spells[owner.GetComponent<Character>().activeSpellID].Activate(direction);
     }
 }

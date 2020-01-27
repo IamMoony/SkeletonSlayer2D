@@ -7,13 +7,10 @@ using Mirror;
 public class Player : Character
 {
     CinemachineVirtualCamera vcam;
-
     public override void OnStartAuthority()
     {
         base.OnStartAuthority();
         activeSpellID = 0;
-        if (!hasAuthority)
-            return;
         vcam = GameObject.Find("Camera_Control").GetComponent<CinemachineVirtualCamera>();
         vcam.Follow = transform;
     }

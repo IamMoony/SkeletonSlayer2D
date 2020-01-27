@@ -150,6 +150,8 @@ public class Character : NetworkBehaviour
     [ClientRpc]
     public void RpcMove(Vector2 direction, float speedMod)
     {
+        if (!isClientOnly)
+            return;
         isWalking = true;
         rb.velocity = new Vector2((direction.x * MoveSpeed_Current) * speedMod, rb.velocity.y);
     }
@@ -166,6 +168,8 @@ public class Character : NetworkBehaviour
     [ClientRpc]
     public void RpcStop(bool snappy)
     {
+        if (!isClientOnly)
+            return;
         isWalking = false;
         if (snappy)
             rb.velocity = new Vector2(0, rb.velocity.y);
@@ -197,6 +201,8 @@ public class Character : NetworkBehaviour
     [ClientRpc]
     public void RpcJump(Vector2 direction)
     {
+        if (!isClientOnly)
+            return;
         if (isGrounded || isClimbing)
         {
             if (isClimbing)
@@ -228,6 +234,8 @@ public class Character : NetworkBehaviour
     [ClientRpc]
     public void RpcClimb(Vector2 direction)
     {
+        if (!isClientOnly)
+            return;
         if (!isClimbing)
         {
             isClimbing = true;
@@ -283,6 +291,8 @@ public class Character : NetworkBehaviour
     [ClientRpc]
     public void RpcTeleport()
     {
+        if (!isClientOnly)
+            return;
         anim.SetTrigger("Dash");
         Vector2 targetPos = (Vector2)transform.position + FacingDirection * teleport_Distance;
         Collider2D obstructed = Physics2D.OverlapCircle(targetPos, 0.1f, GroundLayer);
@@ -340,6 +350,8 @@ public class Character : NetworkBehaviour
     [ClientRpc]
     public void RpcBurn(bool state)
     {
+        if (!isClientOnly)
+            return;
         Debug.Log(name + " - Burn: " + state);
         effect_Burn.SetActive(state);
         if (state)
@@ -411,6 +423,8 @@ public class Character : NetworkBehaviour
     [ClientRpc]
     public void RpcCast()
     {
+        if (!isClientOnly)
+            return;
         StartCoroutine(Cast());
     }
 
