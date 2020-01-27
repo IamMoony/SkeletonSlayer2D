@@ -4764,8 +4764,9 @@ GameObject:
   - component: {fileID: 9048653630674131608}
   - component: {fileID: 4439456849462767888}
   - component: {fileID: 7768758153057738238}
-  - component: {fileID: 1036273925}
   - component: {fileID: -5397746466681933070}
+  - component: {fileID: 5265708864416541315}
+  - component: {fileID: 1036273925}
   m_Layer: 12
   m_Name: Projectile_Firebolt
   m_TagString: Projectile
@@ -4874,6 +4875,37 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.15
+--- !u!114 &-5397746466681933070
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4439456849462767887}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serverOnly: 0
+  localPlayerAuthority: 1
+  m_AssetId: 
+  m_SceneId: 163387057
+--- !u!114 &5265708864416541315
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4439456849462767887}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f74aedd71d9a4f55b3ce499326d45fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0
+  compressRotation: 3
 --- !u!114 &1036273925
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4888,7 +4920,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   initalVelocity: 1
   velocityModifier: {x: 0, y: 3, z: 0}
-  contactDamage: 5
+  contactDamage: 1
   effect_Activation: {fileID: 8539672803853196081, guid: 7771442331baaa34696f217397db3a73,
     type: 3}
   effect_Contact_Character_PreActivation: {fileID: 3593303007339290826, guid: 703c2dad49a614e4bb2fe4f44b474e2a,
@@ -4914,22 +4946,6 @@ MonoBehaviour:
   layerAffectedByExplosion:
     serializedVersion: 2
     m_Bits: 2048
---- !u!114 &-5397746466681933070
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4439456849462767887}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  serverOnly: 0
-  localPlayerAuthority: 1
-  m_AssetId: 
-  m_SceneId: 236202560
 --- !u!1 &7007647216413584997
 GameObject:
   m_ObjectHideFlags: 0

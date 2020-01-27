@@ -2,19 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
+using Mirror;
 
 public class Player : Character
 {
-    public Spell activeSpell;
-
     CinemachineVirtualCamera vcam;
 
     public override void OnStartAuthority()
     {
         base.OnStartAuthority();
+        activeSpellID = 0;
         if (!hasAuthority)
             return;
-        activeSpell = spells[0];
         vcam = GameObject.Find("Camera_Control").GetComponent<CinemachineVirtualCamera>();
         vcam.Follow = transform;
     }
@@ -58,26 +57,26 @@ public class Player : Character
         }
         if (Input.GetButtonDown("Shoot"))
         {
-            if (isGrounded && !isWalking && activeSpell.cd <= 0)
+            if (isGrounded && !isWalking && spells[activeSpellID].cd <= 0)
             {
-                Shoot(activeSpell.spellPrefab, FacingDirection);
+                StartCoroutine(Cast(spells[activeSpellID]));
             } 
         }
         if (Input.GetButtonDown("Activate"))
         {
-            activeSpell.Activate(FacingDirection);
+            NetworkClient.connection.identity.gameObject.GetComponent<PlayerConnection>().CmdActivateSpell(FacingDirection, gameObject);
         }
         if (Input.GetKey(KeyCode.Alpha1))
         {
-            activeSpell = spells[0];
+            NetworkClient.connection.identity.gameObject.GetComponent<PlayerConnection>().CmdChangeSpell(0, gameObject);
         }
         if (Input.GetKey(KeyCode.Alpha2))
         {
-            activeSpell = spells[1];
+            NetworkClient.connection.identity.gameObject.GetComponent<PlayerConnection>().CmdChangeSpell(1, gameObject);
         }
         if (Input.GetKey(KeyCode.Alpha3))
         {
-            activeSpell = spells[2];
+            NetworkClient.connection.identity.gameObject.GetComponent<PlayerConnection>().CmdChangeSpell(2, gameObject);
         }
     }
 }

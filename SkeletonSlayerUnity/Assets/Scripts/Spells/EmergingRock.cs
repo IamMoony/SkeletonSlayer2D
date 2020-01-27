@@ -24,7 +24,7 @@ public class EmergingRock : Projectile
         base.CharacterContact(characterInContact, contactPosition);
         if (emerging)
         {
-            characterInContact.Damage(contactDamage);
+            characterInContact.CmdDamage(contactDamage);
             characterInContact.Knockback(emergeDirection, knockBackForce);
         }
     }
