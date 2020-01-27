@@ -25,7 +25,7 @@ public class Player : Character
             return;
         if (isStunned)
             return;
-        if (Input.GetAxis("Horizontal") != 0)
+        if (Input.GetAxis("Horizontal") != 0 && !isClimbing || isGrounded && isClimbing)
         {
             Move(Input.GetAxis("Horizontal") > 0 ? Vector2.right : Vector2.left, 1f);
         }
@@ -33,18 +33,11 @@ public class Player : Character
         {
             Stop(true);
         }
-        if (canClimb && !isClimbing)
+        if (canClimb && !climbLock)
         {
             if (Input.GetAxis("Vertical") != 0)
             {
                 Climb(new Vector2(0, Input.GetAxis("Vertical")));
-            }
-        }
-        if (canClimb && isClimbing)
-        {
-            if (Input.GetAxis("Vertical") != 0 || Input.GetAxis("Horizontal") != 0)
-            {
-                Climb(new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")));
             }
         }
         if (Input.GetButtonDown("Jump"))

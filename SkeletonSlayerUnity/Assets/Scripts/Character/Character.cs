@@ -35,6 +35,7 @@ public class Character : NetworkBehaviour
     [HideInInspector] public bool isDashing;
     [HideInInspector] public bool isDead;
     [HideInInspector] public bool isStunned;
+    public bool climbLock;
     [HideInInspector, SyncVar] public Vector2 FacingDirection;
     [HideInInspector] public LayerMask GroundLayer;
     [HideInInspector] public Rigidbody2D rb;
@@ -46,6 +47,7 @@ public class Character : NetworkBehaviour
     private int root_Ticks;
     private int wet_Ticks;
     private int stun_Ticks;
+    private Collider2D climbableObject;
 
     private void Awake()
     {
@@ -164,6 +166,7 @@ public class Character : NetworkBehaviour
             {
                 isClimbing = false;
                 rb.gravityScale = 1f;
+                climbLock = true;
             }
             anim.SetTrigger("Jump");
             rb.AddForce((Vector2.up + direction) * JumpForce_Current);
@@ -177,8 +180,10 @@ public class Character : NetworkBehaviour
             isClimbing = true;
             rb.velocity = Vector2.zero;
             rb.gravityScale = 0;
+            transform.position = new Vector2(climbableObject.transform.position.x, transform.position.y);
         }
-        rb.MovePosition(Vector2.MoveTowards(transform.position, (Vector2)transform.position + direction, Time.deltaTime * climbing_Speed));
+        if ((GetComponent<Collider2D>().bounds.center + (Vector3.up * GetComponent<Collider2D>().bounds.extents.y)).y < (climbableObject.bounds.center + (Vector3.up * climbableObject.bounds.extents.y)).y || direction.y < 0)
+            rb.MovePosition(Vector2.MoveTowards(transform.position, (Vector2)transform.position + direction, Time.deltaTime * climbing_Speed));
     }
 
     public void Dash()
@@ -315,6 +320,7 @@ public class Character : NetworkBehaviour
     {
         if (collision.gameObject.tag == "Climbable")
         {
+            climbableObject = collision.gameObject.GetComponent<Collider2D>();
             canClimb = true;
         }
     }
@@ -324,6 +330,7 @@ public class Character : NetworkBehaviour
         if (collision.gameObject.tag == "Climbable")
         {
             canClimb = false;
+            climbLock = false;
             if (isClimbing)
             {
                 isClimbing = false;

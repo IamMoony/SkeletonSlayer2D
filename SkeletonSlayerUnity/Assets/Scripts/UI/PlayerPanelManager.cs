@@ -16,16 +16,12 @@ public class PlayerPanelManager : MonoBehaviour
     private GameObject panel_Spell;
     private GameObject[] hearts;
 
+
     private void Awake()
     {
         panel_Health = transform.Find("Panel_Health").gameObject;
         panel_Spell = transform.Find("Panel_Spell").gameObject;
         player = GameObject.Find("Player").GetComponent<Character>();
-    }
-
-    private void Start()
-    {
-        Setup();
     }
 
     private void Update()
@@ -34,7 +30,7 @@ public class PlayerPanelManager : MonoBehaviour
             UpdateHealth();
     }
 
-    void Setup()
+    public void Setup()
     {
         curHealth = player.HP_Current;
         hearts = new GameObject[curHealth];
