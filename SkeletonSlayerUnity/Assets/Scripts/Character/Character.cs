@@ -154,7 +154,17 @@ public class Character : NetworkBehaviour
         rb.velocity = new Vector2((direction.x * MoveSpeed_Current) * speedMod, rb.velocity.y);
     }
 
-    public void Stop(bool snappy)
+    [Command]
+    public void CmdStop(bool snappy)
+    {
+        isWalking = false;
+        if (snappy)
+            rb.velocity = new Vector2(0, rb.velocity.y);
+        RpcStop(snappy);
+    }
+
+    [ClientRpc]
+    public void RpcStop(bool snappy)
     {
         isWalking = false;
         if (snappy)
@@ -167,7 +177,25 @@ public class Character : NetworkBehaviour
         FacingDirection *= -1f;
     }
 
-    public void Jump(Vector2 direction)
+    [Command]
+    public void CmdJump(Vector2 direction)
+    {
+        if (isGrounded || isClimbing)
+        {
+            if (isClimbing)
+            {
+                isClimbing = false;
+                rb.gravityScale = 1f;
+                climbLock = true;
+            }
+            anim.SetTrigger("Jump");
+            rb.AddForce((Vector2.up + direction) * JumpForce_Current);
+            RpcJump(direction);
+        }
+    }
+
+    [ClientRpc]
+    public void RpcJump(Vector2 direction)
     {
         if (isGrounded || isClimbing)
         {
@@ -182,7 +210,23 @@ public class Character : NetworkBehaviour
         }
     }
 
-    public void Climb(Vector2 direction)
+    [Command]
+    public void CmdClimb(Vector2 direction)
+    {
+        if (!isClimbing)
+        {
+            isClimbing = true;
+            rb.velocity = Vector2.zero;
+            rb.gravityScale = 0;
+            transform.position = new Vector2(climbableObject.transform.position.x, transform.position.y);
+        }
+        if ((GetComponent<Collider2D>().bounds.center + (Vector3.up * GetComponent<Collider2D>().bounds.extents.y)).y < (climbableObject.bounds.center + (Vector3.up * climbableObject.bounds.extents.y)).y || direction.y < 0)
+            rb.MovePosition(Vector2.MoveTowards(transform.position, (Vector2)transform.position + direction, Time.deltaTime * climbing_Speed));
+        RpcClimb(direction);
+    }
+
+    [ClientRpc]
+    public void RpcClimb(Vector2 direction)
     {
         if (!isClimbing)
         {
@@ -221,15 +265,10 @@ public class Character : NetworkBehaviour
         rb.gravityScale = 1;
         isDashing = false;
     }
-
-    public void Teleport()
+    [Command]
+    public void CmdTeleport()
     {
         anim.SetTrigger("Dash");
-        StartCoroutine(Teleporting());
-    }
-
-    IEnumerator Teleporting()
-    {
         Vector2 targetPos = (Vector2)transform.position + FacingDirection * teleport_Distance;
         Collider2D obstructed = Physics2D.OverlapCircle(targetPos, 0.1f, GroundLayer);
         if (obstructed)
@@ -238,7 +277,21 @@ public class Character : NetworkBehaviour
             targetPos = hit.point;
         }
         transform.position = targetPos;
-        yield return null;
+        RpcTeleport();
+    }
+
+    [ClientRpc]
+    public void RpcTeleport()
+    {
+        anim.SetTrigger("Dash");
+        Vector2 targetPos = (Vector2)transform.position + FacingDirection * teleport_Distance;
+        Collider2D obstructed = Physics2D.OverlapCircle(targetPos, 0.1f, GroundLayer);
+        if (obstructed)
+        {
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, FacingDirection, teleport_Distance, GroundLayer);
+            targetPos = hit.point;
+        }
+        transform.position = targetPos;
     }
 
     public void Shoot(GameObject projectile, Vector2 direction)
@@ -348,15 +401,28 @@ public class Character : NetworkBehaviour
         }
     }
 
-    public IEnumerator Cast(Spell spell)
+    [Command]
+    public void CmdCast()
+    {
+        StartCoroutine(Cast());
+        RpcCast();
+    }
+
+    [ClientRpc]
+    public void RpcCast()
+    {
+        StartCoroutine(Cast());
+    }
+
+    public IEnumerator Cast()
     {
         anim.SetTrigger("Cast");
         while(actionValue < 1)
         {
-            if (actionValue >= (spell.castTime - (animation_PreShoot == null ? 0 : animation_PreShoot.averageDuration)) / spell.castTime)
+            if (actionValue >= (spells[activeSpellID].castTime - (animation_PreShoot == null ? 0 : animation_PreShoot.averageDuration)) / spells[activeSpellID].castTime)
                 anim.SetTrigger("Shoot");
             if (isGrounded && !isWalking)
-                actionValue = Mathf.Clamp(actionValue + Time.deltaTime / spell.castTime, 0, 1);
+                actionValue = Mathf.Clamp(actionValue + Time.deltaTime / spells[activeSpellID].castTime, 0, 1);
             else
                 break;
             yield return new WaitForEndOfFrame();
@@ -364,7 +430,7 @@ public class Character : NetworkBehaviour
         actionValue = 0;
         if (isGrounded && !isWalking)
         {
-            NetworkClient.connection.identity.gameObject.GetComponent<PlayerConnection>().CmdCast(FacingDirection, projectileSpawn.position, gameObject);
+            spells[activeSpellID].Cast(FacingDirection, projectileSpawn.position, this);
         }
     }
 }

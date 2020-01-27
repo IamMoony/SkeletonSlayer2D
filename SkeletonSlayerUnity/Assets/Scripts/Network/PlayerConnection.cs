@@ -24,11 +24,9 @@ public class PlayerConnection : NetworkBehaviour
     }
 
     [Command]
-    public void CmdCast(Vector2 direction, Vector2 spawnPos, GameObject owner)
+    public void CmdChangeSpell(int id, GameObject owner)
     {
-        owner.GetComponent<Character>().spells[owner.GetComponent<Character>().activeSpellID].Cast(direction, spawnPos, owner.GetComponent<Character>());
-        RpcCast(direction, spawnPos, owner);
-        //NetworkServer.SpawnWithClientAuthority(owner.GetComponent<Character>().activeSpell.spellInstance, connectionToClient);
+        owner.GetComponent<Character>().activeSpellID = id;
     }
 
     [Command]
@@ -36,18 +34,6 @@ public class PlayerConnection : NetworkBehaviour
     {
         owner.GetComponent<Character>().spells[owner.GetComponent<Character>().activeSpellID].Activate(direction);
         RpcActivateSpell(direction, owner);
-    }
-
-    [Command]
-    public void CmdChangeSpell(int id, GameObject owner)
-    {
-        owner.GetComponent<Character>().activeSpellID = id;
-    }
-
-    [ClientRpc]
-    void RpcCast(Vector2 direction, Vector2 spawnPos, GameObject owner)
-    {
-        owner.GetComponent<Character>().spells[owner.GetComponent<Character>().activeSpellID].Cast(direction, spawnPos, owner.GetComponent<Character>());
     }
 
     [ClientRpc]

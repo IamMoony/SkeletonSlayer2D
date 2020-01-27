@@ -94,7 +94,7 @@ public class NPC : Character
         //yield return new WaitForSeconds(spells[0].cd);
         if (spells[0].cd > 0)
             yield break;
-        yield return StartCoroutine(Cast(spells[0]));
+        yield return StartCoroutine(Cast());
     }
 
     public IEnumerator GetInRange(bool melee)
@@ -115,7 +115,7 @@ public class NPC : Character
             if (!TargetInRange(melee))
                 CmdMove(FacingDirection, 1f);
             else
-                Stop(false);
+                CmdStop(false);
             yield return new WaitForEndOfFrame();
         }
     }
@@ -130,7 +130,7 @@ public class NPC : Character
                 if (!floorClear)
                 {
                     //Debug.Log("No floor detected - Stoping");
-                    Stop(false);
+                    CmdStop(false);
                     yield return new WaitForSeconds(Random.Range(0.25f, 1.5f));
                     if (!jumpClear)
                     {
@@ -140,7 +140,7 @@ public class NPC : Character
                     else
                     {
                         //Debug.Log("Jump TakeOff");
-                        Jump(FacingDirection);
+                        CmdJump(FacingDirection);
                         isGrounded = false;
                         while (!isGrounded)
                             yield return new WaitForEndOfFrame();
@@ -169,7 +169,7 @@ public class NPC : Character
                             else
                             {
                                 //Debug.Log("Target found - Stoping");
-                                Stop(false);
+                                CmdStop(false);
                             }
                         }
                         else

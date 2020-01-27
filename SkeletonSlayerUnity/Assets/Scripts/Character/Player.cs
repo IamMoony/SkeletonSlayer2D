@@ -31,28 +31,28 @@ public class Player : Character
         }
         else
         {
-            Stop(true);
+            CmdStop(true);
         }
         if (canClimb && !climbLock)
         {
             if (Input.GetAxis("Vertical") != 0)
             {
-                Climb(new Vector2(0, Input.GetAxis("Vertical")));
+                CmdClimb(new Vector2(0, Input.GetAxis("Vertical")));
             }
         }
         if (Input.GetButtonDown("Jump"))
         {
-            Jump(Vector2.zero);
+            CmdJump(Vector2.zero);
         }
         if (Input.GetButtonDown("Dash"))
         {
-            Teleport();
+            CmdTeleport();
         }
         if (Input.GetButtonDown("Shoot"))
         {
             if (isGrounded && !isWalking && spells[activeSpellID].cd <= 0)
             {
-                StartCoroutine(Cast(spells[activeSpellID]));
+                CmdCast();
             } 
         }
         if (Input.GetButtonDown("Activate"))
