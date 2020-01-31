@@ -23,10 +23,8 @@ public class Firebolt : Projectile
 
     public override void CharacterContact(Character characterInContact, Vector2 contactPosition)
     {
-        Debug.Log("Contact, Owner = " + owner + ", Contact = " + characterInContact);
         if (characterInContact != owner)
         {
-            Debug.Log("Contacting not Owner");
             if (owner is NPC)
                 if (characterInContact is NPC)
                     return;

@@ -6,6 +6,8 @@ public class Hellhound : NPC
 {
     private void Start()
     {
+        if (isClientOnly)
+            return;
         StartCoroutine(Behavior());
     }
 

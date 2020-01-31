@@ -18,7 +18,7 @@ public class Character : NetworkBehaviour
     public float teleport_Distance;
     public float climbing_Speed;
     public Spell[] spells;
-    [SyncVar] public int activeSpellID;
+    [HideInInspector, SyncVar] public int activeSpellID;
     public AnimationClip animation_PreShoot;
     public GameObject effect_Burn;
     public GameObject effect_Freeze;
@@ -26,6 +26,7 @@ public class Character : NetworkBehaviour
     public GameObject effect_Wet;
     public GameObject effect_Stun;
     public Transform projectileSpawn;
+    public GameObject defaultProjectile;
 
     [HideInInspector] public float actionValue = 0;
     [HideInInspector] public bool isGrounded;
@@ -302,11 +303,6 @@ public class Character : NetworkBehaviour
             targetPos = hit.point;
         }
         transform.position = targetPos;
-    }
-
-    public void Shoot(GameObject projectile, Vector2 direction)
-    {
-        //NetworkClient.connection.identity.gameObject.GetComponent<PlayerConnection>().CmdSpawnProjectile(direction, projectileSpawn.position, gameObject);
     }
 
     [Command]

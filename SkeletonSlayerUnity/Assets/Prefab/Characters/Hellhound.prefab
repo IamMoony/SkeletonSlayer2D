@@ -294,6 +294,7 @@ GameObject:
   - component: {fileID: 5939185117275640319}
   - component: {fileID: 5939185117275640305}
   - component: {fileID: 5939185117275640318}
+  - component: {fileID: -4212692247845103882}
   m_Layer: 11
   m_Name: Hellhound
   m_TagString: Character
@@ -318,6 +319,7 @@ Transform:
   - {fileID: 1644478996408046079}
   - {fileID: 277103070990025851}
   - {fileID: 6704988464930806701}
+  - {fileID: 6648376913443551596}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -438,6 +440,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a21da58bf92e33d47a97c7b6f1fe4ff6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
   HP_Base: 10
   HP_Current: 0
   DMG_Base: 1
@@ -452,6 +456,7 @@ MonoBehaviour:
   climbing_Speed: 0
   spells:
   - {fileID: 8881317040600442969, guid: 1417bb59d291c1f4581e5aeb6e63c830, type: 3}
+  activeSpellID: 0
   animation_PreShoot: {fileID: 0}
   effect_Burn: {fileID: 7310163276645880396, guid: 24d0ce4752c97ad4dbdff29e61179231,
     type: 3}
@@ -462,18 +467,22 @@ MonoBehaviour:
   effect_Wet: {fileID: 7271018466058181344, guid: 88cf6c989c4c9214f85f74dcca70918b,
     type: 3}
   effect_Stun: {fileID: 0}
+  projectileSpawn: {fileID: 6648376913443551596}
+  defaultProjectile: {fileID: 4439456849462767887, guid: e72c3ac73ff8abd46bebc650bfd99cfa,
+    type: 3}
   actionValue: 0
   isGrounded: 0
   isWalking: 0
   canClimb: 0
   isClimbing: 0
+  isDashing: 0
+  isDead: 0
+  isStunned: 0
+  climbLock: 0
+  FacingDirection: {x: 0, y: 0}
   GroundLayer:
     serializedVersion: 2
     m_Bits: 256
-  isDashing: 0
-  FacingDirection: {x: 0, y: 0}
-  isDead: 0
-  isStunned: 0
   rb: {fileID: 0}
   anim: {fileID: 0}
   viewDistance: 1
@@ -488,8 +497,6 @@ MonoBehaviour:
   attackCooldown_Ranged: 2
   attackAnimation_Ranged: {fileID: 7400000, guid: 08b7579aa9e59dd4e9acbbb1063fb645,
     type: 2}
-  attackProjectile_Ranged: {fileID: 4439456849462767887, guid: e72c3ac73ff8abd46bebc650bfd99cfa,
-    type: 3}
   objectsInView: []
   target: {fileID: 0}
   targetInRange_Melee: 0
@@ -504,6 +511,22 @@ MonoBehaviour:
   Attitude: 2
   State: 0
   Action: 0
+--- !u!114 &-4212692247845103882
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5939185117275640315}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serverOnly: 0
+  localPlayerAuthority: 0
+  m_AssetId: cccb138ef246ae74688c8ec65d845d7d
+  m_SceneId: 0
 --- !u!1 &6178822397601025476
 GameObject:
   m_ObjectHideFlags: 0
@@ -636,3 +659,33 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dmgAmount: 1
   knockbackForce: 50
+--- !u!1 &9146308309727500621
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6648376913443551596}
+  m_Layer: 11
+  m_Name: ProjectileSpawn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6648376913443551596
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9146308309727500621}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.25, y: -0.15, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5939185117275640316}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

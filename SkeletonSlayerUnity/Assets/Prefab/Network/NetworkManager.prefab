@@ -62,7 +62,7 @@ MonoBehaviour:
   playerSpawnMethod: 0
   spawnPrefabs:
   - {fileID: 2065848936377577231, guid: 0e83d9b3cf66e2d4899690cdc75f64a0, type: 3}
-  - {fileID: 4439456849462767887, guid: b50c293318cb0fc4999618cf21e66765, type: 3}
+  - {fileID: 5939185117275640315, guid: cccb138ef246ae74688c8ec65d845d7d, type: 3}
 --- !u!114 &971558150913285424
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -113,7 +113,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: Mirror.UnityEventInt, Mirror, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-  port: 7777
+  port: 55555
   NoDelay: 1
   serverMaxMessageSize: 16384
   clientMaxMessageSize: 16384

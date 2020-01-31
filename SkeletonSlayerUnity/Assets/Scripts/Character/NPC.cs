@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Mirror;
 
 public class NPC : Character
 {
@@ -13,7 +14,6 @@ public class NPC : Character
     public float attackRange_Ranged;
     public float attackCooldown_Ranged;
     public AnimationClip attackAnimation_Ranged;
-    public GameObject attackProjectile_Ranged;
 
     public List<GameObject> objectsInView;
     public GameObject target;
@@ -65,10 +65,25 @@ public class NPC : Character
         if (isStunned || cooldown_Melee > 0)
             yield break;
         if (target.transform.position.x < transform.position.x && FacingDirection == Vector2.right || target.transform.position.x > transform.position.x && FacingDirection == Vector2.left)
-        Turn();
+            Turn();
         cooldown_Melee = attackCooldown_Melee;
-        anim.SetTrigger("Attack_Melee");
+        CmdAttackMelee();
         yield return new WaitForSeconds(attackAnimation_Melee.averageDuration);
+    }
+
+    [Command]
+    public void CmdAttackMelee()
+    {
+        anim.SetTrigger("Attack_Melee");
+        RpcAttackMelee();
+    }
+
+    [ClientRpc]
+    public void RpcAttackMelee()
+    {
+        if (!isClientOnly)
+            return;
+        anim.SetTrigger("Attack_Melee");
     }
 
     public IEnumerator Attack_Ranged()
@@ -77,11 +92,43 @@ public class NPC : Character
         if (isStunned || cooldown_Ranged > 0)
             yield break;
         if (target.transform.position.x < transform.position.x && FacingDirection == Vector2.right || target.transform.position.x > transform.position.x && FacingDirection == Vector2.left)
-        Turn();
+            Turn();
         cooldown_Ranged = attackCooldown_Ranged;
-        anim.SetTrigger("Attack_Ranged");
+        CmdTriggerRangedAnimation();
         yield return new WaitForSeconds(attackAnimation_Ranged.averageDuration);
-        Shoot(attackProjectile_Ranged, FacingDirection);
+        CmdAttackRanged();
+    }
+
+    [Command]
+    public void CmdTriggerRangedAnimation()
+    {
+        anim.SetTrigger("Attack_Ranged");
+        RpcTriggerRangedAnimation();
+    }
+
+    [ClientRpc]
+    public void RpcTriggerRangedAnimation()
+    {
+        if (!isClientOnly)
+            return;
+        anim.SetTrigger("Attack_Ranged");
+    }
+
+    [Command]
+    public void CmdAttackRanged()
+    {
+        GameObject go = Instantiate(defaultProjectile, projectileSpawn.position, Quaternion.Euler(FacingDirection == (Vector2)transform.right ? 0 : 180, 0, FacingDirection == (Vector2)transform.right ? 0 : 180));
+        go.GetComponent<Projectile>().owner = this;
+        RpcAttackRanged();
+    }
+
+    [ClientRpc]
+    public void RpcAttackRanged()
+    {
+        if (!isClientOnly)
+            return;
+        GameObject go = Instantiate(defaultProjectile, projectileSpawn.position, Quaternion.Euler(FacingDirection == (Vector2)transform.right ? 0 : 180, 0, FacingDirection == (Vector2)transform.right ? 0 : 180));
+        go.GetComponent<Projectile>().owner = this;
     }
 
     public IEnumerator Cast_Spell()
@@ -90,11 +137,12 @@ public class NPC : Character
         if (isStunned)
             yield break;
         if (target.transform.position.x < transform.position.x && FacingDirection == Vector2.right || target.transform.position.x > transform.position.x && FacingDirection == Vector2.left)
-        Turn();
+            Turn();
         //yield return new WaitForSeconds(spells[0].cd);
         if (spells[0].cd > 0)
             yield break;
-        yield return StartCoroutine(Cast());
+        CmdCast();
+        yield return new WaitForSeconds(spells[activeSpellID].castTime);
     }
 
     public IEnumerator GetInRange(bool melee)
@@ -111,7 +159,7 @@ public class NPC : Character
                 yield break;
             }
             if (target.transform.position.x < transform.position.x && FacingDirection == Vector2.right || target.transform.position.x > transform.position.x && FacingDirection == Vector2.left)
-            Turn();
+                Turn();
             if (!TargetInRange(melee))
                 CmdMove(FacingDirection, 1f);
             else
@@ -135,7 +183,7 @@ public class NPC : Character
                     if (!jumpClear)
                     {
                         //Debug.Log("Jump not possible - Turning");
-                     Turn();
+                        Turn();
                     }
                     else
                     {
@@ -153,7 +201,7 @@ public class NPC : Character
                     if (!pathClear)
                     {
                         //Debug.Log("Path obstructed - Turning");
-                    Turn();
+                        Turn();
                     }
                     else
                     {
@@ -200,7 +248,7 @@ public class NPC : Character
                     turnTimer -= Time.deltaTime;
                 else
                 {
-                Turn();
+                    Turn();
                     turnTimer = 3f;
                 }
             }
