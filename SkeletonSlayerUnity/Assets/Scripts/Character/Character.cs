@@ -142,8 +142,6 @@ public class Character : NetworkBehaviour
     public void CmdMove(Vector2 direction, float speedMod)
     {
         isWalking = true;
-        if (direction.x < 0 && FacingDirection == Vector2.right || direction.x > 0 && FacingDirection == Vector2.left)
-            CmdTurn();
         rb.velocity = new Vector2((direction.x * MoveSpeed_Current) * speedMod, rb.velocity.y);
         RpcMove(direction, speedMod);
     }

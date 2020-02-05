@@ -17,6 +17,9 @@ public class NPC : Character
 
     public List<GameObject> objectsInView;
     public GameObject target;
+    public bool targetInView;
+    public GameObject projectile;
+    public bool projectileInView;
     public bool targetInRange_Melee;
     public float cooldown_Melee;
     public bool targetInRange_Ranged;
@@ -152,7 +155,7 @@ public class NPC : Character
         {
             if (isStunned)
                 yield break;
-            if (!TargetInSight())
+            if (!IsTargetInSight())
             {
                 //Target out of Sight
                 target = null;
@@ -160,7 +163,7 @@ public class NPC : Character
             }
             if (target.transform.position.x < transform.position.x && FacingDirection == Vector2.right || target.transform.position.x > transform.position.x && FacingDirection == Vector2.left)
                 CmdTurn();
-            if (!TargetInRange(melee))
+            if (!IsTargetInRange(melee))
                 CmdMove(FacingDirection, 1f);
             else
                 CmdStop(false);
@@ -209,7 +212,7 @@ public class NPC : Character
                         if (!viewClear)
                         {
                             //Debug.Log("Something is in View");
-                            if (!GetTarget())
+                            if (!TargetInView())
                             {
                                 //Debug.Log("No Target found - Moving");
                                 CmdMove(FacingDirection, 0.5f);
@@ -241,7 +244,7 @@ public class NPC : Character
             {
                 if (!viewClear)
                 {
-                    if (GetTarget())
+                    if (TargetInView())
                        break;
                 }
                 if (turnTimer > 0)
@@ -256,7 +259,7 @@ public class NPC : Character
         }
     }
 
-    public bool GetTarget()
+    public bool TargetInView()
     {
         for (int i = 0; i < objectsInView.Count; i++)
         {
@@ -265,6 +268,7 @@ public class NPC : Character
                 if (objectsInView[i].GetComponent<Character>() is Player)
                 {
                     target = objectsInView[i];
+                    targetInView = true;
                     return true;
                 }
                 else
@@ -274,7 +278,7 @@ public class NPC : Character
         return false;
     }
 
-    public bool TargetInSight()
+    public bool IsTargetInSight()
     {
         RaycastHit2D check = Physics2D.Raycast(transform.position, target.transform.position - transform.position, 10f, visible);
         if (check)
@@ -291,7 +295,7 @@ public class NPC : Character
         return false;
     }
 
-    public bool TargetInRange(bool melee)
+    public bool IsTargetInRange(bool melee)
     {
         if (Vector2.Distance(target.transform.position, transform.position) <= (melee ? attackRange_Melee : attackRange_Ranged))
         {

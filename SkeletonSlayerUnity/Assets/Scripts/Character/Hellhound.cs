@@ -21,11 +21,11 @@ public class Hellhound : NPC
             }
             else
             {
-                if (TargetInRange(true))
+                if (IsTargetInRange(true))
                 {
                     yield return StartCoroutine(Attack_Melee());
                 }
-                else if (TargetInRange(false))
+                else if (IsTargetInRange(false))
                 {
                     yield return StartCoroutine(Attack_Ranged());
                 }

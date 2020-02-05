@@ -91,7 +91,7 @@ GameObject:
   - component: {fileID: 1394314819605642446}
   - component: {fileID: 1394314819605642447}
   - component: {fileID: 3823150033211556544}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Wooden_Ladder
   m_TagString: Climbable
   m_Icon: {fileID: 0}
