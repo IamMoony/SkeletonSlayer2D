@@ -28,8 +28,8 @@ public class NPC_Spawner : NetworkBehaviour
     private void CmdSpawn()
     {
         GameObject go = Instantiate(npcPrefab, transform.position, Quaternion.identity, characterHolder);
-        if (turn)
-            go.GetComponent<Character>().Turn();
         NetworkServer.Spawn(go);
+        if (turn)
+            go.GetComponent<Character>().CmdTurn();
     }
 }

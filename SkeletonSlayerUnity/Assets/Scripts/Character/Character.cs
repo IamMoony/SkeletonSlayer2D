@@ -121,8 +121,6 @@ public class Character : NetworkBehaviour
                 tick = 1f;
             }
         }
-        if (rb.velocity.x < 0 && FacingDirection == Vector2.right || rb.velocity.x > 0 && FacingDirection == Vector2.left)
-            Turn();
         if (isClimbing && Input.GetAxis("Vertical") == 0)
         {
             anim.speed = 0;
@@ -144,6 +142,8 @@ public class Character : NetworkBehaviour
     public void CmdMove(Vector2 direction, float speedMod)
     {
         isWalking = true;
+        if (direction.x < 0 && FacingDirection == Vector2.right || direction.x > 0 && FacingDirection == Vector2.left)
+            CmdTurn();
         rb.velocity = new Vector2((direction.x * MoveSpeed_Current) * speedMod, rb.velocity.y);
         RpcMove(direction, speedMod);
     }
@@ -176,8 +176,19 @@ public class Character : NetworkBehaviour
             rb.velocity = new Vector2(0, rb.velocity.y);
     }
 
-    public void Turn()
+    [Command]
+    public void CmdTurn()
     {
+        transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
+        FacingDirection *= -1f;
+        RpcTurn();
+    }
+
+    [ClientRpc]
+    public void RpcTurn()
+    {
+        if (!isClientOnly)
+            return;
         transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
         FacingDirection *= -1f;
     }
