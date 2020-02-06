@@ -10,7 +10,7 @@ public class Character : NetworkBehaviour
     public int DMG_Base;
     [HideInInspector] public int DMG_Current;
     public int MoveSpeed_Base;
-    [HideInInspector] public int MoveSpeed_Current;
+    public int MoveSpeed_Current;
     public int JumpForce_Base;
     [HideInInspector] public int JumpForce_Current;
     public float dash_Speed;
@@ -37,7 +37,7 @@ public class Character : NetworkBehaviour
     [HideInInspector] public bool isDashing;
     [HideInInspector] public bool isDead;
     [HideInInspector] public bool isStunned;
-    [HideInInspector] public bool climbLock;
+    public bool climbLock;
     [HideInInspector, SyncVar] public Vector2 FacingDirection;
     [HideInInspector] public LayerMask GroundLayer;
     [HideInInspector] public Rigidbody2D rb;
@@ -244,7 +244,7 @@ public class Character : NetworkBehaviour
             rb.position = new Vector2(climbableObject.transform.position.x, transform.position.y);
         }
         if ((GetComponent<Collider2D>().bounds.center + (Vector3.up * GetComponent<Collider2D>().bounds.extents.y)).y < (climbableObject.bounds.center + (Vector3.up * climbableObject.bounds.extents.y)).y || direction.y < 0)
-            rb.MovePosition(Vector2.MoveTowards(transform.position, (Vector2)transform.position + direction, Time.deltaTime * (MoveSpeed_Current * 2)));
+            rb.MovePosition(Vector2.MoveTowards(rb.position, (Vector2)rb.position + direction, (MoveSpeed_Current * .03f)));
         RpcClimb(direction);
     }
 
@@ -259,9 +259,10 @@ public class Character : NetworkBehaviour
             rb.velocity = Vector2.zero;
             rb.gravityScale = 0;
             transform.position = new Vector2(climbableObject.transform.position.x, transform.position.y);
+            rb.position = new Vector2(climbableObject.transform.position.x, transform.position.y);
         }
         if ((GetComponent<Collider2D>().bounds.center + (Vector3.up * GetComponent<Collider2D>().bounds.extents.y)).y < (climbableObject.bounds.center + (Vector3.up * climbableObject.bounds.extents.y)).y || direction.y < 0)
-            rb.MovePosition(Vector2.MoveTowards(transform.position, (Vector2)transform.position + direction, Time.deltaTime * (MoveSpeed_Current * 2)));
+            rb.MovePosition(Vector2.MoveTowards(rb.position, (Vector2)rb.position + direction, (MoveSpeed_Current * .03f)));
     }
 
     public void Dash()
