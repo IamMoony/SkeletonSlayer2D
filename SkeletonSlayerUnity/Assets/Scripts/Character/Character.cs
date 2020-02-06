@@ -241,9 +241,10 @@ public class Character : NetworkBehaviour
             rb.velocity = Vector2.zero;
             rb.gravityScale = 0;
             transform.position = new Vector2(climbableObject.transform.position.x, transform.position.y);
+            rb.position = new Vector2(climbableObject.transform.position.x, transform.position.y);
         }
         if ((GetComponent<Collider2D>().bounds.center + (Vector3.up * GetComponent<Collider2D>().bounds.extents.y)).y < (climbableObject.bounds.center + (Vector3.up * climbableObject.bounds.extents.y)).y || direction.y < 0)
-            rb.MovePosition(Vector2.MoveTowards(transform.position, (Vector2)transform.position + direction, Time.deltaTime * climbing_Speed));
+            rb.MovePosition(Vector2.MoveTowards(transform.position, (Vector2)transform.position + direction, Time.deltaTime * (MoveSpeed_Current * 2)));
         RpcClimb(direction);
     }
 
@@ -260,7 +261,7 @@ public class Character : NetworkBehaviour
             transform.position = new Vector2(climbableObject.transform.position.x, transform.position.y);
         }
         if ((GetComponent<Collider2D>().bounds.center + (Vector3.up * GetComponent<Collider2D>().bounds.extents.y)).y < (climbableObject.bounds.center + (Vector3.up * climbableObject.bounds.extents.y)).y || direction.y < 0)
-            rb.MovePosition(Vector2.MoveTowards(transform.position, (Vector2)transform.position + direction, Time.deltaTime * climbing_Speed));
+            rb.MovePosition(Vector2.MoveTowards(transform.position, (Vector2)transform.position + direction, Time.deltaTime * (MoveSpeed_Current * 2)));
     }
 
     public void Dash()
@@ -351,7 +352,7 @@ public class Character : NetworkBehaviour
     [Command]
     public void CmdBurn(bool state)
     {
-        Debug.Log(name + " - Burn: " + state);
+        //Debug.Log(name + " - Burn: " + state);
         effect_Burn.SetActive(state);
         if (state)
             burn_Ticks = 5;
@@ -363,7 +364,7 @@ public class Character : NetworkBehaviour
     {
         if (!isClientOnly)
             return;
-        Debug.Log(name + " - Burn: " + state);
+        //Debug.Log(name + " - Burn: " + state);
         effect_Burn.SetActive(state);
         if (state)
             burn_Ticks = 5;

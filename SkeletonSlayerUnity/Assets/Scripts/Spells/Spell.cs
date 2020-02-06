@@ -16,7 +16,7 @@ public class Spell : MonoBehaviour
 
     public void Cast(Vector2 direction, Vector2 position, Character source)
     {
-        Debug.Log("source = " + source);
+        //Debug.Log("source = " + source);
         cd = coolDown;
         spellInstance = Instantiate(spellPrefab, position, Quaternion.Euler(direction == (Vector2)transform.right ? 0 : 180, 0, direction == (Vector2)transform.right ? 0 : 180));
         spellInstance.GetComponent<Projectile>().owner = source;
