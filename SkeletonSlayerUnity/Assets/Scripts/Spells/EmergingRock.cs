@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class EmergingRock : Projectile
 {
-    public float lifeTime;
     public int knockBackForce;
     public float emergeAmount;
     public float emergeSpeed;

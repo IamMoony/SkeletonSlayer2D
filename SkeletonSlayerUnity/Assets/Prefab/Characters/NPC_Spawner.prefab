@@ -48,7 +48,7 @@ MonoBehaviour:
   serverOnly: 0
   localPlayerAuthority: 0
   m_AssetId: 
-  m_SceneId: 3247686213
+  m_SceneId: 423109041
 --- !u!114 &3565984012198633721
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -65,6 +65,7 @@ MonoBehaviour:
   syncInterval: 0.1
   npcPrefab: {fileID: 5939185117275640315, guid: cccb138ef246ae74688c8ec65d845d7d,
     type: 3}
+  turn: 1
 --- !u!212 &832714480
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -103,7 +104,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

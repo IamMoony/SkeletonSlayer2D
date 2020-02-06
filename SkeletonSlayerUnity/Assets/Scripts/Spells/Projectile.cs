@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
 
-public class Projectile : MonoBehaviour
+public class Projectile : NetworkBehaviour
 {
     public float initalVelocity;
     public Vector3 velocityModifier;
     public int contactDamage;
+    public float lifeTime = 10f;
     public GameObject effect_Activation;
     public GameObject effect_Contact_Character_PreActivation;
     public GameObject effect_Contact_Ground_PreActivation;
@@ -28,6 +29,14 @@ public class Projectile : MonoBehaviour
     public virtual void Start()
     {
         RB.velocity = (transform.right + velocityModifier) * initalVelocity;
+    }
+
+    private void Update()
+    {
+        if (lifeTime > 0)
+            lifeTime -= Time.deltaTime;
+        else
+            ProjectileDestroy();
     }
 
     private void OnTriggerEnter2D(Collider2D collider)

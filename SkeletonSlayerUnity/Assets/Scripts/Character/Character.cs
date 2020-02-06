@@ -17,7 +17,8 @@ public class Character : NetworkBehaviour
     public float dash_Distance;
     public float teleport_Distance;
     public float climbing_Speed;
-    public Spell[] spells;
+    public GameObject[] spellInstances;
+    [HideInInspector] public Spell[] spells;
     [HideInInspector, SyncVar] public int activeSpellID;
     public AnimationClip animation_PreShoot;
     public GameObject effect_Burn;
@@ -64,6 +65,11 @@ public class Character : NetworkBehaviour
         effect_Wet.SetActive(false);
         //effect_Stun = Instantiate(effect_Stun, transform);
         //effect_Stun.SetActive(false);
+        for (int i = 0; i < spellInstances.Length; i++)
+        {
+            spellInstances[i] = Instantiate(spellInstances[i], transform);
+            spells[i] = spellInstances[i].GetComponent<Spell>();
+        }
         tick = 1f;
         HP_Current = HP_Base;
         DMG_Current = DMG_Base;
@@ -175,20 +181,20 @@ public class Character : NetworkBehaviour
     }
 
     [Command]
-    public void CmdTurn()
+    public void CmdTurn(Vector2 direction)
     {
-        transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
-        FacingDirection *= -1f;
-        RpcTurn();
+        FacingDirection = direction;
+        transform.localScale = new Vector3(direction.x, transform.localScale.y, transform.localScale.z);
+        RpcTurn(direction);
     }
 
     [ClientRpc]
-    public void RpcTurn()
+    public void RpcTurn(Vector2 direction)
     {
         if (!isClientOnly)
             return;
-        transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
-        FacingDirection *= -1f;
+        FacingDirection = direction;
+        transform.localScale = new Vector3(direction.x, transform.localScale.y, transform.localScale.z);
     }
 
     [Command]
@@ -416,6 +422,36 @@ public class Character : NetworkBehaviour
                 rb.gravityScale = 1f;
             }
         }
+    }
+
+    [Command]
+    public void CmdChangeSpell(int id)
+    {
+        activeSpellID = id;
+        RpcChangeSpell(id);
+    }
+
+    [ClientRpc]
+    public void RpcChangeSpell(int id)
+    {
+        if (!isClientOnly)
+            return;
+        activeSpellID = id;
+    }
+
+    [Command]
+    public void CmdActivateSpell(Vector2 direction)
+    {
+        spells[activeSpellID].Activate(direction);
+        RpcActivateSpell(direction);
+    }
+
+    [ClientRpc]
+    void RpcActivateSpell(Vector2 direction)
+    {
+        if (!isClientOnly)
+            return;
+       spells[activeSpellID].Activate(direction);
     }
 
     [Command]

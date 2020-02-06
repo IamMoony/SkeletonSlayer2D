@@ -30,6 +30,6 @@ public class NPC_Spawner : NetworkBehaviour
         GameObject go = Instantiate(npcPrefab, transform.position, Quaternion.identity, characterHolder);
         NetworkServer.Spawn(go);
         if (turn)
-            go.GetComponent<Character>().CmdTurn();
+            go.GetComponent<Character>().CmdTurn(go.GetComponent<Character>().FacingDirection * -1);
     }
 }

@@ -11,15 +11,13 @@ public class Spell : MonoBehaviour
     public float castTime;
     public float coolDown;
 
-    [HideInInspector] public float cd;
-    [HideInInspector] public GameObject spellInstance;
+    public float cd;
+    public GameObject spellInstance;
 
     public void Cast(Vector2 direction, Vector2 position, Character source)
     {
         Debug.Log("source = " + source);
         cd = coolDown;
-        if (spellInstance)
-            spellInstance.GetComponent<Projectile>().ProjectileDestroy();
         spellInstance = Instantiate(spellPrefab, position, Quaternion.Euler(direction == (Vector2)transform.right ? 0 : 180, 0, direction == (Vector2)transform.right ? 0 : 180));
         spellInstance.GetComponent<Projectile>().owner = source;
     }

@@ -22,25 +22,4 @@ public class PlayerConnection : NetworkBehaviour
         player = Instantiate(playerPrefab);
         NetworkServer.SpawnWithClientAuthority(player, connectionToClient);
     }
-
-    [Command]
-    public void CmdChangeSpell(int id, GameObject owner)
-    {
-        owner.GetComponent<Character>().activeSpellID = id;
-    }
-
-    [Command]
-    public void CmdActivateSpell(Vector2 direction, GameObject owner)
-    {
-        owner.GetComponent<Character>().spells[owner.GetComponent<Character>().activeSpellID].Activate(direction);
-        RpcActivateSpell(direction, owner);
-    }
-
-    [ClientRpc]
-    void RpcActivateSpell(Vector2 direction, GameObject owner)
-    {
-        if (!isClientOnly)
-            return;
-        owner.GetComponent<Character>().spells[owner.GetComponent<Character>().activeSpellID].Activate(direction);
-    }
 }

@@ -4763,7 +4763,7 @@ GameObject:
   - component: {fileID: 2390927443734499075}
   - component: {fileID: 2390927443734499079}
   - component: {fileID: -121577862986651451}
-  - component: {fileID: 2891644866961793215}
+  - component: {fileID: 4565303848083976419}
   - component: {fileID: -5282920102421989659}
   m_Layer: 12
   m_Name: Projectile_Waterbolt
@@ -4825,7 +4825,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.33
---- !u!114 &2891644866961793215
+--- !u!114 &4565303848083976419
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4838,9 +4838,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   serverOnly: 0
-  localPlayerAuthority: 1
+  localPlayerAuthority: 0
   m_AssetId: 
-  m_SceneId: 4152427253
+  m_SceneId: 163841295
 --- !u!114 &-5282920102421989659
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4853,9 +4853,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53249106f6ce7b94a934d304ed4d84f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
   initalVelocity: 1
   velocityModifier: {x: 0, y: 0, z: 0}
   contactDamage: 1
+  lifeTime: 10
   effect_Activation: {fileID: 3861367843242237069, guid: 91b2d47b629029d42acac26bcf54c441,
     type: 3}
   effect_Contact_Character_PreActivation: {fileID: 3861367843242237069, guid: 91b2d47b629029d42acac26bcf54c441,

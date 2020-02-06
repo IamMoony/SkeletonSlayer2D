@@ -39,6 +39,17 @@ public class CharacterPanelManager : MonoBehaviour
     {
         for (int i = 0; i < characterInScene.Count; i++)
         {
+            if (characterInScene[i] == null)
+            {
+                int indexToRemove = i;
+                characterInScene.RemoveAt(indexToRemove);
+                characterHealthBar.RemoveAt(indexToRemove);
+                characterCastBar.RemoveAt(indexToRemove);
+                GameObject panel = characterPanelInScene[indexToRemove];
+                characterPanelInScene.RemoveAt(indexToRemove);
+                Destroy(panel);
+                break;
+            }
             if (!characterInScene[i].GetComponent<Character>().isDead)
             {
                 characterPanelInScene[i].transform.position = Camera.main.WorldToScreenPoint(characterInScene[i].position + Vector3.up * panelOffsetY);

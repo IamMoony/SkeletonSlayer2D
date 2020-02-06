@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class IceBlock : Projectile
 {
-    public float lifeTime;
     public int stunDuration;
     public int knockDownForce;
 

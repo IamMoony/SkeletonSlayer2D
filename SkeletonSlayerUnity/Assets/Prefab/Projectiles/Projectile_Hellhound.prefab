@@ -4764,8 +4764,8 @@ GameObject:
   - component: {fileID: 9048653630674131608}
   - component: {fileID: 4439456849462767888}
   - component: {fileID: 7768758153057738238}
+  - component: {fileID: 529225241684506013}
   - component: {fileID: 1036273925}
-  - component: {fileID: -8164436306195475859}
   m_Layer: 12
   m_Name: Projectile_Hellhound
   m_TagString: Projectile
@@ -4874,6 +4874,22 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.15
+--- !u!114 &529225241684506013
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4439456849462767887}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serverOnly: 0
+  localPlayerAuthority: 0
+  m_AssetId: 
+  m_SceneId: 2952725068
 --- !u!114 &1036273925
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4886,9 +4902,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18a8230657e9cc641bc81d0e810a8299, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
   initalVelocity: 2
   velocityModifier: {x: 0, y: 0, z: 0}
   contactDamage: 1
+  lifeTime: 10
   effect_Activation: {fileID: 8539672803853196081, guid: 7771442331baaa34696f217397db3a73,
     type: 3}
   effect_Contact_Character_PreActivation: {fileID: 3593303007339290826, guid: 703c2dad49a614e4bb2fe4f44b474e2a,
@@ -4914,22 +4933,6 @@ MonoBehaviour:
   layerAffectedByExplosion:
     serializedVersion: 2
     m_Bits: 0
---- !u!114 &-8164436306195475859
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4439456849462767887}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  serverOnly: 0
-  localPlayerAuthority: 0
-  m_AssetId: 
-  m_SceneId: 3781954732
 --- !u!1 &7007647216413584997
 GameObject:
   m_ObjectHideFlags: 0

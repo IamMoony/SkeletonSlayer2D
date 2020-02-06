@@ -68,7 +68,7 @@ public class NPC : Character
         if (isStunned || cooldown_Melee > 0)
             yield break;
         if (target.transform.position.x < transform.position.x && FacingDirection == Vector2.right || target.transform.position.x > transform.position.x && FacingDirection == Vector2.left)
-            CmdTurn();
+            CmdTurn(FacingDirection * -1);
         cooldown_Melee = attackCooldown_Melee;
         CmdAttackMelee();
         yield return new WaitForSeconds(attackAnimation_Melee.averageDuration);
@@ -95,7 +95,7 @@ public class NPC : Character
         if (isStunned || cooldown_Ranged > 0)
             yield break;
         if (target.transform.position.x < transform.position.x && FacingDirection == Vector2.right || target.transform.position.x > transform.position.x && FacingDirection == Vector2.left)
-            CmdTurn();
+            CmdTurn(FacingDirection * -1);
         cooldown_Ranged = attackCooldown_Ranged;
         CmdTriggerRangedAnimation();
         yield return new WaitForSeconds(attackAnimation_Ranged.averageDuration);
@@ -140,7 +140,7 @@ public class NPC : Character
         if (isStunned)
             yield break;
         if (target.transform.position.x < transform.position.x && FacingDirection == Vector2.right || target.transform.position.x > transform.position.x && FacingDirection == Vector2.left)
-            CmdTurn();
+            CmdTurn(FacingDirection * -1);
         //yield return new WaitForSeconds(spells[0].cd);
         if (spells[0].cd > 0)
             yield break;
@@ -162,7 +162,7 @@ public class NPC : Character
                 yield break;
             }
             if (target.transform.position.x < transform.position.x && FacingDirection == Vector2.right || target.transform.position.x > transform.position.x && FacingDirection == Vector2.left)
-                CmdTurn();
+                CmdTurn(FacingDirection * -1);
             if (!IsTargetInRange(melee))
                 CmdMove(FacingDirection, 1f);
             else
@@ -186,7 +186,7 @@ public class NPC : Character
                     if (!jumpClear)
                     {
                         //Debug.Log("Jump not possible - Turning");
-                        CmdTurn();
+                        CmdTurn(FacingDirection * -1);
                     }
                     else
                     {
@@ -204,7 +204,7 @@ public class NPC : Character
                     if (!pathClear)
                     {
                         //Debug.Log("Path obstructed - Turning");
-                        CmdTurn();
+                        CmdTurn(FacingDirection * -1);
                     }
                     else
                     {
@@ -251,7 +251,7 @@ public class NPC : Character
                     turnTimer -= Time.deltaTime;
                 else
                 {
-                    CmdTurn();
+                    CmdTurn(FacingDirection * -1);
                     turnTimer = 3f;
                 }
             }

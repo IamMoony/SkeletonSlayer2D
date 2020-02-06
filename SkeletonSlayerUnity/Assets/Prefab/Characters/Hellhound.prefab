@@ -291,10 +291,10 @@ GameObject:
   - component: {fileID: 5939185117275640316}
   - component: {fileID: 5939185117275640317}
   - component: {fileID: 5939185117275640314}
-  - component: {fileID: 5939185117275640319}
   - component: {fileID: 5939185117275640305}
-  - component: {fileID: 5939185117275640318}
+  - component: {fileID: 5939185117275640319}
   - component: {fileID: -4212692247845103882}
+  - component: {fileID: 5939185117275640318}
   m_Layer: 11
   m_Name: Hellhound
   m_TagString: Character
@@ -391,22 +391,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!58 &5939185117275640319
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5939185117275640315}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 6200000, guid: a2404c3f9b537444b9d1446a715cbcee, type: 2}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.3}
-  serializedVersion: 2
-  m_Radius: 0.2
 --- !u!50 &5939185117275640305
 Rigidbody2D:
   serializedVersion: 4
@@ -428,6 +412,38 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
+--- !u!58 &5939185117275640319
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5939185117275640315}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 6200000, guid: a2404c3f9b537444b9d1446a715cbcee, type: 2}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: -0.3}
+  serializedVersion: 2
+  m_Radius: 0.2
+--- !u!114 &-4212692247845103882
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5939185117275640315}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serverOnly: 0
+  localPlayerAuthority: 0
+  m_AssetId: 
+  m_SceneId: 3959488574
 --- !u!114 &5939185117275640318
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -454,8 +470,7 @@ MonoBehaviour:
   dash_Distance: 0
   teleport_Distance: 0
   climbing_Speed: 0
-  spells:
-  - {fileID: 8881317040600442969, guid: 1417bb59d291c1f4581e5aeb6e63c830, type: 3}
+  spells: []
   activeSpellID: 0
   animation_PreShoot: {fileID: 0}
   effect_Burn: {fileID: 7310163276645880396, guid: 24d0ce4752c97ad4dbdff29e61179231,
@@ -499,6 +514,9 @@ MonoBehaviour:
     type: 2}
   objectsInView: []
   target: {fileID: 0}
+  targetInView: 0
+  projectile: {fileID: 0}
+  projectileInView: 0
   targetInRange_Melee: 0
   cooldown_Melee: 0
   targetInRange_Ranged: 0
@@ -511,22 +529,6 @@ MonoBehaviour:
   Attitude: 2
   State: 0
   Action: 0
---- !u!114 &-4212692247845103882
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5939185117275640315}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  serverOnly: 0
-  localPlayerAuthority: 0
-  m_AssetId: cccb138ef246ae74688c8ec65d845d7d
-  m_SceneId: 0
 --- !u!1 &6178822397601025476
 GameObject:
   m_ObjectHideFlags: 0

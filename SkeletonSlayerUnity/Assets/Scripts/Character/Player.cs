@@ -22,11 +22,11 @@ public class Player : Character
             return;
         if (isStunned)
             return;
-        if (Input.GetAxis("Horizontal") != 0 && !isClimbing || isGrounded && isClimbing)
+        if (Input.GetAxis("Horizontal") != 0 && !isClimbing || Input.GetAxis("Horizontal") != 0 && isGrounded && isClimbing)
         {
             Vector2 direction = Input.GetAxis("Horizontal") > 0 ? Vector2.right : Vector2.left;
-            if (direction.x < 0 && FacingDirection == Vector2.right || direction.x > 0 && FacingDirection == Vector2.left)
-                CmdTurn();
+            if (direction != FacingDirection)
+                CmdTurn(direction);
             CmdMove(direction, 1f);
         }
         else
@@ -57,19 +57,19 @@ public class Player : Character
         }
         if (Input.GetButtonDown("Activate"))
         {
-            NetworkClient.connection.identity.gameObject.GetComponent<PlayerConnection>().CmdActivateSpell(FacingDirection, gameObject);
+            CmdActivateSpell(FacingDirection);
         }
         if (Input.GetKey(KeyCode.Alpha1))
         {
-            NetworkClient.connection.identity.gameObject.GetComponent<PlayerConnection>().CmdChangeSpell(0, gameObject);
+            CmdChangeSpell(0);
         }
         if (Input.GetKey(KeyCode.Alpha2))
         {
-            NetworkClient.connection.identity.gameObject.GetComponent<PlayerConnection>().CmdChangeSpell(1, gameObject);
+            CmdChangeSpell(1);
         }
         if (Input.GetKey(KeyCode.Alpha3))
         {
-            NetworkClient.connection.identity.gameObject.GetComponent<PlayerConnection>().CmdChangeSpell(2, gameObject);
+            CmdChangeSpell(2);
         }
     }
 }
