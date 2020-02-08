@@ -198,7 +198,7 @@ public class Character : NetworkBehaviour
     }
 
     [Command]
-    public void CmdJump(Vector2 direction)
+    public void CmdJump(Vector2 direction, float forceMod)
     {
         if (isGrounded || isClimbing)
         {
@@ -209,7 +209,7 @@ public class Character : NetworkBehaviour
                 climbLock = true;
             }
             anim.SetTrigger("Jump");
-            rb.AddForce((Vector2.up + direction) * JumpForce_Current);
+            rb.AddForce((Vector2.up + direction) * JumpForce_Current * forceMod);
             RpcJump(direction);
         }
     }
@@ -334,7 +334,7 @@ public class Character : NetworkBehaviour
 
     public void Knockback(Vector2 direction, int force)
     {
-        rb.AddForce(direction * force);
+        rb.AddForce((Vector2.up + direction) * force);
     }
 
     public void Stun(bool state, int time)

@@ -9,6 +9,7 @@ public class AttackCollider : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        //Debug.Log("Hit");
         collision.GetComponent<Character>().CmdDamage(dmgAmount);
         collision.GetComponent<Character>().Knockback(transform.parent.GetComponent<Character>().FacingDirection, knockbackForce);
     }

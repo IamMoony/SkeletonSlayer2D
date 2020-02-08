@@ -65,7 +65,7 @@ public class NPC : Character
     public IEnumerator Attack_Melee()
     {
         //Debug.Log("Start Melee Attack Routine");
-        if (isStunned || cooldown_Melee > 0)
+        if (isStunned)
             yield break;
         if (target.transform.position.x < transform.position.x && FacingDirection == Vector2.right || target.transform.position.x > transform.position.x && FacingDirection == Vector2.left)
             CmdTurn(FacingDirection * -1);
@@ -77,6 +77,7 @@ public class NPC : Character
     [Command]
     public void CmdAttackMelee()
     {
+        rb.AddForce((Vector2.up + FacingDirection) * JumpForce_Current * 0.75f);
         anim.SetTrigger("Attack_Melee");
         RpcAttackMelee();
     }
@@ -86,13 +87,14 @@ public class NPC : Character
     {
         if (!isClientOnly)
             return;
+        rb.AddForce((Vector2.up + FacingDirection) * JumpForce_Current * 0.75f);
         anim.SetTrigger("Attack_Melee");
     }
 
     public IEnumerator Attack_Ranged()
     {
         //Debug.Log("Start Ranged Attack Routine");
-        if (isStunned || cooldown_Ranged > 0)
+        if (isStunned)
             yield break;
         if (target.transform.position.x < transform.position.x && FacingDirection == Vector2.right || target.transform.position.x > transform.position.x && FacingDirection == Vector2.left)
             CmdTurn(FacingDirection * -1);
@@ -100,6 +102,7 @@ public class NPC : Character
         CmdTriggerRangedAnimation();
         yield return new WaitForSeconds(attackAnimation_Ranged.averageDuration);
         CmdAttackRanged();
+        yield return new WaitForSeconds(1f);
     }
 
     [Command]
@@ -174,7 +177,7 @@ public class NPC : Character
     public IEnumerator Patrol()
     {
         //Debug.Log("Start Patrol Routine");
-        while (target == null)
+        while (target == null && projectile == null)
         {
             if (!isStunned && isGrounded)
             {
@@ -191,7 +194,7 @@ public class NPC : Character
                     else
                     {
                         //Debug.Log("Jump TakeOff");
-                        CmdJump(FacingDirection);
+                        CmdJump(FacingDirection, 1f);
                         isGrounded = false;
                         while (!isGrounded)
                             yield return new WaitForEndOfFrame();
@@ -212,14 +215,15 @@ public class NPC : Character
                         if (!viewClear)
                         {
                             //Debug.Log("Something is in View");
-                            if (!TargetInView())
+                            CheckView();
+                            if (!targetInView)
                             {
-                                //Debug.Log("No Target found - Moving");
+                                //Debug.Log("No target or projectile found - Moving");
                                 CmdMove(FacingDirection, 0.5f);
                             }
                             else
                             {
-                                //Debug.Log("Target found - Stoping");
+                                //Debug.Log("Target or projectile found - Stoping");
                                 CmdStop(false);
                             }
                         }
@@ -231,7 +235,7 @@ public class NPC : Character
                     }
                 }
             }
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForEndOfFrame();
         }
     }
 
@@ -244,7 +248,8 @@ public class NPC : Character
             {
                 if (!viewClear)
                 {
-                    if (TargetInView())
+                    CheckView();
+                    if (targetInView)
                        break;
                 }
                 if (turnTimer > 0)
@@ -259,23 +264,41 @@ public class NPC : Character
         }
     }
 
-    public bool TargetInView()
+    public IEnumerator Evade()
     {
+        //Debug.Log("Evasion");
+        Vector2 evadeDir = Vector2.up;
+        CmdJump(evadeDir, 0.75f);
+        projectile = null;
+        yield return new WaitForSeconds(.5f);
+    }
+
+    public void CheckView()
+    {
+        //Debug.Log("Checking View");
         for (int i = 0; i < objectsInView.Count; i++)
         {
             if (objectsInView[i].tag == "Character")
             {
+                //Debug.Log("Character in View");
                 if (objectsInView[i].GetComponent<Character>() is Player)
                 {
+                    //Debug.Log("its a player");
                     target = objectsInView[i];
                     targetInView = true;
-                    return true;
                 }
-                else
-                    objectsInView.RemoveAt(i);
+            }
+            else if (objectsInView[i].tag == "Projectile")
+            {
+                //Debug.Log("Projectile in View");
+                if (objectsInView[i].GetComponent<Projectile>().owner is Player)
+                {
+                    //Debug.Log("its a player projectile");
+                    projectile = objectsInView[i];
+                    projectileInView = true;
+                }
             }
         }
-        return false;
     }
 
     public bool IsTargetInSight()
@@ -312,5 +335,14 @@ public class NPC : Character
                 targetInRange_Ranged = false;
         }
         return false;
+    }
+
+    public bool ProjectileThreatCheck()
+    {
+        Vector2 nextProjectilePosition = (Vector2)projectile.transform.position + projectile.GetComponent<Projectile>().RB.velocity * Time.deltaTime;
+        Vector2 nextCharacterPosition = (Vector2)transform.position + rb.velocity * Time.deltaTime;
+        if (Vector2.Distance(nextProjectilePosition, nextCharacterPosition) > 1f)
+            return false;
+        return true;
     }
 }

@@ -347,7 +347,7 @@ MonoBehaviour:
   serverOnly: 0
   localPlayerAuthority: 1
   m_AssetId: 
-  m_SceneId: 389221037
+  m_SceneId: 4117985462
 --- !u!114 &2065848936377577216
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -362,7 +362,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  HP_Base: 50
+  HP_Base: 10
   HP_Current: 0
   DMG_Base: 1
   DMG_Current: 0

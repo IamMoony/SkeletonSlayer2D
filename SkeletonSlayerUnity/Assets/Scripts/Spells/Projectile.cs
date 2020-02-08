@@ -45,7 +45,7 @@ public class Projectile : NetworkBehaviour
         {
             CharacterContact(collider.GetComponent<Character>(), collider.ClosestPoint(transform.position));
         }
-        else
+        else if (collider.tag == "Ground")
         {
             GroundContact(collider.ClosestPoint(transform.position));
         }

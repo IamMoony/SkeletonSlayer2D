@@ -442,8 +442,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   serverOnly: 0
   localPlayerAuthority: 0
-  m_AssetId: 
-  m_SceneId: 3959488574
+  m_AssetId: cccb138ef246ae74688c8ec65d845d7d
+  m_SceneId: 0
 --- !u!114 &5939185117275640318
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -470,6 +470,7 @@ MonoBehaviour:
   dash_Distance: 0
   teleport_Distance: 0
   climbing_Speed: 0
+  spellInstances: []
   spells: []
   activeSpellID: 0
   animation_PreShoot: {fileID: 0}
@@ -504,12 +505,12 @@ MonoBehaviour:
   visible:
     serializedVersion: 2
     m_Bits: 2304
-  attackRange_Melee: 0.5
+  attackRange_Melee: 1
   attackCooldown_Melee: 1
   attackAnimation_Melee: {fileID: 7400000, guid: 10f80ca7d78c3be4594f65fc1e3a05c3,
     type: 2}
-  attackRange_Ranged: 3
-  attackCooldown_Ranged: 2
+  attackRange_Ranged: 4
+  attackCooldown_Ranged: 4
   attackAnimation_Ranged: {fileID: 7400000, guid: 08b7579aa9e59dd4e9acbbb1063fb645,
     type: 2}
   objectsInView: []
@@ -660,7 +661,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dmgAmount: 1
-  knockbackForce: 50
+  knockbackForce: 75
 --- !u!1 &9146308309727500621
 GameObject:
   m_ObjectHideFlags: 0

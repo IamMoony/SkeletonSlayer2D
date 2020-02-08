@@ -4889,7 +4889,7 @@ MonoBehaviour:
   serverOnly: 0
   localPlayerAuthority: 0
   m_AssetId: 
-  m_SceneId: 2952725068
+  m_SceneId: 4164683100
 --- !u!114 &1036273925
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4923,7 +4923,7 @@ MonoBehaviour:
   isActivated: 0
   owner: {fileID: 0}
   RB: {fileID: 0}
-  projectileBurn: 1
+  projectileBurn: 0
   projectileBounce: 0
   chargeVelocity: 0
   explosionRadius: 0

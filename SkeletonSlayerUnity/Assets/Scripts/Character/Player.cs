@@ -29,7 +29,7 @@ public class Player : Character
                 CmdTurn(direction);
             CmdMove(direction, 1f);
         }
-        else
+        else if (isGrounded)
         {
             CmdStop(true);
         }
@@ -43,7 +43,7 @@ public class Player : Character
         }
         if (Input.GetButtonDown("Jump"))
         {
-            CmdJump(Vector2.zero);
+            CmdJump(Vector2.zero, 1f);
         }
         if (Input.GetButtonDown("Dash"))
         {
