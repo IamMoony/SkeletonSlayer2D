@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5225803668465559151}
-  - component: {fileID: 7450495574608579579}
+  - component: {fileID: -267198948058087797}
   m_Layer: 0
-  m_Name: Spell_WaterOrb
+  m_Name: Spell_FrostNova
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -31,7 +31,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7450495574608579579
+--- !u!114 &-267198948058087797
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -43,12 +43,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e32f3b34ed348d7478f5c9e04a0dde75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spellName: Water Orb
+  spellName: Frost Nova
   spellDescription: 
   spellIcon: {fileID: 0}
-  spellPrefab: {fileID: 2390927443734499096, guid: db8a3a7c3c29fbe419ff2a9f898da5f9,
+  spellPrefab: {fileID: 7636025900996775909, guid: 14fbbbead88faf74193aecb3948d80de,
     type: 3}
-  castTime: 1
+  castTime: 0
   coolDown: 2
   cd: 0
   spellInstance: {fileID: 0}

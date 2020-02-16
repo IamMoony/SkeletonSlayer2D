@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1701944546573125758}
-  - component: {fileID: 3068676336632528724}
+  - component: {fileID: 8123942154959782768}
   m_Layer: 0
   m_Name: Spell_EarthWorm
   m_TagString: Untagged
@@ -31,7 +31,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3068676336632528724
+--- !u!114 &8123942154959782768
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -40,7 +40,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2419523090019864414}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a751e89dbf3537a45b547fcfb4169955, type: 3}
+  m_Script: {fileID: 11500000, guid: e32f3b34ed348d7478f5c9e04a0dde75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   spellName: Earth Worm
@@ -49,5 +49,6 @@ MonoBehaviour:
   spellPrefab: {fileID: 4053248971094408233, guid: 30379c95a7c27ec43a2df2d5ea54b593,
     type: 3}
   castTime: 1
-  coolDown: 0
+  coolDown: 2
   cd: 0
+  spellInstance: {fileID: 0}

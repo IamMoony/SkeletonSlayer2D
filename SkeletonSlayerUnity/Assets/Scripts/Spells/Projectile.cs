@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
 
-public class Projectile : NetworkBehaviour
+public class Projectile : Spell
 {
     public float initalVelocity;
     public Vector3 velocityModifier;
     public int contactDamage;
+    public int contactKnockBackForce;
     public float lifeTime = 10f;
     public GameObject effect_Activation;
     public GameObject effect_Contact_Character_PreActivation;
@@ -17,7 +18,6 @@ public class Projectile : NetworkBehaviour
     public GameObject effect_Destroy;
 
     public bool isActivated;
-    public Character owner;
 
     public Rigidbody2D RB;
 
@@ -72,6 +72,7 @@ public class Projectile : NetworkBehaviour
     public virtual void CharacterContact(Character characterInContact, Vector2 contactPosition)
     {
         characterInContact.CmdDamage(contactDamage);
+        characterInContact.CmdKnockback(((Vector2)characterInContact.transform.position - contactPosition).normalized, contactKnockBackForce);
         if (!isActivated)
             Destroy(Instantiate(effect_Contact_Character_PreActivation, contactPosition, Quaternion.identity), 5f);
         else

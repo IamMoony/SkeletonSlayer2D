@@ -22,14 +22,14 @@ public class Player : Character
             return;
         if (isStunned)
             return;
-        if (Input.GetAxis("Horizontal") != 0 && !isClimbing || Input.GetAxis("Horizontal") != 0 && isGrounded && isClimbing)
+        if (Input.GetAxis("Horizontal") != 0 && !isClimbing && knockTime <= 0 || Input.GetAxis("Horizontal") != 0 && isGrounded && isClimbing)
         {
             Vector2 direction = Input.GetAxis("Horizontal") > 0 ? Vector2.right : Vector2.left;
             if (direction != FacingDirection)
                 CmdTurn(direction);
             CmdMove(direction, 1f);
         }
-        else if (isGrounded)
+        else if (isGrounded && knockTime <= 0)
         {
             CmdStop(true);
         }
@@ -71,6 +71,10 @@ public class Player : Character
         if (Input.GetKey(KeyCode.Alpha3))
         {
             CmdChangeSpell(2);
+        }
+        if (Input.GetKey(KeyCode.Alpha4))
+        {
+            CmdChangeSpell(3);
         }
     }
 }

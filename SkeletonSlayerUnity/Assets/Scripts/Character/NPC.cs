@@ -278,6 +278,12 @@ public class NPC : Character
         //Debug.Log("Checking View");
         for (int i = 0; i < objectsInView.Count; i++)
         {
+            if (objectsInView[i] == null)
+            {
+                objectsInView.RemoveAt(i);
+                i--;
+                return;
+            }
             if (objectsInView[i].tag == "Character")
             {
                 //Debug.Log("Character in View");

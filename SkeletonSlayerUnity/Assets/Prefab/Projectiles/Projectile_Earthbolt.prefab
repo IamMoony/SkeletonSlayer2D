@@ -4889,7 +4889,7 @@ MonoBehaviour:
   serverOnly: 0
   localPlayerAuthority: 0
   m_AssetId: 
-  m_SceneId: 4182439681
+  m_SceneId: 888186632
 --- !u!114 &-1178161966412068590
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4907,6 +4907,7 @@ MonoBehaviour:
   initalVelocity: 1
   velocityModifier: {x: 0, y: 0, z: 0}
   contactDamage: 0
+  contactKnockBackForce: 0
   lifeTime: 10
   effect_Activation: {fileID: 7222003547137436195, guid: fb7c51cddce6ecb4bb5b6e2fde91559b,
     type: 3}

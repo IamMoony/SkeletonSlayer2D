@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class EmergingRock : Projectile
 {
-    public int knockBackForce;
     public float emergeAmount;
     public float emergeSpeed;
 
@@ -20,17 +19,11 @@ public class EmergingRock : Projectile
 
     public override void CharacterContact(Character characterInContact, Vector2 contactPosition)
     {
-        base.CharacterContact(characterInContact, contactPosition);
         if (emerging)
         {
             characterInContact.CmdDamage(contactDamage);
-            characterInContact.Knockback(emergeDirection, knockBackForce);
+            characterInContact.CmdKnockback(((Vector2)characterInContact.transform.position - contactPosition).normalized, contactKnockBackForce);
         }
-    }
-
-    public override void GroundContact(Vector2 contactPosition)
-    {
-        //base.GroundContact(contactPosition);
     }
 
     IEnumerator Emerge()

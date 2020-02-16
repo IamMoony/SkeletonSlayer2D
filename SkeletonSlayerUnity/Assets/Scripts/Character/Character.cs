@@ -16,9 +16,10 @@ public class Character : NetworkBehaviour
     public float dash_Speed;
     public float dash_Distance;
     public float teleport_Distance;
+    public float teleport_Cooldown;
     public float climbing_Speed;
     public GameObject[] spellInstances;
-    [HideInInspector] public Spell[] spells;
+    [HideInInspector] public Spellbook[] spells;
     [HideInInspector, SyncVar] public int activeSpellID;
     public AnimationClip animation_PreShoot;
     public GameObject effect_Burn;
@@ -30,6 +31,7 @@ public class Character : NetworkBehaviour
     public GameObject defaultProjectile;
 
     [HideInInspector] public float actionValue = 0;
+    [HideInInspector] public float knockTime;
     [HideInInspector] public bool isGrounded;
     [HideInInspector] public bool isWalking;
     [HideInInspector] public bool canClimb;
@@ -49,6 +51,7 @@ public class Character : NetworkBehaviour
     private int root_Ticks;
     private int wet_Ticks;
     private int stun_Ticks;
+    private float tele_cd;
     private Collider2D climbableObject;
 
     private void Awake()
@@ -65,10 +68,11 @@ public class Character : NetworkBehaviour
         effect_Wet.SetActive(false);
         //effect_Stun = Instantiate(effect_Stun, transform);
         //effect_Stun.SetActive(false);
+        spells = new Spellbook[spellInstances.Length];
         for (int i = 0; i < spellInstances.Length; i++)
         {
             spellInstances[i] = Instantiate(spellInstances[i], transform);
-            spells[i] = spellInstances[i].GetComponent<Spell>();
+            spells[i] = spellInstances[i].GetComponent<Spellbook>();
         }
         tick = 1f;
         HP_Current = HP_Base;
@@ -142,6 +146,10 @@ public class Character : NetworkBehaviour
             if (spells[i].cd > 0)
                 spells[i].cd -= Time.deltaTime;
         }
+        if (tele_cd > 0)
+            tele_cd -= Time.deltaTime;
+        if (knockTime > 0)
+            knockTime -= Time.deltaTime;
     }
 
     [Command]
@@ -294,6 +302,9 @@ public class Character : NetworkBehaviour
     [Command]
     public void CmdTeleport()
     {
+        if (tele_cd > 0)
+            return;
+        tele_cd = teleport_Cooldown;
         anim.SetTrigger("Dash");
         Vector2 targetPos = (Vector2)transform.position + FacingDirection * teleport_Distance;
         Collider2D obstructed = Physics2D.OverlapCircle(targetPos, 0.1f, GroundLayer);
@@ -311,6 +322,7 @@ public class Character : NetworkBehaviour
     {
         if (!isClientOnly)
             return;
+        tele_cd = teleport_Cooldown;
         anim.SetTrigger("Dash");
         Vector2 targetPos = (Vector2)transform.position + FacingDirection * teleport_Distance;
         Collider2D obstructed = Physics2D.OverlapCircle(targetPos, 0.1f, GroundLayer);
@@ -332,9 +344,21 @@ public class Character : NetworkBehaviour
         }
     }
 
-    public void Knockback(Vector2 direction, int force)
+    [Command]
+    public void CmdKnockback(Vector2 direction, int force)
     {
-        rb.AddForce((Vector2.up + direction) * force);
+        knockTime = .25f;
+        rb.AddForce(direction * force);
+        RpcKnockback(direction, force);
+    }
+
+    [ClientRpc]
+    public void RpcKnockback(Vector2 direction, int force)
+    {
+        if (!isClientOnly)
+            return;
+        knockTime = .25f;
+        rb.AddForce(direction * force);
     }
 
     public void Stun(bool state, int time)

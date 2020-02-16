@@ -75,7 +75,7 @@ public class Firebolt : Projectile
                 if (explosionBurn)
                     character.CmdBurn(true);
                 character.CmdDamage(explosionDamage);
-                character.Knockback((targetsInRadius[i].transform.position - transform.position).normalized,  explosionForce);
+                character.CmdKnockback((targetsInRadius[i].transform.position - transform.position).normalized,  explosionForce);
             }
         }
     }
