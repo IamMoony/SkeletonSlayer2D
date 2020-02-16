@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5064407292659343219}
-  - component: {fileID: 8881317040600442969}
+  - component: {fileID: -7194204555857475326}
   m_Layer: 0
   m_Name: Spell_Hellhound
   m_TagString: Untagged
@@ -31,7 +31,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8881317040600442969
+--- !u!114 &-7194204555857475326
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -40,14 +40,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 8089935510165870675}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a751e89dbf3537a45b547fcfb4169955, type: 3}
+  m_Script: {fileID: 11500000, guid: e32f3b34ed348d7478f5c9e04a0dde75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spellName: Hellhound Spit
+  spellName: 
   spellDescription: 
   spellIcon: {fileID: 0}
   spellPrefab: {fileID: 4439456849462767887, guid: e72c3ac73ff8abd46bebc650bfd99cfa,
     type: 3}
   castTime: 1
-  coolDown: 1
-  cd: 1.6502932
+  coolDown: 5
+  cd: 0
+  spellInstance: {fileID: 0}

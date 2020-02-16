@@ -10,10 +10,10 @@ public class IceBlock : Projectile
     public override void CharacterContact(Character characterInContact, Vector2 contactPosition)
     {
         base.CharacterContact(characterInContact, contactPosition);
-        if (RB.velocity.magnitude > 0.5f)
+        if (RB.velocity.magnitude > 0.1f)
         {
             characterInContact.CmdDamage(contactDamage);
-            characterInContact.Knockback(Vector2.down, knockDownForce);
+            characterInContact.CmdKnockback(Vector2.down, knockDownForce);
             characterInContact.Stun(true, stunDuration);
             ProjectileDestroy();
         }

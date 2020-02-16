@@ -11,6 +11,6 @@ public class AttackCollider : MonoBehaviour
     {
         //Debug.Log("Hit");
         collision.GetComponent<Character>().CmdDamage(dmgAmount);
-        collision.GetComponent<Character>().Knockback(transform.parent.GetComponent<Character>().FacingDirection, knockbackForce);
+        collision.GetComponent<Character>().CmdKnockback(transform.parent.GetComponent<Character>().FacingDirection, knockbackForce);
     }
 }
