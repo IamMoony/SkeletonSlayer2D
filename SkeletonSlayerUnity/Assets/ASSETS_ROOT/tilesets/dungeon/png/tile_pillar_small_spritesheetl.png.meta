@@ -14,6 +14,12 @@ TextureImporter:
   - first:
       213: -3274540275962821924
     second: tile_pillar_small_spritesheetl_3
+  - first:
+      213: 5349509441716083825
+    second: tile_pillar_small_spritesheetl_4
+  - first:
+      213: 6258002285425214365
+    second: tile_pillar_small_spritesheetl_5
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -110,7 +116,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ca2cb46af3d34114c9ca73fb244cdd8f
+      spriteID: c650e264efbc7c14a8f3c34d8572c942
       internalID: -1060324022446097721
       vertices: []
       indices: 
@@ -131,7 +137,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4582790037fb9f74dbc760ed302627fe
+      spriteID: 216794593935c6b4ca0b7b32a15f891f
       internalID: 582058300411942855
       vertices: []
       indices: 
@@ -152,7 +158,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1db5c1f51a3907d44bbea2237c24206c
+      spriteID: 3448bf5d32e90fd4ca7d151752d1db3a
       internalID: 8822838918401359154
       vertices: []
       indices: 
@@ -173,8 +179,50 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a60907b8ae6e6a04fb97f59ad7972240
+      spriteID: 4855e9bff843ee54d922dafccb1ba754
       internalID: -3274540275962821924
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tile_pillar_small_spritesheetl_4
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5e2a5f51890c712488cdb1e41d88ba15
+      internalID: 5349509441716083825
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tile_pillar_small_spritesheetl_5
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 538fd30495ff1b34dab0e914c271ce9b
+      internalID: 6258002285425214365
       vertices: []
       indices: 
       edges: []
