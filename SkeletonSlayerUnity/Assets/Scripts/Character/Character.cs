@@ -468,8 +468,10 @@ public class Character : NetworkBehaviour
     [Command]
     public void CmdActivateSpell(Vector2 direction)
     {
-        spells[activeSpellID].Activate(direction);
-        RpcActivateSpell(direction);
+        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10f));
+        Vector2 castDirection = (mousePosition - spells[activeSpellID].spellInstance.transform.position).normalized;
+        spells[activeSpellID].Activate(castDirection);
+        RpcActivateSpell(castDirection);
     }
 
     [ClientRpc]
@@ -511,7 +513,10 @@ public class Character : NetworkBehaviour
         actionValue = 0;
         if (isGrounded && !isWalking)
         {
-            spells[activeSpellID].Cast(FacingDirection, projectileSpawn.position, this);
+            Vector3 mousePosition = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10f));
+            mousePosition = transform.InverseTransformPoint(mousePosition);
+            Vector2 castDirection = (mousePosition - projectileSpawn.localPosition).normalized;
+            spells[activeSpellID].Cast(castDirection, projectileSpawn.position, this);
         }
     }
 }

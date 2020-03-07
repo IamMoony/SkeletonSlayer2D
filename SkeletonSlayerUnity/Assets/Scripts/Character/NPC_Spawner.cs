@@ -12,7 +12,7 @@ public class NPC_Spawner : NetworkBehaviour
 
     private void Awake()
     {
-        characterHolder = GameObject.Find("Characters").transform;
+        characterHolder = GameObject.Find("Enemies").transform;
     }
 
     private void OnBecameVisible()

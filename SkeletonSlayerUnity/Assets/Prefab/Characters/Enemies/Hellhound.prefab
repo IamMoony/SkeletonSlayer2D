@@ -359,7 +359,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 3
+  m_SortingOrder: 4
   m_Sprite: {fileID: 8470447989417536072, guid: e1dc1aa8503ea7d4ba2e9ab53c5d436e,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -442,7 +442,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   serverOnly: 0
   localPlayerAuthority: 0
-  m_AssetId: cccb138ef246ae74688c8ec65d845d7d
+  m_AssetId: 
   m_SceneId: 0
 --- !u!114 &5939185117275640318
 MonoBehaviour:
@@ -469,6 +469,7 @@ MonoBehaviour:
   dash_Speed: 0
   dash_Distance: 0
   teleport_Distance: 0
+  teleport_Cooldown: 0
   climbing_Speed: 0
   spellInstances: []
   spells: []
@@ -487,6 +488,7 @@ MonoBehaviour:
   defaultProjectile: {fileID: 4439456849462767887, guid: e72c3ac73ff8abd46bebc650bfd99cfa,
     type: 3}
   actionValue: 0
+  knockTime: 0
   isGrounded: 0
   isWalking: 0
   canClimb: 0
