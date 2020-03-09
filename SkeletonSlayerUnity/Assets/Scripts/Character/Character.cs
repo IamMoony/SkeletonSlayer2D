@@ -514,8 +514,8 @@ public class Character : NetworkBehaviour
         if (isGrounded && !isWalking)
         {
             Vector3 mousePosition = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10f));
-            mousePosition = transform.InverseTransformPoint(mousePosition);
-            Vector2 castDirection = (mousePosition - projectileSpawn.localPosition).normalized;
+            mousePosition = projectileSpawn.transform.InverseTransformPoint(mousePosition);
+            Vector3 castDirection = mousePosition;
             spells[activeSpellID].Cast(castDirection, projectileSpawn.position, this);
         }
     }
