@@ -4772,7 +4772,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4439456849462767892
 Transform:
   m_ObjectHideFlags: 0
@@ -4902,8 +4902,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18a8230657e9cc641bc81d0e810a8299, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  syncMode: 0
-  syncInterval: 0.1
+  owner: {fileID: 0}
   initalVelocity: 2
   velocityModifier: {x: 0, y: 0, z: 0}
   contactDamage: 1
@@ -4922,7 +4921,6 @@ MonoBehaviour:
   effect_Destroy: {fileID: 3593303007339290826, guid: 703c2dad49a614e4bb2fe4f44b474e2a,
     type: 3}
   isActivated: 0
-  owner: {fileID: 0}
   RB: {fileID: 0}
   projectileBurn: 0
   projectileBounce: 0
