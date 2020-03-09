@@ -18,7 +18,7 @@ public class Spellbook : MonoBehaviour
     {
         //Debug.Log("source = " + source);
         cd = coolDown;
-        spellInstance = Instantiate(spellPrefab, position, Quaternion.Euler(new Vector3(0, 0, Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg)));
+        spellInstance = Instantiate(spellPrefab, position, Quaternion.Euler(new Vector3(0, source.FacingDirection == Vector2.right ? 0 : 180, Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg)));
         spellInstance.GetComponent<Spell>().owner = source;
     }
 
