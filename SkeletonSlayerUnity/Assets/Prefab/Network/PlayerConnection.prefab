@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4004112118904465641
 Transform:
   m_ObjectHideFlags: 0
@@ -47,7 +47,7 @@ MonoBehaviour:
   serverOnly: 0
   localPlayerAuthority: 0
   m_AssetId: 
-  m_SceneId: 3591684621
+  m_SceneId: 426664228
 --- !u!114 &8214497003230088269
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -64,3 +64,4 @@ MonoBehaviour:
   syncInterval: 0.1
   playerPrefab: {fileID: 2065848936377577231, guid: 0e83d9b3cf66e2d4899690cdc75f64a0,
     type: 3}
+  playerInstance: {fileID: 0}

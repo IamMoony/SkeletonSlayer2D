@@ -4821,7 +4821,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &7636025900996775934
 Transform:
   m_ObjectHideFlags: 0
@@ -4938,7 +4938,7 @@ MonoBehaviour:
   serverOnly: 0
   localPlayerAuthority: 0
   m_AssetId: 
-  m_SceneId: 1475148327
+  m_SceneId: 2628364313
 --- !u!114 &6927488732852042690
 MonoBehaviour:
   m_ObjectHideFlags: 0
