@@ -7,7 +7,7 @@ public class PlayerConnection : NetworkBehaviour
 {
     public GameObject playerPrefab;
 
-    private GameObject player;
+    public GameObject playerInstance;
 
     private void Start()
     {
@@ -19,7 +19,7 @@ public class PlayerConnection : NetworkBehaviour
     [Command]
     void CmdSpawnPlayer()
     {
-        player = Instantiate(playerPrefab);
-        NetworkServer.SpawnWithClientAuthority(player, connectionToClient);
+        playerInstance = Instantiate(playerPrefab);
+        NetworkServer.SpawnWithClientAuthority(playerInstance, connectionToClient);
     }
 }
