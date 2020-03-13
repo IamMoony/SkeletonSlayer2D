@@ -504,14 +504,14 @@ public class Character : NetworkBehaviour
         {
             if (actionValue >= (spells[activeSpellID].castTime - (animation_PreShoot == null ? 0 : animation_PreShoot.averageDuration)) / spells[activeSpellID].castTime)
                 anim.SetTrigger("Shoot");
-            if (isGrounded && !isWalking)
+            if (true)
                 actionValue = Mathf.Clamp(actionValue + Time.deltaTime / spells[activeSpellID].castTime, 0, 1);
             else
                 break;
             yield return new WaitForEndOfFrame();
         }
         actionValue = 0;
-        if (isGrounded && !isWalking)
+        if (true)
         {
             Vector3 mousePosition = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10f));
             mousePosition = projectileSpawn.transform.InverseTransformPoint(mousePosition);

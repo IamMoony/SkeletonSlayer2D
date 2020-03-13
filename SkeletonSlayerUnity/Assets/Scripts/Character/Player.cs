@@ -51,7 +51,7 @@ public class Player : Character
         }
         if (Input.GetButtonDown("Shoot"))
         {
-            if (isGrounded && !isWalking && spells[activeSpellID].cd <= 0)
+            if (spells[activeSpellID].cd <= 0)
             {
                 CmdCast();
             } 
