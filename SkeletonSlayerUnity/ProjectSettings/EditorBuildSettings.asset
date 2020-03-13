@@ -5,7 +5,10 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 1
-    path: Assets/Scenes/Warp_Forest.unity
-    guid: 2e41991e91aee2148a46e5809e3fc7b3
+    path: Assets/Scenes/Dungeon_Testscene.unity
+    guid: 0b5fcfefe4beafc41ac4384d952b08a2
   m_configObjects: {}
