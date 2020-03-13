@@ -4772,7 +4772,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4053248971094408242
 Transform:
   m_ObjectHideFlags: 0
@@ -4902,8 +4902,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 009217ddedb167a4fb0f339dee7b04e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  syncMode: 0
-  syncInterval: 0.1
+  owner: {fileID: 0}
   initalVelocity: 1
   velocityModifier: {x: 0, y: 0, z: 0}
   contactDamage: 0
@@ -4922,7 +4921,6 @@ MonoBehaviour:
   effect_Destroy: {fileID: 7222003547137436195, guid: fb7c51cddce6ecb4bb5b6e2fde91559b,
     type: 3}
   isActivated: 0
-  owner: {fileID: 0}
   RB: {fileID: 0}
   burrowVelocity: 1
   burrowDepth: 0.3

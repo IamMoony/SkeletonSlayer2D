@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4004112118904465641
 Transform:
   m_ObjectHideFlags: 0
@@ -63,6 +63,4 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   playerPrefab: {fileID: 2065848936377577231, guid: 0e83d9b3cf66e2d4899690cdc75f64a0,
-    type: 3}
-  firebolt: {fileID: 4439456849462767887, guid: b50c293318cb0fc4999618cf21e66765,
     type: 3}
