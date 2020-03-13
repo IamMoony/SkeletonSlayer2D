@@ -6,7 +6,6 @@ using Mirror;
 public class NPC_Spawner : NetworkBehaviour
 {
     public GameObject npcPrefab;
-    public GameObject npcInstance;
     public bool turn;
     private Transform characterHolder;
     private bool hasFired;
@@ -21,10 +20,6 @@ public class NPC_Spawner : NetworkBehaviour
         if (!hasFired)
         {
             CmdSpawn();
-            for (int i = 0; i < NetworkServer.connections.Count; i++)
-            {
-                NetworkServer.connections[i].identity.GetComponent<PlayerConnection>().playerInstance.GetComponent<Player>().StartCombat(npcInstance.GetComponent<Character>());
-            }
             hasFired = true;
         }
     }
@@ -32,9 +27,9 @@ public class NPC_Spawner : NetworkBehaviour
     [Command]
     private void CmdSpawn()
     {
-        npcInstance = Instantiate(npcPrefab, transform.position, Quaternion.identity, characterHolder);
-        NetworkServer.Spawn(npcInstance);
+        GameObject go = Instantiate(npcPrefab, transform.position, Quaternion.identity, characterHolder);
+        NetworkServer.Spawn(go);
         if (turn)
-            npcInstance.GetComponent<Character>().CmdTurn(npcInstance.GetComponent<Character>().FacingDirection * -1);
+            go.GetComponent<Character>().CmdTurn(go.GetComponent<Character>().FacingDirection * -1);
     }
 }
