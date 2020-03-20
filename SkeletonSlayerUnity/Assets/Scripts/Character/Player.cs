@@ -6,14 +6,17 @@ using Mirror;
 
 public class Player : Character
 {
+    public List<int> activeSpellID;
+
     CinemachineVirtualCamera vcam;
 
     public override void OnStartAuthority()
     {
         base.OnStartAuthority();
-        activeSpellID = 0;
         vcam = GameObject.Find("Camera_Control").GetComponent<CinemachineVirtualCamera>();
         vcam.Follow = transform;
+        GameObject.Find("Panel_SpellSelection").GetComponent<SpellSelection>().localPlayer = this;
+        GameObject.Find("Panel_SpellSelection").GetComponent<SpellSelection>().StartSelection();
     }
 
     public override void Update()
@@ -61,21 +64,25 @@ public class Player : Character
         {
             CmdActivateSpell(FacingDirection);
         }
-        if (Input.GetKey(KeyCode.Alpha1))
+        if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            CmdChangeSpell(0);
+            if (activeSpellID.Count > 0)
+            CmdCast(activeSpellID[0]);
         }
-        if (Input.GetKey(KeyCode.Alpha2))
+        if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            CmdChangeSpell(1);
+            if (activeSpellID.Count > 1)
+                CmdCast(activeSpellID[1]);
         }
-        if (Input.GetKey(KeyCode.Alpha3))
+        if (Input.GetKeyDown(KeyCode.Alpha3))
         {
-            CmdChangeSpell(2);
+            if (activeSpellID.Count > 2)
+                CmdCast(activeSpellID[2]);
         }
-        if (Input.GetKey(KeyCode.Alpha4))
+        if (Input.GetKeyDown(KeyCode.Alpha4))
         {
-            CmdChangeSpell(3);
+            if (activeSpellID.Count > 3)
+                CmdCast(activeSpellID[3]);
         }
     }
 }

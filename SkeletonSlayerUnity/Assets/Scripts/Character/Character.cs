@@ -21,7 +21,6 @@ public class Character : NetworkBehaviour
     public GameObject spellBookInstance;
     [HideInInspector] public Spellbook spellBook;
     public GameObject[] spellInstances;
-    [HideInInspector, SyncVar] public int activeSpellID;
     public AnimationClip animation_PreShoot;
     public GameObject effect_Burn;
     public GameObject effect_Freeze;
@@ -457,7 +456,7 @@ public class Character : NetworkBehaviour
     [Command]
     public void CmdChangeSpell(int id)
     {
-        activeSpellID = id;
+        //activeSpellID = id;
         RpcChangeSpell(id);
     }
 
@@ -466,7 +465,7 @@ public class Character : NetworkBehaviour
     {
         if (!isClientOnly)
             return;
-        activeSpellID = id;
+        //activeSpellID = id;
     }
 
     [Command]
@@ -509,14 +508,14 @@ public class Character : NetworkBehaviour
         {
             if (actionValue >= (spellToCast.castTime - (animation_PreShoot == null ? 0 : animation_PreShoot.averageDuration)) / spellToCast.castTime)
                 anim.SetTrigger("Shoot");
-            if (Input.GetButton("Shoot"))
+            if (true)
                 actionValue = Mathf.Clamp(actionValue + Time.deltaTime / spellToCast.castTime, 0, 1);
             else
                 break;
             yield return new WaitForEndOfFrame();
         }
         actionValue = 0;
-        if (Input.GetButton("Shoot"))
+        if (true)
         {
             Vector3 mousePosition = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10f));
             mousePosition = projectileSpawn.transform.InverseTransformPoint(mousePosition);

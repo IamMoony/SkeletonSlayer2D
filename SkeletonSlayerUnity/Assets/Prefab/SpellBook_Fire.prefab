@@ -47,6 +47,9 @@ MonoBehaviour:
   bookDescription: Fire Spells
   primarySpellInstance: {fileID: 3234334099831997495, guid: a18e133cccd24c549ba8ffa6a15e6ff3,
     type: 3}
-  secondarySpellInstance: []
+  secondarySpellInstance:
+  - {fileID: 2419523090019864414, guid: 32bce0f2158c8f64a9e3bd8f9a654f38, type: 3}
+  - {fileID: 9117698377554354511, guid: eda999b89b2e23249b90b06baed25cf1, type: 3}
+  - {fileID: 9117698377554354511, guid: dfee9ed0a09389b49b7109b0f106a470, type: 3}
   primarySpell: {fileID: 0}
   secondarySpell: []
