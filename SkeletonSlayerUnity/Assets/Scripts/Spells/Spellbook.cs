@@ -4,31 +4,35 @@ using UnityEngine;
 
 public class Spellbook : MonoBehaviour
 {
-    public string spellName;
-    public string spellDescription;
-    public Sprite spellIcon;
-    public GameObject spellPrefab;
-    public float castTime;
-    public float coolDown;
+    public string bookName;
+    public string bookDescription;
 
-    [HideInInspector] public float cd;
-    [HideInInspector] public GameObject spellInstance;
+    public GameObject primarySpellInstance;
+    public GameObject[] secondarySpellInstance;
 
-    public void Cast(Vector2 direction, Vector2 position, Character source)
+    [HideInInspector] public Spell primarySpell;
+    [HideInInspector] public Spell[] secondarySpell;
+
+    private void Awake()
     {
-        //Debug.Log("source = " + source);
-        cd = coolDown;
-        spellInstance = Instantiate(spellPrefab, position, Quaternion.Euler(new Vector3(0, source.FacingDirection == Vector2.right ? 0 : 180, Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg)));
-        spellInstance.GetComponent<Spell>().owner = source;
+        primarySpellInstance = Instantiate(primarySpellInstance, transform);
+        primarySpell = primarySpellInstance.GetComponent<Spell>();
+        secondarySpell = new Spell[secondarySpellInstance.Length];
+        for (int i = 0; i < secondarySpellInstance.Length; i++)
+        {
+            secondarySpellInstance[i] = Instantiate(secondarySpellInstance[i], transform);
+            secondarySpell[i] = secondarySpellInstance[i].GetComponent<Spell>();
+        }
     }
 
-    public void Activate(Vector2 activationDirection)
+    private void Update()
     {
-        if (spellInstance)
+        if (primarySpell.cd > 0)
+            primarySpell.cd -= Time.deltaTime;
+        for (int i = 0; i < secondarySpell.Length; i++)
         {
-            if (spellInstance.GetComponent<Projectile>())
-                if (!spellInstance.GetComponent<Projectile>().isActivated)
-                    spellInstance.GetComponent<Projectile>().Activation(activationDirection);
+            if (secondarySpell[i].cd > 0)
+                secondarySpell[i].cd -= Time.deltaTime;
         }
     }
 }

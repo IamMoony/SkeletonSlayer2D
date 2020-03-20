@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
 
-public class Projectile : Spell
+public class Projectile : SpellEffect
 {
     public float initalVelocity;
     public Vector3 velocityModifier;

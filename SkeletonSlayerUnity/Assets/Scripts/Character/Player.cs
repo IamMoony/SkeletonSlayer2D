@@ -7,6 +7,7 @@ using Mirror;
 public class Player : Character
 {
     CinemachineVirtualCamera vcam;
+
     public override void OnStartAuthority()
     {
         base.OnStartAuthority();
@@ -51,9 +52,9 @@ public class Player : Character
         }
         if (Input.GetButtonDown("Shoot"))
         {
-            if (spells[activeSpellID].cd <= 0)
+            if (spellBook.primarySpell.cd <= 0)
             {
-                CmdCast();
+                CmdCast(-1);
             } 
         }
         if (Input.GetButtonDown("Activate"))

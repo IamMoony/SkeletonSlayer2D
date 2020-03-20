@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FrostNova : Spell
+public class FrostNova : SpellEffect
 {
     public int damage;
     public float radius;

@@ -254,8 +254,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   serverOnly: 0
   localPlayerAuthority: 1
-  m_AssetId: 0e83d9b3cf66e2d4899690cdc75f64a0
-  m_SceneId: 0
+  m_AssetId: 
+  m_SceneId: 821156851
 --- !u!114 &2065848936377577216
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -283,6 +283,9 @@ MonoBehaviour:
   teleport_Distance: 2
   teleport_Cooldown: 5
   climbing_Speed: 3
+  spellBookInstance: {fileID: 4510865317672750779, guid: c716a778ca0480848947d1bbb07687a4,
+    type: 3}
+  spellBook: {fileID: 0}
   spellInstances:
   - {fileID: 3234334099831997495, guid: a18e133cccd24c549ba8ffa6a15e6ff3, type: 3}
   - {fileID: 9117698377554354511, guid: eda999b89b2e23249b90b06baed25cf1, type: 3}

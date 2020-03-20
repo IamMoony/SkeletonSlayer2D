@@ -18,8 +18,9 @@ public class Character : NetworkBehaviour
     public float teleport_Distance;
     public float teleport_Cooldown;
     public float climbing_Speed;
+    public GameObject spellBookInstance;
+    [HideInInspector] public Spellbook spellBook;
     public GameObject[] spellInstances;
-    [HideInInspector] public Spellbook[] spells;
     [HideInInspector, SyncVar] public int activeSpellID;
     public AnimationClip animation_PreShoot;
     public GameObject effect_Burn;
@@ -68,12 +69,20 @@ public class Character : NetworkBehaviour
         effect_Wet.SetActive(false);
         //effect_Stun = Instantiate(effect_Stun, transform);
         //effect_Stun.SetActive(false);
-        spells = new Spellbook[spellInstances.Length];
-        for (int i = 0; i < spellInstances.Length; i++)
+        if (spellBookInstance)
         {
-            spellInstances[i] = Instantiate(spellInstances[i], transform);
-            spells[i] = spellInstances[i].GetComponent<Spellbook>();
+            spellBookInstance = Instantiate(spellBookInstance, transform);
+            spellBook = spellBookInstance.GetComponent<Spellbook>();
         }
+        /*if (spellInstances.Length > 0)
+        {
+            spells = new Spell[spellInstances.Length];
+            for (int i = 0; i < spellInstances.Length; i++)
+            {
+                spellInstances[i] = Instantiate(spellInstances[i], transform);
+                spells[i] = spellInstances[i].GetComponent<Spell>();
+            }
+        }*/
         tick = 1f;
         HP_Current = HP_Base;
         DMG_Current = DMG_Base;
@@ -141,11 +150,6 @@ public class Character : NetworkBehaviour
         }
         else if (anim.speed == 0 && !isStunned)
             anim.speed = 1;
-        for (int i = 0; i < spells.Length; i++)
-        {
-            if (spells[i].cd > 0)
-                spells[i].cd -= Time.deltaTime;
-        }
         if (tele_cd > 0)
             tele_cd -= Time.deltaTime;
         if (knockTime > 0)
@@ -469,8 +473,8 @@ public class Character : NetworkBehaviour
     public void CmdActivateSpell(Vector2 direction)
     {
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10f));
-        Vector2 castDirection = (mousePosition - spells[activeSpellID].spellInstance.transform.position).normalized;
-        spells[activeSpellID].Activate(castDirection);
+        Vector2 castDirection = (mousePosition - spellBook.primarySpell.spellInstance.transform.position).normalized;
+        spellBook.primarySpell.Activate(castDirection);
         RpcActivateSpell(castDirection);
     }
 
@@ -479,33 +483,34 @@ public class Character : NetworkBehaviour
     {
         if (!isClientOnly)
             return;
-       spells[activeSpellID].Activate(direction);
+       spellBook.primarySpell.Activate(direction);
     }
 
     [Command]
-    public void CmdCast()
+    public void CmdCast(int spellID)
     {
-        StartCoroutine(Cast());
-        RpcCast();
+        StartCoroutine(Cast(spellID));
+        RpcCast(spellID);
     }
 
     [ClientRpc]
-    public void RpcCast()
+    public void RpcCast(int spellID)
     {
         if (!isClientOnly)
             return;
-        StartCoroutine(Cast());
+        StartCoroutine(Cast(spellID));
     }
 
-    public IEnumerator Cast()
+    public IEnumerator Cast(int spellID)
     {
+        Spell spellToCast = spellID < 0 ? spellBook.primarySpell : spellBook.secondarySpell[spellID];
         anim.SetTrigger("Cast");
         while(actionValue < 1)
         {
-            if (actionValue >= (spells[activeSpellID].castTime - (animation_PreShoot == null ? 0 : animation_PreShoot.averageDuration)) / spells[activeSpellID].castTime)
+            if (actionValue >= (spellToCast.castTime - (animation_PreShoot == null ? 0 : animation_PreShoot.averageDuration)) / spellToCast.castTime)
                 anim.SetTrigger("Shoot");
             if (Input.GetButton("Shoot"))
-                actionValue = Mathf.Clamp(actionValue + Time.deltaTime / spells[activeSpellID].castTime, 0, 1);
+                actionValue = Mathf.Clamp(actionValue + Time.deltaTime / spellToCast.castTime, 0, 1);
             else
                 break;
             yield return new WaitForEndOfFrame();
@@ -516,7 +521,7 @@ public class Character : NetworkBehaviour
             Vector3 mousePosition = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10f));
             mousePosition = projectileSpawn.transform.InverseTransformPoint(mousePosition);
             Vector3 castDirection = mousePosition;
-            spells[activeSpellID].Cast(castDirection, projectileSpawn.position, this);
+            spellToCast.Cast(castDirection, projectileSpawn.position, this);
         }
     }
 }

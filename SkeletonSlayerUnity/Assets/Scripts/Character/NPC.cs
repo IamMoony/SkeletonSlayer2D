@@ -145,10 +145,10 @@ public class NPC : Character
         if (target.transform.position.x < transform.position.x && FacingDirection == Vector2.right || target.transform.position.x > transform.position.x && FacingDirection == Vector2.left)
             CmdTurn(FacingDirection * -1);
         //yield return new WaitForSeconds(spells[0].cd);
-        if (spells[0].cd > 0)
+        if (spellBook.primarySpell.cd > 0)
             yield break;
-        CmdCast();
-        yield return new WaitForSeconds(spells[activeSpellID].castTime);
+        CmdCast(-1);
+        yield return new WaitForSeconds(spellBook.primarySpell.castTime);
     }
 
     public IEnumerator GetInRange(bool melee)
