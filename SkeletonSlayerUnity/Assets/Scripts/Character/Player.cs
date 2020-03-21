@@ -22,9 +22,7 @@ public class Player : Character
     public override void Update()
     {
         base.Update();
-        if (!hasAuthority)
-            return;
-        if (isStunned)
+        if (!hasAuthority || isStunned || Time.timeScale == 0)
             return;
         if (Input.GetAxis("Horizontal") != 0 && !isClimbing && knockTime <= 0 || Input.GetAxis("Horizontal") != 0 && isGrounded && isClimbing)
         {

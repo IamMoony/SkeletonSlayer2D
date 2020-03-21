@@ -29,11 +29,11 @@ public class Waterbolt : Projectile
 
     public override void CharacterContact(Character characterInContact, Vector2 contactPosition)
     {
-        base.CharacterContact(characterInContact, contactPosition);
         if (!isActivated)
         {
             if (characterInContact != owner)
             {
+                base.CharacterContact(characterInContact, contactPosition);
                 characterInContact.Wet(true);
             }
             else

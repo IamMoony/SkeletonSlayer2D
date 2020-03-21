@@ -18,12 +18,15 @@ public class Earthbolt : Projectile
 
     public override void CharacterContact(Character characterInContact, Vector2 contactPosition)
     {
-        base.CharacterContact(characterInContact, contactPosition);
-        if (!isActivated)
+        if (characterInContact != owner)
         {
-            characterInContact.Root(true);
+            base.CharacterContact(characterInContact, contactPosition);
+            if (!isActivated)
+            {
+                characterInContact.Root(true);
+            }
+            ProjectileDestroy();
         }
-        ProjectileDestroy();
     }
 
     public override void GroundContact(Vector2 contactPosition)
