@@ -8,6 +8,12 @@ public class PlayerConnection : NetworkBehaviour
     public GameObject playerPrefab;
 
     private GameObject player;
+    private GameManager gameManager;
+
+    private void Awake()
+    {
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+    }
 
     private void Start()
     {
@@ -20,6 +26,7 @@ public class PlayerConnection : NetworkBehaviour
     void CmdSpawnPlayer()
     {
         player = Instantiate(playerPrefab);
+        gameManager.CmdAddPlayer(player);
         NetworkServer.SpawnWithClientAuthority(player, connectionToClient);
     }
 }

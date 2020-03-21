@@ -9,10 +9,12 @@ public class NPC_Spawner : NetworkBehaviour
     public bool turn;
     private Transform characterHolder;
     private bool hasFired;
+    private GameManager gameManager;
 
     private void Awake()
     {
         characterHolder = GameObject.Find("Enemies").transform;
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
 
     private void OnBecameVisible()
@@ -28,6 +30,7 @@ public class NPC_Spawner : NetworkBehaviour
     private void CmdSpawn()
     {
         GameObject go = Instantiate(npcPrefab, transform.position, Quaternion.identity, characterHolder);
+        gameManager.CmdAddEnemy(go);
         NetworkServer.Spawn(go);
         if (turn)
             go.GetComponent<Character>().CmdTurn(go.GetComponent<Character>().FacingDirection * -1);

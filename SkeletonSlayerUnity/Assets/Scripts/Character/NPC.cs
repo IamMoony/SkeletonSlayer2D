@@ -54,7 +54,8 @@ public class NPC : Character
         base.Update();
         if (isDead)
         {
-            Destroy(gameObject,0.1f);
+            gameManager.CmdRemoveEnemy(gameObject);
+            Destroy(gameObject);
         }
         if (cooldown_Melee > 0)
             cooldown_Melee -= Time.deltaTime;

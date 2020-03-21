@@ -10,10 +10,11 @@ public class SpellSelection : MonoBehaviour
     public GameObject button_StartBattle;
     public GameObject button_Prefab;
 
-    [HideInInspector] public Character localPlayer;
+    public Player localPlayer;
 
     private GameObject[] button_Spellbook;
     private List<GameObject> button_Selection;
+    private GameManager gameManager;
 
     private void Awake()
     {
@@ -21,11 +22,12 @@ public class SpellSelection : MonoBehaviour
         panel_ActiveSpells.SetActive(false);
         button_StartBattle.SetActive(false);
         button_Selection = new List<GameObject>();
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
 
     public void StartSelection()
     {
-        Time.timeScale = 0;
+        localPlayer.inSelection = true;
         panel_Spellbook.SetActive(true);
         panel_ActiveSpells.SetActive(true);
         button_StartBattle.SetActive(true);
@@ -34,16 +36,18 @@ public class SpellSelection : MonoBehaviour
 
     public void FinishSelection()
     {
-        localPlayer.GetComponent<Player>().activeSpellID = new List<int>();
+        int[] spellID = new int[button_Selection.Count];
         for (int i = 0; i < button_Selection.Count; i++)
         {
-            localPlayer.GetComponent<Player>().activeSpellID.Add(button_Selection[i].GetComponent<SpellIdentity>().ID);
+            spellID[i] = button_Selection[i].GetComponent<SpellIdentity>().ID;
         }
+        localPlayer.CmdChangeSpell(spellID);
         ClearSelection();
         panel_Spellbook.SetActive(false);
         panel_ActiveSpells.SetActive(false);
         button_StartBattle.SetActive(false);
-        Time.timeScale = 1;
+        localPlayer.inSelection = false;
+        gameManager.CmdStartBattle();
     }
 
     public void FillSpellbook()

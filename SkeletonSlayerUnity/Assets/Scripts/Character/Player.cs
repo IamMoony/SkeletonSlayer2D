@@ -6,7 +6,8 @@ using Mirror;
 
 public class Player : Character
 {
-    public List<int> activeSpellID;
+    public int[] activeSpellID;
+    [SyncVar] public bool inSelection;
 
     CinemachineVirtualCamera vcam;
 
@@ -15,14 +16,12 @@ public class Player : Character
         base.OnStartAuthority();
         vcam = GameObject.Find("Camera_Control").GetComponent<CinemachineVirtualCamera>();
         vcam.Follow = transform;
-        GameObject.Find("Panel_SpellSelection").GetComponent<SpellSelection>().localPlayer = this;
-        GameObject.Find("Panel_SpellSelection").GetComponent<SpellSelection>().StartSelection();
     }
 
     public override void Update()
     {
         base.Update();
-        if (!hasAuthority || isStunned || Time.timeScale == 0)
+        if (!hasAuthority || isStunned || Time.timeScale == 0 || isDead)
             return;
         if (Input.GetAxis("Horizontal") != 0 && !isClimbing && knockTime <= 0 || Input.GetAxis("Horizontal") != 0 && isGrounded && isClimbing)
         {
@@ -64,23 +63,38 @@ public class Player : Character
         }
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            if (activeSpellID.Count > 0)
+            if (activeSpellID.Length > 0)
             CmdCast(activeSpellID[0]);
         }
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            if (activeSpellID.Count > 1)
+            if (activeSpellID.Length > 1)
                 CmdCast(activeSpellID[1]);
         }
         if (Input.GetKeyDown(KeyCode.Alpha3))
         {
-            if (activeSpellID.Count > 2)
+            if (activeSpellID.Length > 2)
                 CmdCast(activeSpellID[2]);
         }
         if (Input.GetKeyDown(KeyCode.Alpha4))
         {
-            if (activeSpellID.Count > 3)
+            if (activeSpellID.Length > 3)
                 CmdCast(activeSpellID[3]);
         }
+    }
+
+    [Command]
+    public void CmdChangeSpell(int[] spellID)
+    {
+        activeSpellID = spellID;
+        RpcChangeSpell(spellID);
+    }
+
+    [ClientRpc]
+    public void RpcChangeSpell(int[] spellID)
+    {
+        if (!isClientOnly)
+            return;
+        activeSpellID = spellID;
     }
 }

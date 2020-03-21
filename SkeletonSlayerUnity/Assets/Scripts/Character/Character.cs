@@ -44,6 +44,7 @@ public class Character : NetworkBehaviour
     [HideInInspector] public LayerMask GroundLayer;
     [HideInInspector] public Rigidbody2D rb;
     [HideInInspector] public Animator anim;
+    [HideInInspector] public GameManager gameManager;
 
     private float tick;
     private int burn_Ticks;
@@ -90,6 +91,7 @@ public class Character : NetworkBehaviour
         FacingDirection = Vector2.right;
         if (GameObject.Find("GUI"))
             GameObject.Find("GUI").transform.Find("Panel_Character").GetComponent<CharacterPanelManager>().NewPanel(transform);
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
 
     public virtual void Update()
@@ -451,21 +453,6 @@ public class Character : NetworkBehaviour
                 rb.gravityScale = 1f;
             }
         }
-    }
-
-    [Command]
-    public void CmdChangeSpell(int id)
-    {
-        //activeSpellID = id;
-        RpcChangeSpell(id);
-    }
-
-    [ClientRpc]
-    public void RpcChangeSpell(int id)
-    {
-        if (!isClientOnly)
-            return;
-        //activeSpellID = id;
     }
 
     [Command]
