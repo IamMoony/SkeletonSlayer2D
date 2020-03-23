@@ -46,7 +46,7 @@ MonoBehaviour:
   spellName: Water Orb
   spellDescription: 
   spellIcon: {fileID: 0}
-  spellPrefab: {fileID: 2390927443734499096, guid: db8a3a7c3c29fbe419ff2a9f898da5f9,
+  spellEffectPrefab: {fileID: 2390927443734499096, guid: db8a3a7c3c29fbe419ff2a9f898da5f9,
     type: 3}
   castTime: 1
   coolDown: 2

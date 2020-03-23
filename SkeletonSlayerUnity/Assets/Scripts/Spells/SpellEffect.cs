@@ -5,4 +5,5 @@ using UnityEngine;
 public class SpellEffect : MonoBehaviour
 {
     [HideInInspector] public Character owner;
+    public GameObject effect_cast;
 }

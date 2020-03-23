@@ -46,7 +46,7 @@ MonoBehaviour:
   spellName: 
   spellDescription: 
   spellIcon: {fileID: 0}
-  spellPrefab: {fileID: 4439456849462767887, guid: e72c3ac73ff8abd46bebc650bfd99cfa,
+  spellEffectPrefab: {fileID: 4439456849462767887, guid: e72c3ac73ff8abd46bebc650bfd99cfa,
     type: 3}
   castTime: 1
   coolDown: 5

@@ -490,18 +490,25 @@ public class Character : NetworkBehaviour
     public IEnumerator Cast(int spellID)
     {
         Spell spellToCast = spellID < 0 ? spellBook.primarySpell : spellBook.secondarySpell[spellID];
+        GameObject castEffect;
+        if (spellToCast.spellEffectPrefab.GetComponent<SpellEffect>().effect_cast != null)
+            castEffect = Instantiate(spellToCast.spellEffectPrefab.GetComponent<SpellEffect>().effect_cast, projectileSpawn.position, Quaternion.identity, spellToCast.transform);
+        else
+            castEffect = null;
         anim.SetTrigger("Cast");
         while(actionValue < 1)
         {
             if (actionValue >= (spellToCast.castTime - (animation_PreShoot == null ? 0 : animation_PreShoot.averageDuration)) / spellToCast.castTime)
                 anim.SetTrigger("Shoot");
-            if (true)
+            if (spellID == -1 && Input.GetButton("Shoot") || spellID >= 0)
                 actionValue = Mathf.Clamp(actionValue + Time.deltaTime / spellToCast.castTime, 0, 1);
             else
                 break;
             yield return new WaitForEndOfFrame();
         }
         actionValue = 0;
+        if (castEffect)
+            Destroy(castEffect);
         if (true)
         {
             Vector3 mousePosition = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10f));

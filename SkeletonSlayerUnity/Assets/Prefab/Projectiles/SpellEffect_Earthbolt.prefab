@@ -4889,7 +4889,7 @@ MonoBehaviour:
   serverOnly: 0
   localPlayerAuthority: 0
   m_AssetId: 
-  m_SceneId: 1073164208
+  m_SceneId: 2610263967
 --- !u!114 &-1178161966412068590
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4903,6 +4903,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   owner: {fileID: 0}
+  effect_cast: {fileID: 0}
   initalVelocity: 1
   velocityModifier: {x: 0, y: 0, z: 0}
   contactDamage: 0

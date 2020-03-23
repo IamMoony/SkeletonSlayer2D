@@ -46,7 +46,7 @@ MonoBehaviour:
   spellName: Earth Worm
   spellDescription: 
   spellIcon: {fileID: 0}
-  spellPrefab: {fileID: 4053248971094408233, guid: 30379c95a7c27ec43a2df2d5ea54b593,
+  spellEffectPrefab: {fileID: 4053248971094408233, guid: 30379c95a7c27ec43a2df2d5ea54b593,
     type: 3}
   castTime: 1
   coolDown: 2

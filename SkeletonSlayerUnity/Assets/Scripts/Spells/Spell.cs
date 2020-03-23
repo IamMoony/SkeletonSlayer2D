@@ -7,7 +7,7 @@ public class Spell : MonoBehaviour
     public string spellName;
     public string spellDescription;
     public Sprite spellIcon;
-    public GameObject spellPrefab;
+    public GameObject spellEffectPrefab;
     public float castTime;
     public float coolDown;
 
@@ -18,7 +18,7 @@ public class Spell : MonoBehaviour
     {
         //Debug.Log("source = " + source);
         cd = coolDown;
-        spellInstance = Instantiate(spellPrefab, position, Quaternion.Euler(new Vector3(0, source.FacingDirection == Vector2.right ? 0 : 180, Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg)));
+        spellInstance = Instantiate(spellEffectPrefab, position, Quaternion.Euler(new Vector3(0, source.FacingDirection == Vector2.right ? 0 : 180, Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg)));
         spellInstance.GetComponent<SpellEffect>().owner = source;
     }
 

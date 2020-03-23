@@ -46,7 +46,7 @@ MonoBehaviour:
   spellName: Frost Nova
   spellDescription: 
   spellIcon: {fileID: 0}
-  spellPrefab: {fileID: 7636025900996775909, guid: 14fbbbead88faf74193aecb3948d80de,
+  spellEffectPrefab: {fileID: 7636025900996775909, guid: 14fbbbead88faf74193aecb3948d80de,
     type: 3}
   castTime: 0
   coolDown: 2

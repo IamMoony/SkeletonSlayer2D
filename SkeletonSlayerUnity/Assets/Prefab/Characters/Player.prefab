@@ -254,8 +254,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   serverOnly: 0
   localPlayerAuthority: 1
-  m_AssetId: 
-  m_SceneId: 821156851
+  m_AssetId: 0e83d9b3cf66e2d4899690cdc75f64a0
+  m_SceneId: 0
 --- !u!114 &2065848936377577216
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -283,7 +283,7 @@ MonoBehaviour:
   teleport_Distance: 2
   teleport_Cooldown: 5
   climbing_Speed: 3
-  spellBookInstance: {fileID: 4510865317672750779, guid: c716a778ca0480848947d1bbb07687a4,
+  spellBookInstance: {fileID: 4510865317672750779, guid: f3950e9df7ca5774385624befa9bf7db,
     type: 3}
   spellBook: {fileID: 0}
   spellInstances:
@@ -291,11 +291,6 @@ MonoBehaviour:
   - {fileID: 9117698377554354511, guid: eda999b89b2e23249b90b06baed25cf1, type: 3}
   - {fileID: 2419523090019864414, guid: 32bce0f2158c8f64a9e3bd8f9a654f38, type: 3}
   - {fileID: 9117698377554354511, guid: dfee9ed0a09389b49b7109b0f106a470, type: 3}
-  spells:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  activeSpellID: 0
   animation_PreShoot: {fileID: 7400000, guid: 7396811462535b648a02866eb74f1259, type: 2}
   effect_Burn: {fileID: 7310163276645880396, guid: 24d0ce4752c97ad4dbdff29e61179231,
     type: 3}
@@ -324,6 +319,9 @@ MonoBehaviour:
     m_Bits: 256
   rb: {fileID: 0}
   anim: {fileID: 0}
+  gameManager: {fileID: 0}
+  activeSpellID: 
+  inSelection: 0
 --- !u!1 &6036940040080808765
 GameObject:
   m_ObjectHideFlags: 0
@@ -348,7 +346,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6036940040080808765}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.3, y: 0.2, z: 0}
+  m_LocalPosition: {x: 0.3, y: 0.25, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2065848936377577218}
