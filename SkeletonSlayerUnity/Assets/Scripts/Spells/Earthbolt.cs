@@ -13,7 +13,9 @@ public class Earthbolt : Projectile
     public override void Activation(Vector2 direction)
     {
         base.Activation(direction);
-        EmergingRock();
+        emergingRock.GetComponent<SpellEffect>().owner = owner;
+        Instantiate(emergingRock, transform.position + -transform.up * rockOffset, transform.rotation);
+        DestroyEffect();
     }
 
     public override void CharacterContact(Character characterInContact, Vector2 contactPosition)
@@ -25,7 +27,7 @@ public class Earthbolt : Projectile
             {
                 characterInContact.Root(true);
             }
-            ProjectileDestroy();
+            DestroyEffect();
         }
     }
 
@@ -36,12 +38,6 @@ public class Earthbolt : Projectile
         {
             StartCoroutine(Burrow());
         }
-    }
-
-    void EmergingRock()
-    {
-        Instantiate(emergingRock, transform.position + -transform.up * rockOffset, transform.rotation);
-        ProjectileDestroy();
     }
 
     IEnumerator Burrow()

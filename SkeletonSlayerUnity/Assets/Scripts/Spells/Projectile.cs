@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Mirror;
 
 public class Projectile : SpellEffect
 {
@@ -15,7 +14,6 @@ public class Projectile : SpellEffect
     public GameObject effect_Contact_Ground_PreActivation;
     public GameObject effect_Contact_Character_PostActivation;
     public GameObject effect_Contact_Ground_PostActivation;
-    public GameObject effect_Destroy;
 
     public bool isActivated;
 
@@ -36,7 +34,7 @@ public class Projectile : SpellEffect
         if (lifeTime > 0)
             lifeTime -= Time.deltaTime;
         else
-            ProjectileDestroy();
+            DestroyEffect();
     }
 
     private void OnTriggerEnter2D(Collider2D collider)
@@ -49,18 +47,6 @@ public class Projectile : SpellEffect
         {
             GroundContact(collider.ClosestPoint(transform.position));
         }
-    }
-
-    public void ProjectileDestroy()
-    {
-        if (transform.childCount > 0)
-        {
-            Transform child = transform.GetChild(0);
-            Destroy(child.gameObject, 1f);
-            child.SetParent(null);
-        }
-        Destroy(Instantiate(effect_Destroy, transform.position, Quaternion.identity), 5f);
-        NetworkServer.Destroy(gameObject);
     }
 
     public virtual void Activation(Vector2 direction)

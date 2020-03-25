@@ -7,11 +7,8 @@ public class Firebolt : Projectile
     public bool projectileBurn;
     public bool projectileBounce;
     public float chargeVelocity;
-    public float explosionRadius;
-    public int explosionForce;
-    public int explosionDamage;
-    public bool explosionBurn;
-    public LayerMask layerAffectedByExplosion;
+
+    public GameObject fireExplosion;
 
     public override void Activation(Vector2 direction)
     {
@@ -19,6 +16,7 @@ public class Firebolt : Projectile
         RB.velocity = Vector2.zero;
         RB.gravityScale = 0;
         RB.velocity = direction * chargeVelocity;
+        fireExplosion.GetComponent<SpellEffect>().owner = owner;
     }
 
     public override void CharacterContact(Character characterInContact, Vector2 contactPosition)
@@ -36,9 +34,10 @@ public class Firebolt : Projectile
             }
             else
             {
-                Explode();
+                Instantiate(fireExplosion, transform.position, Quaternion.identity);
+                DestroyEffect();
             }
-            ProjectileDestroy();
+            DestroyEffect();
         }
     }
 
@@ -47,8 +46,8 @@ public class Firebolt : Projectile
         base.GroundContact(contactPosition);
         if (isActivated)
         {
-            Explode();
-            ProjectileDestroy();
+            Instantiate(fireExplosion, transform.position, Quaternion.identity);
+            DestroyEffect();
         }
         else
         {
@@ -59,23 +58,7 @@ public class Firebolt : Projectile
             }
             else
             {
-                ProjectileDestroy();
-            }
-        }
-    }
-
-    private void Explode()
-    {
-        Collider2D[] targetsInRadius = Physics2D.OverlapCircleAll(transform.position, explosionRadius, layerAffectedByExplosion);
-        for (int i = 0; i < targetsInRadius.Length; i++)
-        {
-            if (targetsInRadius[i].tag == "Character")
-            {
-                Character character = targetsInRadius[i].GetComponent<Character>();
-                if (explosionBurn)
-                    character.CmdBurn(true);
-                character.CmdDamage(explosionDamage);
-                character.CmdKnockback((targetsInRadius[i].transform.position - transform.position).normalized,  explosionForce);
+                DestroyEffect();
             }
         }
     }

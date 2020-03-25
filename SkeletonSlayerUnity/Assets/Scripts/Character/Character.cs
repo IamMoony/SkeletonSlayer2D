@@ -491,8 +491,8 @@ public class Character : NetworkBehaviour
     {
         Spell spellToCast = spellID < 0 ? spellBook.primarySpell : spellBook.secondarySpell[spellID];
         GameObject castEffect;
-        if (spellToCast.spellEffectPrefab.GetComponent<SpellEffect>().effect_cast != null)
-            castEffect = Instantiate(spellToCast.spellEffectPrefab.GetComponent<SpellEffect>().effect_cast, projectileSpawn.position, Quaternion.identity, spellToCast.transform);
+        if (spellToCast.spellEffectPrefab.GetComponent<SpellEffect>().effect_Cast != null)
+            castEffect = Instantiate(spellToCast.spellEffectPrefab.GetComponent<SpellEffect>().effect_Cast, projectileSpawn.position, Quaternion.identity, spellToCast.transform);
         else
             castEffect = null;
         anim.SetTrigger("Cast");

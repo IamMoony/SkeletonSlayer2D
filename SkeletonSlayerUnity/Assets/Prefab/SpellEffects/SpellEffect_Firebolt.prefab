@@ -4767,7 +4767,7 @@ GameObject:
   - component: {fileID: 5467550006681405230}
   - component: {fileID: 1036273925}
   m_Layer: 12
-  m_Name: Projectile_Firebolt
+  m_Name: SpellEffect_Firebolt
   m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4889,7 +4889,7 @@ MonoBehaviour:
   serverOnly: 0
   localPlayerAuthority: 0
   m_AssetId: 
-  m_SceneId: 0
+  m_SceneId: 1419815002
 --- !u!114 &1036273925
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4903,6 +4903,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   owner: {fileID: 0}
+  effect_Cast: {fileID: 0}
+  effect_Destroy: {fileID: 3593303007339290826, guid: 703c2dad49a614e4bb2fe4f44b474e2a,
+    type: 3}
   initalVelocity: 2
   velocityModifier: {x: 0, y: 0, z: 0}
   contactDamage: 1
@@ -4914,24 +4917,17 @@ MonoBehaviour:
     type: 3}
   effect_Contact_Ground_PreActivation: {fileID: 3593303007339290826, guid: 703c2dad49a614e4bb2fe4f44b474e2a,
     type: 3}
-  effect_Contact_Character_PostActivation: {fileID: 8171018927329503707, guid: abbe39b3e21c63543b578ec3aa761e2a,
+  effect_Contact_Character_PostActivation: {fileID: 3593303007339290826, guid: 703c2dad49a614e4bb2fe4f44b474e2a,
     type: 3}
-  effect_Contact_Ground_PostActivation: {fileID: 8171018927329503707, guid: abbe39b3e21c63543b578ec3aa761e2a,
-    type: 3}
-  effect_Destroy: {fileID: 3593303007339290826, guid: 703c2dad49a614e4bb2fe4f44b474e2a,
+  effect_Contact_Ground_PostActivation: {fileID: 3593303007339290826, guid: 703c2dad49a614e4bb2fe4f44b474e2a,
     type: 3}
   isActivated: 0
   RB: {fileID: 0}
   projectileBurn: 1
   projectileBounce: 0
   chargeVelocity: 4
-  explosionRadius: 1
-  explosionForce: 100
-  explosionDamage: 1
-  explosionBurn: 1
-  layerAffectedByExplosion:
-    serializedVersion: 2
-    m_Bits: 2048
+  fireExplosion: {fileID: 7636025900996775909, guid: 3694e9c0ec93e394597ae5074498bbf7,
+    type: 3}
 --- !u!1 &7007647216413584997
 GameObject:
   m_ObjectHideFlags: 0

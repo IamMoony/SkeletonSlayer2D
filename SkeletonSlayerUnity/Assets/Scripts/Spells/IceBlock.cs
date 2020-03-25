@@ -15,7 +15,7 @@ public class IceBlock : Projectile
             characterInContact.CmdDamage(contactDamage);
             characterInContact.CmdKnockback(Vector2.down, knockDownForce);
             characterInContact.Stun(true, stunDuration);
-            ProjectileDestroy();
+            DestroyEffect();
         }
     }
 

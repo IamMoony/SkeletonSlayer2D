@@ -87,8 +87,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   serverOnly: 0
   localPlayerAuthority: 0
-  m_AssetId: db8a3a7c3c29fbe419ff2a9f898da5f9
-  m_SceneId: 0
+  m_AssetId: 
+  m_SceneId: 4122928471
 --- !u!114 &-5282920102421989659
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -102,7 +102,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   owner: {fileID: 0}
-  effect_cast: {fileID: 7318746912668595937, guid: 992dd86a2f2f8704287c61f4c2ada11d,
+  effect_Cast: {fileID: 7318746912668595937, guid: 992dd86a2f2f8704287c61f4c2ada11d,
+    type: 3}
+  effect_Destroy: {fileID: 3861367843242237069, guid: 91b2d47b629029d42acac26bcf54c441,
     type: 3}
   initalVelocity: 1
   velocityModifier: {x: 0, y: 0, z: 0}
@@ -118,8 +120,6 @@ MonoBehaviour:
   effect_Contact_Character_PostActivation: {fileID: 3861367843242237069, guid: 91b2d47b629029d42acac26bcf54c441,
     type: 3}
   effect_Contact_Ground_PostActivation: {fileID: 3861367843242237069, guid: 91b2d47b629029d42acac26bcf54c441,
-    type: 3}
-  effect_Destroy: {fileID: 3861367843242237069, guid: 91b2d47b629029d42acac26bcf54c441,
     type: 3}
   isActivated: 0
   RB: {fileID: 0}

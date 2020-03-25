@@ -22,9 +22,13 @@ public class Waterbolt : Projectile
             }
         }
         if (frozen == 0)
-            CreateIceBlock();
+        {
+            iceBlock.GetComponent<SpellEffect>().owner = owner;
+            Instantiate(iceBlock, transform.position, Quaternion.identity);
+            DestroyEffect();
+        }
         else
-            ProjectileDestroy();
+            DestroyEffect();
     }
 
     public override void CharacterContact(Character characterInContact, Vector2 contactPosition)
@@ -48,7 +52,7 @@ public class Waterbolt : Projectile
         base.GroundContact(contactPosition);
         if (!isActivated)
         {
-            ProjectileDestroy();
+            DestroyEffect();
         }
     }
     /*
@@ -63,9 +67,4 @@ public class Waterbolt : Projectile
         }
     }
     */
-    private void CreateIceBlock()
-    {
-        Instantiate(iceBlock, transform.position, Quaternion.identity);
-        ProjectileDestroy();
-    }
 }
