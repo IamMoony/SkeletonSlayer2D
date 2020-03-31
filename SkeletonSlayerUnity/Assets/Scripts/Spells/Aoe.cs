@@ -14,9 +14,10 @@ public class Aoe : SpellEffect
 
     private Collider2D[] targetsInRadius;
 
-    private void Start()
+    public virtual void Start()
     {
-        Instantiate(effect_Prefab, nova ? owner.transform.position : transform.position, Quaternion.identity, transform);
+        Instantiate(effect_Prefab, nova ? owner.transform.position : transform.position, Quaternion.identity);
+        audioSource.Play();
         targetsInRadius = Physics2D.OverlapCircleAll(transform.position, effectRadius, affectedLayer);
         for (int i = 0; i < targetsInRadius.Length; i++)
         {

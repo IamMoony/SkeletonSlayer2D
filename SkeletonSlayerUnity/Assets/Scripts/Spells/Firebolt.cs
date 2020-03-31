@@ -35,7 +35,6 @@ public class Firebolt : Projectile
             else
             {
                 Instantiate(fireExplosion, transform.position, Quaternion.identity);
-                DestroyEffect();
             }
             DestroyEffect();
         }

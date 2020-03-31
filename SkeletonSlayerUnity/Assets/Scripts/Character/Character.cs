@@ -506,7 +506,6 @@ public class Character : NetworkBehaviour
                 break;
             yield return new WaitForEndOfFrame();
         }
-        actionValue = 0;
         if (castEffect)
             Destroy(castEffect);
         if (true)
@@ -516,5 +515,6 @@ public class Character : NetworkBehaviour
             Vector3 castDirection = mousePosition;
             spellToCast.Cast(castDirection, projectileSpawn.position, this);
         }
+        actionValue = 0;
     }
 }

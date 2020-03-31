@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5225803668465559151}
   - component: {fileID: 7450495574608579579}
   m_Layer: 0
-  m_Name: Spell_WaterOrb
+  m_Name: Spell_Frostbolt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

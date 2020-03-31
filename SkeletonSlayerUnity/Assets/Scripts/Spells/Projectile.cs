@@ -19,8 +19,9 @@ public class Projectile : SpellEffect
 
     public Rigidbody2D RB;
 
-    private void Awake()
+    public override void Awake()
     {
+        base.Awake();
         RB = GetComponent<Rigidbody2D>();
     }
 
@@ -29,7 +30,7 @@ public class Projectile : SpellEffect
         RB.velocity = (transform.right + velocityModifier) * initalVelocity;
     }
 
-    private void Update()
+    public virtual void Update()
     {
         if (lifeTime > 0)
             lifeTime -= Time.deltaTime;
@@ -60,16 +61,26 @@ public class Projectile : SpellEffect
         characterInContact.CmdDamage(contactDamage);
         characterInContact.CmdKnockback(((Vector2)characterInContact.transform.position - contactPosition).normalized, contactKnockBackForce);
         if (!isActivated)
+        {
+            audioSource.Play();
             Destroy(Instantiate(effect_Contact_Character_PreActivation, contactPosition, Quaternion.identity), 5f);
+        }
         else
+        {
             Destroy(Instantiate(effect_Contact_Character_PostActivation, contactPosition, Quaternion.identity), 5f);
+        }
     }
 
     public virtual void GroundContact(Vector2 contactPosition)
     {
         if (!isActivated)
+        {
+            audioSource.Play();
             Destroy(Instantiate(effect_Contact_Ground_PreActivation, contactPosition, Quaternion.identity), 5f);
+        }
         else
+        {
             Destroy(Instantiate(effect_Contact_Ground_PostActivation, contactPosition, Quaternion.identity), 5f);
+        }
     }
 }
