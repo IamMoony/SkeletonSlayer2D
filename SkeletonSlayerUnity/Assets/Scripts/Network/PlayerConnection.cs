@@ -27,6 +27,6 @@ public class PlayerConnection : NetworkBehaviour
     {
         player = Instantiate(playerPrefab);
         gameManager.CmdAddPlayer(player);
-        NetworkServer.SpawnWithClientAuthority(player, connectionToClient);
+        NetworkServer.Spawn(player, connectionToClient);
     }
 }

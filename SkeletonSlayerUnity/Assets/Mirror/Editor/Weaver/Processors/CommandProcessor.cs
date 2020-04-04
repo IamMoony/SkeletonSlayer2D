@@ -12,13 +12,6 @@ namespace Mirror.Weaver
             // generates code like:
             public void CmdThrust(float thrusting, int spin)
             {
-                if (isServer)
-                {
-                    // we are ON the server, invoke directly
-                    CmdThrust(thrusting, spin);
-                    return;
-                }
-
                 NetworkWriter networkWriter = new NetworkWriter();
                 networkWriter.Write(thrusting);
                 networkWriter.WritePackedUInt32((uint)spin);
@@ -40,20 +33,7 @@ namespace Mirror.Weaver
         */
         public static MethodDefinition ProcessCommandCall(TypeDefinition td, MethodDefinition md, CustomAttribute ca)
         {
-            MethodDefinition cmd = new MethodDefinition("Call" + md.Name,
-                    MethodAttributes.Public | MethodAttributes.HideBySig,
-                    Weaver.voidType);
-
-            // add parameters
-            foreach (ParameterDefinition pd in md.Parameters)
-            {
-                cmd.Parameters.Add(new ParameterDefinition(pd.Name, ParameterAttributes.None, pd.ParameterType));
-            }
-
-            // move the old body to the new function
-            MethodBody newBody = cmd.Body;
-            cmd.Body = md.Body;
-            md.Body = newBody;
+            MethodDefinition cmd = MethodProcessor.SubstituteMethod(td, md, "Call" + md.Name);
 
             ILProcessor cmdWorker = md.Body.GetILProcessor();
 
@@ -64,22 +44,6 @@ namespace Mirror.Weaver
                 cmdWorker.Append(cmdWorker.Create(OpCodes.Ldstr, "Call Command function " + md.Name));
                 cmdWorker.Append(cmdWorker.Create(OpCodes.Call, Weaver.logErrorReference));
             }
-
-            // local client check
-            Instruction localClientLabel = cmdWorker.Create(OpCodes.Nop);
-            cmdWorker.Append(cmdWorker.Create(OpCodes.Ldarg_0));
-            cmdWorker.Append(cmdWorker.Create(OpCodes.Call, Weaver.getBehaviourIsServer));
-            cmdWorker.Append(cmdWorker.Create(OpCodes.Brfalse, localClientLabel));
-
-            // call the cmd function directly.
-            cmdWorker.Append(cmdWorker.Create(OpCodes.Ldarg_0));
-            for (int i = 0; i < md.Parameters.Count; i++)
-            {
-                cmdWorker.Append(cmdWorker.Create(OpCodes.Ldarg, i + 1));
-            }
-            cmdWorker.Append(cmdWorker.Create(OpCodes.Call, cmd));
-            cmdWorker.Append(cmdWorker.Create(OpCodes.Ret));
-            cmdWorker.Append(localClientLabel);
 
             // NetworkWriter writer = new NetworkWriter();
             NetworkBehaviourProcessor.WriteCreateWriter(cmdWorker);
@@ -96,12 +60,15 @@ namespace Mirror.Weaver
             }
 
             // invoke internal send and return
-            cmdWorker.Append(cmdWorker.Create(OpCodes.Ldarg_0)); // load 'base.' to call the SendCommand function with
+            // load 'base.' to call the SendCommand function with
+            cmdWorker.Append(cmdWorker.Create(OpCodes.Ldarg_0));
             cmdWorker.Append(cmdWorker.Create(OpCodes.Ldtoken, td));
-            cmdWorker.Append(cmdWorker.Create(OpCodes.Call, Weaver.getTypeFromHandleReference)); // invokerClass
+            // invokerClass
+            cmdWorker.Append(cmdWorker.Create(OpCodes.Call, Weaver.getTypeFromHandleReference));
             cmdWorker.Append(cmdWorker.Create(OpCodes.Ldstr, cmdName));
-            cmdWorker.Append(cmdWorker.Create(OpCodes.Ldloc_0)); // writer
-            cmdWorker.Append(cmdWorker.Create(OpCodes.Ldc_I4, NetworkBehaviourProcessor.GetChannelId(ca)));
+            // writer
+            cmdWorker.Append(cmdWorker.Create(OpCodes.Ldloc_0));
+            cmdWorker.Append(cmdWorker.Create(OpCodes.Ldc_I4, ca.GetField("channel", 0)));
             cmdWorker.Append(cmdWorker.Create(OpCodes.Call, Weaver.sendCommandInternal));
 
             NetworkBehaviourProcessor.WriteRecycleWriter(cmdWorker);
@@ -145,7 +112,7 @@ namespace Mirror.Weaver
             cmdWorker.Append(cmdWorker.Create(OpCodes.Ret));
 
             NetworkBehaviourProcessor.AddInvokeParameters(cmd.Parameters);
-
+            td.Methods.Add(cmd);
             return cmd;
         }
 
