@@ -21,13 +21,13 @@ public class PlayerPanelManager : MonoBehaviour
     {
         panel_Health = transform.Find("Panel_Health").gameObject;
         panel_Spell = transform.Find("Panel_Spell").gameObject;
-        player = GameObject.Find("Player").GetComponent<Character>();
+        //player = GameObject.Find("Player").GetComponent<Character>();
     }
 
     private void Update()
     {
-        if (curHealth != player.HP_Current)
-            UpdateHealth();
+        //if (curHealth != player.HP_Current)
+        //    UpdateHealth();
     }
 
     public void Setup()

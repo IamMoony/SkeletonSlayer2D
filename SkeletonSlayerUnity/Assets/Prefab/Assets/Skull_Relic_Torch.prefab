@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2791707168174086665}
   - component: {fileID: 2791707168174086664}
   m_Layer: 0
-  m_Name: SkullRelicTorch
+  m_Name: Skull_Relic_Torch
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -47,10 +47,11 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: f51f107996f09404794a333c1e078e76, type: 2}
+  - {fileID: 2100000, guid: 77f7daff463fba5428cb158eb0a8ddad, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -58,6 +59,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -140,8 +142,9 @@ Light:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5490142417058013269}
   m_Enabled: 1
-  serializedVersion: 9
+  serializedVersion: 10
   m_Type: 2
+  m_Shape: 0
   m_Color: {r: 0.9433962, g: 0.9299386, b: 0.38714847, a: 1}
   m_Intensity: 4.5
   m_Range: 1.8

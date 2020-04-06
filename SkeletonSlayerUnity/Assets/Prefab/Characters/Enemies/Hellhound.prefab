@@ -337,10 +337,11 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: f51f107996f09404794a333c1e078e76, type: 2}
+  - {fileID: 2100000, guid: 77f7daff463fba5428cb158eb0a8ddad, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -348,6 +349,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -440,10 +442,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sceneId: 0
   serverOnly: 0
-  localPlayerAuthority: 0
   m_AssetId: 
-  m_SceneId: 0
 --- !u!114 &5939185117275640318
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -471,9 +472,9 @@ MonoBehaviour:
   teleport_Distance: 0
   teleport_Cooldown: 0
   climbing_Speed: 0
+  spellBookInstance: {fileID: 0}
+  spellBook: {fileID: 0}
   spellInstances: []
-  spells: []
-  activeSpellID: 0
   animation_PreShoot: {fileID: 0}
   effect_Burn: {fileID: 7310163276645880396, guid: 24d0ce4752c97ad4dbdff29e61179231,
     type: 3}
@@ -503,6 +504,7 @@ MonoBehaviour:
     m_Bits: 256
   rb: {fileID: 0}
   anim: {fileID: 0}
+  gameManager: {fileID: 0}
   viewDistance: 1
   visible:
     serializedVersion: 2

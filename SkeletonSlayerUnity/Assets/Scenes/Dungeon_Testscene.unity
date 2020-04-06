@@ -99,7 +99,7 @@ LightmapSettings:
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 112000000, guid: 89f16cfc3582fd442afa9636419ba839,
     type: 2}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -7197,6 +7197,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: NPC_Spawner (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 3565984012198633726, guid: e3d0cc052e5629f4aac57482dbc48ab3,
+        type: 3}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: 4422084297763085224, guid: 0000000000000000d000000000000000,
+        type: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e3d0cc052e5629f4aac57482dbc48ab3, type: 3}
 --- !u!4 &1300322820 stripped
@@ -10492,7 +10498,7 @@ PrefabInstance:
     - target: {fileID: 8046653873583921781, guid: de85db7d38fdb9947a2c364527836b4c,
         type: 3}
       propertyPath: m_Name
-      value: Bat (1)
+      value: Bat
       objectReference: {fileID: 0}
     - target: {fileID: 8046653873583921782, guid: de85db7d38fdb9947a2c364527836b4c,
         type: 3}
