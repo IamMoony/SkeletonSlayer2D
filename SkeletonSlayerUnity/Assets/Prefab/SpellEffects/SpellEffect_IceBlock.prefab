@@ -4754,6 +4754,7 @@ ParticleSystemRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -4766,6 +4767,7 @@ ParticleSystemRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -4813,10 +4815,10 @@ GameObject:
   - component: {fileID: 1113873026422296210}
   - component: {fileID: 7636025900996775930}
   - component: {fileID: 3929051326079461432}
-  - component: {fileID: 3487440260915860292}
   - component: {fileID: 6927488732852042690}
+  - component: {fileID: 6395393443803400930}
   m_Layer: 12
-  m_Name: Projectile_IceBlock
+  m_Name: SpellEffect_IceBlock
   m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4852,6 +4854,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -4863,6 +4866,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -4923,22 +4927,6 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.1
---- !u!114 &3487440260915860292
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7636025900996775909}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  serverOnly: 0
-  localPlayerAuthority: 0
-  m_AssetId: 
-  m_SceneId: 2628364313
 --- !u!114 &6927488732852042690
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4952,6 +4940,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   owner: {fileID: 0}
+  audioSource: {fileID: 0}
+  effect_Cast: {fileID: 0}
+  effect_Destroy: {fileID: 3861367843242237069, guid: 91b2d47b629029d42acac26bcf54c441,
+    type: 3}
   initalVelocity: 0
   velocityModifier: {x: 0, y: 0, z: 0}
   contactDamage: 1
@@ -4967,9 +4959,22 @@ MonoBehaviour:
     type: 3}
   effect_Contact_Ground_PostActivation: {fileID: 3861367843242237069, guid: 91b2d47b629029d42acac26bcf54c441,
     type: 3}
-  effect_Destroy: {fileID: 3861367843242237069, guid: 91b2d47b629029d42acac26bcf54c441,
-    type: 3}
   isActivated: 0
   RB: {fileID: 0}
   stunDuration: 0
   knockDownForce: 0
+--- !u!114 &6395393443803400930
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7636025900996775909}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneId: 0
+  serverOnly: 0
+  m_AssetId: 

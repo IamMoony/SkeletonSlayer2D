@@ -9,8 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7636025900996775934}
-  - component: {fileID: 3487440260915860292}
   - component: {fileID: -5443253793337667020}
+  - component: {fileID: -5399557498808264801}
   m_Layer: 12
   m_Name: SpellEffect_FrostNova
   m_TagString: Projectile
@@ -32,22 +32,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3487440260915860292
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7636025900996775909}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  serverOnly: 0
-  localPlayerAuthority: 0
-  m_AssetId: 
-  m_SceneId: 2250490402
 --- !u!114 &-5443253793337667020
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -61,6 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   owner: {fileID: 0}
+  audioSource: {fileID: 0}
   effect_Cast: {fileID: 0}
   effect_Destroy: {fileID: 3861367843242237069, guid: 91b2d47b629029d42acac26bcf54c441,
     type: 3}
@@ -74,3 +59,18 @@ MonoBehaviour:
   nova: 1
   effect_Prefab: {fileID: 1333988044953883718, guid: 355cbebc051b07a4097da7c91f5c5537,
     type: 3}
+--- !u!114 &-5399557498808264801
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7636025900996775909}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneId: 0
+  serverOnly: 0
+  m_AssetId: 
