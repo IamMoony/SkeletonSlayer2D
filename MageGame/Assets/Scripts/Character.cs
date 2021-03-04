@@ -18,8 +18,9 @@ public class Character : MonoBehaviour, IHealthManagement
     public float dash_Duration;
     public float dash_CoolDown;
     public float climbing_Speed;
-    //public Spell[] spells;
-    //public AnimationClip animation_PreShoot;
+    public GameObject[] spellInstances;
+    [HideInInspector] public Spell[] spells;
+    public AnimationClip animation_PreShoot;
     //public GameObject effect_Burn;
     //public GameObject effect_Freeze;
     //public GameObject effect_Root;
@@ -50,6 +51,7 @@ public class Character : MonoBehaviour, IHealthManagement
     //private int stun_Ticks;
     private Collider2D climbableObject;
 
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -70,6 +72,15 @@ public class Character : MonoBehaviour, IHealthManagement
         MoveSpeed_Current = MoveSpeed_Base;
         JumpForce_Current = JumpForce_Base;
         FacingDirection = Vector2.right;
+        if (spellInstances.Length > 0)
+        {
+            spells = new Spell[spellInstances.Length];
+            for (int i = 0; i < spellInstances.Length; i++)
+            {
+                spellInstances[i] = Instantiate(spellInstances[i], transform);
+                spells[i] = spellInstances[i].GetComponent<Spell>();
+            }
+        }
         //if (GameObject.Find("GUI"))
         //    GameObject.Find("GUI").transform.Find("Panel_Character").GetComponent<CharacterPanelManager>().NewPanel(transform);
     }
@@ -96,6 +107,7 @@ public class Character : MonoBehaviour, IHealthManagement
         anim.SetBool("IsGrounded", isGrounded);
         anim.SetBool("IsWalking", isWalking);
         anim.SetBool("IsClimbing", isClimbing);
+        anim.SetBool("IsDashing", isDashing);
         /*
         if (burn_Ticks > 0 || freeze_Ticks > 0 || root_Ticks > 0 || wet_Ticks > 0 || stun_Ticks > 0)
         {
@@ -331,40 +343,42 @@ public class Character : MonoBehaviour, IHealthManagement
             isGrounded = false;
         }
     }
-    /*
-    public void CastSpell(int spellID)
+
+    public Vector2 GetCursorWorldPosition2D()
     {
-        StartCoroutine(Cast(spellID));
+        Vector2 cPos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, Mathf.Abs(Camera.main.transform.position.z)));
+        return cPos;
     }
 
-    public IEnumerator Cast(int spellID)
+    public IEnumerator CastSpell(int spellID)
     {
         GameObject castVFX;
-        if (spells[spellID].spellEffectPrefab.GetComponent<SpellEffect>().effect_Cast != null)
-            castVFX = Instantiate(spells[spellID].vfx_cast, projectileSpawn.position, Quaternion.identity, transform);
+        if (spells[spellID].vfxSpellCast != null)
+            castVFX = Instantiate(spells[spellID].vfxSpellCast, projectileSpawn.position, Quaternion.identity, transform);
         else
             castVFX = null;
         anim.SetTrigger("Cast");
+        anim.SetBool("IsCasting", true);
+        actionValue = 0;
         while (actionValue < 1)
         {
-            if (actionValue >= (spells[spellID].castTime - (animation_PreShoot == null ? 0 : animation_PreShoot.averageDuration)) / spells[spellID].castTime)
-                anim.SetTrigger("Shoot");
+            //if (actionValue >= (spells[spellID].spellCastTime - (animation_PreShoot == null ? 0 : animation_PreShoot.averageDuration)) / spells[spellID].spellCastTime)
+            //    anim.SetTrigger("Shoot");
             if (Input.GetButton("Shoot"))
-                actionValue = Mathf.Clamp(actionValue + Time.deltaTime / spells[spellID].castTime, 0, 1);
+                actionValue = Mathf.Clamp(actionValue + Time.deltaTime / spells[spellID].spellCastTime, 0, 1);
             else
                 break;
             yield return new WaitForEndOfFrame();
         }
+        while(Input.GetButton("Shoot"))
+            yield return new WaitForEndOfFrame();
+        anim.SetBool("IsCasting", false);
+        anim.SetTrigger("Shoot");
         if (castVFX)
             Destroy(castVFX);
-        if (actionValue == 1)
-        {
-            Vector3 mousePosition = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, Mathf.Abs(Camera.main.transform.position.z)));
-            mousePosition = projectileSpawn.transform.InverseTransformPoint(mousePosition);
-            Vector3 castDirection = mousePosition;
-            //spellToCast.Cast(castDirection, projectileSpawn.position, this);
-        }
-        actionValue = 0;
+        Vector2 direction = projectileSpawn.transform.InverseTransformPoint(GetCursorWorldPosition2D());
+        GameObject effect = Instantiate(spells[spellID].spellEffectPrefab[actionValue == 1 ? 1 : 0], projectileSpawn.position, Quaternion.Euler(new Vector3(0, FacingDirection == Vector2.right ? 0 : 180, Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg)));
+        effect.GetComponent<SpellEffect>().owner = this;
+        spells[spellID].AddSpellEffectInstance(effect);
     }
-    */
 }

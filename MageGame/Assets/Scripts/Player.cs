@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Player : Character
 {
+    public float holdDuration;
+    private float hDur;
+
     public override void Update()
     {
         base.Update();
@@ -29,18 +32,31 @@ public class Player : Character
             Jump(Vector2.zero, 1f);
         }
         if (Input.GetButtonDown("Dash") && dash_cd <= 0)
-        {
-            Vector3 mousePosition = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, Mathf.Abs(Camera.main.transform.position.z)));
-            Vector2 direction = mousePosition - transform.position;
+        { 
+            Vector2 cursorPos = GetCursorWorldPosition2D();
+            Vector2 direction = cursorPos - (Vector2)transform.position;
             Dash(direction.normalized);
         }
         if (Input.GetButtonDown("Shoot"))
         {
-            //CastSpell
+            StartCoroutine(CastSpell(0));
         }
-        if (Input.GetButtonDown("Activate"))
+        if (Input.GetButtonUp("Activate"))
         {
-            //ActivateSpell(FacingDirection);
+            if (hDur != 10)
+                spells[0].Activate(GetCursorWorldPosition2D(), false);
+            else
+                hDur = 0;
+        }
+        if (Input.GetButton("Activate"))
+        {
+            if (hDur < holdDuration)
+                hDur += Time.deltaTime;
+            else if (hDur != 10)
+            {
+                spells[0].Activate(GetCursorWorldPosition2D(), true);
+                hDur = 10;
+            }
         }
         /*
         if (Input.GetKeyDown(KeyCode.Alpha1))
