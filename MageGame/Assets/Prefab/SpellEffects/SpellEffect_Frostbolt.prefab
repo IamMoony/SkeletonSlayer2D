@@ -48,11 +48,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   owner: {fileID: 0}
-  spell: {fileID: 0}
   audioSource: {fileID: 0}
   vfxDestroy: {fileID: 3861367843242237069, guid: 91b2d47b629029d42acac26bcf54c441,
     type: 3}
-  initialVelocity: 1
+  initialVelocity: 1.5
   power: 1
   knockBackForce: 0
   activationLimit: 1

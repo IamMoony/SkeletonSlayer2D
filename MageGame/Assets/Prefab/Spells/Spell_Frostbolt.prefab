@@ -47,9 +47,12 @@ MonoBehaviour:
   spellDescription: 
   spellIcon: {fileID: 0}
   spellCastTime: 1
+  spellCooldown: 0.1
   spellInstanceLimit: 10
   spellEffectPrefab:
+  - {fileID: 231005124414772019, guid: 42d25820fc1991d48ae80d5683ec9c72, type: 3}
   - {fileID: 231005124414772019, guid: 6aa9519db4e477f40b167add4225c6d6, type: 3}
-  - {fileID: 231005124414772019, guid: 6aa9519db4e477f40b167add4225c6d6, type: 3}
-  vfxSpellCast: {fileID: 0}
+  vfxSpellCast: {fileID: 7318746912668595937, guid: 992dd86a2f2f8704287c61f4c2ada11d,
+    type: 3}
   spellEffectInstances: []
+  IsOnCooldown: 0

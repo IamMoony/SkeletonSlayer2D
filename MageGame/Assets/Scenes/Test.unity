@@ -917,11 +917,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7023911255765578046, guid: 358c64ad4d2e34f489f005e2f1cfdb7c,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7023911255765578046, guid: 358c64ad4d2e34f489f005e2f1cfdb7c,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.3
+      objectReference: {fileID: 0}
     - target: {fileID: 7023911257143758051, guid: 358c64ad4d2e34f489f005e2f1cfdb7c,
         type: 3}
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 7023911257143758057, guid: 358c64ad4d2e34f489f005e2f1cfdb7c,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 73d46a9de277e5a4eaa4efa5da71d473, type: 2}
     - target: {fileID: 7023911257143758062, guid: 358c64ad4d2e34f489f005e2f1cfdb7c,
         type: 3}
       propertyPath: m_RootOrder
@@ -980,7 +995,7 @@ PrefabInstance:
     - target: {fileID: 7023911257143758063, guid: 358c64ad4d2e34f489f005e2f1cfdb7c,
         type: 3}
       propertyPath: holdDuration
-      value: 1
+      value: 0.33
       objectReference: {fileID: 0}
     - target: {fileID: 7023911257143758063, guid: 358c64ad4d2e34f489f005e2f1cfdb7c,
         type: 3}

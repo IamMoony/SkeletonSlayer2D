@@ -8,25 +8,41 @@ public class Spell : MonoBehaviour
     public string spellDescription;
     public Sprite spellIcon;
     public float spellCastTime;
+    public float spellCooldown;
     public int spellInstanceLimit;
     public GameObject[] spellEffectPrefab;
     public GameObject vfxSpellCast;
+    [HideInInspector] public List<GameObject> spellEffectInstances;
+    [HideInInspector] public bool IsOnCooldown;
 
-    public List<GameObject> spellEffectInstances;
+    private float currentCd;
 
     private void Start()
     {
         spellEffectInstances = new List<GameObject>();
     }
 
-    public void AddSpellEffectInstance(GameObject instance)
+    private void Update()
+    {
+        if (currentCd > 0)
+            currentCd -= Time.deltaTime;
+        else if (IsOnCooldown)
+            IsOnCooldown = false;
+    }
+
+    public void AddSpellEffectInstance(GameObject instance, bool cooldown)
     {
         spellEffectInstances.Add(instance);
         if (spellEffectInstances.Count > spellInstanceLimit)
-            RemoveSpellEffect(0);
+            RemoveSpellEffectInstance(0);
+        if (cooldown)
+        {
+            IsOnCooldown = true;
+            currentCd = spellCooldown;
+        }
     }
 
-    private void RemoveSpellEffect(int id)
+    private void RemoveSpellEffectInstance(int id)
     {
         if (spellEffectInstances[id])
             spellEffectInstances[id].GetComponent<SpellEffect>().DestroySelf();
@@ -38,7 +54,8 @@ public class Spell : MonoBehaviour
         if (spellEffectInstances.Count > 0)
         {
             //Debug.Log("Activating with " + spellEffectInstances.Count + " SpellEffectInstances");
-            List<GameObject> effects = new List<GameObject>();
+            List<GameObject> effectsToAdd = new List<GameObject>();
+            List<int> effectIDsToRemove = new List<int>();
             for (int i = 0; i < spellEffectInstances.Count; i++)
             {
                 //Debug.Log("SpellEffect " + i);
@@ -50,25 +67,29 @@ public class Spell : MonoBehaviour
                     {
                         if (spellEffectInstances[i].GetComponent<Projectile>().activationLimit == 0)
                         {
-                            RemoveSpellEffect(i);
-                            i--;
+                            int id = i;
+                            effectIDsToRemove.Add(id);
                         }
                         //Debug.Log("Activation Effect found");
-                        effects.Add(activationEffect);
+                        effectsToAdd.Add(activationEffect);
                         if (!multi)
                             break;
                     }
+                    //else
+                        //Debug.Log("No Activation found");
                 }
                 else
                 {
-                    RemoveSpellEffect(i);
-                    i--;
+                    effectIDsToRemove.Add(i);
                 }
             }
-            for (int i = 0; i < effects.Count; i++)
+            for (int i = 0; i < effectIDsToRemove.Count; i++)
             {
-                //Debug.Log("Adding Activation Effect " + i);
-                AddSpellEffectInstance(effects[i]);
+                RemoveSpellEffectInstance(effectIDsToRemove[i] - i);
+            }
+            for (int i = 0; i < effectsToAdd.Count; i++)
+            {
+                AddSpellEffectInstance(effectsToAdd[i], false);
             }
         }
     }

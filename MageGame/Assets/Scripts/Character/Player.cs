@@ -39,14 +39,13 @@ public class Player : Character
         }
         if (Input.GetButtonDown("Shoot"))
         {
-            StartCoroutine(CastSpell(0));
+            TryCastingSpell(0);
         }
         if (Input.GetButtonUp("Activate"))
         {
             if (hDur != 10)
                 spells[0].Activate(GetCursorWorldPosition2D(), false);
-            else
-                hDur = 0;
+            hDur = 0;
         }
         if (Input.GetButton("Activate"))
         {

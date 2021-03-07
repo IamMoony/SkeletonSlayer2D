@@ -20,7 +20,6 @@ public class Character : MonoBehaviour, IHealthManagement
     public float climbing_Speed;
     public GameObject[] spellInstances;
     [HideInInspector] public Spell[] spells;
-    public AnimationClip animation_PreShoot;
     //public GameObject effect_Burn;
     //public GameObject effect_Freeze;
     //public GameObject effect_Root;
@@ -33,9 +32,12 @@ public class Character : MonoBehaviour, IHealthManagement
     [HideInInspector] public float actionValue = 0;
     public bool isGrounded;
     public bool isWalking;
+    public bool isJumping;
     public bool canClimb;
     public bool isClimbing;
     public bool isDashing;
+    public enum CastState { Default, Charge, Hold, Release }
+    public CastState castingState = CastState.Default;
     public bool isDead;
     public bool isStunned;
     [HideInInspector] public bool climbLock;
@@ -50,7 +52,8 @@ public class Character : MonoBehaviour, IHealthManagement
     //private int wet_Ticks;
     //private int stun_Ticks;
     private Collider2D climbableObject;
-
+    private enum AnimationState { Idle, Walk, Jump, Dash, Climb, CastCharge, CastHold, CastHoldWalk, CastRelease }
+    private string currentAnimationState;
 
     private void Awake()
     {
@@ -87,27 +90,55 @@ public class Character : MonoBehaviour, IHealthManagement
 
     public virtual void Update()
     {
-        if (isGrounded)
+        if (isGrounded && !isDashing)
         {
             if (rb.velocity.x != 0)
+            {
                 isWalking = true;
+                if (castingState == CastState.Default)
+                    ChangeAnimationState(AnimationState.Walk.ToString());
+                else if (castingState == CastState.Charge)
+                    ChangeAnimationState(AnimationState.CastHoldWalk.ToString());
+                else if (castingState == CastState.Hold)
+                    ChangeAnimationState(AnimationState.CastHoldWalk.ToString());
+                else if (castingState == CastState.Release)
+                    ChangeAnimationState(AnimationState.CastRelease.ToString());
+            }
             else
+            {
                 isWalking = false;
+                if (castingState == CastState.Default)
+                    ChangeAnimationState(AnimationState.Idle.ToString());
+                else if (castingState == CastState.Charge)
+                    ChangeAnimationState(AnimationState.CastCharge.ToString());
+                else if (castingState == CastState.Hold)
+                    ChangeAnimationState(AnimationState.CastHold.ToString());
+                else if (castingState == CastState.Release)
+                    ChangeAnimationState(AnimationState.CastRelease.ToString());
+            }
         }
-        if (isClimbing && Input.GetAxis("Vertical") == 0)
+        if (isJumping && !isDashing)
+            ChangeAnimationState(AnimationState.Jump.ToString());
+        if (isDashing)
+            ChangeAnimationState(AnimationState.Dash.ToString());
+        if (isClimbing)
         {
-            anim.speed = 0;
+            anim.speed = Input.GetAxis("Vertical");
+            ChangeAnimationState(AnimationState.Climb.ToString());
         }
-        else if (isWalking && !isStunned)
+        else if (anim.speed == 0)
+            anim.speed = 1;
+        if (isWalking && !isStunned)
         {
             anim.speed = Mathf.Clamp((float)MoveSpeed_Current / (float)MoveSpeed_Base, 0, 1);
         }
         if (dash_cd > 0)
             dash_cd -= Time.deltaTime;
-        anim.SetBool("IsGrounded", isGrounded);
-        anim.SetBool("IsWalking", isWalking);
-        anim.SetBool("IsClimbing", isClimbing);
-        anim.SetBool("IsDashing", isDashing);
+
+        //anim.SetBool("IsGrounded", isGrounded);
+        //anim.SetBool("IsWalking", isWalking);
+        //anim.SetBool("IsClimbing", isClimbing);
+        //anim.SetBool("IsDashing", isDashing);
         /*
         if (burn_Ticks > 0 || freeze_Ticks > 0 || root_Ticks > 0 || wet_Ticks > 0 || stun_Ticks > 0)
         {
@@ -154,6 +185,14 @@ public class Character : MonoBehaviour, IHealthManagement
         */
     }
 
+    private void ChangeAnimationState (string newState)
+    {
+        if (currentAnimationState == newState)
+            return;
+        anim.Play(newState);
+        currentAnimationState = newState;
+    }
+
     public void AddHealth(int amount)
     {
         if (Health_Current + amount >= Health_Base)
@@ -194,7 +233,7 @@ public class Character : MonoBehaviour, IHealthManagement
                 rb.gravityScale = 1f;
                 climbLock = true;
             }
-            anim.SetTrigger("Jump");
+            //anim.SetTrigger("Jump");
             rb.AddForce((Vector2.up + direction) * JumpForce_Current * forceMod);
         }
     }
@@ -217,7 +256,7 @@ public class Character : MonoBehaviour, IHealthManagement
     {
         if (!isDashing)
         {
-            anim.SetTrigger("Dash");
+            //anim.SetTrigger("Dash");
             StartCoroutine(Dashing(direction));
         }
     }
@@ -323,6 +362,7 @@ public class Character : MonoBehaviour, IHealthManagement
         else if (collision.gameObject.tag == "Ground")
         {
             isGrounded = true;
+            isJumping = false;
         }
     }
 
@@ -341,6 +381,7 @@ public class Character : MonoBehaviour, IHealthManagement
         else if (collision.gameObject.tag == "Ground")
         {
             isGrounded = false;
+            isJumping = true;
         }
     }
 
@@ -350,15 +391,26 @@ public class Character : MonoBehaviour, IHealthManagement
         return cPos;
     }
 
-    public IEnumerator CastSpell(int spellID)
+    public void TryCastingSpell(int spellID)
+    {
+        if (!spells[spellID].IsOnCooldown)
+            StartCoroutine(CastSpell(spellID));
+    }
+
+    private void CastReleased()
+    {
+        castingState = CastState.Default;
+    }
+
+    private IEnumerator CastSpell(int spellID)
     {
         GameObject castVFX;
         if (spells[spellID].vfxSpellCast != null)
             castVFX = Instantiate(spells[spellID].vfxSpellCast, projectileSpawn.position, Quaternion.identity, transform);
         else
             castVFX = null;
-        anim.SetTrigger("Cast");
-        anim.SetBool("IsCasting", true);
+        //anim.SetTrigger("Cast");
+        castingState = CastState.Charge;
         actionValue = 0;
         while (actionValue < 1)
         {
@@ -368,17 +420,20 @@ public class Character : MonoBehaviour, IHealthManagement
                 actionValue = Mathf.Clamp(actionValue + Time.deltaTime / spells[spellID].spellCastTime, 0, 1);
             else
                 break;
+            castVFX.transform.localScale = new Vector3(actionValue, actionValue, 1);
             yield return new WaitForEndOfFrame();
         }
-        while(Input.GetButton("Shoot"))
+        castingState = CastState.Hold;
+        while (Input.GetButton("Shoot"))
             yield return new WaitForEndOfFrame();
-        anim.SetBool("IsCasting", false);
-        anim.SetTrigger("Shoot");
+        castingState = CastState.Release;
+        Invoke("CastReleased", 0.3f);
+        //anim.SetTrigger("Shoot");
         if (castVFX)
             Destroy(castVFX);
         Vector2 direction = projectileSpawn.transform.InverseTransformPoint(GetCursorWorldPosition2D());
         GameObject effect = Instantiate(spells[spellID].spellEffectPrefab[actionValue == 1 ? 1 : 0], projectileSpawn.position, Quaternion.Euler(new Vector3(0, FacingDirection == Vector2.right ? 0 : 180, Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg)));
         effect.GetComponent<SpellEffect>().owner = this;
-        spells[spellID].AddSpellEffectInstance(effect);
+        spells[spellID].AddSpellEffectInstance(effect, true);
     }
 }
