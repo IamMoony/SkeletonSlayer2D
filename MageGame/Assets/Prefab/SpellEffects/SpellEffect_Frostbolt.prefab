@@ -54,8 +54,8 @@ MonoBehaviour:
   initialVelocity: 1.5
   power: 1
   knockBackForce: 0
-  activationLimit: 1
-  spellEffectOnActivation: {fileID: 231005124414772019}
+  activationLimit: 0
+  spellEffectOnActivation: {fileID: 0}
   vfxContactCharacter: {fileID: 2242214404038328044, guid: ff85c2585ee85b5498beadb06b8b8b55,
     type: 3}
   vfxContactGround: {fileID: 2242214404038328044, guid: ff85c2585ee85b5498beadb06b8b8b55,

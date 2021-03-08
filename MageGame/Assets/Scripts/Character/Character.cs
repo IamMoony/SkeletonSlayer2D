@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Character : MonoBehaviour, IHealthManagement
 {
+    [SerializeField]
     private int health_base;
     private int health_current;
     public int Health_Base { get { return health_base; } set { health_base = value; } }
@@ -84,8 +85,8 @@ public class Character : MonoBehaviour, IHealthManagement
                 spells[i] = spellInstances[i].GetComponent<Spell>();
             }
         }
-        //if (GameObject.Find("GUI"))
-        //    GameObject.Find("GUI").transform.Find("Panel_Character").GetComponent<CharacterPanelManager>().NewPanel(transform);
+        if (GameObject.Find("GUI"))
+            GameObject.Find("GUI").transform.Find("Panel_Character").GetComponent<CharacterPanelManager>().NewPanel(transform);
     }
 
     public virtual void Update()
@@ -432,7 +433,7 @@ public class Character : MonoBehaviour, IHealthManagement
         if (castVFX)
             Destroy(castVFX);
         Vector2 direction = projectileSpawn.transform.InverseTransformPoint(GetCursorWorldPosition2D());
-        GameObject effect = Instantiate(spells[spellID].spellEffectPrefab[actionValue == 1 ? 1 : 0], projectileSpawn.position, Quaternion.Euler(new Vector3(0, FacingDirection == Vector2.right ? 0 : 180, Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg)));
+        GameObject effect = Instantiate(spells[spellID].spellEffectPrefab[actionValue == 1 ? 1 : 0], projectileSpawn.position, Quaternion.Euler(new Vector3(0, FacingDirection == Vector2.right ? 0 : 180, Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg)), spells[spellID].transform);
         effect.GetComponent<SpellEffect>().owner = this;
         spells[spellID].AddSpellEffectInstance(effect, true);
     }

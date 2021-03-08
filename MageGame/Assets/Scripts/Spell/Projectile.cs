@@ -44,7 +44,7 @@ public class Projectile : SpellEffect
         {
             if (vfxActivation)
                 Destroy(Instantiate(vfxActivation, transform.position, Quaternion.identity), 1f);
-            GameObject effect = Instantiate(spellEffectOnActivation, transform.position, Quaternion.Euler(new Vector3(0, transform.rotation.eulerAngles.x, Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg)));
+            GameObject effect = Instantiate(spellEffectOnActivation, transform.position, Quaternion.Euler(new Vector3(0, transform.rotation.eulerAngles.x, Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg)), transform.parent);
             activationLimit--;
             return effect;
         }
