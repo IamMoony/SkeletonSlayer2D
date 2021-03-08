@@ -17,8 +17,10 @@ public class Player : Character
             Vector2 direction = Input.GetAxis("Horizontal") > 0 ? Vector2.right : Vector2.left;
             if (direction != FacingDirection)
                 Turn(direction);
-            Move(direction, 1f);
+            Walk(direction, 1f);
         }
+        else
+            StopWalking();
         if (canClimb && !climbLock)
         {
             if (Input.GetAxis("Vertical") != 0)
@@ -39,7 +41,7 @@ public class Player : Character
         }
         if (Input.GetButtonDown("Shoot"))
         {
-            TryCastingSpell(0);
+            TryCastingSpell(0, GetCursorWorldPosition2D());
         }
         if (Input.GetButtonUp("Activate"))
         {
@@ -79,5 +81,11 @@ public class Player : Character
                 CmdCast(activeSpellID[3]);
         }
         */
+    }
+
+    public Vector2 GetCursorWorldPosition2D()
+    {
+        Vector2 cPos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, Mathf.Abs(Camera.main.transform.position.z)));
+        return cPos;
     }
 }

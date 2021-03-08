@@ -37,6 +37,7 @@ public class Character : MonoBehaviour, IHealthManagement
     public bool canClimb;
     public bool isClimbing;
     public bool isDashing;
+    public bool isAttacking;
     public enum CastState { Default, Charge, Hold, Release }
     public CastState castingState = CastState.Default;
     public bool isDead;
@@ -53,10 +54,10 @@ public class Character : MonoBehaviour, IHealthManagement
     //private int wet_Ticks;
     //private int stun_Ticks;
     private Collider2D climbableObject;
-    private enum AnimationState { Idle, Walk, Jump, Dash, Climb, CastCharge, CastHold, CastHoldWalk, CastRelease }
+    public enum AnimationState { Idle, Walk, Jump, Dash, Climb, CastCharge, CastHold, CastHoldWalk, CastRelease, AttackMelee, AttackRanged }
     private string currentAnimationState;
 
-    private void Awake()
+    public virtual void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
@@ -91,11 +92,10 @@ public class Character : MonoBehaviour, IHealthManagement
 
     public virtual void Update()
     {
-        if (isGrounded && !isDashing)
+        if (isGrounded && !isDashing && !isAttacking)
         {
-            if (rb.velocity.x != 0)
+            if (isWalking)
             {
-                isWalking = true;
                 if (castingState == CastState.Default)
                     ChangeAnimationState(AnimationState.Walk.ToString());
                 else if (castingState == CastState.Charge)
@@ -107,7 +107,6 @@ public class Character : MonoBehaviour, IHealthManagement
             }
             else
             {
-                isWalking = false;
                 if (castingState == CastState.Default)
                     ChangeAnimationState(AnimationState.Idle.ToString());
                 else if (castingState == CastState.Charge)
@@ -118,7 +117,7 @@ public class Character : MonoBehaviour, IHealthManagement
                     ChangeAnimationState(AnimationState.CastRelease.ToString());
             }
         }
-        if (isJumping && !isDashing)
+        if (isJumping && !isDashing && !isAttacking)
             ChangeAnimationState(AnimationState.Jump.ToString());
         if (isDashing)
             ChangeAnimationState(AnimationState.Dash.ToString());
@@ -186,7 +185,7 @@ public class Character : MonoBehaviour, IHealthManagement
         */
     }
 
-    private void ChangeAnimationState (string newState)
+    public void ChangeAnimationState (string newState)
     {
         if (currentAnimationState == newState)
             return;
@@ -213,9 +212,16 @@ public class Character : MonoBehaviour, IHealthManagement
             Health_Current -= amount;
     }
 
-    public void Move(Vector2 direction, float speedModifier)
+    public void Walk(Vector2 direction, float speedModifier)
     {
+        isWalking = true;
         rb.velocity = new Vector2(direction.x * MoveSpeed_Current * speedModifier, rb.velocity.y);
+    }
+    
+    public void StopWalking()
+    {
+        isWalking = false;
+        rb.velocity = new Vector2(0, rb.velocity.y);
     }
 
     public void Turn(Vector2 direction)
@@ -235,6 +241,7 @@ public class Character : MonoBehaviour, IHealthManagement
                 climbLock = true;
             }
             //anim.SetTrigger("Jump");
+            isGrounded = false;
             rb.AddForce((Vector2.up + direction) * JumpForce_Current * forceMod);
         }
     }
@@ -386,16 +393,10 @@ public class Character : MonoBehaviour, IHealthManagement
         }
     }
 
-    public Vector2 GetCursorWorldPosition2D()
-    {
-        Vector2 cPos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, Mathf.Abs(Camera.main.transform.position.z)));
-        return cPos;
-    }
-
-    public void TryCastingSpell(int spellID)
+    public void TryCastingSpell(int spellID, Vector2 target)
     {
         if (!spells[spellID].IsOnCooldown)
-            StartCoroutine(CastSpell(spellID));
+            StartCoroutine(CastSpell(spellID, target));
     }
 
     private void CastReleased()
@@ -403,7 +404,7 @@ public class Character : MonoBehaviour, IHealthManagement
         castingState = CastState.Default;
     }
 
-    private IEnumerator CastSpell(int spellID)
+    private IEnumerator CastSpell(int spellID, Vector2 target)
     {
         GameObject castVFX;
         if (spells[spellID].vfxSpellCast != null)
@@ -432,7 +433,7 @@ public class Character : MonoBehaviour, IHealthManagement
         //anim.SetTrigger("Shoot");
         if (castVFX)
             Destroy(castVFX);
-        Vector2 direction = projectileSpawn.transform.InverseTransformPoint(GetCursorWorldPosition2D());
+        Vector2 direction = projectileSpawn.transform.InverseTransformPoint(target);
         GameObject effect = Instantiate(spells[spellID].spellEffectPrefab[actionValue == 1 ? 1 : 0], projectileSpawn.position, Quaternion.Euler(new Vector3(0, FacingDirection == Vector2.right ? 0 : 180, Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg)), spells[spellID].transform);
         effect.GetComponent<SpellEffect>().owner = this;
         spells[spellID].AddSpellEffectInstance(effect, true);

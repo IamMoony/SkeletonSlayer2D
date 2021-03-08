@@ -13,7 +13,7 @@ public class Projectile : SpellEffect
     public GameObject vfxContactGround;
     public GameObject vfxActivation;
 
-    private Rigidbody2D rb;
+    public Rigidbody2D rb;
 
     public override void Awake()
     {

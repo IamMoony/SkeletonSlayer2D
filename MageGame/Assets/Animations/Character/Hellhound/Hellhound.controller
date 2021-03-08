@@ -423,7 +423,7 @@ AnimatorStateMachine:
   m_ChildStates:
   - serializedVersion: 1
     m_State: {fileID: 5296530792239195075}
-    m_Position: {x: 360, y: -60, z: 0}
+    m_Position: {x: 260, y: -60, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -2335177994059879903}
     m_Position: {x: 570, y: 120, z: 0}
@@ -444,8 +444,8 @@ AnimatorStateMachine:
   m_StateMachineTransitions: {}
   m_StateMachineBehaviours: []
   m_AnyStatePosition: {x: -70, y: 170, z: 0}
-  m_EntryPosition: {x: 30, y: -110, z: 0}
-  m_ExitPosition: {x: 30, y: -60, z: 0}
+  m_EntryPosition: {x: 280, y: -190, z: 0}
+  m_ExitPosition: {x: 80, y: -190, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
   m_DefaultState: {fileID: 5296530792239195075}
 --- !u!1101 &3704306290887713357
@@ -511,7 +511,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Hellhound_Idle
+  m_Name: Idle
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:

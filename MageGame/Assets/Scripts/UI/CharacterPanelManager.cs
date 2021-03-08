@@ -28,7 +28,7 @@ public class CharacterPanelManager : MonoBehaviour
         GameObject panel = Instantiate(characterPanel_Instance, transform);
         characterHealthBar.Add(panel.transform.Find("Bar_Health").GetChild(0).GetComponent<Image>());
         characterPanelInScene.Add(panel);
-        characterPanelOffset.Add(character.GetComponent<SpriteRenderer>().bounds.extents.y + 0.1f);
+        characterPanelOffset.Add(character.GetComponent<Collider2D>().bounds.extents.y + 0.1f);
     }
 
     private void Update()
