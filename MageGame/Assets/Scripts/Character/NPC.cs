@@ -57,7 +57,7 @@ public class NPC : Character
     public IEnumerator Routine_AttackMelee(bool jump)
     {
         //Debug.Log("Start Melee Attack Routine");
-        if (isStunned)
+        if (isStunned || !isGrounded)
             yield break;
         if (target.transform.position.x < transform.position.x && FacingDirection == Vector2.right || target.transform.position.x > transform.position.x && FacingDirection == Vector2.left)
             Turn(FacingDirection * -1);
@@ -78,7 +78,7 @@ public class NPC : Character
     public IEnumerator Routine_AttackRanged()
     {
         //Debug.Log("Start Ranged Attack Routine");
-        if (isStunned)
+        if (isStunned || !isGrounded)
             yield break;
         if (target.transform.position.x < transform.position.x && FacingDirection == Vector2.right || target.transform.position.x > transform.position.x && FacingDirection == Vector2.left)
             Turn(FacingDirection * -1);

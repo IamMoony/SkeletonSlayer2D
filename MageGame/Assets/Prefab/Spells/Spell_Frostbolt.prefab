@@ -47,7 +47,7 @@ MonoBehaviour:
   spellDescription: 
   spellIcon: {fileID: 0}
   spellCastTime: 0.5
-  spellCooldown: 0.5
+  spellCooldown: 0.25
   spellInstanceLimit: 3
   spellEffectPrefab:
   - {fileID: 231005124414772019, guid: 42d25820fc1991d48ae80d5683ec9c72, type: 3}

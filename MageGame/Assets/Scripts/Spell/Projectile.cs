@@ -42,7 +42,8 @@ public class Projectile : SpellEffect
     {
         if (collider.GetComponent<Character>())
         {
-            CharacterContact(collider.GetComponent<Character>(), collider.ClosestPoint(transform.position));
+            if (power > 0)
+                CharacterContact(collider.GetComponent<Character>(), collider.ClosestPoint(transform.position));
         }
         else if (collider.tag == "Ground")
         {
@@ -69,7 +70,7 @@ public class Projectile : SpellEffect
     {
         characterInContact.SubtractHealth(Mathf.RoundToInt(owner.DMG_Current * power));
         Vector2 knockDir = ((Vector2)characterInContact.transform.position - contactPosition).normalized;
-        characterInContact.Knockback(new Vector2(knockDir.x, 1f), knockBackForce);
+        characterInContact.Knockback(new Vector2(knockDir.x, 1.5f), knockBackForce);
         characterInContact.Float();
         if (vfxContactCharacter)
             Destroy(Instantiate(vfxContactCharacter, contactPosition, Quaternion.identity), 1f);

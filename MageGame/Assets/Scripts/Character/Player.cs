@@ -126,7 +126,7 @@ public class Player : Character
         effect.GetComponent<SpellEffect>().owner = this;
         if (actionValue != 1)
             effect.GetComponent<Projectile>().targetPosition = GetCursorWorldPosition2D();
-        spells[spellID].AddSpellEffectInstance(effect, true);
+        spells[spellID].AddSpellEffectInstance(effect, actionValue == 1);
     }
 
     private Vector2 GetCursorWorldPosition2D()

@@ -51,9 +51,9 @@ MonoBehaviour:
   audioSource: {fileID: 0}
   vfxDestroy: {fileID: 3861367843242237069, guid: 91b2d47b629029d42acac26bcf54c441,
     type: 3}
-  initialVelocity: 2
+  initialVelocity: 4
   power: 1
-  knockBackForce: 3
+  knockBackForce: 2
   activationLimit: 0
   spellEffectOnActivation: {fileID: 0}
   vfxContactCharacter: {fileID: 2242214404038328044, guid: ff85c2585ee85b5498beadb06b8b8b55,

@@ -166,6 +166,7 @@ MonoBehaviour:
   isClimbing: 0
   isDashing: 0
   isAttacking: 0
+  isFloating: 0
   castingState: 0
   isDead: 0
   isStunned: 0
@@ -212,7 +213,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0.75
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1

@@ -235,7 +235,7 @@ public class Character : MonoBehaviour, IHealthManagement
     public void Turn(Vector2 direction)
     {
         FacingDirection = direction;
-        transform.localScale = new Vector3(direction.x * transform.localScale.x, transform.localScale.y, transform.localScale.z);
+        transform.localScale = new Vector3(-1 * transform.localScale.x, transform.localScale.y, transform.localScale.z);
     }
 
     public void Jump(Vector2 direction, float forceMod)
@@ -326,7 +326,7 @@ public class Character : MonoBehaviour, IHealthManagement
     public void Float()
     {
         isFloating = true;
-        rb.gravityScale = 0.5f;
+        rb.gravityScale = 0.4f;
     }
 
     public void Stun(int ticks)
