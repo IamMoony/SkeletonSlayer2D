@@ -26,16 +26,18 @@ public class Hellhound : NPC
             }
             else if (target)
             {
-                if (IsTargetInRange(true) && cooldown_Melee <= 0)
+                if (IsInMeleeRange() && cooldown_Melee <= 0)
                 {
                     yield return StartCoroutine(Routine_AttackMelee(true));
                 }
-                else if (IsTargetInRange(false) && cooldown_Ranged <= 0 && projectile_Ranged)
+                else if (IsInRangedRange() && cooldown_Ranged <= 0 && projectile_Ranged && !IsInMeleeRange())
                 {
                     yield return StartCoroutine(Routine_AttackRanged());
                 }
                 else
+                {
                     yield return StartCoroutine(GetInRange(true));
+                }
             }
         }
     }

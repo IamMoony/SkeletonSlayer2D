@@ -25,13 +25,14 @@ public class CharacterPanelManager : MonoBehaviour
     public void NewPanel(Transform character)
     {
         characterInScene.Add(character);
-        GameObject panel = Instantiate(characterPanel_Instance, transform);
+        characterPanelOffset.Add(character.GetComponent<Collider2D>().bounds.extents.y + 0.1f);
+        GameObject panel = Instantiate(characterPanel_Instance, Camera.main.WorldToScreenPoint(character.position + Vector3.up * characterPanelOffset[characterPanelOffset.Count - 1]), Quaternion.identity, transform);
         characterHealthBar.Add(panel.transform.Find("Bar_Health").GetChild(0).GetComponent<Image>());
         characterPanelInScene.Add(panel);
-        characterPanelOffset.Add(character.GetComponent<Collider2D>().bounds.extents.y + 0.1f);
+        
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         UpdatePanels();
     }
@@ -52,7 +53,7 @@ public class CharacterPanelManager : MonoBehaviour
             }
             if (!characterInScene[i].GetComponent<Character>().isDead)
             {
-                characterPanelInScene[i].transform.position = Vector2.MoveTowards(characterPanelInScene[i].transform.position, Camera.main.WorldToScreenPoint(characterInScene[i].position + Vector3.up * characterPanelOffset[i]), Time.deltaTime * 666);
+                characterPanelInScene[i].transform.position = Camera.main.WorldToScreenPoint(characterInScene[i].position + Vector3.up * characterPanelOffset[i]);
                 characterHealthBar[i].fillAmount = Mathf.Clamp((float)characterInScene[i].GetComponent<Character>().Health_Current / (float)characterInScene[i].GetComponent<Character>().Health_Base, 0, 1);
             }
             else

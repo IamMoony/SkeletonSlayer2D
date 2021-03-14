@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 231005124414772020}
   - component: {fileID: 231005124414772008}
   - component: {fileID: 231005124414772023}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: SpellEffect_Frostbolt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -51,9 +51,9 @@ MonoBehaviour:
   audioSource: {fileID: 0}
   vfxDestroy: {fileID: 3861367843242237069, guid: 91b2d47b629029d42acac26bcf54c441,
     type: 3}
-  initialVelocity: 1.5
+  initialVelocity: 2
   power: 1
-  knockBackForce: 0
+  knockBackForce: 3
   activationLimit: 0
   spellEffectOnActivation: {fileID: 0}
   vfxContactCharacter: {fileID: 2242214404038328044, guid: ff85c2585ee85b5498beadb06b8b8b55,
@@ -62,6 +62,8 @@ MonoBehaviour:
     type: 3}
   vfxActivation: {fileID: 7318746912668595937, guid: 992dd86a2f2f8704287c61f4c2ada11d,
     type: 3}
+  rb: {fileID: 0}
+  targetPosition: {x: 0, y: 0}
 --- !u!212 &231005124414772021
 SpriteRenderer:
   m_ObjectHideFlags: 0

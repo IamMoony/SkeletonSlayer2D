@@ -11,8 +11,8 @@ public class Character : MonoBehaviour, IHealthManagement
     [HideInInspector] public int Health_Current { get { return health_current; } set { health_current = value; } }
     public int DMG_Base;
     [HideInInspector] public int DMG_Current;
-    public int MoveSpeed_Base;
-    [HideInInspector] public int MoveSpeed_Current;
+    public float MoveSpeed_Base;
+    [HideInInspector] public float MoveSpeed_Current;
     public int JumpForce_Base;
     [HideInInspector] public int JumpForce_Current;
     public float dash_Speed;
@@ -38,6 +38,7 @@ public class Character : MonoBehaviour, IHealthManagement
     public bool isClimbing;
     public bool isDashing;
     public bool isAttacking;
+    public bool isFloating;
     public enum CastState { Default, Charge, Hold, Release }
     public CastState castingState = CastState.Default;
     public bool isDead;
@@ -47,12 +48,12 @@ public class Character : MonoBehaviour, IHealthManagement
     [HideInInspector] public Rigidbody2D rb;
     [HideInInspector] public Animator anim;
 
-    //private float tick;
-    //private int burn_Ticks;
-    //private int freeze_Ticks;
-    //private int root_Ticks;
-    //private int wet_Ticks;
-    //private int stun_Ticks;
+    private float tick;
+    private int burn_Ticks;
+    private int freeze_Ticks;
+    private int root_Ticks;
+    private int wet_Ticks;
+    private int stun_Ticks;
     private Collider2D climbableObject;
     public enum AnimationState { Idle, Walk, Jump, Dash, Climb, CastCharge, CastHold, CastHoldWalk, CastRelease, AttackMelee, AttackRanged }
     private string currentAnimationState;
@@ -139,7 +140,7 @@ public class Character : MonoBehaviour, IHealthManagement
         //anim.SetBool("IsWalking", isWalking);
         //anim.SetBool("IsClimbing", isClimbing);
         //anim.SetBool("IsDashing", isDashing);
-        /*
+        
         if (burn_Ticks > 0 || freeze_Ticks > 0 || root_Ticks > 0 || wet_Ticks > 0 || stun_Ticks > 0)
         {
             if (tick > 0)
@@ -151,38 +152,37 @@ public class Character : MonoBehaviour, IHealthManagement
                 if (burn_Ticks > 0)
                 {
                     burn_Ticks--;
-                    CmdDamage(1);
+                    SubtractHealth(1);
                     if (burn_Ticks == 0)
-                        CmdBurn(false);
+                        isStunned = false;
                 }
                 if (freeze_Ticks > 0)
                 {
                     freeze_Ticks--;
                     if (freeze_Ticks == 0)
-                        Freeze(false);
+                        isStunned = false;
                 }
                 if (root_Ticks > 0)
                 {
                     root_Ticks--;
                     if (root_Ticks == 0)
-                        Root(false);
+                        isStunned = false;
                 }
                 if (wet_Ticks > 0)
                 {
                     wet_Ticks--;
                     if (wet_Ticks == 0)
-                        Wet(false);
+                        isStunned = false;
                 }
                 if (stun_Ticks > 0)
                 {
                     stun_Ticks--;
                     if (stun_Ticks == 0)
-                        Stun(false, 0);
+                        isStunned = false;
                 }
-                tick = 1f;
+                tick = .5f;
             }
         }
-        */
     }
 
     public void ChangeAnimationState (string newState)
@@ -206,16 +206,24 @@ public class Character : MonoBehaviour, IHealthManagement
         if (Health_Current - amount <= 0)
         {
             Health_Current = 0;
-            isDead = true;
+            Death();
         }
         else
             Health_Current -= amount;
     }
 
+    public void Death()
+    {
+        isDead = true;
+        Destroy(gameObject);
+    }
+
     public void Walk(Vector2 direction, float speedModifier)
     {
         isWalking = true;
-        rb.velocity = new Vector2(direction.x * MoveSpeed_Current * speedModifier, rb.velocity.y);
+        float newVelX = direction.x * MoveSpeed_Current * speedModifier;
+        if (Mathf.Abs(newVelX) > Mathf.Abs(rb.velocity.x) || newVelX < 0 && rb.velocity.x > 0 || newVelX > 0 && rb.velocity.x < 0)
+            rb.velocity = new Vector2(newVelX, rb.velocity.y);
     }
     
     public void StopWalking()
@@ -227,7 +235,7 @@ public class Character : MonoBehaviour, IHealthManagement
     public void Turn(Vector2 direction)
     {
         FacingDirection = direction;
-        transform.localScale = new Vector3(direction.x, transform.localScale.y, transform.localScale.z);
+        transform.localScale = new Vector3(direction.x * transform.localScale.x, transform.localScale.y, transform.localScale.z);
     }
 
     public void Jump(Vector2 direction, float forceMod)
@@ -242,6 +250,7 @@ public class Character : MonoBehaviour, IHealthManagement
             }
             //anim.SetTrigger("Jump");
             isGrounded = false;
+            isJumping = true;
             rb.AddForce((Vector2.up + direction) * JumpForce_Current * forceMod);
         }
     }
@@ -265,6 +274,7 @@ public class Character : MonoBehaviour, IHealthManagement
         if (!isDashing)
         {
             //anim.SetTrigger("Dash");
+            isJumping = true;
             StartCoroutine(Dashing(direction));
         }
     }
@@ -306,19 +316,26 @@ public class Character : MonoBehaviour, IHealthManagement
     }
     */
 
-    public void Knockback(Vector2 direction, int force)
+    public void Knockback(Vector2 direction, float speed)
     {
-        //Stun(0.25f);
-        rb.AddForce(direction * force);
-    }
-    /*
-    public void Stun(float time)
-    {
-        //effect_Stun.SetActive(state);
-        //stunTime = time;
-        isStunned = true;
+        Stun(1);
+        rb.velocity = direction * speed;
+        isGrounded = false;
     }
     
+    public void Float()
+    {
+        isFloating = true;
+        rb.gravityScale = 0.5f;
+    }
+
+    public void Stun(int ticks)
+    {
+        //effect_Stun.SetActive(state);
+        stun_Ticks = ticks;
+        isStunned = true;
+    }
+    /*
     public void Burn(bool state)
     {
         //Debug.Log(name + " - Burn: " + state);
@@ -370,7 +387,28 @@ public class Character : MonoBehaviour, IHealthManagement
         else if (collision.gameObject.tag == "Ground")
         {
             isGrounded = true;
-            isJumping = false;
+            if (isJumping)
+                isJumping = false;
+            if (isFloating)
+            {
+                isFloating = false;
+                rb.gravityScale = 1f;
+            }
+        }
+    }
+
+    virtual public void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Ground")
+        {
+            isGrounded = true;
+            if (isJumping)
+                isJumping = false;
+            if (isFloating)
+            {
+                isFloating = false;
+                rb.gravityScale = 1f;
+            }
         }
     }
 
@@ -389,53 +427,6 @@ public class Character : MonoBehaviour, IHealthManagement
         else if (collision.gameObject.tag == "Ground")
         {
             isGrounded = false;
-            isJumping = true;
         }
-    }
-
-    public void TryCastingSpell(int spellID, Vector2 target)
-    {
-        if (!spells[spellID].IsOnCooldown)
-            StartCoroutine(CastSpell(spellID, target));
-    }
-
-    private void CastReleased()
-    {
-        castingState = CastState.Default;
-    }
-
-    private IEnumerator CastSpell(int spellID, Vector2 target)
-    {
-        GameObject castVFX;
-        if (spells[spellID].vfxSpellCast != null)
-            castVFX = Instantiate(spells[spellID].vfxSpellCast, projectileSpawn.position, Quaternion.identity, transform);
-        else
-            castVFX = null;
-        //anim.SetTrigger("Cast");
-        castingState = CastState.Charge;
-        actionValue = 0;
-        while (actionValue < 1)
-        {
-            //if (actionValue >= (spells[spellID].spellCastTime - (animation_PreShoot == null ? 0 : animation_PreShoot.averageDuration)) / spells[spellID].spellCastTime)
-            //    anim.SetTrigger("Shoot");
-            if (Input.GetButton("Shoot"))
-                actionValue = Mathf.Clamp(actionValue + Time.deltaTime / spells[spellID].spellCastTime, 0, 1);
-            else
-                break;
-            castVFX.transform.localScale = new Vector3(actionValue, actionValue, 1);
-            yield return new WaitForEndOfFrame();
-        }
-        castingState = CastState.Hold;
-        while (Input.GetButton("Shoot"))
-            yield return new WaitForEndOfFrame();
-        castingState = CastState.Release;
-        Invoke("CastReleased", 0.3f);
-        //anim.SetTrigger("Shoot");
-        if (castVFX)
-            Destroy(castVFX);
-        Vector2 direction = projectileSpawn.transform.InverseTransformPoint(target);
-        GameObject effect = Instantiate(spells[spellID].spellEffectPrefab[actionValue == 1 ? 1 : 0], projectileSpawn.position, Quaternion.Euler(new Vector3(0, FacingDirection == Vector2.right ? 0 : 180, Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg)), spells[spellID].transform);
-        effect.GetComponent<SpellEffect>().owner = this;
-        spells[spellID].AddSpellEffectInstance(effect, true);
     }
 }

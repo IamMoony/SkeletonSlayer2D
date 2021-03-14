@@ -1,5 +1,65 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &411581239256611587
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4213150832896161502}
+  - component: {fileID: 1098679080627239626}
+  - component: {fileID: 1109421414}
+  m_Layer: 11
+  m_Name: AttackCollider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4213150832896161502
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 411581239256611587}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4300990568137006526}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!58 &1098679080627239626
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 411581239256611587}
+  m_Enabled: 0
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.166, y: 0.06}
+  serializedVersion: 2
+  m_Radius: 0.1
+--- !u!114 &1109421414
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 411581239256611587}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fefbc8440328869458d8b9054c16fec6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4300990567247542751
 GameObject:
   m_ObjectHideFlags: 0
@@ -45,7 +105,7 @@ GameObject:
   - component: {fileID: 4300990568137006525}
   - component: {fileID: 4300990568137006467}
   - component: {fileID: 4300990568137006464}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Hellhound
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -64,6 +124,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4300990567247542750}
+  - {fileID: 4213150832896161502}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -82,7 +143,7 @@ MonoBehaviour:
   health_base: 10
   DMG_Base: 1
   DMG_Current: 0
-  MoveSpeed_Base: 1
+  MoveSpeed_Base: 2
   MoveSpeed_Current: 0
   JumpForce_Base: 150
   JumpForce_Current: 0
@@ -112,22 +173,22 @@ MonoBehaviour:
   FacingDirection: {x: 0, y: 0}
   rb: {fileID: 0}
   anim: {fileID: 0}
-  viewDistance: 0
+  viewDistance: 1
   visible:
     serializedVersion: 2
-    m_Bits: 0
-  attackRange_Melee: 0
-  attackCooldown_Melee: 0
-  attackRange_Ranged: 0
-  attackCooldown_Ranged: 0
+    m_Bits: 2560
+  attackRange_Melee: 1
+  attackCooldown_Melee: 1
+  attackKnockback_Melee: 5
+  attackRange_Ranged: 2
+  attackCooldown_Ranged: 2
+  attackKnockback_Ranged: 0
   projectile_Ranged: {fileID: 0}
   target: {fileID: 0}
   targetInView: 0
   foreignProjectile: {fileID: 0}
   projectileInView: 0
-  targetInRange_Melee: 0
   cooldown_Melee: 0
-  targetInRange_Ranged: 0
   cooldown_Ranged: 0
   viewClear: 1
   jumpClear: 1
@@ -155,7 +216,7 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!212 &4300990568137006527
 SpriteRenderer:
@@ -240,7 +301,7 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.35}
+  m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.15
 --- !u!58 &4300990568137006464
@@ -256,6 +317,6 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.41}
+  m_Offset: {x: 0, y: -0.01}
   serializedVersion: 2
-  m_Radius: 0.1
+  m_Radius: 0.145

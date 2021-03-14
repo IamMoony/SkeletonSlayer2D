@@ -63,16 +63,16 @@ MonoBehaviour:
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
-  m_TargetMovementOnly: 1
+  m_TargetMovementOnly: 0
   m_ScreenX: 0.5
   m_ScreenY: 0.5
   m_CameraDistance: 6
-  m_DeadZoneWidth: 0.1
-  m_DeadZoneHeight: 0.2
+  m_DeadZoneWidth: 0.25
+  m_DeadZoneHeight: 0.25
   m_DeadZoneDepth: 0
-  m_UnlimitedSoftZone: 0
-  m_SoftZoneWidth: 0.2
-  m_SoftZoneHeight: 0.2
+  m_UnlimitedSoftZone: 1
+  m_SoftZoneWidth: 0.39
+  m_SoftZoneHeight: 0.42
   m_BiasX: 0
   m_BiasY: 0
   m_CenterOnActivate: 1
@@ -97,7 +97,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5339523676567531197}
   - component: {fileID: 5339523676567531196}
-  - component: {fileID: 5339523676567531199}
+  - component: {fileID: 276786160}
   m_Layer: 0
   m_Name: CameraControl
   m_TagString: Untagged
@@ -155,7 +155,7 @@ MonoBehaviour:
         m_Calls: []
   m_LegacyBlendHint: 0
   m_ComponentOwner: {fileID: 5339523675087292094}
---- !u!114 &5339523676567531199
+--- !u!114 &276786160
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

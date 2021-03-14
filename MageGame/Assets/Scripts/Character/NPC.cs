@@ -9,17 +9,17 @@ public class NPC : Character
 
     public float attackRange_Melee;
     public float attackCooldown_Melee;
+    public int attackKnockback_Melee;
     public float attackRange_Ranged;
     public float attackCooldown_Ranged;
+    public int attackKnockback_Ranged;
     public GameObject projectile_Ranged;
     public GameObject target;
     public RaycastHit2D[] objectsInView;
     public bool targetInView;
     public GameObject foreignProjectile;
     public bool projectileInView;
-    public bool targetInRange_Melee;
     public float cooldown_Melee;
-    public bool targetInRange_Ranged;
     public float cooldown_Ranged;
     public bool viewClear = true;
     public bool jumpClear = false;
@@ -37,21 +37,17 @@ public class NPC : Character
     public Action action;
 
     private float turnTimer;
-    private Vector2 cSize;
+    private Collider2D col;
 
     public override void Start()
     {
         base.Start();
-        cSize = GetComponent<Collider2D>().bounds.size;
+        col = GetComponent<Collider2D>();
     }
 
     public override void Update()
     {
         base.Update();
-        if (isDead)
-        {
-            Destroy(gameObject);
-        }
         if (cooldown_Melee > 0)
             cooldown_Melee -= Time.deltaTime;
         if (cooldown_Ranged > 0)
@@ -102,10 +98,10 @@ public class NPC : Character
 
     public IEnumerator GetInRange(bool melee)
     {
-        Debug.Log("Start GetInRange Routine");
-        while (melee ? !targetInRange_Melee : !targetInRange_Ranged)
+        //Debug.Log("Start GetInRange Routine");
+        while (melee ? !IsInMeleeRange() : !IsInRangedRange())
         {
-            if (isStunned)
+            if (isStunned || !isGrounded)
                 yield break;
             if (!IsTargetInSight())
             {
@@ -115,7 +111,7 @@ public class NPC : Character
             }
             if (target.transform.position.x < transform.position.x && FacingDirection == Vector2.right || target.transform.position.x > transform.position.x && FacingDirection == Vector2.left)
                 Turn(FacingDirection * -1);
-            if (!IsTargetInRange(melee))
+            if (!IsInMeleeRange())
                 Walk(FacingDirection, 1f);
             else
                 StopWalking();
@@ -123,9 +119,11 @@ public class NPC : Character
         }
     }
 
+
+
     public IEnumerator Patrol()
     {
-        Debug.Log("Start Patrol Routine");
+        //Debug.Log("Start Patrol Routine");
         while (target == null && foreignProjectile == null)
         {
             if (!isStunned && isGrounded)
@@ -133,55 +131,60 @@ public class NPC : Character
                 floorClear = CheckFloor();
                 if (!floorClear)
                 {
-                    Debug.Log("No floor detected - Stoping");
+                    //Debug.Log("No floor detected - Stoping");
                     StopWalking();
-                    yield return new WaitForSeconds(1f);
+                    yield return new WaitForSeconds(.5f);
                     jumpClear = CheckJump();
                     if (!jumpClear)
                     {
-                        Debug.Log("Jump not possible - Turning");
+                        //Debug.Log("Jump not possible - Turning");
                         Turn(FacingDirection * -1);
+                        yield return new WaitForSeconds(.5f);
                     }
                     else
                     {
-                        Debug.Log("Jump TakeOff");
+                        yield return new WaitForSeconds(.5f);
+                        //Debug.Log("Jump TakeOff");
                         Jump(FacingDirection, 1f);
                         while (!isGrounded)
                             yield return new WaitForEndOfFrame();
-                        Debug.Log("Jump Landing");
+                        //Debug.Log("Jump Landing");
                     }
                 }
                 else
                 {
-                    Debug.Log("Floor detected");
-                    pathClear = CheckPath();
+                    //Debug.Log("Floor detected");
+                    pathClear = IsPathClear();
                     if (!pathClear)
                     {
-                        Debug.Log("Path obstructed - Turning");
+                        //Debug.Log("Path obstructed - Turning");
+                        StopWalking();
+                        yield return new WaitForSeconds(.5f);
                         Turn(FacingDirection * -1);
+                        yield return new WaitForSeconds(.5f);
                     }
                     else
                     {
-                        Debug.Log("Path clear");
-                        viewClear = CheckView();
+                        //Debug.Log("Path clear");
+                        viewClear = IsViewClear();
                         if (!viewClear)
                         {
-                            Debug.Log("Something is in View");
+                            //Debug.Log("Something is in View");
                             IdentifyObjectsInView();
                             if (!targetInView)
                             {
-                                Debug.Log("No target or projectile found - Moving");
+                                //Debug.Log("No target or projectile found - Moving");
                                 Walk(FacingDirection, 0.5f);
                             }
                             else
                             {
-                                Debug.Log("Target or projectile found - Stoping");
+                               // Debug.Log("Target or projectile found - Stoping");
                                 StopWalking();
                             }
                         }
                         else
                         {
-                            Debug.Log("View clear - Moving");
+                            //Debug.Log("View clear - Moving");
                             Walk(FacingDirection, 0.5f);
                         }
                     }
@@ -198,7 +201,7 @@ public class NPC : Character
         {
             if (!isStunned)
             {
-                viewClear = CheckView();
+                viewClear = IsViewClear();
                 if (!viewClear)
                 {
                     IdentifyObjectsInView();
@@ -221,20 +224,20 @@ public class NPC : Character
     {
         for (int i = 0; i < objectsInView.Length; i++)
         {
-            if (objectsInView[i].transform.tag == "Character")
+            if (objectsInView[i].transform.GetComponent<Character>())
             {
                 //Debug.Log("Character in View");
-                if (objectsInView[i].transform.GetComponent<Character>() is Player && !targetInView)
+                if (objectsInView[i].transform.GetComponent<Character>() is Player)
                 {
                     //Debug.Log("its a player");
                     target = objectsInView[i].transform.gameObject;
                     targetInView = true;
                 }
             }
-            else if (objectsInView[i].transform.tag == "Projectile")
+            else if (objectsInView[i].transform.GetComponent<Projectile>())
             {
                 //Debug.Log("Projectile in View");
-                if (objectsInView[i].transform.GetComponent<Projectile>().owner is Player && !projectileInView)
+                if (objectsInView[i].transform.GetComponent<Projectile>().owner is Player)
                 {
                     //Debug.Log("its a player projectile");
                     foreignProjectile = objectsInView[i].transform.gameObject;
@@ -244,43 +247,44 @@ public class NPC : Character
         }
     }
 
-    public bool CheckView()
+    public bool IsViewClear()
     {
         //Debug.Log("Checking View");
-        objectsInView = Physics2D.BoxCastAll(transform.position, cSize, 0, FacingDirection, viewDistance, visible);
+        objectsInView = Physics2D.BoxCastAll(transform.position, col.bounds.size, 0, FacingDirection, viewDistance, visible);
         if (objectsInView.Length > 0)
-            return true;
-        return false;
+            return false;
+        return true;
     }
-
-    public bool CheckFloor()
+    
+    public bool IsPathClear()
     {
-        Debug.Log("Check Floor at Position: " + ((Vector2)transform.position + FacingDirection * cSize.x * 1.5f) + " with Size: " + cSize.x);
-        if (Physics2D.OverlapCircle((Vector2)transform.position + FacingDirection * cSize.x * 1.5f, cSize.x * 2f, GroundLayer))
-            return true;
-        return false;
-    }
-
-    public bool CheckPath()
-    {
-        if (Physics2D.OverlapCircle((Vector2)transform.position + FacingDirection * cSize.x , 0.01f, GroundLayer))
+        if (Physics2D.OverlapCircle((Vector2)transform.position + FacingDirection * 0.1f , col.bounds.extents.y * 0.75f, GroundLayer))
             return false;
         return true;
     }
 
+    public bool CheckFloor()
+    {
+        //Debug.Log("Check Floor from Position: " + ((Vector2)transform.position + FacingDirection * collider.bounds.size.x) + " to Position: " + ((Vector2)collider.bounds.min + FacingDirection + Vector2.down * 3f) + " with Size: " + collider.bounds.size);
+        if (Physics2D.BoxCastAll((Vector2)transform.position + FacingDirection * col.bounds.extents.x, col.bounds.extents, 0, Vector2.down, 1f, GroundLayer).Length > 0)
+            return true;
+        return false;
+    }
+
+
     public bool CheckJump()
     {
-        if (Physics2D.OverlapCircle((Vector2)transform.position + FacingDirection * (JumpForce_Base * 0.01f), cSize.x, GroundLayer))
+        if (Physics2D.BoxCastAll((Vector2)transform.position + FacingDirection * (JumpForce_Base * 0.01f), col.bounds.extents, 0, Vector2.down, 1f, GroundLayer).Length > 0)
             return true;
         return false;
     }
 
     public bool IsTargetInSight()
     {
-        RaycastHit2D check = Physics2D.Raycast(transform.position, target.transform.position - transform.position, viewDistance, visible);
+        RaycastHit2D check = Physics2D.Raycast(transform.position, target.transform.position - transform.position, 3f, visible);
         if (check)
         {
-            if (check.collider.tag == "Character")
+            if (check.collider.GetComponent<Character>())
             {
                 return true;
             }
@@ -292,22 +296,17 @@ public class NPC : Character
         return false;
     }
 
-    public bool IsTargetInRange(bool melee)
+    public bool IsInMeleeRange()
     {
-        if (Vector2.Distance(target.transform.position, transform.position) <= (melee ? attackRange_Melee : attackRange_Ranged))
-        {
-            if (melee)
-                targetInRange_Melee = true;
-            targetInRange_Ranged = true;
+        if (Vector2.Distance(new Vector2(target.transform.position.x, transform.position.y), transform.position) <= attackRange_Melee)
             return true;
-        }
-        else
-        {
-            if (melee)
-                targetInRange_Melee = false;
-            else
-                targetInRange_Ranged = false;
-        }
+        return false;
+    }
+
+    public bool IsInRangedRange()
+    {
+        if (Vector2.Distance(target.transform.position, transform.position) <= attackRange_Ranged)
+            return true;
         return false;
     }
 
