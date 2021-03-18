@@ -46,7 +46,7 @@ public class Player : Character
         if (Input.GetButtonUp("Activate"))
         {
             if (hDur != 10)
-                spells[0].Activate(GetCursorWorldPosition2D(), false);
+                spells[0].Activate(false);
             hDur = 0;
         }
         if (Input.GetButton("Activate"))
@@ -55,7 +55,7 @@ public class Player : Character
                 hDur += Time.deltaTime;
             else if (hDur != 10)
             {
-                spells[0].Activate(GetCursorWorldPosition2D(), true);
+                spells[0].Activate(true);
                 hDur = 10;
             }
         }

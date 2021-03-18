@@ -8,6 +8,8 @@ public class Projectile : SpellEffect
     public float power;
     public float knockBackForce;
     public int activationLimit;
+    public float activationTargetingRange;
+    public LayerMask activationTargetingLayers;
     public GameObject spellEffectOnActivation;
     public GameObject vfxContactCharacter;
     public GameObject vfxContactGround;
@@ -15,6 +17,8 @@ public class Projectile : SpellEffect
 
     [HideInInspector] public Rigidbody2D rb;
     [HideInInspector] public Vector2 targetPosition;
+    [HideInInspector] public bool reachedTargetPosition;
+    [HideInInspector] public Transform target;
 
     public override void Awake()
     {
@@ -31,9 +35,37 @@ public class Projectile : SpellEffect
     {
         if (targetPosition != Vector2.zero)
         {
-            if (Vector2.Distance(transform.position, targetPosition) <= 0.05f)
+            if (!reachedTargetPosition)
             {
-                rb.velocity = Vector2.zero;
+                if (Vector2.Distance(transform.position, targetPosition) <= 0.05f)
+                {
+                    reachedTargetPosition = true;
+                    rb.velocity = Vector2.zero;
+                }
+            }
+            else
+            {
+                Collider2D[] possibleTargets = Physics2D.OverlapCircleAll(transform.position, activationTargetingRange, activationTargetingLayers);
+                if (possibleTargets.Length > 0)
+                {
+                    float shortestDistance = 10f;
+                    for (int i = 0; i < possibleTargets.Length; i++)
+                    {
+                        float dist = Vector2.Distance(transform.position, possibleTargets[i].transform.position);
+                        if (dist < shortestDistance)
+                        {
+                            shortestDistance = dist;
+                            target = possibleTargets[i].transform;
+                        }
+                    }
+                }
+                else
+                    target = null;
+            }
+            if (target != null)
+            {
+                Vector2 direction = target.position - transform.position;
+                transform.rotation = Quaternion.Euler(new Vector3(0, transform.rotation.eulerAngles.x, Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg));
             }
         }
     }
@@ -51,13 +83,13 @@ public class Projectile : SpellEffect
         }
     }
 
-    public virtual GameObject Activation(Vector2 direction)
+    public virtual GameObject Activation()
     {
-        if (activationLimit > 0 && spellEffectOnActivation != null)
+        if (activationLimit > 0 && spellEffectOnActivation != null && target != null)
         {
             if (vfxActivation)
                 Destroy(Instantiate(vfxActivation, transform.position, Quaternion.identity), 1f);
-            GameObject effect = Instantiate(spellEffectOnActivation, transform.position, Quaternion.Euler(new Vector3(0, transform.rotation.eulerAngles.x, Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg)));
+            GameObject effect = Instantiate(spellEffectOnActivation, transform.position, transform.rotation);
             effect.GetComponent<SpellEffect>().owner = owner;
             activationLimit--;
             return effect;

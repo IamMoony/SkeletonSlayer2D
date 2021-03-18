@@ -49,7 +49,7 @@ public class Spell : MonoBehaviour
         spellEffectInstances.RemoveAt(id);
     }
 
-    public void Activate(Vector2 target, bool multi)
+    public void Activate(bool multi)
     {
         if (spellEffectInstances.Count > 0)
         {
@@ -62,7 +62,7 @@ public class Spell : MonoBehaviour
                 if (spellEffectInstances[i])
                 {
                     //Debug.Log("Instance found");
-                    GameObject activationEffect = spellEffectInstances[i].GetComponent<Projectile>().Activation(target - (Vector2)spellEffectInstances[i].transform.position);
+                    GameObject activationEffect = spellEffectInstances[i].GetComponent<Projectile>().Activation();
                     if (activationEffect)
                     {
                         if (spellEffectInstances[i].GetComponent<Projectile>().activationLimit == 0)
